@@ -1,7 +1,17 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    
+
+    <div class="effect-list">
+      <effect-card
+        v-for="(effect, index) in effectsList"
+        :key="effect.name"
+        :effect="effect"
+        @delete="removeEffect(effect)"
+      ></effect-card>
+    </div>
+
+
   </div>
 </template>
 
