@@ -1,14 +1,15 @@
 <template>
   <div id="app">
     
-
-    <div class="effect-list">
-      <effect-card
-        v-for="(effect, index) in effectsList"
-        :key="effect.name"
-        :effect="effect"
-        @delete="removeEffect(effect)"
-      ></effect-card>
+    <app-header></app-header>
+    
+    <div class="node-list">
+      <node-card
+        v-for="node in nodesList"
+        :key="node.name"
+        :node="node"
+        @delete="removeNode(node)"
+      ></node-card>
     </div>
 
 
@@ -16,12 +17,32 @@
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import { mapGetters, mapActions } from 'vuex';
+import AppHeader from './components/AppHeader.vue'
+import NodeCard from './components/NodeCard.vue'
 
 export default {
   name: 'app',
+  data () {
+    return {};
+  },
+  computed: {
+    ...mapGetters([
+      'nodesList',
+    ]),
+  },
+  methods: {
+    ...mapActions([
+      'resetNodes',
+      'removeNode',
+    ]),
+  },
   components: {
-    HelloWorld
+    AppHeader,
+    NodeCard
+  },
+  created() {
+    this.resetNodes();
   }
 }
 </script>
