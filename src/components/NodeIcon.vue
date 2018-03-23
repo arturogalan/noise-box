@@ -5,6 +5,8 @@
         <div>
             Nodo de tipo entrada
             Subtipo {{subtype.label}}
+            {{subtype.icon}}
+            <img src="../assets/logo.png">
         </div>
 
     </template>

@@ -2,7 +2,7 @@
   <div id="app">
     
     <app-header></app-header>
-    
+
     <div class="node-list">
       <node-card
         v-for="node in nodesList"
