@@ -12,8 +12,7 @@ export const NODE_SUBTYPE = {
             MEDIA_STREAM: { 
                 value: 'MEDIA_STREAM', 
                 label: 'Media Stream Input',
-                // icon: '../assets/icons/icons8-led-diode-filled-50.png'
-                icon: '../assets/logo.png'
+                icon: "assets/icons/icons8-led-diode-filled-50.png"
             }
         }
     ,

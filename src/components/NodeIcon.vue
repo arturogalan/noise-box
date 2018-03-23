@@ -3,10 +3,8 @@
     <!-- input -->
     <template v-if="type === NODE_TYPE.INPUT">
         <div>
-            Nodo de tipo entrada
-            Subtipo {{subtype.label}}
-            {{subtype.icon}}
-            <img src="../assets/logo.png">
+            Tipo: {{type}} Subtipo: {{subtype.label}}
+            <img :src="getAsset(subtype.icon)">
         </div>
 
     </template>
@@ -30,7 +28,6 @@
 </template>
 
 <script>
-// pokemons from https://codepen.io/steftastan/pen/XbMVGw all credits to Stef Tastan https://codepen.io/steftastan/
 
 import { NODE_TYPE } from '@/store/constants';
 
@@ -47,8 +44,13 @@ export default {
 				: this.type === NODE_TYPE.FILTER ? 'filter-node'
 				: this.type === NODE_TYPE.OUTPUT ? 'output-node'
 				: '';
-		},
-	},
+        }
+    },
+    methods: {
+        getAsset: function(assetName) {
+	        return require("../"+assetName);
+        }
+    }
 }
 </script>
 
