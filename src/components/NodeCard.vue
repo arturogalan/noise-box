@@ -1,7 +1,7 @@
 <template>
   <div class="node-card" :class="{removing: node.dying}">
     <span class="delete" @click="deleteClick" v-if="!node.dying">×</span>
-    <node-icon :type="node.type" :subtype="node.subtype" :dying="node.dying"></node-icon>
+    <node-icon :type="node.type" :subtype="node.subtype"></node-icon>
     <div>name: {{ node.name }}</div>
     <div class="attack-buttons">
         <button> -- </button>

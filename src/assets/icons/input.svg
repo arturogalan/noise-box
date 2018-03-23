@@ -1,0 +1,21 @@
+<svg width="120" height="120" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg">
+ <!-- Created with SVG-edit - http://svg-edit.googlecode.com/ -->
+ <defs>
+  <filter id="svg_22_blur">
+   <feGaussianBlur stdDeviation="0.7"/>
+  </filter>
+  <filter id="svg_35_blur">
+   <feGaussianBlur stdDeviation="1.9"/>
+  </filter>
+  <filter id="svg_33_blur">
+   <feGaussianBlur stdDeviation="1.1"/>
+  </filter>
+ </defs>
+ <g>
+  <title>Layer 1</title>
+  <path fill="none" stroke-width="5" stroke-dasharray="null" stroke-linejoin="null" stroke-linecap="null" d="m17.335698,59.133544c0,-23.52598 18.79558,-42.582024 41.999999,-42.582024c23.204419,0 41.999999,19.056044 41.999999,42.582024c0,23.52598 -18.79558,42.582024 -41.999999,42.582024" id="svg_33" transform="rotate(46.35746765136719 59.335693359375,59.133544921875) " stroke="#000000" filter="url(#svg_33_blur)"/>
+  <path fill="#aaffaa" stroke-width="5" stroke-dasharray="null" stroke-linejoin="null" stroke-linecap="null" d="m22.880343,58.186193l23.079251,-38.298606l23.079251,38.298606l-11.539626,0l0,38.482891l-23.07925,0l0,-38.482891l-11.539626,0z" id="svg_22" transform="rotate(89.70491790771484 45.9595947265625,58.27833557128906) " filter="url(#svg_22_blur)" stroke="#000000"/>
+  <path fill="none" stroke-width="5" stroke-dasharray="null" stroke-linejoin="null" stroke-linecap="null" d="m13.864445,58.499999c0,-25.909635 20.646293,-46.896428 46.135548,-46.896428c25.489255,0 46.135557,20.986793 46.135557,46.896428c0,25.909626 -20.646302,46.896428 -46.135557,46.896428" filter="url(#svg_35_blur)" id="svg_36" transform="rotate(43.47922897338867 59.999999999999986,58.50000000000001) " stroke="#00ffff"/>
+  <path stroke="#000000" fill="none" stroke-width="5" stroke-dasharray="null" stroke-linejoin="null" stroke-linecap="null" d="m9.653595,58.999453c0,-28.314471 22.185487,-51.249187 49.574977,-51.249187c27.38949,0 49.574977,22.934716 49.574977,51.249187c0,28.314471 -22.185487,51.249199 -49.574977,51.249199" transform="rotate(46.35746765136719 59.22857666015624,58.99945068359374) " id="svg_35" filter="url(#svg_35_blur)"/>
+ </g>
+</svg>

@@ -12,7 +12,8 @@ export const NODE_SUBTYPE = {
             MEDIA_STREAM: { 
                 value: 'MEDIA_STREAM', 
                 label: 'Media Stream Input',
-                icon: "assets/icons/icons8-led-diode-filled-50.png"
+                icon: "assets/icons/input.svg",
+                icon2: "assets/icons/icons8-led-diode-filled-50.png"
             }
         }
     ,
@@ -20,7 +21,8 @@ export const NODE_SUBTYPE = {
         {
             DELAY_NODE: { 
                 value: 'DELAY_NODE', 
-                label: 'Delay' 
+                label: 'Delay',
+                icon: "assets/icons/effect.svg"
             }
     }
     ,
@@ -28,7 +30,8 @@ export const NODE_SUBTYPE = {
         {
             AUDIO_DESTINATION_NODE: { 
                 value: 'AUDIO_DESTINATION_NODE', 
-                label: 'Destination output' 
+                label: 'Destination output',
+                icon: "assets/icons/output.svg"
         }
     }
     ,

@@ -1,29 +1,12 @@
 <template>
 <div class="node-icon" :class="className">
     <!-- input -->
-    <template v-if="type === NODE_TYPE.INPUT">
+    <template>
         <div>
             Tipo: {{type}} Subtipo: {{subtype.label}}
-            <img :src="getAsset(subtype.icon)">
-        </div>
-
-    </template>
-
-    <template v-else-if="type === NODE_TYPE.FILTER">
-        <div>
-            Nodo de tipo efecto
+            <img :src="getAsset(subtype.icon)" class="icon-type">
         </div>
     </template>
-
-     <template v-else-if="type === NODE_TYPE.OUTPUT">
-        <div>
-            Nodo de tipo output
-        </div>
-    </template>
-
-	<template v-else>
-		<div>Nodo not defined</div>
-	</template>
 </div>
 </template>
 
@@ -59,5 +42,7 @@ export default {
 body {
 	background-color: #f5f5f5;
 }
-
+.icon-type {
+    width: 45px;
+}
 </style>
