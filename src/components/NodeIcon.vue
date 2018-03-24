@@ -45,4 +45,16 @@ body {
 .icon-type {
     width: 45px;
 }
+
+.node-icon{
+	/* width: 715px;
+	height: 500px;
+	margin: 0 auto; */
+	position: relative;
+	font-size: 11px;
+	height: 100px;
+    width: 100px;
+}
+
+
 </style>

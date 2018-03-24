@@ -1,14 +1,12 @@
 <template>
-  <div class="node-card" :class="{removing: node.dying}">
-    <span class="delete" @click="deleteClick" v-if="!node.dying">×</span>
-    <node-icon :type="node.type" :subtype="node.subtype"></node-icon>
-    <div>name: {{ node.name }}</div>
+  <div class="palette-card" :class="{removing: node.dying}">
+    <div>{{ node.name }}
+        <img :src="getAsset(node.type.icon)" class="icon-type">
+    </div>
 </div>
 </template>
 
 <script>
-import NodeIcon from './NodeIcon.vue';
-
 
 export default {
   name: 'NodeCard',
@@ -19,38 +17,42 @@ export default {
     methods: {
         deleteClick() {
             this.$emit('delete');
+        },
+        getAsset: function(assetName) {
+	        return require("../"+assetName);
         }
-    },
-    components: {
-        NodeIcon,
     }
 }
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style>
-.node-card {
+.palette-card {
     display: flex;
     position: relative;
     flex-direction: column;
     margin: 5px;
-    padding: 15px 15px 10px 15px;
+    padding: 5px 5px 5px 5px;
     border: solid 1px #ccc;
+    border-radius: 10px;
 }
 
-.node-card.removing {
+.palette-card.removing {
     background-color: red;
 }
 
-.node-card .delete {
+.palette-card .delete {
     position: absolute;
     top: 0px;
     right: 5px;
     cursor: pointer;
 }
 
-.node-card .attack-buttons {
+.palette-card .attack-buttons {
     display: flex;
     justify-content: space-between;
+}
+.icon-type{
+    max-width: 75px;
 }
 </style>
