@@ -1,8 +1,7 @@
 <template>
   <div class="palette-card" :class="{removing: node.dying}">
-    <div>{{ node.name }}
-        <img :src="getAsset(node.type.icon)" class="icon-type">
-    </div>
+    <div class="overlay">{{ node.name }}</div>
+    <img :src="getAsset(node.icon)" class="icon-type">
 </div>
 </template>
 
@@ -35,6 +34,8 @@ export default {
     padding: 5px 5px 5px 5px;
     border: solid 1px #ccc;
     border-radius: 10px;
+    cursor: pointer;
+    background:dimgray;
 }
 
 .palette-card.removing {
@@ -53,6 +54,18 @@ export default {
     justify-content: space-between;
 }
 .icon-type{
-    max-width: 75px;
+    max-width: 50px;
+       display:block;
+    margin:auto;
+}
+.overlay {
+  bottom: 0; 
+  background: rgb(0, 0, 0);
+  background:rgba(193, 150, 150, 0.5); /* Black see-through */
+  color: #f1f1f1; 
+  transition: .5s ease;
+  color: white;
+  text-align: center;
+  border-radius: 10px;
 }
 </style>

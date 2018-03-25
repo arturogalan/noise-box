@@ -49,5 +49,6 @@ h1{
 .logo-icon {
     width: 130px;
     float: left;
+    margin-top: 4px;
 }
 </style>

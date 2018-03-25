@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 
-import { NODE_TYPE, NODE_SUBTYPE } from './constants';
+import { NODE_TYPE, NODE_PROPERTIES } from './constants';
 
 Vue.use(Vuex);
 
@@ -31,17 +31,17 @@ const actions = {
         if (name && !state.nodes[name]) { // add only if not exists
             commit(verbs.ADD_PALETTE_NODE, {
                 type,
-                name
+                name,
+                ...NODE_PROPERTIES[type],
             });
         }
     },
-    addNode({state, commit}, {type, subtype, name}) {
+    addNode({state, commit}, {type, name}) {
         if (name && !state.nodes[name]) { // add only if not exists
             commit(verbs.ADD_NODE, {
                 type,
-                subtype,
                 name,
-                ...NODE_SUBTYPE[type],
+                ...NODE_PROPERTIES[type],
                 dying: false,
             });
         }
@@ -49,9 +49,10 @@ const actions = {
     resetNodes({commit, dispatch}) {
         commit(verbs.CLEAR_NODES);
         [
-            {type: NODE_TYPE.INPUT, subtype: NODE_SUBTYPE[NODE_TYPE.INPUT.value].MEDIA_STREAM, name: 'entrada'},
-            {type: NODE_TYPE.FILTER, subtype: NODE_SUBTYPE[NODE_TYPE.FILTER.value].DELAY_NODE, name: 'efecto'},
-            {type: NODE_TYPE.OUTPUT, subtype: NODE_SUBTYPE[NODE_TYPE.OUTPUT.value].AUDIO_DESTINATION_NODE, name: 'salida'}
+            {type: NODE_TYPE.VOLUME, name: 'volumen'},
+            {type: NODE_TYPE.DISTORSION, name: 'distorsion'},
+            {type: NODE_TYPE.DELAY, name: 'delay'},
+            {type: NODE_TYPE.FLANGER, name: 'flanger'}
         ].forEach(node => {
             dispatch('addNode', node);
         });
@@ -59,9 +60,10 @@ const actions = {
     resetPaletteNodes({commit, dispatch}) {
         commit(verbs.CLEAR_NODES);
         [
-            {type: NODE_TYPE.INPUT, name: 'Entrada'},
-            {type: NODE_TYPE.FILTER, name: 'Filtro'},
-            {type: NODE_TYPE.OUTPUT, name: 'Salida'}
+            {type: NODE_TYPE.VOLUME, name: 'volumen'},
+            {type: NODE_TYPE.DISTORSION, name: 'distorsion'},
+            {type: NODE_TYPE.DELAY, name: 'delay'},
+            {type: NODE_TYPE.FLANGER, name: 'flanger'}
         ].forEach(node => {
             dispatch('addPaletteNode', node);
         });
