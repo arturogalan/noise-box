@@ -7,6 +7,7 @@ Vue.use(Vuex);
 
 const verbs = {
     CLEAR_NODES: 'CLEAR_NODES',
+    CLEAR_PALETTE_NODES: 'CLEAR_PALETTE_NODES',
     ADD_PALETTE_NODE: 'ADD_PALETTE_NODE',
     ADD_NODE: 'ADD_NODE',
     ATTACK_NODE: 'ATTACK_NODE',
@@ -15,17 +16,22 @@ const verbs = {
 }
 
 const state = {
+    //best practice to store lists as objects because you can access faster than with arrays
     paletteNodes: {},
     nodes: {}
 };
 
 const getters = {
     paletteNodesList(state) {
-        return Object.values(state.paletteNodes);
+        return Object.values(state.paletteNodes)
+    },
+    nodesList(state){
+        return Object.values(state.nodes)
     }
 }
 
-
+//Actions can be asynchronous
+// You can make here ONLY the business-logic
 const actions = {
     addPaletteNode({state, commit}, {type, name}) {
         if (name && !state.nodes[name]) { // add only if not exists
@@ -67,12 +73,27 @@ const actions = {
         ].forEach(node => {
             dispatch('addPaletteNode', node);
         });
-    }
+    },
+    removeNode({state, commit}, node) {
+        if (node.dying) return;
+        commit(verbs.KILL_NODE, node.name);
+        setTimeout(() => {
+            if (state.nodes[node.name] === node) { // check if the node is the same
+                commit(verbs.REMOVE_NODE, node.name);
+            }
+        }, 1000);
+    },
 };
 
+// Synchronous and the only point where we can change the state
+// You can make here ONLY the data-logic (language or formatting data....)
+//VUe doesn't detect the addition of properties, that's the reason we must do 'Vue.set'
 const mutations = {
     [verbs.CLEAR_NODES] (state) {
-        state.pokemons = {};
+        state.nodes = {};
+    },
+    [verbs.CLEAR_PALETTE_NODES] (state) {
+        state.paletteNodes = {};
     },
     [verbs.ADD_NODE] (state, node) {
         // state.pokemons[pokemon.name] = pokemon;
@@ -81,7 +102,13 @@ const mutations = {
     [verbs.ADD_PALETTE_NODE] (state, node) {
         // state.pokemons[pokemon.name] = pokemon;
         Vue.set(state.paletteNodes, node.name, node);
-    }
+    },
+    [verbs.KILL_NODE] (state, name) {
+        state.nodes[name].dying = true;
+    },
+    [verbs.REMOVE_NODE] (state, name) {
+        Vue.delete(state.nodes, name);
+    },
 }
 
 

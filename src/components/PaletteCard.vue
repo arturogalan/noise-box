@@ -1,11 +1,12 @@
 <template>
-  <div class="palette-card" :class="{removing: node.dying}">
+  <div class="palette-card" :class="{removing: node.dying}" @click="addNode(node)">
     <div class="overlay">{{ node.name }}</div>
     <img :src="getAsset(node.icon)" class="icon-type">
 </div>
 </template>
 
 <script>
+import {mapActions} from 'vuex'
 
 export default {
   name: 'NodeCard',
@@ -19,7 +20,10 @@ export default {
         },
         getAsset: function(assetName) {
 	        return require("../"+assetName);
-        }
+        },
+        ...mapActions([
+            'addNode',
+        ]),
     }
 }
 </script>
@@ -67,5 +71,8 @@ export default {
   color: white;
   text-align: center;
   border-radius: 10px;
+}
+.palette-card.removing {
+    background-color: lightcoral;
 }
 </style>

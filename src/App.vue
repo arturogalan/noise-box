@@ -6,17 +6,25 @@
     
     <div class="row">
       <div class="grid-container node-palette" style="background-color:#aaa;">
-         <palette-card
-        v-for="node in paletteNodesList"
-        :key="node.name"
-        :node="node"
-        @delete="removeNode(node)"
-      ></palette-card>
+        <palette-card
+            v-for="node in paletteNodesList"
+            :key="node.name"
+            :node="node"
+          >
+        </palette-card>
       </div>
       <div class="noise-board column">
         <div class="row">
           <div class="column left" style="background-color:#bbb;"></div>
-          <div class="column middle" style="background-color:#ccc;"></div>
+          <div class="column middle" style="background-color:#ccc;">
+            <node-card
+              v-for="node in nodesList"
+              :key="node.name"
+              :node="node"
+              @delete="removeNode(node)"
+            >
+            </node-card>
+          </div>
           <div class="column right" style="background-color:#ddd;"></div>
         </div>
       </div>
@@ -29,6 +37,7 @@
 import { mapGetters, mapActions } from 'vuex';
 import AppHeader from './components/AppHeader.vue'
 import PaletteCard from './components/PaletteCard.vue'
+import NodeCard from './components/NodeCard.vue'
 
 export default {
   name: 'app',
@@ -38,6 +47,7 @@ export default {
   computed: {
     ...mapGetters([
       'paletteNodesList',
+      'nodesList'
     ]),
   },
   methods: {
@@ -48,7 +58,8 @@ export default {
   },
   components: {
     AppHeader,
-    PaletteCard
+    PaletteCard,
+    NodeCard
   },
   created() {
     this.resetPaletteNodes();

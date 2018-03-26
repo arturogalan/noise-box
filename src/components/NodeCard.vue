@@ -1,14 +1,12 @@
 <template>
   <div class="node-card" :class="{removing: node.dying}">
     <span class="delete" @click="deleteClick" v-if="!node.dying">×</span>
-    <node-icon :type="node.type" :subtype="node.subtype"></node-icon>
     <div>name: {{ node.name }}</div>
+    <img :src="getAsset(node.icon)" class="icon-type">
 </div>
 </template>
 
 <script>
-import NodeIcon from './NodeIcon.vue';
-
 
 export default {
   name: 'NodeCard',
@@ -19,10 +17,12 @@ export default {
     methods: {
         deleteClick() {
             this.$emit('delete');
-        }
+        },
+        getAsset: function(assetName) {
+	        return require("../"+assetName);
+        },
     },
     components: {
-        NodeIcon,
     }
 }
 </script>
