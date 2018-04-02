@@ -1,0 +1,26 @@
+<svg width="180" height="270" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg">
+ <!-- Created with SVG-edit - http://svg-edit.googlecode.com/ -->
+ <defs>
+  <filter id="svg_7_blur">
+   <feGaussianBlur stdDeviation="0.8"/>
+  </filter>
+ </defs>
+ <g display="inline">
+  <title>Layer 1</title>
+  <path fill-opacity="0" stroke="#000000" transform="rotate(-179.77508544921875 90.00787353515626,57.01736068725587) " d="m163.92556,111.23495l-147.95644,0c-1.93724,0 -3.51124,-1.7533 -3.51124,-3.91122l0,-100.61274c0,-2.15792 1.574,-3.91122 3.51124,-3.91122l148.07752,0c1.93724,0 3.51124,1.7533 3.51124,3.91122l0,100.61274c0,2.15792 -1.574,3.91122 -3.63232,3.91122z" fill="#000000" id="svg_2"/>
+  <path fill="none" stroke-width="3" id="svg_1" stroke="black"/>
+  <rect id="svg_6" height="35.4375" width="6.75" y="50.37502" x="5.17476" stroke-linecap="null" stroke-linejoin="null" stroke-dasharray="null" stroke-width="0" stroke="black" fill="#7f7f7f"/>
+  <line id="svg_15" y2="133.02737" x2="11.96363" y1="102.33596" x1="12.28004" opacity="0.8" stroke-linecap="null" stroke-linejoin="null" stroke-dasharray="null" stroke-width="null" stroke="black" fill="none"/>
+  <path d="m30.5,158.50001l120,0a6,3.63636 0 0 1 6,3.63638l0,72.72726a6,3.63636 0 0 1 -6,3.63638l-120,0a6,3.63636 0 0 1 -6.00001,-3.63638l0,-72.72726a6,3.63636 0 0 1 6.00001,-3.63638z" fill="#333333" stroke-width="3" id="svg_3" stroke="black"/>
+  <rect opacity="0.78" id="svg_10" height="24.75" width="1.125" y="54.31251" x="176.11323" stroke-linecap="null" stroke-linejoin="null" stroke-dasharray="null" stroke-width="3" stroke="black" fill="#333333"/>
+  <rect id="svg_8" height="35.4375" width="6.75" y="49.53125" x="167.95702" stroke-linecap="null" stroke-linejoin="null" stroke-dasharray="null" stroke-width="0" stroke="black" fill="#7f7f7f"/>
+  <rect id="svg_12" opacity="0.78" height="24.75" width="1.125" y="55.4375" x="2.73146" stroke-linecap="null" stroke-linejoin="null" stroke-dasharray="null" stroke-width="3" stroke="black" fill="#333333"/>
+  <path id="svg_1" stroke-width="3" fill="#000000" d="m159.39107,8.9206l0,91.92894a6.36128,4.59645 0 0 1 -6.36128,4.59645l-127.22571,0a6.36128,4.59645 0 0 1 -6.36129,-4.59645l0,-91.92894l139.94829,0l-0.00001,0z" opacity="0.8" transform="rotate(179.8671417236328 89.41693878173827,57.183292388916016) " stroke="black"/>
+  <circle fill="#ff0000" stroke="black" stroke-width="0" stroke-dasharray="null" stroke-linejoin="null" stroke-linecap="null" opacity="0.78" cx="91" cy="15" r="5" id="svg_5"/>
+  <text opacity="0.68" stroke="#000000" transform="matrix(1.460766990278585,0,0,1.354796741290448,-178.28341393634793,-34.060038093585405) " font-weight="bold" xml:space="preserve" text-anchor="middle" font-family="Monospace" font-size="24" y="164.53085" x="197.52908" stroke-linecap="null" stroke-linejoin="null" stroke-dasharray="null" fill="#0f0e0e" id="svg_7" stroke-width="0" filter="url(#svg_7_blur)">PUSH</text>
+  <text id="svg_13" opacity="0.59" stroke="#000000" transform="matrix(1.460766990278585,0,0,1.354796741290448,-178.28341393634793,-34.060038093585405) " font-weight="bold" xml:space="preserve" text-anchor="middle" font-family="Monospace" font-size="24" y="163.49153" x="196.54944" stroke-linecap="null" stroke-linejoin="null" stroke-dasharray="null" fill="#333333">PUSH</text>
+  <text filter="url(#svg_11_blur)" id="svg_11" opacity="0.4" stroke="#000000" transform="matrix(1.460766990278585,0,0,1.354796741290448,-178.28341393634793,-34.060038093585405) " font-weight="bold" xml:space="preserve" text-anchor="middle" font-family="Monospace" font-size="24" y="180.6514" x="208.14691" stroke-linecap="null" stroke-linejoin="null" stroke-dasharray="null" stroke-width="0" fill="#000000">PUSH</text>
+  <line id="svg_16" y2="123.37696" x2="167.22641" y1="92.68555" x1="167.54282" opacity="0.8" stroke-linecap="null" stroke-linejoin="null" stroke-dasharray="null" stroke-width="null" stroke="black" fill="none"/>
+  <path stroke="black" id="svg_4" d="m19.09418,114.32716l141.09157,0a7.05457,6.31872 0 0 1 7.05457,6.31872l0,126.37428a7.05457,6.31872 0 0 1 -7.05457,6.31872l-141.09157,0a7.05457,6.31872 0 0 1 -7.05458,-6.31872l0,-126.37428a7.05457,6.31872 0 0 1 7.05458,-6.31872z" fill="none"/>
+ </g>
+</svg>
