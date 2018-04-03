@@ -1,5 +1,5 @@
 <template>
-  <div class="palette-card" :class="{removing: node.dying}" @click="addNode(node)">
+  <div class="palette-card" @click="addNode(node)">
     <div class="overlay">{{ node.name }}</div>
     <img :src="getAsset(node.icon)" class="icon-type">
 </div>

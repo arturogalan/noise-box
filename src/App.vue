@@ -5,13 +5,17 @@
 
     
     <div class="row">
-      <div class="grid-container node-palette" style="background-color:#aaa;">
-        <palette-card
-            v-for="node in paletteNodesList"
-            :key="node.name"
-            :node="node"
-          >
-        </palette-card>
+      <div class="node-palette">    
+        <div class="palette-title">Add effects!</div>
+        <div class="grid-container" style="background-color:#aaa;">
+          <palette-card
+              v-for="node in paletteNodesList"
+              :key="node.name"
+              :node="node"
+              :title="'Add '+node.name+'!!'"
+            >
+          </palette-card>
+        </div>
       </div>
       <div class="noise-board column">
         <div class="row">
@@ -80,8 +84,8 @@ export default {
   margin-top: 0px;
 }
 .node-palette {
-  display: flex;
-  flex-wrap: wrap;
+  /* display: flex; */
+  /* flex-wrap: wrap; */
   width: 20%;
   float: left;
 }
@@ -96,10 +100,10 @@ export default {
 
 
 .left, .right {
-  width: 15%;
+  width: 5%;
 }
 .middle {
-  width: 70%;
+  width: 90%;
 }
 
 /* Clear floats after the columns */
@@ -115,5 +119,20 @@ export default {
   grid-template-columns: 45% 45%;/*Make the grid smaller than the container*/
   grid-gap: 10px;
   background-color: #2196F3;
+}
+.overlay {
+  bottom: 0; 
+  background: rgb(0, 0, 0);
+  background:rgba(193, 150, 150, 0.5); /* Black see-through */
+  color: #f1f1f1; 
+  transition: .5s ease;
+  color: white;
+  text-align: center;
+  border-radius: 10px;
+}
+.palette-title {
+  background-color: bisque;
+  font-style: oblique;
+  font-weight: 900;
 }
 </style>

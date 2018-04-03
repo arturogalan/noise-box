@@ -1,21 +1,21 @@
 <template>
-    <div class="knob-grid">
-        <div class="one-knob">
-            <vue-knob v-model="myVal" color="red"/>
-        </div>
-        <div class="one-knob">
-            <vue-knob v-model="myVal" color="blue"/>
-        </div>
-        <div class="one-knob">
-            <vue-knob v-model="myVal" color="yellow"/>
-        </div>
+    <div class="knob-grid" >
+        <vue-knob
+            class="one-knob"
+            v-for="(setting, index) in settingsList"
+            :key="index"
+            :name="setting.name"
+            v-model="setting.initialValue"
+            :color="setting.color"
+        >
+        </vue-knob>
     </div>
 </template>
 
 <script>
 import VueKnob from "vue-knob";
 export default {
-  props: ["attributesList"],
+  props: ["settingsList"],
   data() {
     return {
       myVal: 50
@@ -27,8 +27,6 @@ export default {
   }
 };
 </script>
-
-
 
 <style>
 .knob-grid {
@@ -44,6 +42,5 @@ export default {
   text-align: center;
   color: #2c3e50;
   width: 40px;
-  
 }
 </style>

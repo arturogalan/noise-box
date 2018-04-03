@@ -1,7 +1,7 @@
 <template>
   <div class="node-card" :class="{removing: node.dying}">
     <span class="delete" @click="deleteClick" v-if="!node.dying">×</span>
-    <knob-grid></knob-grid>
+    <knob-grid :settingsList="node.settingsList"></knob-grid>
     <div class="node-name" :style="{ color: node.fcolor }">{{ node.name }} </div>
     <img class="pedal-svg" src="../assets/img/pedal.svg" alt="" :style="{ backgroundColor: node.bgcolor }">
 </div>
