@@ -10,9 +10,12 @@
     "unit": "jest --config test/unit/jest.conf.js --coverage",
     "e2e": "node test/e2e/runner.js",
     "test": "npm run unit && npm run e2e",
-    "build": "node build/build.js"
+    "build": "node build/build.js",
+    "startPro": "node app.js"
   },
   "dependencies": {
+    "bunyan": "^1.8.12",
+    "express": "^4.16.3",
     "vue": "^2.5.2",
     "vue-knob": "^1.0.2",
     "vue-router": "^3.0.1",

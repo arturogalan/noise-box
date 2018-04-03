@@ -11,7 +11,7 @@ export const NODE_PROPERTIES = {
 
     [NODE_TYPE.VOLUME]: {
         label: 'Volume node',
-        icon: 'assets/icons/input.svg',
+        icon: 'assets/icons/volume.svg',
         bgcolor: '#688c4b',
         fcolor: 'black',
         settingsList: [
@@ -26,7 +26,7 @@ export const NODE_PROPERTIES = {
     },
     [NODE_TYPE.DISTORSION]: {
         label: 'Distorsion node',
-        icon: 'assets/icons/input.svg',
+        icon: 'assets/icons/distorsion.svg',
         bgcolor: '#3b3f44',
         fcolor: 'orange',
         settingsList: [
@@ -55,7 +55,7 @@ export const NODE_PROPERTIES = {
     },
     [NODE_TYPE.DELAY]: {
         label: 'Delay node',
-        icon: 'assets/icons/effect.svg',
+        icon: 'assets/icons/delay.svg',
         bgcolor: '#eedbc3',
         fcolor: 'blue',
         settingsList: [
@@ -84,7 +84,7 @@ export const NODE_PROPERTIES = {
     },
     [NODE_TYPE.FLANGER]: {
         label: 'Flanger node',
-        icon: 'assets/icons/output.svg',
+        icon: 'assets/icons/flanger.svg',
         bgcolor: '#b1428b',
         fcolor: 'black',
         settingsList: [

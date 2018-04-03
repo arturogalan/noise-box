@@ -1,0 +1,21 @@
+<svg width="120" height="120" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg">
+ <!-- Created with SVG-edit - http://svg-edit.googlecode.com/ -->
+ <defs>
+  <filter id="svg_1_blur">
+   <feGaussianBlur stdDeviation="0.5"/>
+  </filter>
+  <filter id="svg_2_blur">
+   <feGaussianBlur stdDeviation="1.1"/>
+  </filter>
+  <filter id="svg_3_blur">
+   <feGaussianBlur stdDeviation="1.9"/>
+  </filter>
+ </defs>
+ <g>
+  <title>Layer 1</title>
+  <ellipse fill="none" stroke-width="5" stroke-dasharray="null" stroke-linejoin="null" stroke-linecap="null" cx="59.5" cy="59" rx="46" ry="45" filter="url(#svg_2_blur)" id="svg_4" stroke="#00ffff"/>
+  <ellipse fill="none" stroke-width="5" stroke-dasharray="null" stroke-linejoin="null" stroke-linecap="null" cx="59" cy="59.49999" rx="51" ry="51" id="svg_3" filter="url(#svg_3_blur)" stroke="#000000"/>
+  <ellipse fill="none" stroke-width="5" stroke-dasharray="null" stroke-linejoin="null" stroke-linecap="null" cx="59" cy="59.5" id="svg_2" rx="42" ry="42.5" filter="url(#svg_2_blur)" stroke="#000000"/>
+  <path filter="url(#svg_1_blur)" stroke="#000000" id="svg_1" d="m41.56381,54.14718c3.79213,6.91208 4.53245,9.01119 3.27863,9.29625c-2.44924,0.55687 -1.95706,3.74169 1.47106,9.519c4.29924,7.24539 12.72012,11.69472 20.62993,10.9002c3.07013,-0.30839 6.54105,-0.94482 7.71315,-1.41432c1.1721,-0.4695 0.45285,0.40513 -1.59832,1.94361c-10.26117,7.69637 -22.93416,7.16026 -33.04445,-1.39789c-4.03116,-3.41231 -9.57742,-13.38212 -9.57742,-17.21616c0,-1.08616 -0.91439,-2.1386 -2.03197,-2.33875c-1.82767,-0.32732 -1.58223,-1.18918 2.44132,-8.57232c2.46031,-4.51463 4.77628,-8.53225 5.14661,-8.92805c0.37034,-0.3958 2.87749,3.29799 5.57147,8.20841l0,0zm32.59662,13.32564c-3.79213,-6.91208 -4.53245,-9.01119 -3.27864,-9.29625c2.44924,-0.55686 1.95706,-3.74169 -1.47106,-9.519c-4.29924,-7.24539 -12.72013,-11.69472 -20.62993,-10.90021c-3.07013,0.30838 -6.54104,0.94483 -7.71314,1.41433c-1.1721,0.46949 -0.45286,-0.40513 1.59832,-1.94362c10.26117,-7.69638 22.93416,-7.16027 33.04446,1.3979c4.03117,3.4123 9.57742,13.38212 9.57742,17.21615c0,1.08616 0.91439,2.1386 2.03196,2.33875c1.82768,0.32733 1.58223,1.18918 -2.44131,8.57232c-2.46031,4.51462 -4.77629,8.53225 -5.14661,8.92805c-0.37034,0.3958 -2.87749,-3.29798 -5.57147,-8.20841l0,0z" stroke-linecap="null" stroke-linejoin="null" stroke-dasharray="null" stroke-width="2" fill="#aaffaa"/>
+ </g>
+</svg>
