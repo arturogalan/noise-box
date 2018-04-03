@@ -1,35 +1,36 @@
 <template>
   <div class="node-card" :class="{removing: node.dying}">
     <span class="delete" @click="deleteClick" v-if="!node.dying">×</span>
-    <div class="node-name">{{ node.name }}</div>
-    <!-- <img :src="getAsset(node.icon)" class="icon-type"> -->
-    <img class="pedal-svg" src="../assets/img/pedal.svg" alt="">
+    <knob-grid></knob-grid>
+    <div class="node-name" :style="{ color: node.fcolor }">{{ node.name }} </div>
+    <img class="pedal-svg" src="../assets/img/pedal.svg" alt="" :style="{ backgroundColor: node.bgcolor }">
 </div>
 </template>
 
 <script>
-
+import KnobGrid from './KnobGrid.vue'
 export default {
   name: 'NodeCard',
   props: ['node'],
   data() {
-        return {};
+        return {
+             myVal:50
+        };
     },
     methods: {
         deleteClick() {
             this.$emit('delete');
-        },
-        getAsset: function(assetName) {
-	        return require("../"+assetName);
-        },
+        }
     },
     components: {
+        KnobGrid
     }
 }
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style>
+
 .node-card {
     display: flex;
     position: relative;
@@ -47,7 +48,7 @@ export default {
     position: relative;
     top: 0px;
     right: 5px;
-    height: 270px;
+    height: 274px;
     width: 180px;
 }
 .delete {
@@ -64,10 +65,10 @@ export default {
 
 .node-name {
     font-family: 'FontPbio';
-    position: absolute;
-    left: 10%;
-    top: 40%;
-    z-index: 50;
+    font-size: small;
+    position: relative;
+    top: 50%;
+    z-index: 100;
 }
   @font-face {
     font-family: "FontPbio";
@@ -79,11 +80,9 @@ export default {
 .pedal-svg {
     height: 270px;
     width: 180px;
-    position: absolute;
     left: 0;
     top: 0;
-    z-index: 100;
-     background-color: blue;
-     border-radius: 5px;
+    z-index: 50;
+    border-radius: 5px;
 }
 </style>

@@ -15,9 +15,6 @@ export default {
         return {};
     },
     methods: {
-        deleteClick() {
-            this.$emit('delete');
-        },
         getAsset: function(assetName) {
 	        return require("../"+assetName);
         },
@@ -74,5 +71,6 @@ export default {
 }
 .palette-card.removing {
     background-color: lightcoral;
+   color: #3b3f44
 }
 </style>

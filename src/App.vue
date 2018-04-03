@@ -17,13 +17,16 @@
         <div class="row">
           <div class="column left" style="background-color:#bbb;"></div>
           <div class="column middle" style="background-color:#ccc;">
+            <div class="row">
             <node-card
               v-for="node in nodesList"
               :key="node.name"
               :node="node"
               @delete="removeNode(node)"
+              class='column'
             >
             </node-card>
+            </div>
           </div>
           <div class="column right" style="background-color:#ddd;"></div>
         </div>
