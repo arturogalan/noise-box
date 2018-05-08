@@ -1,21 +1,21 @@
 <template>
 <div class="container" @click="computeValue">
-      <svg id="rotationSVG" width="100%" height="100%" viewBox="0 0 42 42" v-bind:style="svgAbove" preserveAspectRatio >
-      <circle
-        class="stroke-hole"
-        cx="21"
-        cy="21"
-        :r="9"
-        >
-      </circle>
-      <circle
-        class="stroke-mark"
-        cx="21"
-        cy="21"
-        r="5"
-        >
-      </circle>
-    </svg>
+  <svg id="rotationSVG" width="100%" height="100%" viewBox="0 0 42 42" v-bind:style="svgAbove" preserveAspectRatio >
+    <circle
+      class="stroke-hole"
+      cx="21"
+      cy="21"
+      :r="9"
+      >
+    </circle>
+    <circle
+      class="stroke-mark"
+      cx="21"
+      cy="21"
+      r="5"
+      >
+    </circle>
+  </svg>
 <svg width="100%" height="100%" viewBox="0 0 42 42"  v-bind:style="svgStyle" preserveAspectRatio >
 
   <circle 
@@ -47,9 +47,19 @@
       {{currentValue}}
     </text>
   </g>
+  
 </svg>
 
+  <slot name="body">
+    <div class="setting-name">
+
+    <span >{{name}}</span>
+    </div>
+  </slot>
 </div>
+
+
+
 </template>
 <script>
 export default {
@@ -84,6 +94,10 @@ export default {
       required:false,
       default:'#d2d3d4'
     },
+    name:{
+      type: String,
+      required: false
+    }
   },
   data() {
     return {
@@ -198,7 +212,12 @@ export default {
   stroke-dasharray: 1, 90;
 }
 
-
+.setting-name {
+  color: aliceblue;
+  position: absolute;
+  width: 100%;
+  top: 80%;
+}
 /* .svg-above{
   position: absolute;
   top: 0;

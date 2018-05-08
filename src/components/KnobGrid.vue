@@ -38,11 +38,12 @@ export default {
     margin: 40px 0 0 15px;
 }
 .one-knob {
-  font-family: "Avenir", Helvetica, Arial, sans-serif;
+  /* font-family: "Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
-  width: 40px;
+  color: #2c3e50; */
+  width: 50px;
+  cursor: pointer;
 }
 </style>
