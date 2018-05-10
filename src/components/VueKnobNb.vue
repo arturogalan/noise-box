@@ -1,5 +1,5 @@
 <template>
-<div class="container" @click="computeValue">
+<div class="container">
   <svg id="rotationSVG" width="100%" height="100%" viewBox="0 0 42 42" v-bind:style="svgAbove" preserveAspectRatio >
     <circle
       class="stroke-hole"
@@ -50,12 +50,10 @@
   
 </svg>
 
-  <slot name="body">
     <div class="setting-name">
 
-    <span >{{name}}</span>
+    <span>{{name}}</span>
     </div>
-  </slot>
 </div>
 
 
@@ -198,6 +196,7 @@ export default {
 <style>
 .container{
   position: relative;
+  z-index: 100;
 }
 .stroke-hole{
   fill: darkgray;
@@ -217,6 +216,7 @@ export default {
   position: absolute;
   width: 100%;
   top: 80%;
+  z-index: -1;
 }
 /* .svg-above{
   position: absolute;

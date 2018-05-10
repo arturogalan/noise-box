@@ -32,7 +32,11 @@
             </node-card>
             </div>
           </div>
-          <div class="column right" style="background-color:#ddd;"></div>
+          <div class="column right" style="background-color:#ddd;">
+            <master-control>
+              
+            </master-control>
+          </div>
         </div>
       </div>
     </div>
@@ -45,6 +49,7 @@ import { mapGetters, mapActions } from 'vuex';
 import AppHeader from './components/AppHeader.vue'
 import PaletteCard from './components/PaletteCard.vue'
 import NodeCard from './components/NodeCard.vue'
+import MasterControl from './components/MasterControl.vue'
 
 export default {
   name: 'app',
@@ -66,7 +71,8 @@ export default {
   components: {
     AppHeader,
     PaletteCard,
-    NodeCard
+    NodeCard,
+    MasterControl
   },
   created() {
     this.resetPaletteNodes();
@@ -99,11 +105,14 @@ export default {
 }
 
 
-.left, .right {
-  width: 5%;
+.left {
+  width: 2%;
 }
 .middle {
-  width: 90%;
+  width: 80%;
+}
+.right {
+  width: 18%;
 }
 
 /* Clear floats after the columns */
