@@ -21,7 +21,7 @@ export default {
 
 .slidecontainer {
     display: grid;
-    /* grid-template-columns: 25% 25% 25% 25%; */
+    grid-template-columns: 25% 25% 25% 25%;
     margin-left: 15%;
 }
 
