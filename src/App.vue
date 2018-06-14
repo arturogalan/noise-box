@@ -69,7 +69,7 @@ export default {
     ...mapActions([
       'resetPalettePedals',
       'removePedal',
-      'setAudioContext'
+      'createAudioContext'
     ]),
   },
   components: {
@@ -80,7 +80,7 @@ export default {
   },
   created() {
     this.resetPalettePedals();
-    this.setAudioContext();
+    this.createAudioContext();
   }
 }
 </script>

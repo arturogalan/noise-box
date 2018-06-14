@@ -10,96 +10,120 @@ export const PEDAL_TYPE = {
 export const PEDAL_PROPERTIES = {
 
     [PEDAL_TYPE.VOLUME]: {
-        label: 'Volume node',
+        name: 'volume',
         icon: 'assets/icons/volume.svg',
         bgcolor: '#688c4b',
         fcolor: 'black',
         settingsList: [
             {
-                name: 'volume',
+                name: 'level',
                 min:0,
-                max:100,
-                initialValue: 68,
+                max:1,
+                initialValue: 0.5,
+                correctionFactor: 1,
                 color: 'lightskyblue',
             },
         ]
     },
     [PEDAL_TYPE.DISTORSION]: {
-        label: 'Distorsion node',
+        name: 'distortion',
         icon: 'assets/icons/distorsion.svg',
         bgcolor: '#3b3f44',
         fcolor: 'orange',
         settingsList: [
             {
-                name: 'level',
+                name: 'gain',
                 min:0,
                 max:100,
-                initialValue: 68,
+                initialValue: 50,
+                correctionFactor: 1,
                 color: 'lightskyblue'
             },
             {
-                name: 'tone',
-                min:0,
-                max:100,
-                initialValue: 40,
-                color: 'lightslategray'
-            },
-            {
-                name: 'drive',
+                name: 'intensity',
                 min:0,
                 max:100,
                 initialValue: 80,
-                color: 'lightseagreen'
+                correctionFactor: 1,
+                color: 'lightslategray'
             },
+            // {
+            //     name: 'drive',
+            //     min:0,
+            //     max:100,
+            //     initialValue: 80,
+            //     color: 'lightseagreen'
+            // },
         ]
     },
     [PEDAL_TYPE.DELAY]: {
-        label: 'Delay node',
+        name: 'delay',
         icon: 'assets/icons/delay.svg',
         bgcolor: '#eedbc3',
         fcolor: 'blue',
         settingsList: [
             {
-                name: 'level',
+                name: 'wet',
                 min:0,
                 max:100,
-                initialValue: 20,
+                initialValue: 1,
+                correctionFactor: 1,
                 color: 'lightskyblue'
             },
             {
-                name: 'f.back',
+                name: 'speed',
                 min:0,
-                max:100,
-                initialValue: 50,
+                max:10,
+                initialValue: 5, //0.5 0->1,
+                correctionFactor: 10,
                 color: 'lightslategray'
             },
             {
-                name: 'd.time',
+                name: 'duration',
                 min:0,
-                max:100,
-                initialValue: 22,
+                max:10,
+                initialValue: 4, //0.4 0->1,
+                correctionFactor: 10,
                 color: 'lightseagreen'
             },
         ]
     },
     [PEDAL_TYPE.FLANGER]: {
-        label: 'Flanger node',
+        name: 'flanger',
         icon: 'assets/icons/flanger.svg',
         bgcolor: '#b1428b',
         fcolor: 'black',
         settingsList: [
             {
-                name: 'deph',
+                name: 'delay',
                 min:0,
-                max:100,
-                initialValue: 60,
+                max:0.1,
+                initialValue: 5, //0.005 0->0.1?,
+                correctionFactor: 1,
                 color: 'lightslategray'
             },
             {
-                name: 'rate',
+                name: 'depth',
                 min:0,
                 max:100,
-                initialValue: 10,
+                initialValue: 2, //0.002 0->0.1,
+                correctionFactor: 1000,
+                color: 'lightseagreen'
+            },
+            {
+                name: 'feedback',
+                min:0,
+                max:100,
+                initialValue: 5, //0.5 0->1,
+                correctionFactor: 100,               
+                color: 'lightskyblue'
+            },
+            {
+                name: 'speed',
+                min:0,
+                max:100,
+                initialValue: 25, // 0.25 0->1,
+                correctionFactor: 100,                
                 color: 'lightseagreen'
             }
         ]
