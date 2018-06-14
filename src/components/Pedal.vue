@@ -1,17 +1,17 @@
 <template>
-  <div class="node-card" :class="{removing: node.dying}">
-    <span class="delete" @click="deleteClick" v-if="!node.dying">×</span>
-    <knob-grid :settingsList="node.settingsList"></knob-grid>
-    <div class="node-name" :style="{ color: node.fcolor }">{{ node.name }} </div>
-    <img class="pedal-svg" src="../assets/img/pedal.svg" alt="" :style="{ backgroundColor: node.bgcolor }">
+  <div class="pedal-card" :class="{removing: pedal.dying}">
+    <span class="delete" @click="deleteClick" v-if="!pedal.dying">×</span>
+    <knob-grid :settingsList="pedal.settingsList"></knob-grid>
+    <div class="pedal-name" :style="{ color: pedal.fcolor }">{{ pedal.name }} </div>
+    <img class="pedal-svg" src="../assets/img/pedal.svg" alt="" :style="{ backgroundColor: pedal.bgcolor }">
 </div>
 </template>
 
 <script>
 import KnobGrid from './KnobGrid.vue'
 export default {
-  name: 'NodeCard',
-  props: ['node'],
+  name: 'Pedal',
+  props: ['pedal'],
   data() {
         return {
              myVal:50
@@ -31,7 +31,7 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style>
 
-.node-card {
+.pedal-card {
     display: flex;
     position: relative;
     flex-direction: column;
@@ -40,11 +40,11 @@ export default {
     border: solid 1px rgb(122, 44, 44);
 }
 
-.node-card.removing {
+.pedal-card.removing {
     background-color: red;
 }
 
-.node-card  {
+.pedal-card  {
     position: relative;
     top: 0px;
     right: 5px;
@@ -58,12 +58,12 @@ export default {
     cursor: pointer;
     font-family: 'FontPbio';
 }
-.node-card .attack-buttons {
+.pedal-card .attack-buttons {
     display: flex;
     justify-content: space-between;
 }
 
-.node-name {
+.pedal-name {
     font-family: 'FontPbio';
     font-size: small;
     position: relative;

@@ -5,16 +5,16 @@
 
     
     <div class="row">
-      <div class="node-palette">    
+      <div class="pedal-palette">    
         <div class="palette-title">Add effects!</div>
         <div class="grid-container" style="background-color:#aaa;">
-          <palette-card
-              v-for="node in paletteNodesList"
-              :key="node.name"
-              :node="node"
-              :title="'Add '+node.name+'!!'"
+          <palette-pedal
+              v-for="palettePedal in palettePedalsList"
+              :key="palettePedal.name"
+              :palettePedal="palettePedal"
+              :title="'Add '+palettePedal.name+'!!'"
             >
-          </palette-card>
+          </palette-pedal>
         </div>
       </div>
       <div class="noise-board column">
@@ -22,14 +22,14 @@
           <div class="column left" style="background-color:#bbb;"></div>
           <div class="column middle" style="background-color:#ccc;">
             <div class="row">
-            <node-card
-              v-for="node in nodesList"
-              :key="node.name"
-              :node="node"
-              @delete="removeNode(node)"
+            <pedal
+              v-for="pedal in pedalList"
+              :key="pedal.name"
+              :pedal="pedal"
+              @delete="removePedal(pedal)"
               class='column'
             >
-            </node-card>
+            </pedal>
             </div>
           </div>
           <div class="column right" style="background-color:#ddd;">
@@ -47,35 +47,40 @@
 <script>
 import { mapGetters, mapActions } from 'vuex';
 import AppHeader from './components/AppHeader.vue'
-import PaletteCard from './components/PaletteCard.vue'
-import NodeCard from './components/NodeCard.vue'
+import PalettePedal from './components/PalettePedal.vue'
+import Pedal from './components/Pedal.vue'
 import MasterControl from './components/MasterControl.vue'
+
 
 export default {
   name: 'app',
   data () {
-    return {};
+    return {
+      audioContext: null
+    };
   },
   computed: {
     ...mapGetters([
-      'paletteNodesList',
-      'nodesList'
+      'palettePedalsList',
+      'pedalList'
     ]),
   },
   methods: {
     ...mapActions([
-      'resetPaletteNodes',
-      'removeNode',
+      'resetPalettePedals',
+      'removePedal',
+      'setAudioContext'
     ]),
   },
   components: {
     AppHeader,
-    PaletteCard,
-    NodeCard,
+    PalettePedal,
+    Pedal,
     MasterControl
   },
   created() {
-    this.resetPaletteNodes();
+    this.resetPalettePedals();
+    this.setAudioContext();
   }
 }
 </script>
@@ -89,7 +94,7 @@ export default {
   color: #2c3e50;
   margin-top: 0px;
 }
-.node-palette {
+.pedal-palette {
   /* display: flex; */
   /* flex-wrap: wrap; */
   width: 20%;

@@ -1,5 +1,5 @@
 
-export const NODE_TYPE = {
+export const PEDAL_TYPE = {
     VOLUME: 'VOLUME',
     DISTORSION: 'DISTORSION',
     DELAY: 'DELAY',
@@ -7,9 +7,9 @@ export const NODE_TYPE = {
 };
 
 
-export const NODE_PROPERTIES = {
+export const PEDAL_PROPERTIES = {
 
-    [NODE_TYPE.VOLUME]: {
+    [PEDAL_TYPE.VOLUME]: {
         label: 'Volume node',
         icon: 'assets/icons/volume.svg',
         bgcolor: '#688c4b',
@@ -24,7 +24,7 @@ export const NODE_PROPERTIES = {
             },
         ]
     },
-    [NODE_TYPE.DISTORSION]: {
+    [PEDAL_TYPE.DISTORSION]: {
         label: 'Distorsion node',
         icon: 'assets/icons/distorsion.svg',
         bgcolor: '#3b3f44',
@@ -53,7 +53,7 @@ export const NODE_PROPERTIES = {
             },
         ]
     },
-    [NODE_TYPE.DELAY]: {
+    [PEDAL_TYPE.DELAY]: {
         label: 'Delay node',
         icon: 'assets/icons/delay.svg',
         bgcolor: '#eedbc3',
@@ -82,7 +82,7 @@ export const NODE_PROPERTIES = {
             },
         ]
     },
-    [NODE_TYPE.FLANGER]: {
+    [PEDAL_TYPE.FLANGER]: {
         label: 'Flanger node',
         icon: 'assets/icons/flanger.svg',
         bgcolor: '#b1428b',

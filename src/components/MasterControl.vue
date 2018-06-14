@@ -1,6 +1,5 @@
 <template>
   <div>
-      hola
       <vue-slider-nb>
       </vue-slider-nb>  
   </div>

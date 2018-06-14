@@ -3,9 +3,9 @@
   <p>Custom range slider:</p>
 <div class="slidecontainer">
   <input type="range" min="1" max="100" value="50" class="slider" orient="vertical" id="myRange">
+  <!-- <input type="range" min="1" max="100" value="50" class="slider" orient="vertical" id="myRange">
   <input type="range" min="1" max="100" value="50" class="slider" orient="vertical" id="myRange">
-  <input type="range" min="1" max="100" value="50" class="slider" orient="vertical" id="myRange">
-  <input type="range" min="1" max="100" value="50" class="slider" orient="vertical" id="myRange">
+  <input type="range" min="1" max="100" value="50" class="slider" orient="vertical" id="myRange"> -->
 
 </div>
 </div>

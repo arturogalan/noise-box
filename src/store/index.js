@@ -1,122 +1,130 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 
-import { NODE_TYPE, NODE_PROPERTIES } from './constants';
+import { PEDAL_TYPE, PEDAL_PROPERTIES } from './constants';
+
+import { HasAudioContext } from 'audio-effects';
 
 Vue.use(Vuex);
 
 const verbs = {
-    CLEAR_NODES: 'CLEAR_NODES',
-    CLEAR_PALETTE_NODES: 'CLEAR_PALETTE_NODES',
-    ADD_PALETTE_NODE: 'ADD_PALETTE_NODE',
-    ADD_NODE: 'ADD_NODE',
-    ATTACK_NODE: 'ATTACK_NODE',
-    KILL_NODE: 'KILL_NODE',
-    REMOVE_NODE: 'REMOVE_NODE',
+  CLEAR_PALETTE_PEDALS: 'CLEAR_PALETTE_PEDALS',
+  ADD_PALETTE_PEDAL: 'ADD_PALETTE_PEDAL',
+  ADD_PEDAL: 'ADD_PEDAL',
+  TOGGLE_PEDAL: 'TOGGLE_PEDAL',
+  KILL_PEDAL: 'KILL_PEDAL',
+  REMOVE_PEDAL: 'REMOVE_PEDAL',
+  SET_AUDIO_CONTEXT: 'SET_AUDIO_CONTEXT',
+  SET_USER_INPUT: 'SET_USER_INPUT',
 }
 
 const state = {
-    //best practice to store lists as objects because you can access faster than with arrays
-    paletteNodes: {},
-    nodes: {}
+  //best practice to store lists as objects because you can access faster than with arrays
+  palettePedals: {},
+  pedalBoard: {
+    pedals: {}
+  },
+  audioContext: {}
 };
 
 const getters = {
-    paletteNodesList(state) {
-        return Object.values(state.paletteNodes)
-    },
-    nodesList(state){
-        return Object.values(state.nodes)
-    }
+  palettePedalsList(state) {
+    return Object.values(state.palettePedals)
+  },
+  pedalList(state) {
+    return Object.values(state.pedalBoard.pedals)
+  },
+  audioContext(state) {
+    return state.audioContext
+  }
 }
 
 //Actions can be asynchronous
 // You can make here ONLY the business-logic
 const actions = {
-    addPaletteNode({state, commit}, {type, name}) {
-        if (name && !state.nodes[name]) { // add only if not exists
-            commit(verbs.ADD_PALETTE_NODE, {
-                type,
-                name,
-                ...NODE_PROPERTIES[type],
-            });
-        }
-    },
-    addNode({state, commit}, {type, name}) {
-        if (name && !state.nodes[name]) { // add only if not exists
-            commit(verbs.ADD_NODE, {
-                type,
-                name,
-                ...NODE_PROPERTIES[type],
-                dying: false,
-            });
-        }
-    },
-    resetNodes({commit, dispatch}) {
-        commit(verbs.CLEAR_NODES);
-        [
-            {type: NODE_TYPE.VOLUME, name: 'volumen'},
-            {type: NODE_TYPE.DISTORSION, name: 'distorsion'},
-            {type: NODE_TYPE.DELAY, name: 'delay'},
-            {type: NODE_TYPE.FLANGER, name: 'flanger'}
-        ].forEach(node => {
-            dispatch('addNode', node);
-        });
-    },
-    resetPaletteNodes({commit, dispatch}) {
-        commit(verbs.CLEAR_NODES);
-        [
-            {type: NODE_TYPE.VOLUME, name: 'volumen'},
-            {type: NODE_TYPE.DISTORSION, name: 'distorsion'},
-            {type: NODE_TYPE.DELAY, name: 'delay'},
-            {type: NODE_TYPE.FLANGER, name: 'flanger'}
-        ].forEach(node => {
-            dispatch('addPaletteNode', node);
-        });
-    },
-    removeNode({state, commit}, node) {
-        if (node.dying) return;
-        commit(verbs.KILL_NODE, node.name);
-        setTimeout(() => {
-            if (state.nodes[node.name] === node) { // check if the node is the same
-                commit(verbs.REMOVE_NODE, node.name);
-            }
-        }, 1000);
-    },
+  addPalettePedal({ state, commit }, { type, name }) {
+    if (name && !state.pedalBoard.pedals[name]) { // add only if not exists
+      commit(verbs.ADD_PALETTE_PEDAL, {
+        type,
+        name,
+        ...PEDAL_PROPERTIES[type],
+      });
+    }
+  },
+  resetPalettePedals({ commit, dispatch }) {
+    commit(verbs.CLEAR_PALETTE_PEDALS);
+    [
+      { type: PEDAL_TYPE.VOLUME, name: 'volume' },
+      { type: PEDAL_TYPE.DISTORSION, name: 'distorsion' },
+      { type: PEDAL_TYPE.DELAY, name: 'delay' },
+      { type: PEDAL_TYPE.FLANGER, name: 'flanger' }
+    ].forEach(palettePedal => {
+      dispatch('addPalettePedal', palettePedal);
+    });
+  },
+  addPedal({ state, commit }, { type, name }) {
+    if (name && !state.pedalBoard.pedals[name]) { // add only if not exists
+      commit(verbs.ADD_PEDAL, {
+        type,
+        name,
+        ...PEDAL_PROPERTIES[type],
+        dying: false,
+      });
+    }
+  },
+  removePedal({ state, commit }, pedal) {
+    if (pedal.dying) return;
+    commit(verbs.KILL_PEDAL, pedal.name);
+    setTimeout(() => {
+      if (state.pedalBoard.pedals[pedal.name] === pedal) { // check if the node is the same
+        commit(verbs.REMOVE_PEDAL, pedal.name);
+      }
+    }, 1000);
+  },
+  setAudioContext({ commit }, audioContext) {
+    commit(verbs.SET_AUDIO_CONTEXT, audioContext)
+  },
+  setUserMediaInput() {
+    commit(verbs.SET_USER_INPUT, audioContext)
+  },
+  togglePedal(){
+    return state.updateIn(['pedalboard', 'pedals', action.id], pedal => pedal.set('switchedOn', !pedal.get('switchedOn')));
+  }
 };
 
 // Synchronous and the only point where we can change the state
 // You can make here ONLY the data-logic (language or formatting data....)
 //VUe doesn't detect the addition of properties, that's the reason we must do 'Vue.set'
 const mutations = {
-    [verbs.CLEAR_NODES] (state) {
-        state.nodes = {};
-    },
-    [verbs.CLEAR_PALETTE_NODES] (state) {
-        state.paletteNodes = {};
-    },
-    [verbs.ADD_NODE] (state, node) {
-        // state.pokemons[pokemon.name] = pokemon;
-        Vue.set(state.nodes, node.name, node);
-    },
-    [verbs.ADD_PALETTE_NODE] (state, node) {
-        // state.pokemons[pokemon.name] = pokemon;
-        Vue.set(state.paletteNodes, node.name, node);
-    },
-    [verbs.KILL_NODE] (state, name) {
-        state.nodes[name].dying = true;
-    },
-    [verbs.REMOVE_NODE] (state, name) {
-        Vue.delete(state.nodes, name);
-    },
+  [verbs.ADD_PALETTE_PEDAL](state, palettePedal) {
+    Vue.set(state.palettePedals, palettePedal.name, palettePedal);
+  },
+  [verbs.CLEAR_PALETTE_PEDALS](state) {
+    state.palettePedals = {};
+  },
+  [verbs.ADD_PEDAL](state, pedal) {
+    Vue.set(state.pedalBoard.pedals, pedal.name, pedal);
+  },
+  [verbs.KILL_PEDAL](state, name) {
+    state.pedalBoard.pedals[name].dying = true;
+  },
+  [verbs.REMOVE_PEDAL](state, name) {
+    Vue.delete(state.pedalBoard.pedals, name);
+  },
+  [verbs.SET_AUDIO_CONTEXT](state) {
+    if (HasAudioContext) {
+      Vue.set(state, 'audioContext', new AudioContext());
+    }
+  },
+  [verbs.SET_USER_INPUT](state, audioContext) {
+    Vue.set(state, 'audioContext', audioContext);
+  },
 }
-
-
 const store = new Vuex.Store({
-    state,
-    getters,
-    actions,
-    mutations,
+  state,
+  getters,
+  actions,
+  mutations,
 });
 
 export default store;

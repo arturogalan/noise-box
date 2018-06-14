@@ -1,7 +1,7 @@
 <template>
-  <div class="palette-card" @click="addNode(node)">
-    <div class="overlay">{{ node.name }}</div>
-    <img :src="getAsset(node.icon)" class="icon-type">
+  <div class="palette-card" @click="addPedal(palettePedal)">
+    <div class="overlay">{{ palettePedal.name }}</div>
+    <img :src="getAsset(palettePedal.icon)" class="icon-type">
 </div>
 </template>
 
@@ -9,8 +9,8 @@
 import {mapActions} from 'vuex'
 
 export default {
-  name: 'NodeCard',
-  props: ['node'],
+  name: 'PalettePedal',
+  props: ['palettePedal'],
   data() {
         return {};
     },
@@ -19,7 +19,7 @@ export default {
 	        return require("../"+assetName);
         },
         ...mapActions([
-            'addNode',
+            'addPedal',
         ]),
     }
 }
