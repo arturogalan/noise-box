@@ -1,6 +1,6 @@
 import * as AudioEffects from 'audio-effects';
 import _ from 'lodash'
-
+import { HasAudioContext } from 'audio-effects';
 
 const audioUtils = (function() {
   let module  = {};
