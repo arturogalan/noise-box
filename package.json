@@ -12,7 +12,8 @@
     "e2e": "node test/e2e/runner.js",
     "test": "npm run unit && npm run e2e",
     "build": "node build/build.js",
-    "startPro": "node app.js"
+    "startPro": "node app.js",
+    "lintfix": "eslint --fix --ext .js,.vue ."
   },
   "dependencies": {
     "audio-effects": "^1.2.4",

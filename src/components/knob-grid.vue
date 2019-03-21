@@ -15,7 +15,7 @@
 </template>
 
 <script>
-import VueKnobNb from './VueKnobNb.vue'
+import vueKnobNb from './vue-knob-nb.vue'
 export default {
   props: ["settingsList"],
   data() {
@@ -25,7 +25,7 @@ export default {
   },
   methods: {},
   components: {
-    VueKnobNb
+    vueKnobNb
   }
 };
 </script>

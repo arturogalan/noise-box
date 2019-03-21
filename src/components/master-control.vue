@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import VueSliderNb from './VueSliderNb.vue'
+import vueSliderNb from './vue-slider-nb.vue'
 export default {
   name: 'MasterControl',
   props: [],
@@ -19,7 +19,7 @@ export default {
     methods: {
     },
     components: {
-        VueSliderNb
+        vueSliderNb
     }
 }
 </script>

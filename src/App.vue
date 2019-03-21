@@ -46,10 +46,10 @@
 
 <script>
 import { mapGetters, mapActions } from 'vuex';
-import AppHeader from './components/AppHeader.vue'
-import PalettePedal from './components/PalettePedal.vue'
-import Pedal from './components/Pedal.vue'
-import MasterControl from './components/MasterControl.vue'
+import appHeader from './components/app-header.vue'
+import palettePedal from './components/palette-pedal.vue'
+import pedal from './components/pedal.vue'
+import masterControl from './components/master-control.vue'
 
 
 export default {
@@ -73,10 +73,10 @@ export default {
     ]),
   },
   components: {
-    AppHeader,
-    PalettePedal,
-    Pedal,
-    MasterControl
+    appHeader,
+    palettePedal,
+    pedal,
+    masterControl
   },
   created() {
     this.resetPalettePedals();

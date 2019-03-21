@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import KnobGrid from './KnobGrid.vue'
+import knobGrid from './knob-grid.vue'
 export default {
   name: 'Pedal',
   props: ['pedal'],
@@ -23,7 +23,7 @@ export default {
         }
     },
     components: {
-        KnobGrid
+        knobGrid
     }
 }
 </script>
