@@ -1,9 +1,10 @@
 
 export const PEDAL_TYPE = {
-    VOLUME: 'VOLUME',
-    DISTORSION: 'DISTORSION',
-    DELAY: 'DELAY',
-    FLANGER: 'FLANGER'
+    VOLUME: 'volume',
+    DISTORSION: 'distorsion',
+    DELAY: 'delay',
+    FLANGER: 'flanger',
+    REVERB: 'reverb'
 };
 
 
@@ -127,5 +128,29 @@ export const PEDAL_PROPERTIES = {
                 color: 'lightseagreen'
             }
         ]
-    }
+    },
+    [PEDAL_TYPE.REVERB]: {
+      name: 'reverb',
+      icon: 'assets/icons/flanger.svg',
+      bgcolor: '#b1428b',
+      fcolor: 'black',
+      settingsList: [
+          {
+              name: 'wet',
+              min:0,
+              max:1,
+              initialValue: 1,
+              correctionFactor: 1,
+              color: 'lightslategray'
+          },
+          {
+              name: 'level',
+              min:0,
+              max:1,
+              initialValue: 1,
+              correctionFactor: 1,
+              color: 'lightseagreen'
+          }
+      ]
+  }
 }

@@ -1,23 +1,39 @@
+<script>
+import { mapActions } from 'vuex';
+  export default {
+    data() {
+      return {
+      };
+    },
+      methods: {
+      ...mapActions([
+        'resetPalettePedals',
+        'removePedal',
+        'createAudioContext',
+        'switchOnAudioContext',
+        'setUserMediaInput',
+        'setUserMediaOutput',
+      ]),
+    },
+    created() {
+      this.createAudioContext();
+      this.setUserMediaInput();
+      this.setUserMediaOutput();
+    }
+  };
+</script>
+
 <template>
     <div id="grad1">
     <div  title="F*king awesome noise box!!!">
         <img src="/static/header-icon.png" class="logo-icon">
+        <button type="button" @click="switchOnAudioContext">
+          ON
+        </button>
         <h1>NOISE BOX</h1>
     </div>
     </div>  
 </template>
-
-<script>
-
-export default {
-  data() {
-    return {
-      
-    };
-  },
-  methods: {}
-};
-</script>
 
 <style>
 #grad1 {
