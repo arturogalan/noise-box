@@ -6,7 +6,7 @@
             :key="index"
             :name="setting.name"
             :barcolor="setting.color"
-            :initValue="setting.initialValue"
+            :initValue="setting.value"
             fillcolor="none"
             bgcolor="none"
         >

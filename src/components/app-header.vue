@@ -11,14 +11,10 @@ import { mapActions } from 'vuex';
         'removePedal',
         'createAudioContext',
         'switchOnAudioContext',
-        'setUserMediaInput',
-        'setUserMediaOutput',
       ]),
     },
     created() {
       this.createAudioContext();
-      this.setUserMediaInput();
-      this.setUserMediaOutput();
     }
   };
 </script>

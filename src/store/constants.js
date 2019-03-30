@@ -1,7 +1,7 @@
 
 export const PEDAL_TYPE = {
     VOLUME: 'volume',
-    DISTORSION: 'distorsion',
+    DISTORTION: 'distortion',
     DELAY: 'delay',
     FLANGER: 'flanger',
     REVERB: 'reverb'
@@ -20,15 +20,23 @@ export const PEDAL_PROPERTIES = {
                 name: 'level',
                 min:0,
                 max:1,
-                initialValue: 0.5,
+                value: 0.5,
                 correctionFactor: 1,
                 color: 'lightskyblue',
             },
+            {
+              name: 'mute',
+              min:0,
+              max:1,
+              value: false,
+              correctionFactor: 1,
+              color: 'lightskyblue',
+          },
         ]
     },
-    [PEDAL_TYPE.DISTORSION]: {
+    [PEDAL_TYPE.DISTORTION]: {
         name: 'distortion',
-        icon: 'assets/icons/distorsion.svg',
+        icon: 'assets/icons/distortion.svg',
         bgcolor: '#3b3f44',
         fcolor: 'orange',
         settingsList: [
@@ -36,7 +44,7 @@ export const PEDAL_PROPERTIES = {
                 name: 'gain',
                 min:0,
                 max:100,
-                initialValue: 50,
+                value: 50,
                 correctionFactor: 1,
                 color: 'lightskyblue'
             },
@@ -44,7 +52,7 @@ export const PEDAL_PROPERTIES = {
                 name: 'intensity',
                 min:0,
                 max:100,
-                initialValue: 80,
+                value: 80,
                 correctionFactor: 1,
                 color: 'lightslategray'
             },
@@ -52,7 +60,7 @@ export const PEDAL_PROPERTIES = {
             //     name: 'drive',
             //     min:0,
             //     max:100,
-            //     initialValue: 80,
+            //     value: 80,
             //     color: 'lightseagreen'
             // },
         ]
@@ -67,7 +75,7 @@ export const PEDAL_PROPERTIES = {
                 name: 'wet',
                 min:0,
                 max:100,
-                initialValue: 1,
+                value: 1,
                 correctionFactor: 1,
                 color: 'lightskyblue'
             },
@@ -75,7 +83,7 @@ export const PEDAL_PROPERTIES = {
                 name: 'speed',
                 min:0,
                 max:10,
-                initialValue: 5, //0.5 0->1,
+                value: 5, //0.5 0->1,
                 correctionFactor: 10,
                 color: 'lightslategray'
             },
@@ -83,7 +91,7 @@ export const PEDAL_PROPERTIES = {
                 name: 'duration',
                 min:0,
                 max:10,
-                initialValue: 4, //0.4 0->1,
+                value: 4, //0.4 0->1,
                 correctionFactor: 10,
                 color: 'lightseagreen'
             },
@@ -99,7 +107,7 @@ export const PEDAL_PROPERTIES = {
                 name: 'delay',
                 min:0,
                 max:0.1,
-                initialValue: 5, //0.005 0->0.1?,
+                value: 5, //0.005 0->0.1?,
                 correctionFactor: 1,
                 color: 'lightslategray'
             },
@@ -107,7 +115,7 @@ export const PEDAL_PROPERTIES = {
                 name: 'depth',
                 min:0,
                 max:100,
-                initialValue: 2, //0.002 0->0.1,
+                value: 2, //0.002 0->0.1,
                 correctionFactor: 1000,
                 color: 'lightseagreen'
             },
@@ -115,7 +123,7 @@ export const PEDAL_PROPERTIES = {
                 name: 'feedback',
                 min:0,
                 max:100,
-                initialValue: 5, //0.5 0->1,
+                value: 5, //0.5 0->1,
                 correctionFactor: 100,               
                 color: 'lightskyblue'
             },
@@ -123,7 +131,7 @@ export const PEDAL_PROPERTIES = {
                 name: 'speed',
                 min:0,
                 max:100,
-                initialValue: 25, // 0.25 0->1,
+                value: 25, // 0.25 0->1,
                 correctionFactor: 100,                
                 color: 'lightseagreen'
             }
@@ -139,7 +147,7 @@ export const PEDAL_PROPERTIES = {
               name: 'wet',
               min:0,
               max:1,
-              initialValue: 1,
+              value: 1,
               correctionFactor: 1,
               color: 'lightslategray'
           },
@@ -147,7 +155,7 @@ export const PEDAL_PROPERTIES = {
               name: 'level',
               min:0,
               max:1,
-              initialValue: 1,
+              value: 1,
               correctionFactor: 1,
               color: 'lightseagreen'
           }

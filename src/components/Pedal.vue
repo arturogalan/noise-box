@@ -1,3 +1,35 @@
+<script>
+import { mapActions } from 'vuex';
+import knobGrid from "./knob-grid.vue";
+export default {
+  name: "pedal",
+  props: {
+    pedal: {
+      type: Object,
+      required: true
+    }
+  },
+  mounted() {
+    // this.configurePedal(this.pedal.type);
+  },
+  data() {
+    return {
+      myVal: 50
+    };
+  },
+  methods: {
+    ...mapActions([
+      'configurePedal',
+    ]),
+    deleteClick() {
+      this.$emit("delete");
+    }
+  },
+  components: {
+    knobGrid
+  }
+};
+</script>
 <template>
   <div class="pedal-card" :class="{removing: pedal.dying}">
     <span class="delete" @click="deleteClick" v-if="!pedal.dying">×</span>
@@ -11,36 +43,6 @@
     >
   </div>
 </template>
-
-<script>
-import knobGrid from "./knob-grid.vue";
-export default {
-  name: "pedal",
-  props: {
-    pedal: {
-      type: Object,
-      required: true
-    }
-  },
-  created() {
-    console.log(this.pedal);
-  },
-  data() {
-    return {
-      myVal: 50
-    };
-  },
-  methods: {
-    deleteClick() {
-      this.$emit("delete");
-    }
-  },
-  components: {
-    knobGrid
-  }
-};
-</script>
-
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style>
 .pedal-card {
