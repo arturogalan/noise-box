@@ -16,7 +16,7 @@
     "lintfix": "eslint --fix --ext .js,.vue ."
   },
   "dependencies": {
-    "audio-effects": "^1.2.4",
+    "noisefy": "0.0.7",
     "bunyan": "^1.8.12",
     "express": "^4.16.3",
     "lodash": "^4.17.10",
