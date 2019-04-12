@@ -1,48 +1,48 @@
-import {capitalize} from 'lodash'
+import {capitalize} from 'lodash';
 import * as Noisefy from 'noisefy';
 import {PEDAL_TYPE} from '../store/constants';
 const irf = require('../static/audio/hall-reverb.ogg');
 
 const audioUtils = {
- createAudioContext(){
+  createAudioContext() {
     if (Noisefy.hasAudioContext) {
       return new AudioContext();
     }
+    return null;
   },
-  createAudioNode(audioContext, type){
+  createAudioNode(audioContext, type) {
     console.log(capitalize(type));
 
     let audioNode = new Noisefy[capitalize(type)](audioContext);
     return audioNode;
   },
-  configAudioNode(pedal){
-    if(pedal.type === PEDAL_TYPE.REVERB) {
-      Noisefy.Reverb.getInputResponseFile(irf).then(buffer => {
-        if(!pedal.effect.buffer){
+  configAudioNode(pedal) {
+    if (pedal.type === PEDAL_TYPE.REVERB) {
+      Noisefy.Reverb.getInputResponseFile(irf).then((buffer)=> {
+        if (!pedal.effect.buffer) {
           pedal.effect.buffer = buffer;
         }
-      }).catch((e)=>{
-        console.error('Error processing file:', e)
+      }).catch((e)=> {
+        console.error('Error processing file:', e);
       });
     }
   },
-  createInput(audioContext){
+  createInput(audioContext) {
     const input = new Noisefy.Input(audioContext);
-    let audioSource = '';
 
     input.getUserMedia();
 
-    console.log('latency',audioContext.baseLatency);
+    console.log('latency', audioContext.baseLatency);
     return convertToMono(input, audioContext);
   },
-  createOutput(audioContext){
+  createOutput(audioContext) {
     return new Noisefy.Output(audioContext);
-  }
+  },
 };
 
 function convertToMono(input, audioContext) {
-  var splitter = audioContext.createChannelSplitter(2);
-  var merger = audioContext.createChannelMerger(2);
+  let splitter = audioContext.createChannelSplitter(2);
+  let merger = audioContext.createChannelMerger(2);
 
   input.connect(splitter);
   splitter.connect(merger, 0, 0);

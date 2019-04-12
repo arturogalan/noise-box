@@ -1,32 +1,33 @@
 <template>
-    <div class="knob-grid" >
-        <vue-knob-nb
-            class="one-knob"
-            v-for="(setting, index) in settingsList"
-            :key="index"
-            :name="setting.name"
-            :barcolor="setting.color"
-            :initValue="setting.value"
-            fillcolor="none"
-            bgcolor="none"
-        >
-        </vue-knob-nb>
-    </div>
+  <div class="knob-grid" >
+    <vue-knob-nb
+      v-for="(setting, index) in settingsList"
+      :key="index"
+      :name="setting.name"
+      :barcolor="setting.color"
+      :init-value="setting.value"
+      class="one-knob"
+      fillcolor="none"
+      bgcolor="none"
+    />
+  </div>
 </template>
 
 <script>
-import vueKnobNb from './vue-knob-nb.vue'
+import vueKnobNb from './vue-knob-nb.vue';
 export default {
-  props: ["settingsList"],
+  components: {
+    vueKnobNb,
+  },
+  props: {
+    settingsList: {type: Array, required: true, default: ()=> []},
+  },
   data() {
     return {
-      myVal: 50
+      myVal: 50,
     };
   },
   methods: {},
-  components: {
-    vueKnobNb
-  }
 };
 </script>
 

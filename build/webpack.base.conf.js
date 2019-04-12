@@ -1,5 +1,6 @@
 'use strict'
 const path = require('path')
+const VueLoaderPlugin = require('vue-loader/lib/plugin');
 const utils = require('./utils')
 const config = require('../config')
 const vueLoaderConfig = require('./vue-loader.conf')
@@ -15,7 +16,9 @@ const createLintingRule = () => ({
   include: [resolve('src'), resolve('test')],
   options: {
     formatter: require('eslint-friendly-formatter'),
-    emitWarning: !config.dev.showEslintErrorsInOverlay
+    emitWarning: true,
+    failOnError: process.env.NODE_ENV === 'production',
+    fix: process.env.NODE_ENV !== 'production',
   }
 })
 
@@ -74,9 +77,17 @@ module.exports = {
           limit: 10000,
           name: utils.assetsPath('fonts/[name].[hash:7].[ext]')
         }
+      },
+      {
+        test: /(\.jsx|\.js|\.vue)$/,
+        loader: 'eslint-loader',
+        exclude: /node_modules/
       }
     ]
   },
+  plugins: [
+    new VueLoaderPlugin(),
+  ],
   node: {
     // prevent webpack from injecting useless setImmediate polyfill because Vue
     // source contains it (although only uses it if it's native).

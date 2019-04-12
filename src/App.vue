@@ -1,41 +1,45 @@
 <template>
   <div id="app">
-    
-    <app-header></app-header>
 
-    
+    <app-header/>
+
+
     <div class="row">
-      <div class="pedal-palette">    
+      <div class="pedal-palette">
         <div class="palette-title">Add effects!</div>
-        <div class="grid-container" style="background-color:#aaa;">
+        <div
+          class="grid-container"
+          style="background-color:#aaa;">
           <palette-pedal
-              v-for="palettePedal in palettePedalsList"
-              :key="palettePedal.name"
-              :palettePedal="palettePedal"
-              :title="'Add '+palettePedal.name+'!!'"
-            >
-          </palette-pedal>
+            v-for="palettePedal in palettePedalsList"
+            :key="palettePedal.name"
+            :palette-pedal="palettePedal"
+            :title="'Add '+palettePedal.name+'!!'"
+          />
         </div>
       </div>
       <div class="noise-board column">
         <div class="row">
-          <div class="column left" style="background-color:#bbb;"></div>
-          <div class="column middle" style="background-color:#ccc;">
+          <div
+            class="column left"
+            style="background-color:#bbb;"/>
+          <div
+            class="column middle"
+            style="background-color:#ccc;">
             <div class="row">
-            <pedal
-              v-for="pedal in pedalList"
-              :key="pedal.name"
-              :pedal="pedal"
-              @delete="removePedal(pedal)"
-              class='column'
-            >
-            </pedal>
+              <pedal
+                v-for="pedal in pedalList"
+                :key="pedal.name"
+                :pedal="pedal"
+                class="column"
+                @delete="removePedal(pedal)"
+              />
             </div>
           </div>
-          <div class="column right" style="background-color:#ddd;">
-            <master-control>
-              
-            </master-control>
+          <div
+            class="column right"
+            style="background-color:#ddd;">
+            <master-control/>
           </div>
         </div>
       </div>
@@ -45,42 +49,43 @@
 </template>
 
 <script>
-import { mapGetters, mapActions } from 'vuex';
-import appHeader from './components/app-header.vue'
-import palettePedal from './components/palette-pedal.vue'
-import pedal from './components/pedal.vue'
-import masterControl from './components/master-control.vue'
+import {mapGetters, mapActions} from 'vuex';
+import appHeader from './components/app-header.vue';
+import palettePedal from './components/palette-pedal.vue';
+import pedal from './components/pedal.vue';
+import masterControl from './components/master-control.vue';
 
 
 export default {
-  name: 'app',
-  data () {
-    return {
-      audioContext: null
-    };
-  },
-  computed: {
-    ...mapGetters([
-      'palettePedalsList',
-      'pedalList'
-    ]),
-  },
-  methods: {
-    ...mapActions([
-      'resetPalettePedals',
-      'removePedal',
-    ]),
-  },
+  name: 'App',
   components: {
     appHeader,
     palettePedal,
     pedal,
-    masterControl
+    masterControl,
+  },
+  data() {
+    return {
+      audioContext: null,
+    };
+  },
+  computed: {
+    ...mapGetters('pedal', [
+      'palettePedalsList',
+      'pedalList',
+    ]),
   },
   created() {
     this.resetPalettePedals();
-  }
-}
+  },
+  methods: {
+    ...mapActions('pedal', [
+      'resetPalettePedals',
+      'removePedal',
+    ]),
+  },
+
+};
 </script>
 
 <style>
@@ -133,10 +138,10 @@ export default {
   background-color: #2196F3;
 }
 .overlay {
-  bottom: 0; 
+  bottom: 0;
   background: rgb(0, 0, 0);
   background:rgba(193, 150, 150, 0.5); /* Black see-through */
-  color: #f1f1f1; 
+  color: #f1f1f1;
   transition: .5s ease;
   color: white;
   text-align: center;
