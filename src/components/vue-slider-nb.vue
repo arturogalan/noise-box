@@ -1,38 +1,52 @@
 <template>
-<div>
-  <p>Custom range slider:</p>
-<div class="slide-container">
-  <input type="range" min="1" max="100" v-model="spanValue" class="slider" id="myRange">
-  <input type="range" min="1" max="100" value="50" class="thin-slider" id="myRange2">
-  <!-- <input type="range" min="1" max="100" value="50" class="slider" orient="vertical" id="myRange">
+  <div>
+    <p>Custom range slider:</p>
+    <div class="slide-container">
+      <input
+        id="myRange"
+        v-model="spanValue"
+        type="range"
+        min="1"
+        max="100"
+        class="slider">
+      <input
+        id="myRange2"
+        type="range"
+        min="1"
+        max="100"
+        value="50"
+        class="thin-slider">
+        <!-- <input type="range" min="1" max="100" value="50" class="slider" orient="vertical" id="myRange">
   <input type="range" min="1" max="100" value="50" class="slider" orient="vertical" id="myRange">
-  <input type="range" min="1" max="100" value="50" class="slider" orient="vertical" id="myRange"> -->
-
-</div>
-<div class="slider-value-container"> 
-<transition name="bounce">
-  <div :key="spanValue" v-show="isVisible">
-    <span class="slide-value-text" >{{spanValue}}</span>
+      <input type="range" min="1" max="100" value="50" class="slider" orient="vertical" id="myRange">-->
+    </div>
+    <div class="slider-value-container">
+      <transition name="bounce">
+        <div
+          v-show="isVisible"
+          :key="spanValue">
+          <span class="slide-value-text">{{ spanValue }}</span>
+        </div>
+      </transition>
+      <transition name="bounce">
+        <div
+          v-show="isVisible"
+          :key="spanValue">
+          <span class="slide-value-text">{{ spanValue }}</span>
+        </div>
+      </transition>
+    </div>
+    <br>
   </div>
-</transition>
-<transition name="bounce">
-  <div :key="spanValue" v-show="isVisible">
-    <span class="slide-value-text" >{{spanValue}}</span>
-  </div>
-</transition>
-</div>
-<br>
-</div>
-
 </template>
 <script>
 export default {
-  name:'vue-slider-nb',
-  props: [],
+  name: 'VueSliderNb',
+  components: {},
   data() {
     return {
       spanValue: 0,
-      isVisible: true
+      isVisible: true,
     };
   },
   methods: {
@@ -41,23 +55,19 @@ export default {
     },
     changeVisible() {
       this.isVisible = !this.isVisible;
-    }
+    },
   },
-  components: {
-  }
-}
+};
 </script>
 
-<style <style lang="scss" scoped>
-
-
+<style lang="scss" scoped>
 $slide-width: 300px;
 $slide-height: 12.6px;
 
 .slide-container {
-    display: grid;
-    grid-template-columns: 25% 25% 25% 25%;
-    margin-left: 15%;
+  display: grid;
+  grid-template-columns: 25% 25% 25% 25%;
+  margin-left: 15%;
 }
 .slider-value-container {
   display: grid;
@@ -70,17 +80,17 @@ $slide-height: 12.6px;
   border-radius: 25%;
   max-width: 20px;
 }
-input[type=range] {
+input[type="range"] {
   -webkit-appearance: none;
   width: $slide-width;
   margin: 13.2px 0;
   transform: translateY($slide-width) rotate(-90deg);
   transform-origin: 0;
 }
-input[type=range]:focus {
+input[type="range"]:focus {
   outline: none;
 }
-input[type=range]::-webkit-slider-runnable-track {
+input[type="range"]::-webkit-slider-runnable-track {
   width: 100%;
   height: 12.6px;
   cursor: pointer;
@@ -89,7 +99,7 @@ input[type=range]::-webkit-slider-runnable-track {
   border-radius: 6.2px;
   border: 0.7px solid #562425;
 }
-input[type=range]::-webkit-slider-thumb {
+input[type="range"]::-webkit-slider-thumb {
   box-shadow: 1px 1px 1px #050000, 0px 0px 1px #1f0000;
   border: 2.2px solid #000000;
   height: 39px;
@@ -100,10 +110,10 @@ input[type=range]::-webkit-slider-thumb {
   -webkit-appearance: none;
   margin-top: -13.9px;
 }
-input[type=range]:focus::-webkit-slider-runnable-track {
+input[type="range"]:focus::-webkit-slider-runnable-track {
   background: #9e9191;
 }
-input[type=range]::-moz-range-track {
+input[type="range"]::-moz-range-track {
   width: 100%;
   height: 12.6px;
   cursor: pointer;
@@ -112,7 +122,7 @@ input[type=range]::-moz-range-track {
   border-radius: 6.2px;
   border: 0.7px solid #562425;
 }
-input[type=range]::-moz-range-thumb {
+input[type="range"]::-moz-range-thumb {
   box-shadow: 1px 1px 1px #050000, 0px 0px 1px #1f0000;
   border: 2.2px solid #000000;
   height: 39px;
@@ -121,7 +131,7 @@ input[type=range]::-moz-range-thumb {
   background: #cff517;
   cursor: pointer;
 }
-input[type=range]::-ms-track {
+input[type="range"]::-ms-track {
   width: 100%;
   height: 12.6px;
   cursor: pointer;
@@ -129,19 +139,19 @@ input[type=range]::-ms-track {
   border-color: transparent;
   color: transparent;
 }
-input[type=range]::-ms-fill-lower {
+input[type="range"]::-ms-fill-lower {
   background: #867776;
   border: 0.7px solid #562425;
   border-radius: 12.4px;
   box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
 }
-input[type=range]::-ms-fill-upper {
+input[type="range"]::-ms-fill-upper {
   background: #928483;
   border: 0.7px solid #562425;
   border-radius: 12.4px;
   box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
 }
-input[type=range]::-ms-thumb {
+input[type="range"]::-ms-thumb {
   box-shadow: 1px 1px 1px #050000, 0px 0px 1px #1f0000;
   border: 2.2px solid #000000;
   height: 39px;
@@ -151,52 +161,63 @@ input[type=range]::-ms-thumb {
   cursor: pointer;
   height: 12.6px;
 }
-input[type=range]:focus::-ms-fill-lower {
+input[type="range"]:focus::-ms-fill-lower {
   background: #928483;
 }
-input[type=range]:focus::-ms-fill-upper {
+input[type="range"]:focus::-ms-fill-upper {
   background: #9e9191;
 }
 
-
-
-
-
 @keyframes pulse_animation {
-    0% { transform: scale(1); }
-    20% { transform: scale(1.2); }
-    30% { transform: scale(1.7); }
-    40% { transform: scale(2); }
-    50% { transform: scale(2.4); }
-    60% { transform: scale(2); }
-    70% { transform: scale(1.7); }
-    80% { transform: scale(1.2); }
-    100% { transform: scale(1); }
+  0% {
+    transform: scale(1);
+  }
+  20% {
+    transform: scale(1.2);
+  }
+  30% {
+    transform: scale(1.7);
+  }
+  40% {
+    transform: scale(2);
+  }
+  50% {
+    transform: scale(2.4);
+  }
+  60% {
+    transform: scale(2);
+  }
+  70% {
+    transform: scale(1.7);
+  }
+  80% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+  }
 }
-
 
 .pulse {
-    animation-name: pulse_animation;
-    animation-duration: 5000ms;
-    transform-origin:70% 70%;
-    animation-iteration-count: infinite;
-    animation-timing-function: linear;
+  animation-name: pulse_animation;
+  animation-duration: 5000ms;
+  transform-origin: 70% 70%;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
 }
-
 
 .bounce-enter-active {
-  animation: pulse_animation .5s;
+  animation: pulse_animation 0.5s;
 }
 .bounce-leave-active {
-  animation: pulse_animation .5s reverse;
+  animation: pulse_animation 0.5s reverse;
 }
 
-
-
-$transition-duration: .5s;
+$transition-duration: 0.5s;
 
 // Fade in delay out
-.fade-delayed-enter-active, .fade-delayed-leave-active {
+.fade-delayed-enter-active,
+.fade-delayed-leave-active {
   transition-duration: $transition-duration;
   transition-property: font-size;
 }
@@ -204,11 +225,11 @@ $transition-duration: .5s;
 .fade-delayed-enter-active {
   transition-delay: $transition-duration;
 }
-.fade-delayed-enter, .fade-delayed-leave-to {
+.fade-delayed-enter,
+.fade-delayed-leave-to {
   font-size: 100px;
 }
 // .fade-delayed-leave-to {
 //   width: 50%;
 // }
-
 </style>

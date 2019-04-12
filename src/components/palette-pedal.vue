@@ -1,28 +1,33 @@
 <template>
-  <div class="palette-card" @click="addPedal(palettePedal)">
+  <div
+    class="palette-card"
+    @click="addPedal(palettePedal)">
     <div class="overlay">{{ palettePedal.name }}</div>
-    <img :src="getAsset(palettePedal.icon)" class="icon-type">
-</div>
+    <img
+      :src="getAsset(palettePedal.icon)"
+      class="icon-type">
+  </div>
 </template>
 
 <script>
-import {mapActions} from 'vuex'
+import {mapActions} from 'vuex';
 
 export default {
   name: 'PalettePedal',
-  props: ['palettePedal'],
+  props: {palettePedal: {type: Object, required: true},
+  },
   data() {
-        return {};
+    return {};
+  },
+  methods: {
+    getAsset: function(assetName) {
+      return require('../'+assetName);
     },
-    methods: {
-        getAsset: function(assetName) {
-	        return require("../"+assetName);
-        },
-        ...mapActions([
-            'addPedal',
-        ]),
-    }
-}
+    ...mapActions('pedal', [
+      'addPedal',
+    ]),
+  },
+};
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
@@ -60,10 +65,10 @@ export default {
     margin:auto;
 }
 .overlay {
-  bottom: 0; 
+  bottom: 0;
   background: rgb(0, 0, 0);
   background:rgba(193, 150, 150, 0.5); /* Black see-through */
-  color: #f1f1f1; 
+  color: #f1f1f1;
   transition: .5s ease;
   color: white;
   text-align: center;

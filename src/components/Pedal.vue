@@ -1,45 +1,53 @@
 <script>
-import { mapActions } from 'vuex';
-import knobGrid from "./knob-grid.vue";
+import {mapActions} from 'vuex';
+import knobGrid from './knob-grid.vue';
 export default {
-  name: "pedal",
+  name: 'Pedal',
+  components: {
+    knobGrid,
+  },
   props: {
     pedal: {
       type: Object,
-      required: true
-    }
-  },
-  mounted() {
-    // this.configurePedal(this.pedal.type);
+      required: true,
+    },
   },
   data() {
     return {
-      myVal: 50
+      myVal: 50,
     };
+  },
+  mounted() {
+    // this.configurePedal(this.pedal.type);
   },
   methods: {
     ...mapActions([
       'configurePedal',
     ]),
     deleteClick() {
-      this.$emit("delete");
-    }
+      this.$emit('delete');
+    },
   },
-  components: {
-    knobGrid
-  }
+
 };
 </script>
 <template>
-  <div class="pedal-card" :class="{removing: pedal.dying}">
-    <span class="delete" @click="deleteClick" v-if="!pedal.dying">×</span>
-    <knob-grid :settingsList="pedal.settingsList"></knob-grid>
-    <div class="pedal-name" :style="{ color: pedal.fcolor }">{{ pedal.name }}</div>
+  <div
+    :class="{removing: pedal.dying}"
+    class="pedal-card">
+    <span
+      v-if="!pedal.dying"
+      class="delete"
+      @click="deleteClick">×</span>
+    <knob-grid :settings-list="pedal.settingsList"/>
+    <div
+      :style="{ color: pedal.fcolor }"
+      class="pedal-name">{{ pedal.name }}</div>
     <img
+      :style="{ backgroundColor: pedal.bgcolor }"
       class="pedal-svg"
       src="../assets/img/pedal.svg"
       alt
-      :style="{ backgroundColor: pedal.bgcolor }"
     >
   </div>
 </template>
