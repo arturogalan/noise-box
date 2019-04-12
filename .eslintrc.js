@@ -1,4 +1,4 @@
-// https://eslint.org/docs/user-guide/configuring
+// http://eslint.org/docs/user-guide/configuring
 
 module.exports = {
   root: true,
@@ -10,21 +10,15 @@ module.exports = {
   env: {
     browser: true,
   },
+  // https://github.com/feross/standard/blob/master/RULES.md#javascript-standard-style
   extends: [
-    // https://github.com/vuejs/eslint-plugin-vue#priority-a-essential-error-prevention
-    // consider switching to `plugin:vue/strongly-recommended` or `plugin:vue/recommended` for stricter rules.
-    'plugin:vue/essential',
-    'plugin:vue/strongly-recommended',
-    // https://github.com/standard/standard/blob/master/docs/RULES-en.md
-    'standard'
+    'standard',
+    "eslint:recommended",
+    "plugin:vue/recommended"
   ],
-  // required to lint *.vue files
-  plugins: [
-    'vue'
-  ],
+  plugins: [],
   // add your custom rules here
-  rules: {
-
+  'rules': {
     // Possible Errors
     // http://eslint.org/docs/rules/#possible-errors
     'no-cond-assign': 0, // eslint:recommended
@@ -186,9 +180,5 @@ module.exports = {
     'arrow-spacing': [2, { 'before': false, 'after': true }],
 
 
-    // vue-eslint override
-    'vue/name-property-casing': ['error', 'kebab-case'],
-    'vue/order-in-components': ['error'],
-    'vue/attributes-order': ['error'],
   }
-}
+};
