@@ -1,44 +1,3 @@
-<template>
-  <div>
-    <p>Custom range slider:</p>
-    <div class="slide-container">
-      <input
-        id="myRange"
-        v-model="spanValue"
-        type="range"
-        min="1"
-        max="100"
-        class="slider">
-      <input
-        id="myRange2"
-        type="range"
-        min="1"
-        max="100"
-        value="50"
-        class="thin-slider">
-        <!-- <input type="range" min="1" max="100" value="50" class="slider" orient="vertical" id="myRange">
-  <input type="range" min="1" max="100" value="50" class="slider" orient="vertical" id="myRange">
-      <input type="range" min="1" max="100" value="50" class="slider" orient="vertical" id="myRange">-->
-    </div>
-    <div class="slider-value-container">
-      <transition name="bounce">
-        <div
-          v-show="isVisible"
-          :key="spanValue">
-          <span class="slide-value-text">{{ spanValue }}</span>
-        </div>
-      </transition>
-      <transition name="bounce">
-        <div
-          v-show="isVisible"
-          :key="spanValue">
-          <span class="slide-value-text">{{ spanValue }}</span>
-        </div>
-      </transition>
-    </div>
-    <br>
-  </div>
-</template>
 <script>
 export default {
   name: 'VueSliderNb',
@@ -49,33 +8,64 @@ export default {
       isVisible: true,
     };
   },
+  computed: {
+  },
   methods: {
-    addValue() {
-      this.spanValue += 1;
-    },
-    changeVisible() {
-      this.isVisible = !this.isVisible;
-    },
   },
 };
 </script>
-
+<template>
+  <div class="slider-container">
+    <div class="slider-wrapper">
+      <div class="input-container">
+        <input
+          id="myRange"
+          v-model="spanValue"
+          type="range"
+          min="0"
+          max="100"
+          class="slider">
+      </div>
+    </div>
+    <transition name="bounce">
+      <div
+        v-show="isVisible"
+        :key="spanValue"
+        class="value-container">
+        <span
+          v-if="isVisible"
+          :style="{ color: `hsl(0, 100%, ${spanValue/2}%)`}"
+          class="value-text">{{ spanValue }}</span>
+      </div>
+    </transition>
+  </div>
+</template>
 <style lang="scss" scoped>
-$slide-width: 300px;
-$slide-height: 12.6px;
+$slide-width: calc(25rem);
+$slide-height: 18px;
+$slide-selector-border: 5px;
+$slide-selector-height: 80px;
+$slide-selector-width: 30px;
+$span-font-size: 30px;
+.slider-container {
+  width: $slide-selector-height;
+}
+.slider-wrapper {
+  margin-left: ($slide-selector-height - $slide-height)/2;
+}
+.input-container {
+  // 4.4 = border * 2 ?
+  margin-left: ($slide-height / 2) - 4;
+}
+.value-container {
+  margin-top: $slide-width ;
+  height: $slide-height;
+  width: $slide-selector-height;
+  font-size: $span-font-size;
+  font-family: "FontPbio";
+}
 
-.slide-container {
-  display: grid;
-  grid-template-columns: 25% 25% 25% 25%;
-  margin-left: 15%;
-}
-.slider-value-container {
-  display: grid;
-  grid-template-columns: 25% 25% 25% 25%;
-  margin-top: $slide-width - $slide-height;
-  margin-left: $slide-height / 2;
-}
-.slide-value-text {
+.value-text {
   background-color: #cadfe6;
   border-radius: 25%;
   max-width: 20px;
@@ -83,7 +73,6 @@ $slide-height: 12.6px;
 input[type="range"] {
   -webkit-appearance: none;
   width: $slide-width;
-  margin: 13.2px 0;
   transform: translateY($slide-width) rotate(-90deg);
   transform-origin: 0;
 }
@@ -92,30 +81,31 @@ input[type="range"]:focus {
 }
 input[type="range"]::-webkit-slider-runnable-track {
   width: 100%;
-  height: 12.6px;
+  height: $slide-height;
   cursor: pointer;
   box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
   background: #928483;
   border-radius: 6.2px;
   border: 0.7px solid #562425;
 }
+// Chrome
 input[type="range"]::-webkit-slider-thumb {
   box-shadow: 1px 1px 1px #050000, 0px 0px 1px #1f0000;
-  border: 2.2px solid #000000;
-  height: 39px;
-  width: 19px;
+  border: $slide-selector-border solid #000000;
+  height: $slide-selector-height;
+  width: $slide-selector-width;
   border-radius: 2px;
   background: #cff517;
   cursor: pointer;
   -webkit-appearance: none;
-  margin-top: -13.9px;
+  margin-top: -$slide-selector-height/2 + $slide-height/2;
 }
 input[type="range"]:focus::-webkit-slider-runnable-track {
   background: #9e9191;
 }
 input[type="range"]::-moz-range-track {
   width: 100%;
-  height: 12.6px;
+  height: $slide-height;
   cursor: pointer;
   box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
   background: #928483;
@@ -124,16 +114,16 @@ input[type="range"]::-moz-range-track {
 }
 input[type="range"]::-moz-range-thumb {
   box-shadow: 1px 1px 1px #050000, 0px 0px 1px #1f0000;
-  border: 2.2px solid #000000;
-  height: 39px;
-  width: 19px;
+  border: $slide-selector-border solid #000000;
+  height: $slide-selector-height;
+  width: $slide-selector-width;
   border-radius: 2px;
   background: #cff517;
   cursor: pointer;
 }
 input[type="range"]::-ms-track {
   width: 100%;
-  height: 12.6px;
+  height: $slide-height;
   cursor: pointer;
   background: transparent;
   border-color: transparent;
@@ -153,9 +143,9 @@ input[type="range"]::-ms-fill-upper {
 }
 input[type="range"]::-ms-thumb {
   box-shadow: 1px 1px 1px #050000, 0px 0px 1px #1f0000;
-  border: 2.2px solid #000000;
-  height: 39px;
-  width: 19px;
+  border: $slide-selector-border solid #000000;
+  height: $slide-selector-height;
+  width: $slide-selector-width;
   border-radius: 2px;
   background: #cff517;
   cursor: pointer;

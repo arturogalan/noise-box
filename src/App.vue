@@ -39,6 +39,7 @@
           <div
             class="column right"
             style="background-color:#ddd;">
+            <div class="palette-title">Main controls</div>
             <master-control/>
           </div>
         </div>
@@ -76,11 +77,11 @@ export default {
     ]),
   },
   created() {
-    this.resetPalettePedals();
+    this.initPalettePedals();
   },
   methods: {
     ...mapActions('pedal', [
-      'resetPalettePedals',
+      'initPalettePedals',
       'removePedal',
     ]),
   },
@@ -117,10 +118,10 @@ export default {
   width: 2%;
 }
 .middle {
-  width: 80%;
+  width: 90%;
 }
 .right {
-  width: 18%;
+  width: 8%;
 }
 
 /* Clear floats after the columns */

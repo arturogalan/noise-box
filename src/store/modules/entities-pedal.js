@@ -30,9 +30,21 @@ const pedalModule = {
     audioContext(state) {
       return state.audioContext;
     },
+    audioInput(state) {
+      return state.audioInput;
+    },
+    audioOut(state) {
+      return state.audioOut;
+    },
   },
 
   actions: {
+    initPalettePedals({commit, dispatch}) {
+      commit('clearPalettePedals');
+      for (let pedal in PEDAL_TYPE) {
+        dispatch('addPalettePedal', PEDAL_TYPE[pedal]);
+      }
+    },
     addPalettePedal({state, commit}, type) {
       if (type && !state.pedalBoard.pedals[type]) { // add only if not exists
         commit('addPalettePedal', {
@@ -40,12 +52,6 @@ const pedalModule = {
           name: type,
           ...PEDAL_PROPERTIES[type],
         });
-      }
-    },
-    resetPalettePedals({commit, dispatch}) {
-      commit('clearPalettePedals');
-      for (let pedal in PEDAL_TYPE) {
-        dispatch('addPalettePedal', PEDAL_TYPE[pedal]);
       }
     },
     addPedal({state, commit, getters}, {type}) {
