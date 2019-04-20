@@ -20,9 +20,8 @@ const pedalModule = {
     palettePedalsList(state) {
       return Object.values(state.palettePedals);
     },
-    pedalList(state, type) {
-      return type ? state.pedalBoard.pedals[type] :
-        Object.values(state.pedalBoard.pedals);
+    pedalList(state) {
+      return Object.values(state.pedalBoard.pedals);
     },
     switchedOnPedalList(state) {
       return Object.values(state.pedalBoard.pedals).filter((pedal)=> {
@@ -69,8 +68,8 @@ const pedalModule = {
       commit('setUserInput');
       commit('setUserOutput');
       dispatch('addPedal', {type: PEDAL_TYPE.VOLUME});
-      dispatch('setDevicesList');
-      dispatch('setDevicesListHandler');
+      // dispatch('setDevicesList');
+      // dispatch('setDevicesListHandler');
     },
     addPedal({state, commit, getters}, {type}) {
       if (type && !state.pedalBoard.pedals[type]) { // add only if not exists
