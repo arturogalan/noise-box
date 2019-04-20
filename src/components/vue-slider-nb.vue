@@ -2,15 +2,19 @@
 export default {
   name: 'VueSliderNb',
   components: {},
+  props: {
+    value: {type: Number, required: true, default: ()=> 0},
+  },
   data() {
     return {
-      spanValue: 0,
       isVisible: true,
+      inputValue: this.value,
     };
   },
-  computed: {
-  },
-  methods: {
+  watch: {
+    inputValue(newValue) {
+      this.$emit('change', newValue);
+    },
   },
 };
 </script>
@@ -20,7 +24,7 @@ export default {
       <div class="input-container">
         <input
           id="myRange"
-          v-model="spanValue"
+          v-model="inputValue"
           type="range"
           min="0"
           max="100"
@@ -30,12 +34,12 @@ export default {
     <transition name="bounce">
       <div
         v-show="isVisible"
-        :key="spanValue"
+        :key="inputValue"
         class="value-container">
         <span
           v-if="isVisible"
-          :style="{ color: `hsl(0, 100%, ${spanValue/2}%)`}"
-          class="value-text">{{ spanValue }}</span>
+          :style="{ color: `hsl(0, 100%, ${inputValue/2}%)`}"
+          class="value-text">{{ inputValue }}</span>
       </div>
     </transition>
   </div>

@@ -30,14 +30,21 @@ const audioUtils = {
   createInput(audioContext) {
     const input = new Noisefy.Input(audioContext);
 
-    input.getUserMedia();
-
+    let stream = input.getUserMedia();
+    console.log(stream);
     console.log('latency', audioContext.baseLatency);
     return convertToMono(input, audioContext);
   },
   createOutput(audioContext) {
     return new Noisefy.Output(audioContext);
   },
+  deviceList() {
+    return Noisefy.deviceList();
+  },
+  deviceListHandler(callback) {
+    Noisefy.deviceListHandler(callback);
+  },
+
 };
 
 function convertToMono(input, audioContext) {
@@ -49,5 +56,6 @@ function convertToMono(input, audioContext) {
   splitter.connect(merger, 0, 1);
   return input;
 }
+
 
 export default audioUtils;

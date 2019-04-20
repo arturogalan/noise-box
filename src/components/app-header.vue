@@ -1,19 +1,15 @@
 <script>
-import {mapActions} from 'vuex';
+
 export default {
   data() {
     return {
     };
   },
   created() {
-    this.createAudioContext();
   },
   methods: {
-    ...mapActions('pedal', [
-      'createAudioContext',
-      'switchOnAudioContext',
-    ]),
   },
+
 };
 </script>
 
@@ -23,11 +19,7 @@ export default {
       <img
         src="/static/header-icon.png"
         class="logo-icon">
-      <button
-        type="button"
-        @click="switchOnAudioContext">
-        ON
-      </button>
+      <div/>
       <h1>NOISE BOX</h1>
     </div>
   </div>

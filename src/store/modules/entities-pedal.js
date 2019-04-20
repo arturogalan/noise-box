@@ -14,13 +14,15 @@ const pedalModule = {
       pedals: {},
     },
     audioContext: {},
+    deviceList: [],
   },
   getters: {
     palettePedalsList(state) {
       return Object.values(state.palettePedals);
     },
-    pedalList(state) {
-      return Object.values(state.pedalBoard.pedals);
+    pedalList(state, type) {
+      return type ? state.pedalBoard.pedals[type] :
+        Object.values(state.pedalBoard.pedals);
     },
     switchedOnPedalList(state) {
       return Object.values(state.pedalBoard.pedals).filter((pedal)=> {
@@ -35,6 +37,15 @@ const pedalModule = {
     },
     audioOut(state) {
       return state.audioOut;
+    },
+    defaultAudioDevicesList(state) {
+      return state.deviceList.filter((el)=> el.deviceId==='default');
+    },
+    defaultInputDevice(state, getters) {
+      return getters.defaultAudioDevicesList.find((el)=> el.direction === 'input');
+    },
+    defaultOutputDevice(state, getters) {
+      return getters.defaultAudioDevicesList.find((el)=> el.direction === 'output');
     },
   },
 
@@ -54,6 +65,13 @@ const pedalModule = {
         });
       }
     },
+    initAudioInutAndOutput({commit, dispatch}) {
+      commit('setUserInput');
+      commit('setUserOutput');
+      dispatch('addPedal', {type: PEDAL_TYPE.VOLUME});
+      dispatch('setDevicesList');
+      dispatch('setDevicesListHandler');
+    },
     addPedal({state, commit, getters}, {type}) {
       if (type && !state.pedalBoard.pedals[type]) { // add only if not exists
         const pedal = {
@@ -62,9 +80,6 @@ const pedalModule = {
           dying: false,
           ...PEDAL_PROPERTIES[type],
         };
-
-        commit('setUserInput');
-        commit('setUserOutput');
         commit('addPedal', pedal);
         commit('connectPedals', getters.switchedOnPedalList);
       }
@@ -82,14 +97,28 @@ const pedalModule = {
         }
       }, 500);
     },
+    setPedalProperty({commit}, data) {
+      commit('setPedalProperty', data);
+    },
     // togglePedal() {
     //   return state.updateIn(['pedalboard', 'pedals', action.id], (pedal)=> pedal.set('switchedOn', !pedal.get('switchedOn')));
     // },
+
     createAudioContext({commit}) {
       commit('setAudioContext', audioUtils.createAudioContext());
     },
     switchOnAudioContext({commit}) {
       commit('resumeAudioContext');
+    },
+    setDevicesList({commit}) {
+      audioUtils.deviceList().then((deviceList)=> {
+        commit('setDevicesList', deviceList.filter((el)=> el.type === 'audio'));
+      });
+    },
+    setDevicesListHandler({commit}) {
+      audioUtils.deviceListHandler((newDeviceList, event)=> {
+        commit('setDevicesList', newDeviceList.filter((el)=> el.type === 'audio'));
+      });
     },
   },
 
@@ -107,7 +136,6 @@ const pedalModule = {
         pedal.effect[setting] = setting.value;
       }
       audioUtils.configAudioNode(pedal);
-
       Vue.set(state.pedalBoard.pedals, pedal.type, pedal);
     },
     killPedal(state, type) {
@@ -116,6 +144,12 @@ const pedalModule = {
     removePedal(state, pedal) {
       pedal.effect.disconnect();
       Vue.delete(state.pedalBoard.pedals, pedal.type);
+    },
+    setPedalProperty(state, {type, property, value}) {
+      let pedal = state.pedalBoard.pedals[type];
+      if (pedal) {
+        pedal.effect[property] = value;
+      }
     },
     connectPedals(state, switchedOnPedalList) {
       switchedOnPedalList.forEach((pedal, index)=> {
@@ -136,17 +170,22 @@ const pedalModule = {
     resumeAudioContext(state) {
       state.audioContext.resume().then(()=> {
         console.log('Playback resumed successfully');
+        console.log(state.audioContext);
       });
     },
     setUserInput(state) {
       if (isEmpty(state.audioInput)) {
         Vue.set(state, 'audioInput', audioUtils.createInput(state.audioContext));
+        console.log(state.audioInput);
       }
     },
     setUserOutput(state) {
       if (isEmpty(state.audioOutput)) {
         Vue.set(state, 'audioOutput', audioUtils.createOutput(state.audioContext));
       }
+    },
+    setDevicesList(state, deviceList) {
+      Vue.set(state, 'deviceList', deviceList);
     },
   },
 };

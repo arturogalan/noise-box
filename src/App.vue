@@ -1,57 +1,7 @@
-<template>
-  <div id="app">
-
-    <app-header/>
-
-
-    <div class="row">
-      <div class="pedal-palette">
-        <div class="palette-title">Add effects!</div>
-        <div
-          class="grid-container"
-          style="background-color:#aaa;">
-          <palette-pedal
-            v-for="palettePedal in palettePedalsList"
-            :key="palettePedal.name"
-            :palette-pedal="palettePedal"
-            :title="'Add '+palettePedal.name+'!!'"
-          />
-        </div>
-      </div>
-      <div class="noise-board column">
-        <div class="row">
-          <div
-            class="column left"
-            style="background-color:#bbb;"/>
-          <div
-            class="column middle"
-            style="background-color:#ccc;">
-            <div class="row">
-              <pedal
-                v-for="pedal in pedalList"
-                :key="pedal.name"
-                :pedal="pedal"
-                class="column"
-                @delete="removePedal(pedal)"
-              />
-            </div>
-          </div>
-          <div
-            class="column right"
-            style="background-color:#ddd;">
-            <div class="palette-title">Main controls</div>
-            <master-control/>
-          </div>
-        </div>
-      </div>
-    </div>
-
-  </div>
-</template>
-
 <script>
 import {mapGetters, mapActions} from 'vuex';
 import appHeader from './components/app-header.vue';
+import appFooter from './components/app-footer.vue';
 import palettePedal from './components/palette-pedal.vue';
 import pedal from './components/pedal.vue';
 import masterControl from './components/master-control.vue';
@@ -64,6 +14,7 @@ export default {
     palettePedal,
     pedal,
     masterControl,
+    appFooter,
   },
   data() {
     return {
@@ -78,25 +29,76 @@ export default {
   },
   created() {
     this.initPalettePedals();
+    this.createAudioContext();
   },
   methods: {
     ...mapActions('pedal', [
       'initPalettePedals',
       'removePedal',
+      'createAudioContext',
     ]),
   },
 
 };
 </script>
+<template>
+  <div id="app">
 
+    <app-header/>
+    <div>
+      <div class="master-control column">
+        <div class="palette-title">Main</div>
+        <master-control/>
+      </div>
+
+      <div class="pedal-palette">
+        <div class="palette-title">Add effects!</div>
+        <div class="grid-container">
+          <palette-pedal
+            v-for="palettePedal in palettePedalsList"
+            :key="palettePedal.name"
+            :palette-pedal="palettePedal"
+            :title="'Add '+palettePedal.name+'!!'"
+          />
+        </div>
+      </div>
+      <div class="noise-board column">
+        <div>
+          <div
+            class="column left"/>
+          <div
+            class="column middle">
+            <div>
+              <pedal
+                v-for="pedal in pedalList"
+                :key="pedal.name"
+                :pedal="pedal"
+                class="column"
+                @delete="removePedal(pedal)"
+              />
+            </div>
+          </div>
+          <div
+            class="column right"/>
+        </div>
+      </div>
+    </div>
+    <app-footer/>
+  </div>
+</template>
 <style>
+body,p { margin:0; }
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 0px;
+  margin: 0px;
+}
+.master-control {
+  width: 10%;
+  background-color:#bbb;
 }
 .pedal-palette {
   /* display: flex; */
@@ -105,23 +107,24 @@ export default {
   float: left;
 }
 .noise-board{
-  width: 80%;
+  width: 70%;
 }
 /* Create three unequal columns that floats next to each other */
 .column {
     float: left;
-    height: 600px; /* Should be removed. Only for demonstration */
+    height: 37rem; /* Should be removed. Only for demonstration */
 }
-
-
 .left {
   width: 2%;
+  background-color:#bbb;
 }
 .middle {
   width: 90%;
+  background-color:#ccc;
 }
 .right {
   width: 8%;
+  background-color:#ddd;
 }
 
 /* Clear floats after the columns */
@@ -136,7 +139,7 @@ export default {
   justify-content: start;
   grid-template-columns: 45% 45%;/*Make the grid smaller than the container*/
   grid-gap: 10px;
-  background-color: #2196F3;
+  background-color:#aaa;
 }
 .overlay {
   bottom: 0;
