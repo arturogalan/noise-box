@@ -1,5 +1,6 @@
 <script>
 import vueSliderNb from './vue-slider-nb.vue';
+import switchOn from './switch-on.vue';
 import {mapActions} from 'vuex';
 import {PEDAL_TYPE} from '../store/constants';
 
@@ -7,6 +8,7 @@ export default {
   name: 'MasterControl',
   components: {
     vueSliderNb,
+    switchOn,
   },
   data() {
     return {
@@ -32,13 +34,9 @@ export default {
 </script>
 <template>
   <div class="centered-parent">
-    <span class="slider-title">Input</span>
-    <br>
-    <div class="centered-child">
-      <button @click="initAudioInterface()">On</button>
-    </div>
-    <br>
-    <span class="slider-title">Volume</span>
+    <span class="slider-title slider-title--small">Power</span>
+    <switch-on @click="initAudioInterface()"/>
+    <span class="slider-title slider-title--big">Volume</span>
     <div class="centered-child">
       <vue-slider-nb
         :value="initialMainVolumeLevel"
@@ -50,12 +48,20 @@ export default {
 <style lang="scss" scoped>
   .slider-title {
     font-family: "FontPbio";
-    font-size: 16px;
-    margin: 0.5em 0 0 0;
+    margin: 0.5em 0 0.5em 0;
     display: inline-block;
+    &--small {
+      font-size: 12px;
+    }
+    &--big {
+      font-size: 16px;
+    }
   }
   .centered-parent{
     text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
   .centered-child{
     display: inline-block;

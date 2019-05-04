@@ -5,34 +5,35 @@
       :style="svgAbove"
       width="100%"
       height="100%"
-      viewBox="0 0 42 42"
+      viewBox="0 0 32 32"
       preserveAspectRatio
+      @click="computeValue"
     >
       <circle
         :r="9"
         class="stroke-hole"
-        cx="21"
-        cy="21"/>
+        cx="16"
+        cy="16"/>
       <circle
         class="stroke-mark"
-        cx="21"
-        cy="21"
+        cx="16"
+        cy="16"
         r="5"/>
     </svg>
     <svg
       :style="svgStyle"
       width="100%"
       height="100%"
-      viewBox="0 0 42 42"
+      viewBox="0 0 32 32"
       preserveAspectRatio>
       <circle
         ref="ring"
-        :r="radius"
+        :r="radius+30"
         :stroke="bgcolor"
         :stroke-width="strokeWidth"
         class="ring"
-        cx="21"
-        cy="21"
+        cx="16"
+        cy="16"
         fill="transparent"
         @click="computeValue"
       />
@@ -43,13 +44,13 @@
         :stroke-width="strokeWidth"
         :stroke-dasharray="strokeDasharray"
         class="segment"
-        cx="21"
-        cy="21"
+        cx="16"
+        cy="16"
         fill="transparent"
         stroke-dashoffset="0"
         @click="computeValue"
       />
-      <g transform="rotate(90 21 21)">
+      <g transform="rotate(90 16 16)">
         <text
           ref="textVal"
           :style="labelStyle"
@@ -221,10 +222,13 @@ export default {
 }
 
 .setting-name {
+  text-transform: uppercase;
+  font-size: .5rem;
+  font-weight: bold;
   color: aliceblue;
   position: absolute;
   width: 100%;
-  top: 80%;
+  top: 100%;
   z-index: -1;
 }
 /* .svg-above{

@@ -86,7 +86,7 @@ module.exports = new Promise((resolve, reject)=> {
       // Add FriendlyErrorsPlugin
       devWebpackConfig.plugins.push(new FriendlyErrorsPlugin({
         compilationSuccessInfo: {
-          messages: [`Clarity is running on http://${devWebpackConfig.devServer.host}:${port}`],
+          messages: [`NOISE-BOX is running on http://${devWebpackConfig.devServer.host}:${port}`],
           notes: [],
         },
         onErrors: config.dev.notifyOnErrors ? utils.createNotifierCallback() : undefined,

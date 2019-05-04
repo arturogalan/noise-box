@@ -45,7 +45,7 @@ export default {
   </div>
 </template>
 <style lang="scss" scoped>
-$slide-width: calc(25rem);
+$slide-width: calc(20rem);
 $slide-height: 18px;
 $slide-selector-border: 5px;
 $slide-selector-height: 80px;

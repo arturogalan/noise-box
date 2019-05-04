@@ -112,7 +112,6 @@ body,p { margin:0; }
 /* Create three unequal columns that floats next to each other */
 .column {
     float: left;
-    height: 37rem; /* Should be removed. Only for demonstration */
 }
 .left {
   width: 2%;

@@ -16,7 +16,7 @@
     "lintfix": "eslint --fix src/**"
   },
   "dependencies": {
-    "noisefy": "0.0.11",
+    "noisefy": "file:./../noisefy",
     "bunyan": "^1.8.12",
     "express": "^4.16.4",
     "lodash": "^4.17.11",
