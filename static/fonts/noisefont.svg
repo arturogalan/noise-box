@@ -1,0 +1,21 @@
+<?xml version="1.0" standalone="no"?> 
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd" >
+<svg xmlns="http://www.w3.org/2000/svg">
+<defs>
+  <font id="noisefont" horiz-adv-x="24">
+    <font-face font-family="noisefont"
+      units-per-em="24" ascent="24"
+      descent="0" />
+    <missing-glyph horiz-adv-x="0" />
+    <glyph glyph-name="close"
+      unicode="&#xF101;"
+      horiz-adv-x="24" d=" M19 17.6L17.6 19L12 13.4L6.4 19L5 17.6L10.6 12L5 6.4L6.4 5L12 10.6L17.6 5L19 6.4L13.4 12z" />
+    <glyph glyph-name="maximize"
+      unicode="&#xF102;"
+      horiz-adv-x="24" d=" M5.004736 4.807664L5.004736 16.558176L17.629408 4.807664L5.004736 4.807664z M19.192336 18.995264L19.192336 7.244752L6.567664 18.995264L19.192336 18.995264z" />
+    <glyph glyph-name="minimize"
+      unicode="&#xF103;"
+      horiz-adv-x="24" d=" M3.816496 13.627152L20.764624 13.627152L20.764624 10.507152L3.816496 10.507152L3.816496 13.627152z" />
+  </font>
+</defs>
+</svg>

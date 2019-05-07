@@ -94,14 +94,14 @@ const pedalModule = {
           commit('removePedal', pedal);
           commit('connectPedals', getters.switchedOnPedalList);
         }
-      }, 500);
+      }, 200);
     },
     setPedalProperty({commit}, data) {
       commit('setPedalProperty', data);
     },
-    // togglePedal() {
-    //   return state.updateIn(['pedalboard', 'pedals', action.id], (pedal)=> pedal.set('switchedOn', !pedal.get('switchedOn')));
-    // },
+    togglePedal({commit}, type) {
+      commit('togglePedal', type);
+    },
 
     createAudioContext({commit}) {
       commit('setAudioContext', audioUtils.createAudioContext());
@@ -136,6 +136,9 @@ const pedalModule = {
       }
       audioUtils.configAudioNode(pedal);
       Vue.set(state.pedalBoard.pedals, pedal.type, pedal);
+    },
+    togglePedal(state, type) {
+      state.pedalBoard.pedals[type].switchedOn = !state.pedalBoard.pedals[type].switchedOn;
     },
     killPedal(state, type) {
       state.pedalBoard.pedals[type].dying = true;

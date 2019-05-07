@@ -40,6 +40,7 @@ h1 {
   text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
   font-size: 7em;
   margin: 0px;
+  font-family: "FontPbio";
 }
 .logo-icon {
   width: 130px;

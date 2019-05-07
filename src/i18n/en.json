@@ -1,0 +1,17 @@
+{
+  "en": {
+    "MAIN": {
+      "STEP_1": "1: Switch on!",
+      "STEP_2": "2: Add effects!",
+      "STEP_3": "3: Configure effects!"
+    },
+    "TOOLTIP": {
+      "SWITCH_ON_PEDAL": "Swith ON pedal",
+      "SWITCH_OFF_PEDAL": "Swith OFF pedal"
+    },
+    "MAIN_CONTROL": {
+      "POWER": "Power",
+      "VOLUME": "Volume"
+    }
+  }
+}

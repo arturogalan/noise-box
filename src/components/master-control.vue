@@ -34,9 +34,9 @@ export default {
 </script>
 <template>
   <div class="centered-parent">
-    <span class="slider-title slider-title--small">Power</span>
+    <span class="slider-title slider-title--small">{{ $t('MAIN_CONTROL.POWER') }}</span>
     <switch-on @click="initAudioInterface()"/>
-    <span class="slider-title slider-title--big">Volume</span>
+    <span class="slider-title slider-title--big">{{ $t('MAIN_CONTROL.VOLUME') }}</span>
     <div class="centered-child">
       <vue-slider-nb
         :value="initialMainVolumeLevel"

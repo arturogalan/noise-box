@@ -36,12 +36,9 @@ export default {
     display: flex;
     position: relative;
     flex-direction: column;
-    margin: 5px;
-    padding: 5px 5px 5px 5px;
-    border: solid 1px #ccc;
     border-radius: 10px;
     cursor: pointer;
-    background:dimgray;
+    /* background:dimgray; */
 }
 
 .palette-card.removing {
@@ -60,19 +57,17 @@ export default {
     justify-content: space-between;
 }
 .icon-type{
-    max-width: 50px;
+    max-width: 5rem;
        display:block;
     margin:auto;
 }
 .overlay {
-  bottom: 0;
-  background: rgb(0, 0, 0);
-  background:rgba(193, 150, 150, 0.5); /* Black see-through */
-  color: #f1f1f1;
-  transition: .5s ease;
-  color: white;
-  text-align: center;
+  /* background:rgba(193, 150, 150, 0.5); */
   border-radius: 10px;
+  font-family: "FatsansContur";
+  color: #aaffaa;
+  text-transform: capitalize;
+  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
 }
 .palette-card.removing {
     background-color: lightcoral;

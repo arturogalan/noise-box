@@ -36,7 +36,9 @@ export default {
     position: absolute;
     z-index: 150;
     display: flex;
-    margin: 40px 0 0 10px;
+    justify-content: space-around;
+    margin: 40px 0px 40px 10px;
+    width: 90%;
 }
 .one-knob {
   /* font-family: "Avenir", Helvetica, Arial, sans-serif;

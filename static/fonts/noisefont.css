@@ -1,0 +1,49 @@
+@font-face {
+    font-family: "noisefont";
+    src: url("./noisefont.eot?fa5ab048be492c23489f341b0e1c5d0a?#iefix") format("embedded-opentype"),
+url("./noisefont.woff2?fa5ab048be492c23489f341b0e1c5d0a") format("woff2"),
+url("./noisefont.woff?fa5ab048be492c23489f341b0e1c5d0a") format("woff"),
+url("./noisefont.ttf?fa5ab048be492c23489f341b0e1c5d0a") format("truetype"),
+url("./noisefont.svg?fa5ab048be492c23489f341b0e1c5d0a#noisefont") format("svg");
+}
+
+i {
+    line-height: 1;
+}
+
+i:before {
+    font-family: noisefont !important;
+    font-style: normal;
+    font-weight: normal !important;
+}
+
+.ico-close:before {
+    content: "\f101";
+}
+.ico-maximize:before {
+    content: "\f102";
+}
+.ico-minimize:before {
+    content: "\f103";
+}
+
+i-after {
+  line-height: 1;
+}
+
+i-after:after {
+  font-family: noisefont !important;
+  font-style: normal;
+  font-weight: normal !important;
+  vertical-align: top;
+}
+
+.ico-close-after:after {
+  content: "\f101";
+}
+.ico-maximize-after:after {
+  content: "\f102";
+}
+.ico-minimize-after:after {
+  content: "\f103";
+}

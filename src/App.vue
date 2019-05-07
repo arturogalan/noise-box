@@ -47,12 +47,12 @@ export default {
     <app-header/>
     <div>
       <div class="master-control column">
-        <div class="palette-title">Main</div>
+        <div class="palette-title">{{ this.$t('MAIN.STEP_1') }}</div>
         <master-control/>
       </div>
 
       <div class="pedal-palette">
-        <div class="palette-title">Add effects!</div>
+        <div class="palette-title">{{ this.$t('MAIN.STEP_2') }}</div>
         <div class="grid-container">
           <palette-pedal
             v-for="palettePedal in palettePedalsList"
@@ -62,31 +62,36 @@ export default {
           />
         </div>
       </div>
-      <div class="noise-board column">
-        <div>
-          <div
-            class="column left"/>
-          <div
-            class="column middle">
-            <div>
-              <pedal
-                v-for="pedal in pedalList"
-                :key="pedal.name"
-                :pedal="pedal"
-                class="column"
-                @delete="removePedal(pedal)"
-              />
+      <div>
+        <div class="palette-title">{{ this.$t('MAIN.STEP_3') }}</div>
+
+
+        <div class="noise-board column">
+          <div>
+            <div
+              class="column left"/>
+            <div
+              class="column middle">
+              <div>
+                <pedal
+                  v-for="pedal in pedalList"
+                  :key="pedal.name"
+                  :pedal="pedal"
+                  class="column"
+                  @delete="removePedal(pedal)"
+                />
+              </div>
             </div>
+            <div
+              class="column right"/>
           </div>
-          <div
-            class="column right"/>
         </div>
       </div>
     </div>
     <app-footer/>
   </div>
 </template>
-<style>
+<style lang="scss">
 body,p { margin:0; }
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
@@ -95,6 +100,30 @@ body,p { margin:0; }
   text-align: center;
   color: #2c3e50;
   margin: 0px;
+}
+@font-face {
+  font-family: "FontPbio";
+  src: url("./assets/fonts/pbio-bold.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Conthrax";
+  src: url("./assets/fonts/conthrax-sb.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Fatsans";
+  src: url("./assets/fonts/Fatsans.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+}
+@font-face {
+  font-family: "FatsansContur";
+  src: url("./assets/fonts/FatsansContur.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
 }
 .master-control {
   width: 10%;
@@ -137,22 +166,99 @@ body,p { margin:0; }
   display: grid;
   justify-content: start;
   grid-template-columns: 45% 45%;/*Make the grid smaller than the container*/
-  grid-gap: 10px;
+  grid-gap: 5px;
   background-color:#aaa;
-}
-.overlay {
-  bottom: 0;
-  background: rgb(0, 0, 0);
-  background:rgba(193, 150, 150, 0.5); /* Black see-through */
-  color: #f1f1f1;
-  transition: .5s ease;
-  color: white;
-  text-align: center;
-  border-radius: 10px;
+  padding-top: .3rem;
 }
 .palette-title {
   background-color: bisque;
   font-style: oblique;
   font-weight: 900;
 }
+.tooltip-box {
+  font-family: 'Conthrax';
+  font-size: .6rem;
+  color: black;
+  background-color: white;
+  border: solid 1px rgb(122, 44, 44);
+}
+.tooltip-text {
+  padding: 2px;
+}
+
+.visible {
+  visibility: visible;
+  opacity: 1;
+  transition: opacity 3s linear;
+}
+.hidden {
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0s 2s, opacity 2s linear;
+}
+
+.fade-in {
+  opacity: 1;
+  animation-name: fadeInOpacity;
+  animation-iteration-count: 1;
+  animation-timing-function: ease-in;
+  animation-duration: .5s;
+}
+
+@keyframes fadeInOpacity {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.fade-out {
+  opacity: 1;
+  animation-name: fadeOutOpacity;
+  animation-iteration-count: 1;
+  animation-timing-function: ease-out;
+  animation-duration: .25s;
+}
+
+@keyframes fadeOutOpacity {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+// @keyframes visible {
+//   0% {
+//     opacity: 0;
+//   }
+//   20% {
+//     opacity: .1;
+//   }
+//   30% {
+//     opacity: .2;
+//   }
+//   40% {
+//     opacity: .3;
+//   }
+//   50% {
+//     opacity: .4;
+//   }
+//   60% {
+//     opacity: .5;
+//   }
+//   70% {
+//     opacity: .6;
+//   }
+//   80% {
+//     opacity: .8;
+//   }
+//   100% {
+//     opacity: 1;
+//   }
+// }
+
 </style>
