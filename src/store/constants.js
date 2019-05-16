@@ -12,6 +12,7 @@ export const PEDAL_PROPERTIES = {
 
   [PEDAL_TYPE.VOLUME]: {
     name: 'volume',
+    zoomIn: false,
     icon: 'assets/icons/volume.svg',
     bgcolor: '#688c4b',
     fcolor: 'black',
@@ -36,6 +37,7 @@ export const PEDAL_PROPERTIES = {
   },
   [PEDAL_TYPE.DISTORTION]: {
     name: 'distortion',
+    zoomIn: false,
     icon: 'assets/icons/distortion.svg',
     bgcolor: '#3b3f44',
     fcolor: 'orange',
@@ -67,6 +69,7 @@ export const PEDAL_PROPERTIES = {
   },
   [PEDAL_TYPE.DELAY]: {
     name: 'delay',
+    zoomIn: false,
     icon: 'assets/icons/delay.svg',
     bgcolor: '#eedbc3',
     fcolor: 'blue',
@@ -99,6 +102,7 @@ export const PEDAL_PROPERTIES = {
   },
   [PEDAL_TYPE.FLANGER]: {
     name: 'flanger',
+    zoomIn: false,
     icon: 'assets/icons/flanger.svg',
     bgcolor: '#b1428b',
     fcolor: 'black',
@@ -139,6 +143,7 @@ export const PEDAL_PROPERTIES = {
   },
   [PEDAL_TYPE.REVERB]: {
     name: 'reverb',
+    zoomIn: false,
     icon: 'assets/icons/flanger.svg',
     bgcolor: '#b1428b',
     fcolor: 'black',

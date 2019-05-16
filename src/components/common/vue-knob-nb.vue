@@ -206,7 +206,6 @@ export default {
 <style>
 .container {
   position: relative;
-  z-index: 100;
 }
 .stroke-hole {
   fill: darkgray;

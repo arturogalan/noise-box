@@ -34,16 +34,16 @@ const tooltip = {
   inserted: function(el, binding, vnode) {
     el.addEventListener('mouseover', (e)=> {
       if (!el.attributes['vue-tooltip'] || el.attributes['vue-tooltip'].value === 'false') {
-        createTooltip(e, el, binding.value.text || binding.expression);
+        createTooltip(e, el, binding.value ? binding.value.text : binding.expression);
       }
     });
     el.addEventListener('mousemove', (e)=> {
       if (el.attributes['vue-tooltip'] && el.attributes['vue-tooltip'].value === 'true') {
         positionTooltip(e, el.lastChild);
       }
-      if (!el.attributes['vue-tooltip'] || el.attributes['vue-tooltip'].value === 'false') {
-        createTooltip(e, el, binding.value.text);
-      }
+      // if (!el.attributes['vue-tooltip'] || el.attributes['vue-tooltip'].value === 'false') {
+      //   createTooltip(e, el, binding.value.text);
+      // }
     });
     el.addEventListener('mouseleave', ()=> {
       if (el.attributes['vue-tooltip'] && el.attributes['vue-tooltip'].value === 'true') {
@@ -53,14 +53,14 @@ const tooltip = {
         setTimeout(()=> {
           el.setAttribute('vue-tooltip', false);
           el.removeChild(el.lastChild);
-        }, 250);
+        }, 150);
       }
     });
   },
   update: function(el, binding) {
     //If tooltip exists, change the text
     if (el.attributes['vue-tooltip'] && el.attributes['vue-tooltip'].value === 'true') {
-      el.lastChild.lastChild.innerHTML = binding.value.text || binding.expression;
+      el.lastChild.lastChild.innerHTML = binding.value ? binding.value.text : binding.expression;
     }
   },
 };

@@ -3,9 +3,10 @@ import {mapGetters, mapActions} from 'vuex';
 import appHeader from './components/app-header.vue';
 import appFooter from './components/app-footer.vue';
 import palettePedal from './components/palette-pedal.vue';
-import pedal from './components/pedal.vue';
+import pedal from './components/pedal/pedal.vue';
 import masterControl from './components/master-control.vue';
-
+import modal from './components/common/modal.vue';
+import pedalZoomIn from './components/pedal/pedal-zoom-in';
 
 export default {
   name: 'App',
@@ -15,6 +16,8 @@ export default {
     pedal,
     masterControl,
     appFooter,
+    modal,
+    pedalZoomIn,
   },
   data() {
     return {
@@ -25,6 +28,7 @@ export default {
     ...mapGetters('pedal', [
       'palettePedalsList',
       'pedalList',
+      'zoomInPedal',
     ]),
   },
   created() {
@@ -36,14 +40,20 @@ export default {
       'initPalettePedals',
       'removePedal',
       'createAudioContext',
+      'setPedalProperty',
     ]),
+    zoomPedal(pedal) {
+      this.setPedalProperty({type: pedal.type, property: 'zoomIn', value: true});
+    },
   },
 
 };
 </script>
 <template>
   <div id="app">
-
+    <modal :show="zoomInPedal ? true : false">
+      <pedal-zoom-in/>
+    </modal>
     <app-header/>
     <div>
       <div class="master-control column">
@@ -55,10 +65,10 @@ export default {
         <div class="palette-title">{{ this.$t('MAIN.STEP_2') }}</div>
         <div class="grid-container">
           <palette-pedal
+            v-tooltip="{text: $t('TOOLTIP.PEDAL.ADD', { effect: palettePedal.name })}"
             v-for="palettePedal in palettePedalsList"
             :key="palettePedal.name"
             :palette-pedal="palettePedal"
-            :title="'Add '+palettePedal.name+'!!'"
           />
         </div>
       </div>
@@ -79,6 +89,7 @@ export default {
                   :pedal="pedal"
                   class="column"
                   @delete="removePedal(pedal)"
+                  @maximize="zoomPedal(pedal)"
                 />
               </div>
             </div>
@@ -181,6 +192,7 @@ body,p { margin:0; }
   color: black;
   background-color: white;
   border: solid 1px rgb(122, 44, 44);
+  z-index: $z-index-tooltip;
 }
 .tooltip-text {
   padding: 2px;

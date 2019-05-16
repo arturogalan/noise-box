@@ -1,20 +1,5 @@
-<template>
-  <div class="knob-grid" >
-    <vue-knob-nb
-      v-for="(setting, index) in settingsList"
-      :key="index"
-      :name="setting.name"
-      :barcolor="setting.color"
-      :init-value="setting.value"
-      class="one-knob"
-      fillcolor="none"
-      bgcolor="none"
-    />
-  </div>
-</template>
-
 <script>
-import vueKnobNb from './vue-knob-nb.vue';
+import vueKnobNb from '../common/vue-knob-nb.vue';
 export default {
   components: {
     vueKnobNb,
@@ -30,11 +15,24 @@ export default {
   methods: {},
 };
 </script>
-
-<style>
+<template>
+  <div class="knob-grid" >
+    <vue-knob-nb
+      v-for="(setting, index) in settingsList"
+      :key="index"
+      :name="setting.name"
+      :barcolor="setting.color"
+      :init-value="setting.value"
+      class="one-knob"
+      fillcolor="none"
+      bgcolor="none"
+    />
+  </div>
+</template>
+<style lang="scss">
 .knob-grid {
     position: absolute;
-    z-index: 150;
+    z-index: $z-index-pedal;
     display: flex;
     justify-content: space-around;
     margin: 40px 0px 40px 10px;

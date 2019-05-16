@@ -28,6 +28,9 @@ const pedalModule = {
         return pedal.switchedOn;
       });
     },
+    zoomInPedal(state) {
+      return Object.values(state.pedalBoard.pedals).find((pedal)=> pedal.zoomIn);
+    },
     audioContext(state) {
       return state.audioContext;
     },
@@ -99,6 +102,9 @@ const pedalModule = {
     setPedalProperty({commit}, data) {
       commit('setPedalProperty', data);
     },
+    setPedalEffectProperty({commit}, data) {
+      commit('setPedalEffectProperty', data);
+    },
     togglePedal({commit}, type) {
       commit('togglePedal', type);
     },
@@ -148,6 +154,12 @@ const pedalModule = {
       Vue.delete(state.pedalBoard.pedals, pedal.type);
     },
     setPedalProperty(state, {type, property, value}) {
+      let pedal = state.pedalBoard.pedals[type];
+      if (pedal) {
+        pedal[property] = value;
+      }
+    },
+    setPedalEffectProperty(state, {type, property, value}) {
       let pedal = state.pedalBoard.pedals[type];
       if (pedal) {
         pedal.effect[property] = value;

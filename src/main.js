@@ -15,6 +15,7 @@ Vue.use(VueI18n);
 
 // Set i18n instance on app
 console.log(messages);
+vueTooltipNb.init();
 const i18n = new VueI18n({
   locale: 'en', // set locale
   messages, // set locale messages
@@ -28,4 +29,3 @@ new Vue({
   components: {App},
   template: '<App/>',
 });
-vueTooltipNb.init();

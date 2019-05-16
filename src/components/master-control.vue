@@ -1,5 +1,5 @@
 <script>
-import vueSliderNb from './vue-slider-nb.vue';
+import vueSliderNb from './common/vue-slider-nb.vue';
 import switchOn from './switch-on.vue';
 import {mapActions} from 'vuex';
 import {PEDAL_TYPE} from '../store/constants';
@@ -19,7 +19,7 @@ export default {
     ...mapActions('pedal', [
       'switchOnAudioContext',
       'initAudioInutAndOutput',
-      'setPedalProperty',
+      'setPedalEffectProperty',
     ]),
     initAudioInterface() {
       this.switchOnAudioContext();
@@ -27,7 +27,7 @@ export default {
       this.updateMainVolumeLevel(this.initialMainVolumeLevel);
     },
     updateMainVolumeLevel(value) {
-      this.setPedalProperty({type: PEDAL_TYPE.VOLUME, property: 'level', value});
+      this.setPedalEffectProperty({type: PEDAL_TYPE.VOLUME, property: 'level', value});
     },
   },
 };

@@ -51,18 +51,21 @@ export default {
     class="pedal-card">
     <div class="pedal-led--strip">
       <div
+        v-tooltip="{text: $t('TOOLTIP.PEDAL.CLOSE')}"
         class="pedal-led pedal-led--close"
         @click="deleteClick">
         <i class="ico-close ico-led"/>
       </div>
+      <!-- v-tooltip="{text: $t('TOOLTIP.PEDAL.MINIMIZE')}" -->
       <div
-        class="pedal-led pedal-led--minimize"
+        class="pedal-led pedal-led--minimize pedal-led--minimize--disabled"
         @click="deleteClick">
-        <i class="ico-minimize ico-led"/>
+        <i class="ico-led"/>
       </div>
       <div
+        v-tooltip="{text: $t('TOOLTIP.PEDAL.MAXIMIZE')}"
         class="pedal-led pedal-led--maximize"
-        @click="deleteClick">
+        @click="$emit('maximize')">
         <i class="ico-maximize ico-led"/>
       </div>
     </div>
@@ -82,14 +85,14 @@ export default {
           class="pedal-name">{{ pedal.name }}</div>
       </div>
       <div
-        v-tooltip="{text: $t(`TOOLTIP.SWITCH_${pedal.switchedOn ? 'ON' : 'OFF'}_PEDAL`)}"
+        v-tooltip="{text: $t(`TOOLTIP.PEDAL.SWITCH_${pedal.switchedOn ? 'OFF' : 'ON'}`)}"
         ref="push-wrapper"
         class="push-wrapper"
         @click="switchPedal()"/>
       <img
         :style="{ backgroundColor: pedal.bgcolor }"
         class="pedal-svg"
-        src="../assets/img/pedal.svg"
+        src="../../assets/img/pedal.svg"
         alt
       >
     </div>
@@ -146,7 +149,8 @@ export default {
 .push-wrapper {
   position: absolute;
   bottom: 0;
-  width: 100%;
+  width: 80%;
+  left: 10%;
   height: 40%;
   cursor: pointer;
 }
@@ -170,10 +174,18 @@ export default {
     cursor: pointer;
     margin-right: .3rem;
     background-color: yellow;
+    &--disabled{
+      cursor: default;
+      background-color: #787575;
+    }
   }
   &--maximize{
     cursor: pointer;
     background-color: lawngreen;
+    &--disabled{
+      cursor: default;
+      background-color: #787575;
+    }
   }
   &--strip {
     padding: 0 .3rem .3rem;
@@ -210,7 +222,7 @@ export default {
   width: 180px;
   left: 0;
   top: 0;
-  z-index: 50;
+  z-index: $z-index-pedal;
   border-radius: 9px;
   border: solid 2px black;
   box-shadow: 4px 6px 6px 4px black

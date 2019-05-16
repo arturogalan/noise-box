@@ -6,8 +6,14 @@
       "STEP_3": "3: Configure effects!"
     },
     "TOOLTIP": {
-      "SWITCH_ON_PEDAL": "Swith ON pedal",
-      "SWITCH_OFF_PEDAL": "Swith OFF pedal"
+      "PEDAL": {
+        "SWITCH_ON": "Swith ON pedal",
+        "SWITCH_OFF": "Swith OFF pedal",
+        "MAXIMIZE": "Maximize",
+        "MINIMIZE": "Minimize",
+        "CLOSE": "Close",
+        "ADD": "Add {effect}"
+      }
     },
     "MAIN_CONTROL": {
       "POWER": "Power",
