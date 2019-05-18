@@ -10,7 +10,7 @@
       @click="computeValue"
     >
       <circle
-        :r="9"
+        :r="radius-5"
         class="stroke-hole"
         cx="16"
         cy="16"/>
@@ -25,7 +25,8 @@
       width="100%"
       height="100%"
       viewBox="0 0 32 32"
-      preserveAspectRatio>
+      preserveAspectRatio
+      @click="computeValue">
       <circle
         ref="ring"
         :r="radius+30"
@@ -50,18 +51,39 @@
         stroke-dashoffset="0"
         @click="computeValue"
       />
-      <g transform="rotate(90 16 16)">
-        <text
-          ref="textVal"
-          :style="labelStyle"
-          y="50%"
-          x="50%"
-          @click="computeValue"
-        >{{ currentValue }}</text>
-      </g>
+      <!-- <g transform="rotate(90 16 16)">
+        <transition name="bounce">
+          <text
+            v-show="isVisible"
+            v-if="isVisible"
+            ref="textVal"
+            :key="currentValue"
+            :style="labelStyle"
+            y="50%"
+            x="50%"
+            @click="computeValue"
+          >{{ currentValue }}</text>
+        </transition>
+      </g> -->
     </svg>
-
-    <div class="setting-name">
+    <transition name="bounce-tiny">
+      <div
+        v-show="isVisible"
+        :key="currentValue"
+        class="value-label">
+        <div
+          v-if="isVisible"
+          :style="{color: barcolor}"
+          :class="'value-span--'+size"
+          class="value-span">
+          {{ currentValue }}
+        </div>
+      </div>
+    </transition>
+    <div
+      :class="'setting-name--'+size"
+      :style="{top: knobsNumber > 3 ? '-20%' : '-8%'}"
+      class="setting-name">
       <span>{{ name }}</span>
     </div>
   </div>
@@ -103,15 +125,25 @@ export default {
       required: false,
       default: '',
     },
+    size: {
+      type: String,
+      required: false,
+      default: ()=> 'normal',
+    },
+    knobsNumber: {
+      type: Number,
+      required: true,
+    },
   },
   data() {
     return {
-      radius: 15,
+      radius: 13,
       strokeWidth: 3,
       svgRotate: 90,
       currentValue: this.initValue,
       isShowing: false,
       testValue: 0,
+      isVisible: true,
     };
   },
   computed: {
@@ -159,8 +191,7 @@ export default {
   },
   mounted() {
     let initialDegress = (this.currentValue / this.maxValue) * 360;
-    console.log('initialDegress: ' + initialDegress);
-
+    // console.log('initialDegress: ' + initialDegress);
     let self = this;
     setTimeout(function() {
       self.testValue = initialDegress;
@@ -203,7 +234,27 @@ export default {
   template: '#vue-knob-nb',
 };
 </script>
-<style>
+<style  lang="scss">
+.value-label{
+  position: absolute;
+  top: 90%;
+  height: 50%;
+  left: 25%;
+  width: 50%;
+  display: flex;
+  justify-content: center;
+  // align-items: center;
+}
+.value-span{
+  font-weight: bold;
+  // color: yellow;
+  &--normal {
+    font-size: .9rem;
+  }
+  &--zoom-in {
+    font-size: 2.7rem;;
+  }
+}
 .container {
   position: relative;
 }
@@ -211,7 +262,7 @@ export default {
   fill: darkgray;
   stroke: darkgrey;
   stroke-width: 5;
-  stroke-dasharray: 2, 2;
+  stroke-dasharray: 2, 3;
 }
 .stroke-mark {
   fill: none;
@@ -222,13 +273,18 @@ export default {
 
 .setting-name {
   text-transform: uppercase;
-  font-size: .5rem;
   font-weight: bold;
   color: aliceblue;
   position: absolute;
   width: 100%;
-  top: 100%;
+  // top: -15%;
   z-index: -1;
+  &--normal {
+    font-size: .45rem;
+  }
+  &--zoom-in {
+    font-size: 1.2rem;
+  }
 }
 /* .svg-above{
   position: absolute;

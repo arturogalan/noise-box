@@ -1,11 +1,13 @@
 <script>
 import {mapActions} from 'vuex';
 import knobGrid from './knob-grid.vue';
+import macButtons from '../common/mac-buttons.vue';
 
 export default {
   name: 'Pedal',
   components: {
     knobGrid,
+    macButtons,
   },
   props: {
     pedal: {
@@ -49,29 +51,22 @@ export default {
   <div
     :class="[pedal.dying && 'fade-out']"
     class="pedal-card">
-    <div class="pedal-led--strip">
-      <div
-        v-tooltip="{text: $t('TOOLTIP.PEDAL.CLOSE')}"
-        class="pedal-led pedal-led--close"
-        @click="deleteClick">
-        <i class="ico-close ico-led"/>
-      </div>
-      <!-- v-tooltip="{text: $t('TOOLTIP.PEDAL.MINIMIZE')}" -->
-      <div
-        class="pedal-led pedal-led--minimize pedal-led--minimize--disabled"
-        @click="deleteClick">
-        <i class="ico-led"/>
-      </div>
-      <div
-        v-tooltip="{text: $t('TOOLTIP.PEDAL.MAXIMIZE')}"
-        class="pedal-led pedal-led--maximize"
-        @click="$emit('maximize')">
-        <i class="ico-maximize ico-led"/>
-      </div>
-    </div>
+    <mac-buttons
+      :button-literals="{
+        close: 'TOOLTIP.PEDAL.REMOVE',
+        maximize: 'TOOLTIP.PEDAL.MAXIMIZE',
+      }"
+      @close="deleteClick"
+      @maximize="$emit('maximize')"/>
     <div class="pedal-wrapper">
+      <div
+        :style="{height: pedal.settingsList.length < 3 ? '45%': '51%'}"
+        class="knob-grid-wrapper">
+        <div class="knob-grid-container">
 
-      <knob-grid :settings-list="pedal.settingsList"/>
+          <knob-grid :settings-list="pedal.settingsList"/>
+        </div>
+      </div>
       <div class="pedal-name-wrapper">
         <div class="check-wrapper">
           <div class="check">Check
@@ -109,7 +104,22 @@ export default {
 .pedal-card.removing {
   background-color: red;
 }
-
+.pedal-led {
+  border-radius: 100%;
+  width: 10px;
+  height: 10px;
+  display: flex;
+  &--on{
+    background-color: rgb(255, 0, 0);
+    // border: solid 2px rgba(26, 21, 20, 0.527);
+    box-shadow: inset -1px 0px 2px 1px rgba(26, 21, 20, 0.527);
+    // box-shadow: inset 0px -2px 20px 0px #111010
+  }
+  &--off{
+    box-shadow: inset -1px 0px 2px 1px rgba(26, 21, 20, 0.527);
+    background-color: darkred;
+  }
+}
 .delete {
   position: absolute;
   left: 0;
@@ -125,6 +135,19 @@ export default {
 .pedal-card .attack-buttons {
   display: flex;
   justify-content: space-between;
+}
+.knob-grid-wrapper {
+  position: absolute;
+  width: 100%;
+  // height: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.knob-grid-container {
+  position: relative;
+  width: 86%;
+  height: 40%;
 }
 .pedal-name-wrapper {
   position: absolute;
@@ -154,59 +177,8 @@ export default {
   height: 40%;
   cursor: pointer;
 }
-.pedal-led {
-  border-radius: 100%;
-  width: 10px;
-  height: 10px;
-  display: flex;
-  &--on{
-    background-color: red;
-  }
-  &--off{
-    background-color: darkred;
-  }
-  &--close{
-    cursor: pointer;
-    margin-right: .3rem;
-    background-color: red;
-  }
-  &--minimize{
-    cursor: pointer;
-    margin-right: .3rem;
-    background-color: yellow;
-    &--disabled{
-      cursor: default;
-      background-color: #787575;
-    }
-  }
-  &--maximize{
-    cursor: pointer;
-    background-color: lawngreen;
-    &--disabled{
-      cursor: default;
-      background-color: #787575;
-    }
-  }
-  &--strip {
-    padding: 0 .3rem .3rem;
-    display:flex;
-    flex-direction: row;
-    width: -moz-min-content;    /* Firefox */
-    width: -webkit-min-content; /* Chrome */
-  }
-}
-.pedal-led--strip:hover {
-  .ico-led {
-    display: block;
-  }
-}
-.ico-led {
-  width: 10px;
-  line-height: 10px;
-  font-size: 8px;
-  margin-left: .5px;
-  display: none;
-}
+
+
 .pedal-name {
   font-family: "Conthrax";
   font-size: 1.2rem;;
@@ -218,8 +190,8 @@ export default {
 
 
 .pedal-svg {
-  height: 270px;
-  width: 180px;
+  height: 16rem;
+  width: 11rem;
   left: 0;
   top: 0;
   z-index: $z-index-pedal;

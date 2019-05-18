@@ -12,6 +12,7 @@
         "MAXIMIZE": "Maximize",
         "MINIMIZE": "Minimize",
         "CLOSE": "Close",
+        "REMOVE": "Remove",
         "ADD": "Add {effect}"
       }
     },

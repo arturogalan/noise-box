@@ -162,51 +162,6 @@ input[type="range"]:focus::-ms-fill-upper {
   background: #9e9191;
 }
 
-@keyframes pulse_animation {
-  0% {
-    transform: scale(1);
-  }
-  20% {
-    transform: scale(1.2);
-  }
-  30% {
-    transform: scale(1.7);
-  }
-  40% {
-    transform: scale(2);
-  }
-  50% {
-    transform: scale(2.4);
-  }
-  60% {
-    transform: scale(2);
-  }
-  70% {
-    transform: scale(1.7);
-  }
-  80% {
-    transform: scale(1.2);
-  }
-  100% {
-    transform: scale(1);
-  }
-}
-
-.pulse {
-  animation-name: pulse_animation;
-  animation-duration: 5000ms;
-  transform-origin: 70% 70%;
-  animation-iteration-count: infinite;
-  animation-timing-function: linear;
-}
-
-.bounce-enter-active {
-  animation: pulse_animation 0.5s;
-}
-.bounce-leave-active {
-  animation: pulse_animation 0.5s reverse;
-}
-
 $transition-duration: 0.5s;
 
 // Fade in delay out

@@ -6,6 +6,7 @@ export default {
   },
   props: {
     settingsList: {type: Array, required: true, default: ()=> []},
+    size: {type: String, required: false, default: ()=> 'normal'},
   },
   data() {
     return {
@@ -23,6 +24,9 @@ export default {
       :name="setting.name"
       :barcolor="setting.color"
       :init-value="setting.value"
+      :class="'one-knob--'+size"
+      :size="size"
+      :knobs-number="settingsList.length"
       class="one-knob"
       fillcolor="none"
       bgcolor="none"
@@ -35,8 +39,7 @@ export default {
     z-index: $z-index-pedal;
     display: flex;
     justify-content: space-around;
-    margin: 40px 0px 40px 10px;
-    width: 90%;
+    width: 100%;
 }
 .one-knob {
   /* font-family: "Avenir", Helvetica, Arial, sans-serif;
@@ -44,8 +47,14 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50; */
-  width: 36px;
   cursor: pointer;
   margin-right: .3rem;
+  // max size
+  &--normal {
+    width: 3rem;
+  }
+  &--zoom-in {
+    width: 10rem;
+  }
 }
 </style>

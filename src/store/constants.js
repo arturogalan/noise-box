@@ -137,7 +137,7 @@ export const PEDAL_PROPERTIES = {
         max: 100,
         value: 25, // 0.25 0->1,
         correctionFactor: 100,
-        color: 'lightseagreen',
+        color: 'brown',
       },
     ],
   },
@@ -145,7 +145,7 @@ export const PEDAL_PROPERTIES = {
     name: 'reverb',
     zoomIn: false,
     icon: 'assets/icons/flanger.svg',
-    bgcolor: '#b1428b',
+    bgcolor: 'rgb(139,98,79)',
     fcolor: 'black',
     settingsList: [
       {

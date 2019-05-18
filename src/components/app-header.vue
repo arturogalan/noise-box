@@ -1,5 +1,4 @@
 <script>
-
 export default {
   data() {
     return {
@@ -15,7 +14,7 @@ export default {
 
 <template>
   <div id="grad1">
-    <div title="F*king awesome noise box!!!">
+    <div v-tooltip="{text: 'F*king awesome noise box!!!'}">
       <img
         src="/static/header-icon.png"
         class="logo-icon">
@@ -41,6 +40,8 @@ h1 {
   font-size: 7em;
   margin: 0px;
   font-family: "FontPbio";
+  white-space: nowrap;
+  cursor: default;
 }
 .logo-icon {
   width: 130px;

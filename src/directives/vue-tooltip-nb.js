@@ -34,7 +34,7 @@ const tooltip = {
   inserted: function(el, binding, vnode) {
     el.addEventListener('mouseover', (e)=> {
       if (!el.attributes['vue-tooltip'] || el.attributes['vue-tooltip'].value === 'false') {
-        createTooltip(e, el, binding.value ? binding.value.text : binding.expression);
+        binding.value && createTooltip(e, el, binding.value.text);
       }
     });
     el.addEventListener('mousemove', (e)=> {
@@ -60,7 +60,9 @@ const tooltip = {
   update: function(el, binding) {
     //If tooltip exists, change the text
     if (el.attributes['vue-tooltip'] && el.attributes['vue-tooltip'].value === 'true') {
-      el.lastChild.lastChild.innerHTML = binding.value ? binding.value.text : binding.expression;
+      if (binding.value) {
+        el.lastChild.lastChild.innerHTML = binding.value.text;
+      }
     }
   },
 };

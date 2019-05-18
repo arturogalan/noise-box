@@ -55,7 +55,7 @@ export default {
       <pedal-zoom-in/>
     </modal>
     <app-header/>
-    <div>
+    <div class="app-body">
       <div class="master-control column">
         <div class="palette-title">{{ this.$t('MAIN.STEP_1') }}</div>
         <master-control/>
@@ -72,7 +72,7 @@ export default {
           />
         </div>
       </div>
-      <div>
+      <div class="pedal-board">
         <div class="palette-title">{{ this.$t('MAIN.STEP_3') }}</div>
 
 
@@ -136,6 +136,9 @@ body,p { margin:0; }
   font-weight: 400;
   font-style: normal;
 }
+.app-body {
+  height: 49rem;
+}
 .master-control {
   width: 10%;
   background-color:#bbb;
@@ -143,8 +146,14 @@ body,p { margin:0; }
 .pedal-palette {
   /* display: flex; */
   /* flex-wrap: wrap; */
-  width: 20%;
+  width: 15%;
+  height: 100%;
   float: left;
+  background-color:#aaa;
+}
+.pedal-board {
+   height: 100%;
+     background-color:#ccc;
 }
 .noise-board{
   width: 70%;
@@ -152,6 +161,7 @@ body,p { margin:0; }
 /* Create three unequal columns that floats next to each other */
 .column {
     float: left;
+    height: 100%;
 }
 .left {
   width: 2%;
@@ -159,7 +169,6 @@ body,p { margin:0; }
 }
 .middle {
   width: 90%;
-  background-color:#ccc;
 }
 .right {
   width: 8%;
@@ -178,7 +187,8 @@ body,p { margin:0; }
   justify-content: start;
   grid-template-columns: 45% 45%;/*Make the grid smaller than the container*/
   grid-gap: 5px;
-  background-color:#aaa;
+
+
   padding-top: .3rem;
 }
 .palette-title {
@@ -233,7 +243,6 @@ body,p { margin:0; }
   animation-timing-function: ease-out;
   animation-duration: .25s;
 }
-
 @keyframes fadeOutOpacity {
   0% {
     opacity: 1;

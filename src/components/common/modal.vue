@@ -10,14 +10,15 @@ export default {
 };
 </script>
 <template>
-  <div
-    v-if="show"
-    class="modal">
-    <div class="modal-content">
-      <slot/>
+  <transition name="fade">
+    <div
+      v-if="show"
+      class="modal">
+      <div class="modal-content">
+        <slot/>
+      </div>
     </div>
-
-  </div>
+  </transition>
 </template>
 <style lang="scss" scoped>
 .modal {
@@ -28,16 +29,20 @@ export default {
   width: 100%; /* Full width */
   height: 100%; /* Full height */
   overflow: auto; /* Enable scroll if needed */
-  background-color: rgb(0,0,0); /* Fallback color */
-  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  // background-color: rgb(0,0,0); /* Fallback color */
+  // background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
 }
 /* Modal Content/Box */
 .modal-content {
-  background-color: #fefefe;
-  margin: 15% auto; /* 15% from the top and centered */
-  padding: 20px;
-  border: 1px solid #888;
+  margin: 5% auto; /* 15% from the top and centered */
   width: 80%; /* Could be more or less, depending on screen size */
+  height: 80%; /* Could be more or less, depending on screen size */
+}
+.fade-enter-active, .fade-leave-active {
+  transition: opacity .5s;
+}
+.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+  opacity: 0;
 }
 </style>
 
