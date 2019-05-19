@@ -8,8 +8,18 @@ $z-index-modal: 10;
 // Colors
 $knob-grid-background: rgb(39,39,39);
 
+//Helpers
 
-
+@for $i from 0 through 8 {
+  .index-#{$i} {
+    z-index: $i
+  }
+}
+@for $i from 1 through 8 {
+  .n-index-#{$i} {
+    z-index: -$i
+  }
+}
 //Effects
 @keyframes pulse_animation {
   0% {
