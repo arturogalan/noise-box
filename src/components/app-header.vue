@@ -25,7 +25,8 @@ export default {
     </div>
     <div
       v-tooltip="{text: 'F*king awesome noise box!!!'}"
-      class="index-2">
+      class="title"
+    >
       <img
         src="/static/header-icon.png"
         class="logo-icon">
@@ -40,6 +41,10 @@ export default {
   position: absolute;
   width: 100%;
   height: 100%;
+}
+.title{
+  border: 1rem solid rgb(21,18,17);
+  box-shadow: inset 0px 1px 10px 0px rgb(0, 0, 0);
 }
 .grad1 {
   height: 140px;

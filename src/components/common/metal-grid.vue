@@ -92,7 +92,7 @@ export default {
     transform: translateX(50%)
   }
   .middle {
-    left: 44%;
+    left: 43%;
   }
   .horizontal-white-reflect{
     position: absolute;
