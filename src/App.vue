@@ -1,8 +1,7 @@
 <script>
 import {mapGetters, mapActions} from 'vuex';
-import appHeader from './components/app-header.vue';
+import appHeaderEngl from './components/app-header-engl.vue';
 import appFooter from './components/app-footer.vue';
-import engl from './components/amp/engl.vue';
 import palettePedal from './components/palette-pedal.vue';
 import pedal from './components/pedal/pedal.vue';
 import masterControl from './components/master-control.vue';
@@ -12,8 +11,7 @@ import pedalZoomIn from './components/pedal/pedal-zoom-in';
 export default {
   name: 'App',
   components: {
-    appHeader,
-    engl,
+    appHeaderEngl,
     palettePedal,
     pedal,
     masterControl,
@@ -56,8 +54,7 @@ export default {
     <modal :show="zoomInPedal ? true : false">
       <pedal-zoom-in/>
     </modal>
-    <app-header/>
-    <engl/>
+    <app-header-engl/>
     <div class="app-body">
       <div class="master-control column">
         <div class="palette-title">{{ this.$t('MAIN.STEP_1') }}</div>

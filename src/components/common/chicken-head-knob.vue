@@ -1,5 +1,6 @@
 <script>
 export default {
+  name: 'ChickenHeadKnob',
   props: {
     initValue: {
       type: Number,
@@ -22,7 +23,7 @@ export default {
     barcolor: {
       type: String,
       required: false,
-      default: 'black',
+      default: 'grey',
       // '#17d'
     },
     bgcolor: {
@@ -47,8 +48,8 @@ export default {
   },
   data() {
     return {
-      radius: 13,
-      strokeWidth: 3,
+      radius: 10,
+      strokeWidth: 5,
       svgRotate: 90,
       currentValue: this.initValue,
       isShowing: false,
@@ -89,13 +90,8 @@ export default {
     },
     svgAbove() {
       return {
-        position: 'absolute',
-        top: 0,
-        left: 0,
-        width: '100%',
-        height: '100%',
         transition: 'all 1s ease',
-        transform: `rotate(${this.selectorValue - this.svgRotate - 2}deg)`,
+        transform: `rotate(${this.selectorValue}deg)`,
       };
     },
   },
@@ -106,7 +102,7 @@ export default {
   methods: {
     computeValue(e) {
       // The percentaje where user clicks
-      const rect = this.$refs.ring.getBoundingClientRect();
+      const rect = this.$refs.chicken.getBoundingClientRect();
       const centerX = rect.width / 2 + rect.left;
       const centerY = rect.height / 2 + rect.top;
       const clickX = e.clientX;
@@ -138,63 +134,32 @@ export default {
       return Math.max(Math.floor(Math.log10(Math.abs(x))), 0) + 1;
     },
   },
-  template: '#vue-knob-nb',
 };
 </script>
 <template>
   <div class="container">
-    <svg
-      id="rotationSVG"
+    <div
+      class="pointer-wrapper"
+      @click="computeValue"/>
+    <img
+      ref="chicken"
       :style="svgAbove"
-      width="100%"
-      height="100%"
-      viewBox="0 0 32 32"
+      class="chicken-head"
+      src="../../assets/img/chicken-head.svg"
+    >
+
+    <svg
+      class="ring-mesaure"
       preserveAspectRatio
-      @click="computeValue"
     >
       <circle
-        :r="radius-5"
-        class="stroke-hole"
-        cx="16"
-        cy="16"/>
-      <circle
-        class="stroke-mark"
-        cx="16"
-        cy="16"
-        r="5"/>
+        r="40%"
+        cx="50%"
+        cy="50%"
+        class="stroke-hole"/>
     </svg>
-    <svg
-      :style="svgStyle"
-      width="100%"
-      height="100%"
-      viewBox="0 0 32 32"
-      preserveAspectRatio
-      @click="computeValue">
-      <circle
-        ref="ring"
-        :r="radius+30"
-        :stroke="bgcolor"
-        :stroke-width="strokeWidth"
-        class="ring"
-        cx="16"
-        cy="16"
-        fill="transparent"
-        @click="computeValue"
-      />
-      <circle
-        ref="segment"
-        :r="radius"
-        :stroke="barcolor"
-        :stroke-width="strokeWidth"
-        :stroke-dasharray="strokeDasharray"
-        class="segment"
-        cx="16"
-        cy="16"
-        fill="transparent"
-        stroke-dashoffset="0"
-        @click="computeValue"
-      />
-    </svg>
+
+
     <transition name="bounce-tiny">
       <div
         v-show="isVisible"
@@ -210,29 +175,43 @@ export default {
       </div>
     </transition>
     <div
-      :class="'setting-name--'+size"
-      :style="{top: knobsNumber > 3 ? '-20%' : '-8%'}"
-      class="setting-name">
+      class="setting-name"
+    >
       <span>{{ name }}</span>
     </div>
   </div>
 </template>
 <style lang="scss" scoped>
-.value-label{
+.ring-mesaure {
   position: absolute;
-  top: 90%;
-  height: 50%;
-  left: 25%;
-  width: 50%;
-  display: flex;
-  justify-content: center;
-  // align-items: center;
+  width: 100%;
+  height: 100%;
+}
+.chicken-head{
+  width: 4rem;
+  z-index: $z-index-tooltip;
+}
+.setting-name {
+  text-transform: uppercase;
+  font-weight: bold;
+  color: aliceblue;
+  position: absolute;
+  width: 100%;
+  top: -20%;
+  z-index: -1;
+  font-size: .8rem;
+}
+.value-label{
+  z-index: $z-index-pedal;
+  position: absolute;
+  top: 35%;
+  font-size: 1.5rem;
 }
 .value-span{
   font-weight: bold;
   // color: yellow;
   &--normal {
-    font-size: .9rem;
+    font-size: 1.3rem;
   }
   &--zoom-in {
     font-size: 2.7rem;;
@@ -240,54 +219,24 @@ export default {
 }
 .container {
   position: relative;
+  display: flex;
+  justify-content: center;
+  width: 7rem;
+  height: 7rem;
+  align-items: center;
+  margin-top: 1.5rem;
 }
 .stroke-hole {
-  fill: darkgray;
-  stroke: darkgrey;
+  fill: transparent;
+  stroke: white;
   stroke-width: 5;
-  stroke-dasharray: 2, 3;
-}
-.stroke-mark {
-  fill: none;
-  stroke: black;
-  stroke-width: 7;
-  stroke-dasharray: 1, 90;
+  stroke-dasharray: 2, 33;
 }
 
-.setting-name {
-  text-transform: uppercase;
-  font-weight: bold;
-  color: aliceblue;
+.pointer-wrapper {
+  width: 200%;
+  height: 200%;
   position: absolute;
-  width: 100%;
-  // top: -15%;
-  z-index: -1;
-  &--normal {
-    font-size: .45rem;
-  }
-  &--zoom-in {
-    font-size: 1.2rem;
-  }
+  z-index: $z-index-pedal;
 }
-/* .svg-above{
-  position: absolute;
-  top: 0;
-  left:0;
-  width: 100%;
-  height: 100%;
-  animation: spin 1s linear 0s 1 normal both;
-} */
-/* .spin-animation{
-  animation: spin 1s linear 0s 1 normal both;
-  -webkit-animation-fill-mode: both;
-  animation-fill-mode: both;
-  display: inline-block;
-} */
-/* @keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% {
-    transform: rotate(90deg);
-    display: inline-block;
-  }
-} */
 </style>
