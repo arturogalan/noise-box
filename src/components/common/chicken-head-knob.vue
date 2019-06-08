@@ -261,7 +261,7 @@ export default {
         class="value-label">
         <div
           v-if="isVisible"
-          :style="{ color: `hsl(310, 100%, ${100 - (currentValue/2)}%)`}"
+          :style="{ color: `hsl(0, 100%, ${100 - (currentValue/2)}%)`}"
           :class="'value-span--'+size"
           class="value-span">
           {{ currentValue }}
@@ -332,7 +332,7 @@ export default {
 
 .pointer-wrapper {
   width: 200%;
-  height: 150%;
+  height: 110%;
   position: absolute;
   z-index: $z-index-pedal;
 }

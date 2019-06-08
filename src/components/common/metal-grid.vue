@@ -39,7 +39,7 @@ export default {
     position: relative;
     width: 2.6rem;
     height: 2.3rem;
-    background-color: black;
+    // background-color: black;
     display: flex;
     overflow: hidden;
     float: left;
@@ -51,11 +51,11 @@ export default {
     border-bottom: 3px solid $metal-border-color;
     &--big {
       width: 100%;
-      height: 10%;
+      height: 5%;
     }
     &--small {
       width: 83%;
-      height: 10%;
+      height: 5%;
       border-left: 3px solid $metal-border-color;
       border-right: 3px solid $metal-border-color;
     }
@@ -65,7 +65,7 @@ export default {
     position: absolute;
     background-color: $metal-color;
     border-left: 3px solid $metal-border-color;
-    width: 10%;
+    width: 5%;
     height: 100%;
     border-right: 3px solid $metal-border-color;
   }

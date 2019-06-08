@@ -21,9 +21,24 @@ export default {
 
 <template>
   <div>
+    <div class="header-background n-index-7"/>
+    <div class="valves-behind valve-left n-index-5">
+      <img
+        v-for="index in 2"
+        :key="index"
+        class="valves"
+        src="../assets/img/valve.svg">
+    </div>
+    <div class="valves-behind valve-right n-index-5">
+      <img
+        v-for="index in 2"
+        :key="index"
+        class="valves"
+        src="../assets/img/valve.svg">
+    </div>
     <div class="grid-wrapper">
       <metal-grid
-        v-for="i in 200"
+        v-for="i in 240"
         :key="i"/>
     </div>
     <div
@@ -50,6 +65,24 @@ $logo-height: 130;
   position: absolute;
   width: 100%;
   height: 100%;
+}
+.header-background {
+  background-color: black;
+  position: absolute;
+  width: 100%;
+  height: 10rem;
+}
+.valves-behind {
+  position: absolute;
+}
+.valve-left {
+  left: #{$logo-height + px}
+}
+.valve-right {
+right: 2rem;
+}
+.valves {
+height: 13rem;
 }
 .title{
   border: 1rem solid rgb(21,18,17);

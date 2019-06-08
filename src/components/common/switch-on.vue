@@ -4,7 +4,7 @@ export default {
   data() {
     return {
       switchedOn: false,
-      name: 'Volume',
+      name: 'Power',
     };
   },
   methods: {
@@ -135,11 +135,12 @@ export default {
 .setting-name {
   text-transform: uppercase;
   font-weight: bold;
-  color: black;
+  color: white;
   position: absolute;
   width: 100%;
   bottom: -40%;
   font-size: .8rem;
+  font-family: "FontPbio";
 }
 // .letter-0-off {
 //   transform: rotateZ(-2deg);
