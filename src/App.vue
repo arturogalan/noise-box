@@ -56,13 +56,13 @@ export default {
     </modal>
     <app-header-engl/>
     <div class="app-body">
-      <div class="master-control column">
+      <!-- <div class="master-control column">
         <div class="palette-title">{{ this.$t('MAIN.STEP_1') }}</div>
         <master-control/>
-      </div>
+      </div> -->
 
       <div class="pedal-palette">
-        <div class="palette-title">{{ this.$t('MAIN.STEP_2') }}</div>
+        <div class="palette-title">{{ this.$t('MAIN.STEP_1') }}</div>
         <div class="grid-container">
           <palette-pedal
             v-tooltip="{text: $t('TOOLTIP.PEDAL.ADD', { effect: palettePedal.name })}"
@@ -73,7 +73,7 @@ export default {
         </div>
       </div>
       <div class="pedal-board">
-        <div class="palette-title">{{ this.$t('MAIN.STEP_3') }}</div>
+        <div class="palette-title">{{ this.$t('MAIN.STEP_2') }}</div>
 
 
         <div class="noise-board column">
@@ -137,7 +137,7 @@ body,p { margin:0; }
   font-style: normal;
 }
 .app-body {
-  height: 49rem;
+  height: 25rem;
 }
 .master-control {
   width: 10%;
@@ -156,7 +156,7 @@ body,p { margin:0; }
      background-color:#ccc;
 }
 .noise-board{
-  width: 70%;
+  width: 80%;
 }
 /* Create three unequal columns that floats next to each other */
 .column {
@@ -168,10 +168,10 @@ body,p { margin:0; }
   background-color:#bbb;
 }
 .middle {
-  width: 90%;
+  width: 95%;
 }
 .right {
-  width: 8%;
+  width: 5%;
   background-color:#ddd;
 }
 

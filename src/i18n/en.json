@@ -1,9 +1,8 @@
 {
   "en": {
     "MAIN": {
-      "STEP_1": "1: Switch on!",
-      "STEP_2": "2: Add effects!",
-      "STEP_3": "3: Configure effects!"
+      "STEP_1": "1: Add effects!",
+      "STEP_2": "2: Configure effects!"
     },
     "TOOLTIP": {
       "PEDAL": {

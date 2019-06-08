@@ -20,12 +20,12 @@ export default {
       default: 'red',
       // '#17d'
     },
-    barcolor: {
-      type: String,
-      required: false,
-      default: 'grey',
-      // '#17d'
-    },
+    // barcolor: {
+    //   type: String,
+    //   required: false,
+    //   default: 'grey',
+    //   // '#17d'
+    // },
     bgcolor: {
       type: String,
       required: false,
@@ -55,7 +55,8 @@ export default {
       isShowing: false,
       selectorValue: 0,
       isVisible: true,
-      chickenImg: '../../assets/img/chicken-head.svg',
+      strokeColor: 'black',
+      valueColor: 'grey',
     };
   },
   computed: {
@@ -134,6 +135,10 @@ export default {
     numDigits(x) {
       return Math.max(Math.floor(Math.log10(Math.abs(x))), 0) + 1;
     },
+    setStroke(isHover) {
+      this.strokeColor = isHover ? '#3f7f00' : 'black';
+      this.valueColor = isHover ? '#3f7f00' : 'grey';
+    },
   },
 };
 </script>
@@ -141,7 +146,9 @@ export default {
   <div class="container">
     <div
       class="pointer-wrapper"
-      @click="computeValue"/>
+      @click="computeValue"
+      @mouseover="setStroke(true)"
+      @mouseleave="setStroke(false)"/>
     <div
       ref="chicken"
       :style="svgAbove"
@@ -149,7 +156,8 @@ export default {
     >
 
       <svg
-        view-box="0 0 100% 100%"
+        width="100%"
+        height="100%"
         xmlns="http://www.w3.org/2000/svg"
         xmlns:svg="http://www.w3.org/2000/svg">
         <!-- Created with SVG-edit - https://github.com/SVG-Edit/svgedit-->
@@ -194,34 +202,40 @@ export default {
         <g class="layer">
           <title>Layer 1</title>
           <g
-            id="svg_3"
+            id="svg_8"
             stroke="null">
             <circle
               id="svg_2"
-              stroke="black"
-              stroke-width="0"
+              :stroke="strokeColor"
+              stroke-width="2"
               stroke-linejoin="null"
               stroke-linecap="null"
               stroke-dasharray="null"
-              r="36.43024"
+              r="30%"
               fill="url(#svg_5)"
-              cy="61.05812"
-              cx="36.5"/>
+              cy="50%"
+              cx="51%"/>
             <path
               id="svg_1"
-              stroke="black"
-              stroke-width="3"
+              :stroke="strokeColor"
+              xmlns="http://www.w3.org/2000/svg"
+              d="M19.610950469970703,106.15030662841797 C25.240630469970704,106.80492662841797 30.477540469970705,107.45953662841796 36.5000004699707,
+              108.11414662841797 L53.389050469970705,106.15030662841797 L53.389050469970705,58.01526662841797 Q53.389050469970705,33.947746628417974 36.5000004699707,
+              11.885856628417969 Q19.610950469970703,35.95337662841797 19.610950469970703,58.01526662841797 L19.610950469970703,104.15030662841797 L19.610950469970703,
+              106.15030662841797 z"
               fill="url(#svg_10)"
-              d="m15.59388,118.1853c6.9687,0.81032 13.45122,1.62063 20.90612,2.43094l20.90612,-2.43094l0,-59.58399q0,-29.792 -20.90612,
-              -57.10132q-20.90612,29.79199 -20.90612,57.10132l0,59.58399z"
-              xmlns="http://www.w3.org/2000/svg"/>
+              stroke-width="2"
+              fill-opacity="1"
+              stroke-opacity="1"/>
             <path
               id="svg_4"
-              stroke="black"
-              stroke-width="0"
+              xmlns="http://www.w3.org/2000/svg"
+              d="M31.24724,26.12285 L42.14658,26.12285 L39.59358,21.48068 L36.54963,16.83851 L33.65296,21.48068 L31.24725,26.12285 L31.24724,26.12285 z"
               fill="#ffffff"
-              d="m29.75413,15.26842l13.49175,0l-3.16023,-5.74631l-3.76796,-5.74631l-3.58565,5.74631l-2.97791,5.74631z"
-              xmlns="http://www.w3.org/2000/svg"/>
+              stroke-width="0"
+              stroke="black"
+              fill-opacity="1"
+              stroke-opacity="1"/>
           </g>
         </g>
       </svg>
@@ -247,7 +261,7 @@ export default {
         class="value-label">
         <div
           v-if="isVisible"
-          :style="{color: barcolor}"
+          :style="{ color: `hsl(310, 100%, ${100 - (currentValue/2)}%)`}"
           :class="'value-span--'+size"
           class="value-span">
           {{ currentValue }}
@@ -268,7 +282,8 @@ export default {
   height: 100%;
 }
 .chicken-head{
-  width: 4rem;
+  width: 4.6rem;
+  height: 7.5rem;
   z-index: $z-index-tooltip;
 }
 .setting-name {
@@ -277,15 +292,17 @@ export default {
   color: aliceblue;
   position: absolute;
   width: 100%;
-  top: -20%;
+  top: -15%;
   z-index: -1;
-  font-size: .8rem;
+  font-size: .6rem;
+  font-family: "FontPbio";
 }
 .value-label{
   z-index: $z-index-pedal;
   position: absolute;
   top: 35%;
-  font-size: 1.5rem;
+  font-size: 1rem;
+  font-family: "FontPbio";
 }
 .value-span{
   font-weight: bold;
@@ -315,7 +332,7 @@ export default {
 
 .pointer-wrapper {
   width: 200%;
-  height: 200%;
+  height: 150%;
   position: absolute;
   z-index: $z-index-pedal;
 }
