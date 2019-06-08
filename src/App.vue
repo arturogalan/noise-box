@@ -196,17 +196,7 @@ body,p { margin:0; }
   font-style: oblique;
   font-weight: 900;
 }
-.tooltip-box {
-  font-family: 'Conthrax';
-  font-size: .6rem;
-  color: black;
-  background-color: white;
-  border: solid 1px rgb(122, 44, 44);
-  z-index: $z-index-tooltip;
-}
-.tooltip-text {
-  padding: 2px;
-}
+
 
 .visible {
   visibility: visible;

@@ -1,12 +1,12 @@
 <script>
 import {mapGetters, mapActions} from 'vuex';
-import knobGrid from './knob-grid.vue';
+import pedalKnobGrid from './pedal-knob-grid.vue';
 import macButtons from '../common/mac-buttons.vue';
 
 export default {
   name: 'PedalZoomIn',
   components: {
-    knobGrid,
+    pedalKnobGrid,
     macButtons,
   },
   computed: {
@@ -41,7 +41,7 @@ export default {
         @maximize="$emit('maximize')"/>
       {{ zoomInPedal.name }}
     </div>
-    <knob-grid
+    <pedal-knob-grid
       :settings-list="zoomInPedal.settingsList"
       class="knob-grid-container"
       size="zoom-in"/>

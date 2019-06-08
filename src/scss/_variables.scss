@@ -99,3 +99,15 @@ $knob-grid-background: rgb(39,39,39);
 // .bounce-leave-active {
 //   animation: pulse_animation 0.5s reverse;
 // }
+
+.tooltip-box {
+  font-family: 'Conthrax';
+  font-size: .6rem;
+  color: black;
+  background-color: white;
+  border: solid 1px rgb(122, 44, 44);
+  z-index: $z-index-tooltip;
+}
+.tooltip-text {
+  padding: 2px;
+}

@@ -1,12 +1,12 @@
 <script>
 import {mapActions} from 'vuex';
-import knobGrid from './knob-grid.vue';
+import pedalKnobGrid from './pedal-knob-grid.vue';
 import macButtons from '../common/mac-buttons.vue';
 
 export default {
   name: 'Pedal',
   components: {
-    knobGrid,
+    pedalKnobGrid,
     macButtons,
   },
   props: {
@@ -64,7 +64,7 @@ export default {
         class="knob-grid-wrapper">
         <div class="knob-grid-container">
 
-          <knob-grid :settings-list="pedal.settingsList"/>
+          <pedal-knob-grid :settings-list="pedal.settingsList"/>
         </div>
       </div>
       <div class="pedal-name-wrapper">

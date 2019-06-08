@@ -4,6 +4,7 @@ export default {
   data() {
     return {
       switchedOn: false,
+      name: 'Volume',
     };
   },
   methods: {
@@ -15,35 +16,42 @@ export default {
 };
 </script>
 <template>
-  <div class="frame">
-    <div class="switch-border">
-      <div
-        v-if="switchedOn"
-        class="switch-top-side"/>
-      <div
-        :class="switchedOn ? 'switch-on' : 'switch-off'"
-        class="switch">
-        <div class="inner-switch-grid"/>
-        <label
-          :class="switchedOn && 'switch-right'"
-          class="letter"
-          @click="toogleSwitch()">
-          <span :class="switchedOn && 'switch-letter-right'">
-            0
-          </span>
-        </label>
-        <label
-          :class="!switchedOn && 'switch-left'"
-          class="letter"
-          @click="toogleSwitch()">
-          <span :class="!switchedOn && 'switch-letter-left'">
-            I
-          </span>
-        </label>
+  <div class="container">
+    <div class="frame">
+      <div class="switch-border">
+        <div
+          v-if="switchedOn"
+          class="switch-top-side"/>
+        <div
+          :class="switchedOn ? 'switch-on' : 'switch-off'"
+          class="switch">
+          <div class="inner-switch-grid"/>
+          <label
+            :class="switchedOn && 'switch-right'"
+            class="letter"
+            @click="toogleSwitch()">
+            <span :class="switchedOn && 'switch-letter-right'">
+              0
+            </span>
+          </label>
+          <label
+            :class="!switchedOn && 'switch-left'"
+            class="letter"
+            @click="toogleSwitch()">
+            <span :class="!switchedOn && 'switch-letter-left'">
+              I
+            </span>
+          </label>
+        </div>
+        <div
+          v-if="!switchedOn"
+          class="switch-bottom-side"/>
       </div>
-      <div
-        v-if="!switchedOn"
-        class="switch-bottom-side"/>
+    </div>
+    <div
+      class="setting-name"
+    >
+      <span>{{ name }}</span>
     </div>
   </div>
 </template>
@@ -117,6 +125,21 @@ export default {
   font-weight: bold;
   z-index: 0;
   cursor: pointer;
+}
+.container {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.setting-name {
+  text-transform: uppercase;
+  font-weight: bold;
+  color: black;
+  position: absolute;
+  width: 100%;
+  bottom: -40%;
+  font-size: .8rem;
 }
 // .letter-0-off {
 //   transform: rotateZ(-2deg);
