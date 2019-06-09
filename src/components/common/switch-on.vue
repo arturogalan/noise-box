@@ -1,10 +1,21 @@
 <script>
 export default {
   name: 'SwitchOn',
+  props: {
+    name: {
+      type: String,
+      required: false,
+      default: 'Power',
+    },
+    color: {
+      type: String,
+      required: false,
+      default: 'red',
+    },
+  },
   data() {
     return {
       switchedOn: false,
-      name: 'Power',
     };
   },
   methods: {
@@ -18,16 +29,19 @@ export default {
 <template>
   <div class="container">
     <div class="frame">
-      <div class="switch-border">
+      <div
+        :class="`switch-border--${color}`"
+        class="switch-border">
         <div
           v-if="switchedOn"
+          :class="`switch-top-side--${color}`"
           class="switch-top-side"/>
         <div
-          :class="switchedOn ? 'switch-on' : 'switch-off'"
+          :class="switchedOn ? `switch-on--${color}` : `switch-off--${color}`"
           class="switch">
           <div class="inner-switch-grid"/>
           <label
-            :class="switchedOn && 'switch-right'"
+            :class="[switchedOn && `switch-right switch-right--${color}`]"
             class="letter"
             @click="toogleSwitch()">
             <span :class="switchedOn && 'switch-letter-right'">
@@ -35,7 +49,7 @@ export default {
             </span>
           </label>
           <label
-            :class="!switchedOn && 'switch-left'"
+            :class="[!switchedOn && `switch-left switch-left--${color}`]"
             class="letter"
             @click="toogleSwitch()">
             <span :class="!switchedOn && 'switch-letter-left'">
@@ -45,6 +59,7 @@ export default {
         </div>
         <div
           v-if="!switchedOn"
+          :class="`switch-bottom-side--${color}`"
           class="switch-bottom-side"/>
       </div>
     </div>
@@ -64,22 +79,41 @@ export default {
   background: black;
 }
 .switch-border {
-  border: 3px solid #5d0202;
+  border: 3px solid;
+  &--red{
+    border-color: #5d0202;
+  }
+  &--black{
+    border-color: black;
+  }
 }
 .switch-top-side {
   width: 2.5rem;
   height: .5rem;
-  border-bottom: 1px solid #5d0202;
-  background-color: red;
   box-shadow: inset 0px 0px 8px 0px black;
+  &--red{
+    border-bottom: 1px solid #5d0202;
+    background-color: red;
+  }
+  &--black{
+      border-bottom: 1px solid #1a1919;
+    background-color: 1a1919;
+  }
 }
 .switch-bottom-side {
   width: 2.5rem;
   height: .5rem;
-  border-top: 1px solid #5d0202;
-  background-color: darkred;
-  border-left: .2px solid #5d0202;
-  transform: rotateZ(deg);
+  &--red{
+    border-top: 1px solid #5d0202;
+    background-color: darkred;
+    border-left: .2px solid #5d0202;
+  }
+  &--black{
+      border-top: 1px solid #1a1919;
+    background-color: #1a1919;
+    border-left: .2px solid #1a1919;
+  }
+  // transform: rotateZ(deg);
   box-shadow: inset 0px 0px 8px 0px black;
 }
 .switch {
@@ -92,22 +126,42 @@ export default {
   justify-content: space-between;
 }
 .switch-off {
-  background-color: darkred;
+  &--red{
+    background-color: darkred;
+  }
+  &--black{
+    background-color: black;
+  }
 }
 .switch-on {
-  background-color: red;
-  box-shadow: inset 0px -2px 20px 0px #111010;
+  &--red{
+    box-shadow: inset 0px -2px 20px 0px #111010;
+    background-color: red;
+  }
+  &--black{
+    background-color: black;
+  }
 }
 .switch-left {
   transform: rotateZ(-3deg) translate(-1px);
-  border-left: .2px solid #5d0202;
+  &--red{
+    border-left: .2px solid #5d0202;
+  }
+  &--black{
+    border-left: .2px solid #1a1919;
+  }
 }
 .switch-letter-left {
   padding-left: 3px;
 }
 .switch-right {
   transform: rotateZ(3deg) translate(-1px);
-  border-left: .2px solid #5d0202;
+    &--red{
+    border-left: .2px solid #5d0202;
+  }
+  &--black{
+    border-left: .2px solid #1a1919;
+  }
 }
 .switch-letter-right {
   padding-left: 3px;
@@ -137,21 +191,12 @@ export default {
   font-weight: bold;
   color: white;
   position: absolute;
-  width: 100%;
+  width: 200%;
   bottom: -40%;
   font-size: .8rem;
   font-family: "FontPbio";
+  white-space: nowrap;
+  align-self: center;
 }
-// .letter-0-off {
-//   transform: rotateZ(-2deg);
-// }
-// .letter-0-on {
-//   transform: rotateZ(-2deg);
-// }
-// .letter-1-on {
-// transform: rotateZ(-2deg);
-// }
-// .letter-1-off {
-// transform: rotateZ(-2deg);
-// }
+
 </style>

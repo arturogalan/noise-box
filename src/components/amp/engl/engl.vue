@@ -25,6 +25,9 @@ export default {
     updateMainVolumeLevel(value) {
       this.setPedalEffectProperty({type: PEDAL_TYPE.VOLUME, property: 'level', value});
     },
+    toogleMuteAudio() {
+
+    },
   },
 };
 </script>
@@ -60,6 +63,10 @@ export default {
       />
     </div>
     <div class="power-section">
+      <switch-on
+        name="Stand by"
+        color="black"
+        @click="toogleMuteAudio()"/>
       <switch-on @click="initAudioInterface()"/>
     </div>
   </div>
@@ -91,7 +98,10 @@ export default {
   }
 }
 .power-section {
+   display: flex;
+   justify-content: space-around;
    align-self: center;
+   width: 82%;
 }
 .one-knob {
   cursor: pointer;
