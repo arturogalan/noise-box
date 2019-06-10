@@ -75,7 +75,7 @@ export default {
 .grid-container {
   display: grid;
   justify-content: center;
-  grid-template-columns: 15% 60% 25%;/*Make the grid smaller than the container*/
+  grid-template-columns: 15% 70% 15%;/*Make the grid smaller than the container*/
   grid-gap: 5px;
 }
 .amp-wrapper {
@@ -89,7 +89,7 @@ export default {
     z-index: $z-index-pedal;
     display: flex;
     justify-content: space-around;
-    width: 100%;
+    width: 80%;
 }
 .input-cable {
   width: 3rem;
@@ -99,9 +99,9 @@ export default {
 }
 .power-section {
    display: flex;
-   justify-content: space-around;
+   justify-content: space-between;
    align-self: center;
-   width: 82%;
+   width: 70%;
 }
 .one-knob {
   cursor: pointer;
