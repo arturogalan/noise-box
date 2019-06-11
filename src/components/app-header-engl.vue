@@ -29,34 +29,46 @@ export default {
 <template>
   <div>
     <div class="header-background n-index-7"/>
-    <div class="valves-behind n-index-5">
+    <div class="valves-behind valve-left n-index-5">
       <div
         v-for="index in 2"
         :key="index"
       >
         <transition
           name="fade-valve">
-          <img
-            v-if="amp.switchedOn"
-            :key="`valvOn-${index}`"
-            :src="require('../assets/img/valve-on.svg')"
-            class="valves">
-          <img
-            v-else
-            :key="`valvOff-${index}`"
-            :src="require('../assets/img/valve-off.svg')"
-            class="valves">
+          <div :key="amp.switchedOn">
+            <img
+              v-if="amp.switchedOn"
+              :src="require('../assets/img/valve-on.svg')"
+              class="valves">
+            <img
+              v-else
+              :src="require('../assets/img/valve-off.svg')"
+              class="valves">
+          </div>
         </transition>
       </div>
-
     </div>
-    <!-- <div class="valves-behind valve-right n-index-5">
-      <img
+    <div class="valves-behind valve-right n-index-5">
+      <div
         v-for="index in 2"
         :key="index"
-        :src="require(`../assets/img/valve-${amp.switchedOn ? 'on' : 'off'}.svg`)"
-        class="valves">
-    </div> -->
+      >
+        <transition
+          name="fade-valve">
+          <div :key="amp.switchedOn">
+            <img
+              v-if="amp.switchedOn"
+              :src="require('../assets/img/valve-on.svg')"
+              class="valves">
+            <img
+              v-else
+              :src="require('../assets/img/valve-off.svg')"
+              class="valves">
+          </div>
+        </transition>
+      </div>
+    </div>
     <div class="grid-wrapper">
       <metal-grid
         v-for="i in 240"

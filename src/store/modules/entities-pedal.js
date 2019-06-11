@@ -84,6 +84,7 @@ const pedalModule = {
       commit('setUserInput');
       commit('setUserOutput');
       dispatch('addAmpComponent', {type: AMP_COMPONENT_TYPE.VOLUME});
+      dispatch('addAmpComponent', {type: AMP_COMPONENT_TYPE.EQUALIZER});
       commit('connectAllNodes', getters.ampComponentsList, []);
       dispatch('setDevicesList');
       dispatch('setDevicesListHandler');

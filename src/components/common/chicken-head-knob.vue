@@ -14,23 +14,23 @@ export default {
       required: false,
       default: 100,
     },
-    fillcolor: {
-      type: String,
-      required: false,
-      default: 'red',
-      // '#17d'
-    },
+    // fillcolor: {
+    //   type: String,
+    //   required: false,
+    //   default: 'red',
+    //   // '#17d'
+    // },
     // barcolor: {
     //   type: String,
     //   required: false,
     //   default: 'grey',
     //   // '#17d'
     // },
-    bgcolor: {
-      type: String,
-      required: false,
-      default: '#d2d3d4',
-    },
+    // bgcolor: {
+    //   type: String,
+    //   required: false,
+    //   default: '#d2d3d4',
+    // },
     name: {
       type: String,
       required: false,
@@ -40,10 +40,6 @@ export default {
       type: String,
       required: false,
       default: ()=> 'normal',
-    },
-    knobsNumber: {
-      type: Number,
-      required: true,
     },
   },
   data() {
@@ -130,7 +126,7 @@ export default {
       let adjustDegrees = degress + deltaDegrees;
       adjustDegrees = adjustDegrees > 360 ? adjustDegrees - 360 : adjustDegrees;
       this.selectorValue = adjustDegrees;
-      // console.log(this.maxValue * Math.trunc(adjustPercentage/this.maxValue))
+      this.$emit('valueChanged', this.currentValue);
     },
     numDigits(x) {
       return Math.max(Math.floor(Math.log10(Math.abs(x))), 0) + 1;

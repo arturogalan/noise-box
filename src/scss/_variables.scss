@@ -113,7 +113,7 @@ $knob-grid-background: rgb(39,39,39);
 }
 
 .fade-valve-enter-active {
-  transition: opacity .5s;
+  transition: opacity 1s;
 }
 .fade-valve-enter /* .fade-leave-active below version 2.1.8 */ {
   opacity: 0;

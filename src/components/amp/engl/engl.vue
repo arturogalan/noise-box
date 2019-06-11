@@ -13,10 +13,11 @@ export default {
   },
   data() {
     return {
-      initialMainVolumeLevel: 30,
+      mainVolumeLevel: 30,
       isAudioInitializated: false,
       isMuted: true,
       isSwitchedOn: false,
+      AMP_COMPONENT_TYPE,
     };
   },
   methods: {
@@ -30,14 +31,17 @@ export default {
       if (!this.isAudioInitializated) {
         this.switchOnAudioContext();
         this.initAudioInputAndOutput();
-        this.setAmpComponentEffectProperty({type: AMP_COMPONENT_TYPE.VOLUME, property: 'level', value: this.initialMainVolumeLevel});
+        this.setAmpComponentEffectProperty({type: AMP_COMPONENT_TYPE.VOLUME, property: 'level', value: this.mainVolumeLevel});
         this.setAmpComponentEffectProperty({type: AMP_COMPONENT_TYPE.VOLUME, property: 'mute', value: this.isMuted});
         this.isAudioInitializated = true;
       }
     },
     toogleMuteAudio() {
-      this.isMuted = !this.isMuted;
-      this.setAmpComponentEffectProperty({type: AMP_COMPONENT_TYPE.VOLUME, property: 'mute', value: this.isMuted});
+      // Only toggle if power switch is ON
+      if (this.isSwitchedOn) {
+        this.isMuted = !this.isMuted;
+        this.setAmpComponentEffectProperty({type: AMP_COMPONENT_TYPE.VOLUME, property: 'mute', value: this.isMuted});
+      }
     },
     toogleSwitchOnAmp() {
       this.initAudioInterface();
@@ -58,25 +62,22 @@ export default {
     </div>
     <div class="knob-grid" >
       <chicken-head-knob
-        :name="'volume'"
-        :knobs-number="1"
-        :init-value="10"
+        :init-value="mainVolumeLevel"
+        name="volume"
+        @valueChanged="setAmpComponentEffectProperty({type: AMP_COMPONENT_TYPE.VOLUME, property: 'level', value: $event})"
       />
-      <chicken-head-knob
+      <!-- <chicken-head-knob
         :name="'trebble'"
-        :knobs-number="1"
         :init-value="25"
       />
       <chicken-head-knob
         :name="'middle'"
-        :knobs-number="1"
         :init-value="50"
       />
       <chicken-head-knob
         :name="'bass'"
-        :knobs-number="1"
         :init-value="70"
-      />
+      /> -->
     </div>
     <div class="power-section">
       <switch-on

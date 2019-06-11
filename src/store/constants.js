@@ -8,14 +8,11 @@ export const PEDAL_TYPE = {
 };
 export const AMP_COMPONENT_TYPE = {
   VOLUME: 'volume',
+  EQUALIZER: 'equalizer',
 };
 export const AMP_COMPONENT_PROPERTIES = {
   [AMP_COMPONENT_TYPE.VOLUME]: {
     name: 'volume',
-    zoomIn: false,
-    icon: 'assets/icons/volume.svg',
-    bgcolor: '#688c4b',
-    fcolor: 'black',
     settingsList: [
       {
         name: 'level',
@@ -29,6 +26,35 @@ export const AMP_COMPONENT_PROPERTIES = {
         name: 'mute',
         min: 0,
         max: 1,
+        value: false,
+        correctionFactor: 1,
+        color: 'lightskyblue',
+      },
+    ],
+  },
+  [AMP_COMPONENT_TYPE.EQUALIZER]: {
+    name: 'equalizer',
+    settingsList: [
+      {
+        name: 'trebbleGain',
+        min: 0,
+        max: 10,
+        value: 1,
+        correctionFactor: 10,
+        color: 'lightskyblue',
+      },
+      {
+        name: 'middleGain',
+        min: 0,
+        max: 10,
+        value: false,
+        correctionFactor: 10,
+        color: 'lightskyblue',
+      },
+      {
+        name: 'bassGain',
+        min: 0,
+        max: 10,
         value: false,
         correctionFactor: 1,
         color: 'lightskyblue',
