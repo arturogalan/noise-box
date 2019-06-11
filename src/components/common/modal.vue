@@ -38,11 +38,5 @@ export default {
   width: 80%; /* Could be more or less, depending on screen size */
   height: 80%; /* Could be more or less, depending on screen size */
 }
-.fade-enter-active, .fade-leave-active {
-  transition: opacity .5s;
-}
-.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
-  opacity: 0;
-}
 </style>
 

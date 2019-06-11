@@ -2,7 +2,7 @@
 import ChickenHeadKnob from '../../common/chicken-head-knob.vue';
 import {mapActions} from 'vuex';
 import SwitchOn from './../../common/switch-on.vue';
-import {PEDAL_TYPE} from '../../../store/constants';
+import {AMP_COMPONENT_TYPE} from '../../../store/constants';
 
 
 export default {
@@ -11,22 +11,38 @@ export default {
     ChickenHeadKnob,
     SwitchOn,
   },
+  data() {
+    return {
+      initialMainVolumeLevel: 30,
+      isAudioInitializated: false,
+      isMuted: true,
+      isSwitchedOn: false,
+    };
+  },
   methods: {
     ...mapActions('pedal', [
       'switchOnAudioContext',
-      'initAudioInutAndOutput',
-      'setPedalEffectProperty',
+      'initAudioInputAndOutput',
+      'setAmpComponentEffectProperty',
+      'toggleAmp',
     ]),
     initAudioInterface() {
-      this.switchOnAudioContext();
-      this.initAudioInutAndOutput();
-      this.updateMainVolumeLevel(this.initialMainVolumeLevel);
-    },
-    updateMainVolumeLevel(value) {
-      this.setPedalEffectProperty({type: PEDAL_TYPE.VOLUME, property: 'level', value});
+      if (!this.isAudioInitializated) {
+        this.switchOnAudioContext();
+        this.initAudioInputAndOutput();
+        this.setAmpComponentEffectProperty({type: AMP_COMPONENT_TYPE.VOLUME, property: 'level', value: this.initialMainVolumeLevel});
+        this.setAmpComponentEffectProperty({type: AMP_COMPONENT_TYPE.VOLUME, property: 'mute', value: this.isMuted});
+        this.isAudioInitializated = true;
+      }
     },
     toogleMuteAudio() {
-
+      this.isMuted = !this.isMuted;
+      this.setAmpComponentEffectProperty({type: AMP_COMPONENT_TYPE.VOLUME, property: 'mute', value: this.isMuted});
+    },
+    toogleSwitchOnAmp() {
+      this.initAudioInterface();
+      this.isSwitchedOn = !this.isSwitchedOn;
+      this.toggleAmp({value: this.isSwitchedOn});
     },
   },
 };
@@ -67,7 +83,7 @@ export default {
         name="Stand by"
         color="black"
         @click="toogleMuteAudio()"/>
-      <switch-on @click="initAudioInterface()"/>
+      <switch-on @click="toogleSwitchOnAmp()"/>
     </div>
   </div>
 </template>

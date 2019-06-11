@@ -1,6 +1,7 @@
 <script>
 import metalGrid from './common/metal-grid.vue';
 import engl from './amp/engl/engl.vue';
+import {mapGetters} from 'vuex';
 
 export default {
   components: {
@@ -9,7 +10,13 @@ export default {
   },
   data() {
     return {
+      isVisible: true,
     };
+  },
+  computed: {
+    ...mapGetters('pedal', [
+      'amp',
+    ]),
   },
   created() {
   },
@@ -22,20 +29,34 @@ export default {
 <template>
   <div>
     <div class="header-background n-index-7"/>
-    <div class="valves-behind valve-left n-index-5">
+    <div class="valves-behind n-index-5">
+      <div
+        v-for="index in 2"
+        :key="index"
+      >
+        <transition
+          name="fade-valve">
+          <img
+            v-if="amp.switchedOn"
+            :key="`valvOn-${index}`"
+            :src="require('../assets/img/valve-on.svg')"
+            class="valves">
+          <img
+            v-else
+            :key="`valvOff-${index}`"
+            :src="require('../assets/img/valve-off.svg')"
+            class="valves">
+        </transition>
+      </div>
+
+    </div>
+    <!-- <div class="valves-behind valve-right n-index-5">
       <img
         v-for="index in 2"
         :key="index"
-        class="valves"
-        src="../assets/img/valve.svg">
-    </div>
-    <div class="valves-behind valve-right n-index-5">
-      <img
-        v-for="index in 2"
-        :key="index"
-        class="valves"
-        src="../assets/img/valve.svg">
-    </div>
+        :src="require(`../assets/img/valve-${amp.switchedOn ? 'on' : 'off'}.svg`)"
+        class="valves">
+    </div> -->
     <div class="grid-wrapper">
       <metal-grid
         v-for="i in 240"
@@ -74,6 +95,8 @@ $logo-height: 130;
 }
 .valves-behind {
   position: absolute;
+  display: flex;
+  justify-content: space-between;
 }
 .valve-left {
   left: #{$logo-height + px}

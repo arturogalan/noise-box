@@ -111,3 +111,10 @@ $knob-grid-background: rgb(39,39,39);
 .tooltip-text {
   padding: 2px;
 }
+
+.fade-valve-enter-active {
+  transition: opacity .5s;
+}
+.fade-valve-enter /* .fade-leave-active below version 2.1.8 */ {
+  opacity: 0;
+}

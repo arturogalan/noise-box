@@ -1,16 +1,16 @@
 
 export const PEDAL_TYPE = {
-  VOLUME: 'volume',
+  // VOLUME: 'volume',
   DISTORTION: 'distortion',
   DELAY: 'delay',
   FLANGER: 'flanger',
   REVERB: 'reverb',
 };
-
-
-export const PEDAL_PROPERTIES = {
-
-  [PEDAL_TYPE.VOLUME]: {
+export const AMP_COMPONENT_TYPE = {
+  VOLUME: 'volume',
+};
+export const AMP_COMPONENT_PROPERTIES = {
+  [AMP_COMPONENT_TYPE.VOLUME]: {
     name: 'volume',
     zoomIn: false,
     icon: 'assets/icons/volume.svg',
@@ -35,6 +35,10 @@ export const PEDAL_PROPERTIES = {
       },
     ],
   },
+};
+
+
+export const PEDAL_PROPERTIES = {
   [PEDAL_TYPE.DISTORTION]: {
     name: 'distortion',
     zoomIn: false,

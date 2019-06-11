@@ -16,12 +16,12 @@ export default {
   methods: {
     ...mapActions('pedal', [
       'switchOnAudioContext',
-      'initAudioInutAndOutput',
+      'initAudioInputAndOutput',
       'setPedalEffectProperty',
     ]),
     initAudioInterface() {
       this.switchOnAudioContext();
-      this.initAudioInutAndOutput();
+      this.initAudioInputAndOutput();
       this.updateMainVolumeLevel(this.initialMainVolumeLevel);
     },
     updateMainVolumeLevel(value) {
