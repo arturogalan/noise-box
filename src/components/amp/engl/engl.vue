@@ -1,6 +1,6 @@
 <script>
 import ChickenHeadKnob from '../../common/chicken-head-knob.vue';
-import {mapActions} from 'vuex';
+import {mapActions, mapGetters} from 'vuex';
 import SwitchOn from './../../common/switch-on.vue';
 import {AMP_COMPONENT_TYPE} from '../../../store/constants';
 
@@ -20,9 +20,18 @@ export default {
       AMP_COMPONENT_TYPE,
     };
   },
+  computed: {
+    ...mapGetters('pedal', [
+      'ampComponentList',
+    ]),
+  },
+  created() {
+    this.initAmpComponents();
+  },
   methods: {
     ...mapActions('pedal', [
       'switchOnAudioContext',
+      'initAmpComponents',
       'initAudioInputAndOutput',
       'setAmpComponentEffectProperty',
       'toggleAmp',
@@ -31,8 +40,8 @@ export default {
       if (!this.isAudioInitializated) {
         this.switchOnAudioContext();
         this.initAudioInputAndOutput();
-        this.setAmpComponentEffectProperty({type: AMP_COMPONENT_TYPE.VOLUME, property: 'level', value: this.mainVolumeLevel});
-        this.setAmpComponentEffectProperty({type: AMP_COMPONENT_TYPE.VOLUME, property: 'mute', value: this.isMuted});
+        // this.setAmpComponentEffectProperty({type: AMP_COMPONENT_TYPE.VOLUME, property: 'level', value: this.mainVolumeLevel});
+        // this.setAmpComponentEffectProperty({type: AMP_COMPONENT_TYPE.VOLUME, property: 'mute', value: this.isMuted});
         this.isAudioInitializated = true;
       }
     },
@@ -48,6 +57,9 @@ export default {
       this.isSwitchedOn = !this.isSwitchedOn;
       this.toggleAmp({value: this.isSwitchedOn});
     },
+    getKnobTypes(settingsList) {
+      return settingsList.filter((setting)=> setting.type === 'knob');
+    },
   },
 };
 </script>
@@ -61,11 +73,26 @@ export default {
       >
     </div>
     <div class="knob-grid" >
-      <chicken-head-knob
+
+      <template
+        v-for="component in ampComponentList"
+      >
+
+        <chicken-head-knob
+          v-for="knobSetting in getKnobTypes(component.settingsList)"
+          :key="knobSetting.name"
+          :name="knobSetting.name"
+          :init-value="knobSetting.value"
+          @valueChanged="setAmpComponentEffectProperty({type: component.type, property: knobSetting.name, value: $event})"
+        />
+
+
+      <!-- <chicken-head-knob
         :init-value="mainVolumeLevel"
         name="volume"
         @valueChanged="setAmpComponentEffectProperty({type: AMP_COMPONENT_TYPE.VOLUME, property: 'level', value: $event})"
-      />
+      /> -->
+      </template>
       <!-- <chicken-head-knob
         :name="'trebble'"
         :init-value="25"
