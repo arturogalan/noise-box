@@ -46,7 +46,7 @@ export default {
     return {
       radius: 10,
       strokeWidth: 5,
-      svgRotate: 90,
+      svgRotate: 270,
       currentValue: this.initValue,
       isShowing: false,
       selectorValue: 0,
@@ -95,7 +95,7 @@ export default {
   },
   mounted() {
     const initialDegress = (this.currentValue / this.maxValue) * 360;
-    setTimeout(()=> this.selectorValue = initialDegress, 250);
+    setTimeout(()=> this.selectorValue = initialDegress - (this.svgRotate - 90), 250);
   },
   methods: {
     computeValue(e) {
@@ -119,13 +119,12 @@ export default {
           : adjustPercentage;
       //TO-DO if decimal: this.currentValue = adjustPercentage; and round to 1 digit
       this.currentValue = Math.ceil(adjustPercentage);
-
       // Calculation of inner selector position
       let deltaDegrees = (this.svgRotate / 360) * 360;
       let degress = ((result + Math.PI) / (Math.PI + Math.PI)) * 360;
       let adjustDegrees = degress + deltaDegrees;
       adjustDegrees = adjustDegrees > 360 ? adjustDegrees - 360 : adjustDegrees;
-      this.selectorValue = adjustDegrees;
+      this.selectorValue = adjustDegrees - (this.svgRotate - 90);
       this.$emit('valueChanged', this.currentValue);
     },
     numDigits(x) {
@@ -327,7 +326,7 @@ export default {
 }
 
 .pointer-wrapper {
-  width: 200%;
+  width: 125%;
   height: 110%;
   position: absolute;
   z-index: $z-index-pedal;

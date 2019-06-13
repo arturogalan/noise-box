@@ -74,37 +74,19 @@ export default {
     </div>
     <div class="knob-grid" >
 
-      <template
+      <div
         v-for="component in ampComponentList"
+        :key="component.name"
+        class="component-grid"
       >
-
         <chicken-head-knob
           v-for="knobSetting in getKnobTypes(component.settingsList)"
           :key="knobSetting.name"
-          :name="knobSetting.name"
+          :name="$t(`AMP.COMPONENT.${component.name.toUpperCase()}.${knobSetting.name.toUpperCase()}`)"
           :init-value="knobSetting.value"
           @valueChanged="setAmpComponentEffectProperty({type: component.type, property: knobSetting.name, value: $event})"
         />
-
-
-      <!-- <chicken-head-knob
-        :init-value="mainVolumeLevel"
-        name="volume"
-        @valueChanged="setAmpComponentEffectProperty({type: AMP_COMPONENT_TYPE.VOLUME, property: 'level', value: $event})"
-      /> -->
-      </template>
-      <!-- <chicken-head-knob
-        :name="'trebble'"
-        :init-value="25"
-      />
-      <chicken-head-knob
-        :name="'middle'"
-        :init-value="50"
-      />
-      <chicken-head-knob
-        :name="'bass'"
-        :init-value="70"
-      /> -->
+      </div>
     </div>
     <div class="power-section">
       <switch-on
@@ -119,7 +101,7 @@ export default {
 .grid-container {
   display: grid;
   justify-content: center;
-  grid-template-columns: 15% 70% 15%;/*Make the grid smaller than the container*/
+  grid-template-columns: 10% 75% 15%;/*Make the grid smaller than the container*/
   grid-gap: 5px;
 }
 .amp-wrapper {
@@ -131,9 +113,14 @@ export default {
 .knob-grid {
     position: relative;
     z-index: $z-index-pedal;
-    display: flex;
-    justify-content: space-around;
-    width: 80%;
+    width: 90%;
+}
+.component-grid{
+  display: flex;
+  justify-content: space-between;
+  .container {
+    margin-right: 1.7rem;
+  }
 }
 .input-cable {
   width: 3rem;

@@ -18,6 +18,21 @@
     "MAIN_CONTROL": {
       "POWER": "Power",
       "VOLUME": "Volume"
+    },
+    "AMP": {
+      "COMPONENT": {
+        "VOLUME":{
+        "LEVEL":"Volume"
+        },
+        "EQUALIZER": {
+        "TREBBLEGAIN":"Trebble",
+        "MIDDLEGAIN":"Middle",
+        "BASSGAIN":"Bass"
+        },
+        "PRESENCE":{
+          "GAIN": "Presence"
+        }
+      }
     }
   }
 }

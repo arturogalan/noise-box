@@ -9,6 +9,7 @@ export const PEDAL_TYPE = {
 export const AMP_COMPONENT_TYPE = {
   VOLUME: 'volume',
   EQUALIZER: 'equalizer',
+  PRESENCE: 'presence',
 };
 export const AMP_COMPONENT_PROPERTIES = {
   [AMP_COMPONENT_TYPE.VOLUME]: {
@@ -53,6 +54,21 @@ export const AMP_COMPONENT_PROPERTIES = {
         min: 0,
         max: 100,
         value: 1,
+        type: 'knob',
+        correctionFactor: 10,
+        color: 'lightskyblue',
+      },
+    ],
+  },
+  [AMP_COMPONENT_TYPE.PRESENCE]: {
+    name: 'presence',
+    type: AMP_COMPONENT_TYPE.PRESENCE,
+    settingsList: [
+      {
+        name: 'gain',
+        min: 0,
+        max: 100,
+        value: 4,
         type: 'knob',
         correctionFactor: 10,
         color: 'lightskyblue',

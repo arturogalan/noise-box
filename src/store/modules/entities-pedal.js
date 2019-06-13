@@ -92,6 +92,7 @@ const pedalModule = {
     initAmpComponents({commit, dispatch, getters}) {
       dispatch('addAmpComponent', {type: AMP_COMPONENT_TYPE.VOLUME});
       dispatch('addAmpComponent', {type: AMP_COMPONENT_TYPE.EQUALIZER});
+      dispatch('addAmpComponent', {type: AMP_COMPONENT_TYPE.PRESENCE});
     },
     initAudioInputAndOutput({commit, getters, dispatch}) {
       commit('setUserInput');
@@ -239,41 +240,29 @@ const pedalModule = {
 
 
     connectAllNodes(state, ampComponentList, switchedOnPedalList) {
-      ampComponentList.forEach((pedal, index)=> {
+      ampComponentList.forEach((component, index)=> {
         if (index === 0) {
-          state.audioInput.connect(pedal.effect);
+          state.audioInput.connect(component.effect);
         }
-        if (index === (ampComponentList.length - 1)) {
-          pedal.effect.connect(state.audioOutput);
-        } else {
-          pedal.effect.connect(ampComponentList[index + 1].effect);
+        if (index < ampComponentList.length - 1) {
+          component.effect.connect(ampComponentList[index + 1].effect);
         }
       });
+      const lastComponent = ampComponentList[ampComponentList.length - 1];
 
-
-      // let lastComponent = '';
-      // ampComponentList.forEach((component, index)=> {
-      //   if (index === 0) {
-      //     state.audioInput.connect(component.effect);
-      //   } else if (index < (ampComponentList.length - 1)) {
-      //     component.effect.connect(ampComponentList[index + 1].effect);
-      //   } else {
-      //     lastComponent = component;
-      //   }
-      // });
-      // if (switchedOnPedalList && switchedOnPedalList.length) {
-      //   switchedOnPedalList.forEach((pedal, index)=> {
-      //     if (index === 0) {
-      //       lastComponent.effect.connect(pedal.effect);
-      //     } else if (index < (switchedOnPedalList.length - 1)) {
-      //       pedal.effect.connect(switchedOnPedalList[index + 1].effect);
-      //     } else {
-      //       pedal.effect.connect(state.audioOutput);
-      //     }
-      //   });
-      // } else {
-      //   ampComponentList[ampComponentList.length - 1].effect.connect(state.audioOutput);
-      // }
+      if (switchedOnPedalList && switchedOnPedalList.length) {
+        switchedOnPedalList.forEach((pedal, index)=> {
+          if (index === 0) {
+            lastComponent.effect.connect(pedal.effect);
+          } else if (index < (switchedOnPedalList.length - 1)) {
+            pedal.effect.connect(switchedOnPedalList[index + 1].effect);
+          } else {
+            pedal.effect.connect(state.audioOutput);
+          }
+        });
+      } else {
+        lastComponent.effect.connect(state.audioOutput);
+      }
     },
     //Audio mutations
     setAudioContext(state, audioContext) {
