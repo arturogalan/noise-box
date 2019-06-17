@@ -182,7 +182,7 @@ const pedalModule = {
     addComponent(state, component) {
       component.effect = audioUtils.createAudioNode(state.audioContext, component.type);
       for (let setting of component.settingsList) {
-        component.effect[setting.name] = setting.value;
+        component.effect[setting.name] = setting.value / getPropertyCorrectionFactor(component, setting.name);
       }
       audioUtils.configAudioNode(component);
       Vue.set(state.amp.components, component.type, component);
@@ -196,7 +196,7 @@ const pedalModule = {
     addPedal(state, pedal) {
       pedal.effect = audioUtils.createAudioNode(state.audioContext, pedal.type);
       for (let setting of pedal.settingsList) {
-        pedal.effect[setting.name] = setting.value;
+        pedal.effect[setting.name] = setting.value / getPropertyCorrectionFactor(pedal, setting.name);
       }
       audioUtils.configAudioNode(pedal);
       Vue.set(state.pedalBoard.pedals, pedal.type, pedal);
@@ -263,6 +263,18 @@ const pedalModule = {
       } else {
         lastComponent.effect.connect(state.audioOutput);
       }
+
+
+      // ampComponentList.forEach((pedal, index)=> {
+      //   if (index === 0) {
+      //     state.audioInput.connect(pedal.effect);
+      //   }
+      //   if (index === (ampComponentList.length - 1)) {
+      //     pedal.effect.connect(state.audioOutput);
+      //   } else {
+      //     pedal.effect.connect(ampComponentList[index + 1].effect);
+      //   }
+      // });
     },
     //Audio mutations
     setAudioContext(state, audioContext) {
