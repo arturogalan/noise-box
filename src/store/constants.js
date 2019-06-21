@@ -1,6 +1,11 @@
 
 export const PEDAL_TYPE = {
-  // VOLUME: 'volume',
+  DISTORTION: 'distortion',
+  DELAY: 'delay',
+  FLANGER: 'flanger',
+  REVERB: 'reverb',
+};
+export const PEDAL_NAME = {
   DISTORTION: 'distortion',
   DELAY: 'delay',
   FLANGER: 'flanger',
@@ -11,9 +16,35 @@ export const AMP_COMPONENT_TYPE = {
   EQUALIZER: 'equalizer',
   PRESENCE: 'presence',
 };
+export const AMP_COMPONENT_NAME = {
+  VOLUME: 'volume',
+  MASTER: 'master',
+  EQUALIZER: 'equalizer',
+  PRESENCE: 'presence',
+};
 export const AMP_COMPONENT_PROPERTIES = {
-  [AMP_COMPONENT_TYPE.VOLUME]: {
-    name: 'volume',
+  [AMP_COMPONENT_NAME.MASTER]: {
+    name: AMP_COMPONENT_NAME.MASTER,
+    type: AMP_COMPONENT_TYPE.VOLUME,
+    settingsList: [
+      {
+        name: 'level',
+        min: 0,
+        max: 1,
+        value: 30,
+        type: 'knob',
+        correctionFactor: 1,
+        color: 'lightskyblue',
+      },
+      {
+        name: 'mute',
+        value: false,
+        type: 'boolean',
+      },
+    ],
+  },
+  [AMP_COMPONENT_NAME.VOLUME]: {
+    name: AMP_COMPONENT_NAME.VOLUME,
     type: AMP_COMPONENT_TYPE.VOLUME,
     settingsList: [
       {
@@ -27,8 +58,8 @@ export const AMP_COMPONENT_PROPERTIES = {
       },
     ],
   },
-  [AMP_COMPONENT_TYPE.EQUALIZER]: {
-    name: 'equalizer',
+  [AMP_COMPONENT_NAME.EQUALIZER]: {
+    name: AMP_COMPONENT_NAME.EQUALIZER,
     type: AMP_COMPONENT_TYPE.EQUALIZER,
     settingsList: [
       {
@@ -60,8 +91,8 @@ export const AMP_COMPONENT_PROPERTIES = {
       },
     ],
   },
-  [AMP_COMPONENT_TYPE.PRESENCE]: {
-    name: 'presence',
+  [AMP_COMPONENT_NAME.PRESENCE]: {
+    name: AMP_COMPONENT_NAME.PRESENCE,
     type: AMP_COMPONENT_TYPE.PRESENCE,
     settingsList: [
       {
@@ -79,8 +110,9 @@ export const AMP_COMPONENT_PROPERTIES = {
 
 
 export const PEDAL_PROPERTIES = {
-  [PEDAL_TYPE.DISTORTION]: {
-    name: 'distortion',
+  [PEDAL_NAME.DISTORTION]: {
+    name: PEDAL_NAME.DISTORTION,
+    type: PEDAL_TYPE.DISTORTION,
     zoomIn: false,
     icon: 'assets/icons/distortion.svg',
     bgcolor: '#3b3f44',
@@ -111,8 +143,9 @@ export const PEDAL_PROPERTIES = {
       // },
     ],
   },
-  [PEDAL_TYPE.DELAY]: {
-    name: 'delay',
+  [PEDAL_NAME.DELAY]: {
+    name: PEDAL_NAME.DELAY,
+    type: PEDAL_TYPE.DELAY,
     zoomIn: false,
     icon: 'assets/icons/delay.svg',
     bgcolor: '#eedbc3',
@@ -144,8 +177,9 @@ export const PEDAL_PROPERTIES = {
       },
     ],
   },
-  [PEDAL_TYPE.FLANGER]: {
-    name: 'flanger',
+  [PEDAL_NAME.FLANGER]: {
+    name: PEDAL_NAME.FLANGER,
+    type: PEDAL_TYPE.FLANGER,
     zoomIn: false,
     icon: 'assets/icons/flanger.svg',
     bgcolor: '#b1428b',
@@ -185,8 +219,9 @@ export const PEDAL_PROPERTIES = {
       },
     ],
   },
-  [PEDAL_TYPE.REVERB]: {
-    name: 'reverb',
+  [PEDAL_NAME.REVERB]: {
+    name: PEDAL_NAME.REVERB,
+    type: PEDAL_TYPE.REVERB,
     zoomIn: false,
     icon: 'assets/icons/flanger.svg',
     bgcolor: 'rgb(139,98,79)',

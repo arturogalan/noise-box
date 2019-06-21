@@ -194,7 +194,7 @@ export default {
   width: 11rem;
   left: 0;
   top: 0;
-  z-index: $z-index-pedal;
+  z-index: $z-index-3;
   border-radius: 9px;
   border: solid 2px black;
   box-shadow: 4px 6px 6px 4px black

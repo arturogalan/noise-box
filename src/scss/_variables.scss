@@ -1,8 +1,8 @@
 $bg-classroom: pink;
 
-$z-index-tooltip: 2;
-$z-index-pedal: 3;
-$z-index-modal: 10;
+$z-index-2: 2;
+$z-index-3: 3;
+$z-index-10: 10;
 
 
 // Colors
@@ -106,7 +106,7 @@ $knob-grid-background: rgb(39,39,39);
   color: black;
   background-color: white;
   border: solid 1px rgb(122, 44, 44);
-  z-index: $z-index-tooltip;
+  z-index: $z-index-2;
 }
 .tooltip-text {
   padding: 2px;

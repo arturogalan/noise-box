@@ -57,7 +57,6 @@ export default {
   },
   computed: {
     circumference() {
-      //94.2 = 2 * PI * RADIOUS (r="15")
       return this.radius * 2 * Math.PI;
     },
     strokeDasharray() {
@@ -279,7 +278,7 @@ export default {
 .chicken-head{
   width: 4.6rem;
   height: 7.5rem;
-  z-index: $z-index-tooltip;
+  z-index: $z-index-2;
 }
 .setting-name {
   text-transform: uppercase;
@@ -293,7 +292,7 @@ export default {
   font-family: "FontPbio";
 }
 .value-label{
-  z-index: $z-index-pedal;
+  z-index: $z-index-2;
   position: absolute;
   top: 35%;
   font-size: 1rem;
@@ -329,6 +328,6 @@ export default {
   width: 125%;
   height: 110%;
   position: absolute;
-  z-index: $z-index-pedal;
+  z-index: $z-index-3;
 }
 </style>

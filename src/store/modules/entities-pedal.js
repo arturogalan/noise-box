@@ -1,5 +1,5 @@
 import Vue from 'vue';
-import {PEDAL_TYPE, PEDAL_PROPERTIES, AMP_COMPONENT_TYPE, AMP_COMPONENT_PROPERTIES} from '../constants';
+import {PEDAL_NAME, PEDAL_PROPERTIES, AMP_COMPONENT_NAME, AMP_COMPONENT_PROPERTIES} from '../constants';
 import audioUtils from '../../helpers/audioUtils';
 import {isEmpty} from 'lodash';
 
@@ -76,8 +76,8 @@ const pedalModule = {
     },
     initPalettePedals({commit, dispatch}) {
       commit('clearPalettePedals');
-      for (let pedal in PEDAL_TYPE) {
-        dispatch('addPalettePedal', PEDAL_TYPE[pedal]);
+      for (let pedal in PEDAL_NAME) {
+        dispatch('addPalettePedal', PEDAL_NAME[pedal]);
       }
     },
     addPalettePedal({state, commit}, type) {
@@ -89,10 +89,11 @@ const pedalModule = {
         });
       }
     },
-    initAmpComponents({commit, dispatch, getters}) {
-      dispatch('addAmpComponent', {type: AMP_COMPONENT_TYPE.VOLUME});
-      dispatch('addAmpComponent', {type: AMP_COMPONENT_TYPE.EQUALIZER});
-      dispatch('addAmpComponent', {type: AMP_COMPONENT_TYPE.PRESENCE});
+    initAmpComponents({dispatch}) {
+      dispatch('addAmpComponent', {name: AMP_COMPONENT_NAME.MASTER});
+      dispatch('addAmpComponent', {name: AMP_COMPONENT_NAME.VOLUME});
+      dispatch('addAmpComponent', {name: AMP_COMPONENT_NAME.EQUALIZER});
+      dispatch('addAmpComponent', {name: AMP_COMPONENT_NAME.PRESENCE});
     },
     initAudioInputAndOutput({commit, getters, dispatch}) {
       commit('setUserInput');
@@ -101,13 +102,13 @@ const pedalModule = {
       dispatch('setDevicesList');
       dispatch('setDevicesListHandler');
     },
-    addAmpComponent({state, commit, getters}, {type}) {
-      if (type && !state.amp.components[type]) { // add only if not exists
+    addAmpComponent({state, commit}, {name}) {
+      if (name && !state.amp.components[name]) { // add only if not exists
         const component = {
-          type,
+          name,
           switchedOn: true,
           dying: false,
-          ...AMP_COMPONENT_PROPERTIES[type],
+          ...AMP_COMPONENT_PROPERTIES[name],
         };
         commit('addComponent', component);
       }
@@ -185,10 +186,10 @@ const pedalModule = {
         component.effect[setting.name] = setting.value / getPropertyCorrectionFactor(component, setting.name);
       }
       audioUtils.configAudioNode(component);
-      Vue.set(state.amp.components, component.type, component);
+      Vue.set(state.amp.components, component.name, component);
     },
-    setAmpComponentEffectProperty(state, {type, property, value}) {
-      let component = state.amp.components[type];
+    setAmpComponentEffectProperty(state, {name, property, value}) {
+      let component = state.amp.components[name];
       if (component) {
         component.effect[property] = value / getPropertyCorrectionFactor(component, property);
       }
@@ -199,26 +200,26 @@ const pedalModule = {
         pedal.effect[setting.name] = setting.value / getPropertyCorrectionFactor(pedal, setting.name);
       }
       audioUtils.configAudioNode(pedal);
-      Vue.set(state.pedalBoard.pedals, pedal.type, pedal);
+      Vue.set(state.pedalBoard.pedals, pedal.name, pedal);
     },
-    togglePedal(state, type) {
-      state.pedalBoard.pedals[type].switchedOn = !state.pedalBoard.pedals[type].switchedOn;
+    togglePedal(state, name) {
+      state.pedalBoard.pedals[name].switchedOn = !state.pedalBoard.pedals[name].switchedOn;
     },
-    killPedal(state, type) {
-      state.pedalBoard.pedals[type].dying = true;
+    killPedal(state, name) {
+      state.pedalBoard.pedals[name].dying = true;
     },
     removePedal(state, pedal) {
       pedal.effect.disconnect();
-      Vue.delete(state.pedalBoard.pedals, pedal.type);
+      Vue.delete(state.pedalBoard.pedals, pedal.name);
     },
-    setPedalProperty(state, {type, property, value}) {
-      let pedal = state.pedalBoard.pedals[type];
+    setPedalProperty(state, {name, property, value}) {
+      let pedal = state.pedalBoard.pedals[name];
       if (pedal) {
         pedal[property] = value;
       }
     },
-    setPedalEffectProperty(state, {type, property, value}) {
-      let pedal = state.pedalBoard.pedals[type];
+    setPedalEffectProperty(state, {name, property, value}) {
+      let pedal = state.pedalBoard.pedals[name];
       if (pedal) {
         pedal.effect[property] = value / getPropertyCorrectionFactor(pedal, property);
       }

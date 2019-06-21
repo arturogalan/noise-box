@@ -21,6 +21,9 @@
     },
     "AMP": {
       "COMPONENT": {
+        "MASTER":{
+          "LEVEL":"Master"
+          },
         "VOLUME":{
         "LEVEL":"Volume"
         },

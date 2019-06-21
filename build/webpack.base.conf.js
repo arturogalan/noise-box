@@ -82,6 +82,10 @@ module.exports = {
         test: /(\.jsx|\.js|\.vue)$/,
         loader: 'eslint-loader',
         exclude: /node_modules/
+      },
+      {
+        test: /\.hbs$/,
+        loader: 'ignore-loader'
       }
     ]
   },

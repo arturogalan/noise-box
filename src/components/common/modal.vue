@@ -23,7 +23,7 @@ export default {
 <style lang="scss" scoped>
 .modal {
   position: fixed; /* Stay in place */
-  z-index: $z-index-modal; /* Sit on top */
+  z-index: $z-index-10; /* Sit on top */
   left: 0;
   top: 0;
   width: 100%; /* Full width */

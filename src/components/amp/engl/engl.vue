@@ -2,7 +2,7 @@
 import ChickenHeadKnob from '../../common/chicken-head-knob.vue';
 import {mapActions, mapGetters} from 'vuex';
 import SwitchOn from './../../common/switch-on.vue';
-import {AMP_COMPONENT_TYPE} from '../../../store/constants';
+import {AMP_COMPONENT_TYPE, AMP_COMPONENT_NAME} from '../../../store/constants';
 
 
 export default {
@@ -49,7 +49,7 @@ export default {
       // Only toggle if power switch is ON
       if (this.isSwitchedOn) {
         this.isMuted = !this.isMuted;
-        this.setAmpComponentEffectProperty({type: AMP_COMPONENT_TYPE.VOLUME, property: 'mute', value: this.isMuted});
+        this.setAmpComponentEffectProperty({name: AMP_COMPONENT_NAME.VOLUME, property: 'mute', value: this.isMuted});
       }
     },
     toogleSwitchOnAmp() {
@@ -84,7 +84,7 @@ export default {
           :key="knobSetting.name"
           :name="$t(`AMP.COMPONENT.${component.name.toUpperCase()}.${knobSetting.name.toUpperCase()}`)"
           :init-value="knobSetting.value"
-          @valueChanged="setAmpComponentEffectProperty({type: component.type, property: knobSetting.name, value: $event})"
+          @valueChanged="setAmpComponentEffectProperty({name: component.name, property: knobSetting.name, value: $event})"
         />
       </div>
     </div>
@@ -112,7 +112,7 @@ export default {
 }
 .knob-grid {
     position: relative;
-    z-index: $z-index-pedal;
+    z-index: $z-index-3;
     width: 90%;
 }
 .component-grid{
