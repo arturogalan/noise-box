@@ -79,9 +79,13 @@ export default {
       class="title"
     >
       <img
-        src="/static/header-icon.png"
+        v-if="amp.standBy"
+        :src="require('../assets/img/header-icon-on.png')"
         class="logo-icon">
-      <div/>
+      <img
+        v-else
+        :src="require('../assets/img/header-icon-off.png')"
+        class="logo-icon">
       <h1><span class="metal">NOISE BOX</span></h1>
     </div>
     <engl/>

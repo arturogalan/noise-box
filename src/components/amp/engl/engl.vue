@@ -35,6 +35,7 @@ export default {
       'initAudioInputAndOutput',
       'setAmpComponentEffectProperty',
       'toggleAmp',
+      'toggleStandByAmp',
     ]),
     initAudioInterface() {
       if (!this.isAudioInitializated) {
@@ -50,6 +51,7 @@ export default {
       if (this.isSwitchedOn) {
         this.isMuted = !this.isMuted;
         this.setAmpComponentEffectProperty({name: AMP_COMPONENT_NAME.VOLUME, property: 'mute', value: this.isMuted});
+        this.toggleStandByAmp({value: !this.isMuted});
       }
     },
     toogleSwitchOnAmp() {

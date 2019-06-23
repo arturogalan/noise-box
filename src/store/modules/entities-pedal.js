@@ -18,6 +18,7 @@ const pedalModule = {
     audioOutput: {},
     amp: {
       switchedOn: false,
+      standBy: false,
       components: {},
     },
     pedalBoard: {
@@ -73,6 +74,9 @@ const pedalModule = {
   actions: {
     toggleAmp({commit}, data) {
       commit('toggleAmp', data);
+    },
+    toggleStandByAmp({commit}, data) {
+      commit('toggleStandByAmp', data);
     },
     initPalettePedals({commit, dispatch}) {
       commit('clearPalettePedals');
@@ -173,6 +177,9 @@ const pedalModule = {
   mutations: {
     toggleAmp(state, {value}) {
       state.amp.switchedOn = value;
+    },
+    toggleStandByAmp(state, {value}) {
+      state.amp.standBy = value;
     },
     //Visual mutations
     addPalettePedal(state, palettePedal) {
