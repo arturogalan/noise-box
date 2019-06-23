@@ -109,18 +109,23 @@ export default {
   height: 9rem;
   background-color: rgb(70,70,70);
   box-shadow: inset 0px 1px 20px 0px rgb(0, 0, 0);
+  min-width: $app-min-width + 12px;
 }
 .knob-grid {
     position: relative;
     z-index: $z-index-3;
-    width: 90%;
+    width: 100%;
 }
 .component-grid{
   display: flex;
-  justify-content: space-between;
+  flex-direction: row;
   .container {
-    margin-right: 1.7rem;
+    margin-left: .5rem;
+    margin-right: .5rem;
   }
+  // & > container + container {
+  //   margin-right: 1.7rem;
+  // }
 }
 .input-cable {
   width: 3rem;

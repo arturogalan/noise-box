@@ -325,7 +325,7 @@ export default {
 }
 
 .pointer-wrapper {
-  width: 125%;
+  width: 110%;
   height: 110%;
   position: absolute;
   z-index: $z-index-3;

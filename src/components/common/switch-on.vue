@@ -192,8 +192,8 @@ export default {
   color: white;
   position: absolute;
   width: 200%;
-  bottom: -40%;
-  font-size: .8rem;
+  bottom: -30%;
+  font-size: .6rem;
   font-family: "FontPbio";
   white-space: nowrap;
   align-self: center;

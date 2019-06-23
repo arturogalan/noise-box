@@ -1,12 +1,10 @@
 
 export const PEDAL_TYPE = {
-  DISTORTION: 'distortion',
   DELAY: 'delay',
   FLANGER: 'flanger',
   REVERB: 'reverb',
 };
 export const PEDAL_NAME = {
-  DISTORTION: 'distortion',
   DELAY: 'delay',
   FLANGER: 'flanger',
   REVERB: 'reverb',
@@ -15,34 +13,16 @@ export const AMP_COMPONENT_TYPE = {
   VOLUME: 'volume',
   EQUALIZER: 'equalizer',
   PRESENCE: 'presence',
+  DISTORTION: 'distortion',
 };
 export const AMP_COMPONENT_NAME = {
   VOLUME: 'volume',
   MASTER: 'master',
   EQUALIZER: 'equalizer',
   PRESENCE: 'presence',
+  DISTORTION: 'distortion',
 };
 export const AMP_COMPONENT_PROPERTIES = {
-  [AMP_COMPONENT_NAME.MASTER]: {
-    name: AMP_COMPONENT_NAME.MASTER,
-    type: AMP_COMPONENT_TYPE.VOLUME,
-    settingsList: [
-      {
-        name: 'level',
-        min: 0,
-        max: 1,
-        value: 30,
-        type: 'knob',
-        correctionFactor: 1,
-        color: 'lightskyblue',
-      },
-      {
-        name: 'mute',
-        value: false,
-        type: 'boolean',
-      },
-    ],
-  },
   [AMP_COMPONENT_NAME.VOLUME]: {
     name: AMP_COMPONENT_NAME.VOLUME,
     type: AMP_COMPONENT_TYPE.VOLUME,
@@ -53,8 +33,28 @@ export const AMP_COMPONENT_PROPERTIES = {
         max: 1,
         value: 30,
         type: 'knob',
-        correctionFactor: 1,
+        correctionFactor: 10,
         color: 'lightskyblue',
+      },
+    ],
+  },
+  [AMP_COMPONENT_NAME.MASTER]: {
+    name: AMP_COMPONENT_NAME.MASTER,
+    type: AMP_COMPONENT_TYPE.VOLUME,
+    settingsList: [
+      {
+        name: 'level',
+        min: 0,
+        max: 1,
+        value: 30,
+        type: 'knob',
+        correctionFactor: 10,
+        color: 'lightskyblue',
+      },
+      {
+        name: 'mute',
+        value: false,
+        type: 'boolean',
       },
     ],
   },
@@ -106,23 +106,17 @@ export const AMP_COMPONENT_PROPERTIES = {
       },
     ],
   },
-};
-
-
-export const PEDAL_PROPERTIES = {
-  [PEDAL_NAME.DISTORTION]: {
-    name: PEDAL_NAME.DISTORTION,
-    type: PEDAL_TYPE.DISTORTION,
+  [AMP_COMPONENT_NAME.DISTORTION]: {
+    name: AMP_COMPONENT_NAME.DISTORTION,
+    type: AMP_COMPONENT_NAME.DISTORTION,
     zoomIn: false,
-    icon: 'assets/icons/distortion.svg',
-    bgcolor: '#3b3f44',
-    fcolor: 'orange',
     settingsList: [
       {
         name: 'gain',
         min: 0,
         max: 100,
         value: 50,
+        type: 'knob',
         correctionFactor: 1,
         color: 'lightskyblue',
       },
@@ -143,6 +137,10 @@ export const PEDAL_PROPERTIES = {
       // },
     ],
   },
+};
+
+
+export const PEDAL_PROPERTIES = {
   [PEDAL_NAME.DELAY]: {
     name: PEDAL_NAME.DELAY,
     type: PEDAL_TYPE.DELAY,

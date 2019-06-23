@@ -11,7 +11,7 @@ const audioUtils = {
     return null;
   },
   createAudioNode(audioContext, type) {
-    console.log(capitalize(type));
+    console.log(`Creating ${capitalize(type)} audio node`);
 
     let audioNode = new Noisefy[capitalize(type)](audioContext);
     return audioNode;

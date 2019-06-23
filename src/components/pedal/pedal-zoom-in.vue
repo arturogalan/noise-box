@@ -19,7 +19,7 @@ export default {
       'setPedalProperty',
     ]),
     zoomPedalOut(pedal) {
-      this.setPedalProperty({type: this.zoomInPedal.type, property: 'zoomIn', value: false});
+      this.setPedalProperty({name: this.zoomInPedal.name, property: 'zoomIn', value: false});
     },
   },
 };

@@ -10,7 +10,9 @@ export default {
 };
 </script>
 <template>
-  <transition name="fade">
+  <transition
+    name="fade"
+    mode="out-in">
     <div
       v-if="show"
       class="modal">

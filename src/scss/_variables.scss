@@ -4,7 +4,7 @@ $z-index-2: 2;
 $z-index-3: 3;
 $z-index-10: 10;
 
-
+$app-min-width: 1170px;
 // Colors
 $knob-grid-background: rgb(39,39,39);
 
@@ -117,4 +117,13 @@ $knob-grid-background: rgb(39,39,39);
 }
 .fade-valve-enter /* .fade-leave-active below version 2.1.8 */ {
   opacity: 0;
+}
+
+.fade-enter-active,
+.fade-leave-active {
+    transition: opacity .2s
+}
+.fade-enter,
+.fade-leave-to {
+    opacity: 0
 }

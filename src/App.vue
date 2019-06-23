@@ -43,7 +43,7 @@ export default {
       'setPedalProperty',
     ]),
     zoomPedal(pedal) {
-      this.setPedalProperty({type: pedal.type, property: 'zoomIn', value: true});
+      this.setPedalProperty({name: pedal.name, property: 'zoomIn', value: true});
     },
   },
 
@@ -51,16 +51,12 @@ export default {
 </script>
 <template>
   <div id="app">
-    <modal :show="zoomInPedal ? true : false">
+    <modal
+      :show="zoomInPedal">
       <pedal-zoom-in/>
     </modal>
     <app-header-engl/>
     <div class="app-body">
-      <!-- <div class="master-control column">
-        <div class="palette-title">{{ this.$t('MAIN.STEP_1') }}</div>
-        <master-control/>
-      </div> -->
-
       <div class="pedal-palette">
         <div class="palette-title">{{ this.$t('MAIN.STEP_1') }}</div>
         <div class="grid-container">
