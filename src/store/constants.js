@@ -112,29 +112,14 @@ export const AMP_COMPONENT_PROPERTIES = {
     zoomIn: false,
     settingsList: [
       {
-        name: 'gain',
-        min: 0,
-        max: 100,
-        value: 50,
-        type: 'knob',
-        correctionFactor: 1,
-        color: 'lightskyblue',
-      },
-      {
         name: 'intensity',
         min: 0,
         max: 100,
         value: 80,
-        correctionFactor: 1,
+        type: 'knob',
+        correctionFactor: 10,
         color: 'lightslategray',
       },
-      // {
-      //     name: 'drive',
-      //     min:0,
-      //     max:100,
-      //     value: 80,
-      //     color: 'lightseagreen'
-      // },
     ],
   },
 };
