@@ -94,11 +94,9 @@ const pedalModule = {
       }
     },
     initAmpComponents({dispatch}) {
-      dispatch('addAmpComponent', {name: AMP_COMPONENT_NAME.DISTORTION});
-      dispatch('addAmpComponent', {name: AMP_COMPONENT_NAME.EQUALIZER});
-      dispatch('addAmpComponent', {name: AMP_COMPONENT_NAME.PRESENCE});
-      dispatch('addAmpComponent', {name: AMP_COMPONENT_NAME.VOLUME});
-      dispatch('addAmpComponent', {name: AMP_COMPONENT_NAME.MASTER});
+      for (const component in AMP_COMPONENT_NAME) {
+        dispatch('addAmpComponent', {name: AMP_COMPONENT_NAME[component]});
+      }
     },
     initAudioInputAndOutput({commit, getters, dispatch}) {
       commit('setUserInput');

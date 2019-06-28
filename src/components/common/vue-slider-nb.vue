@@ -1,6 +1,6 @@
 <script>
 export default {
-  name: 'VueSliderNb',
+  name: 'vue-slider-nb',
   components: {},
   props: {
     value: {type: Number, required: true, default: ()=> 0},

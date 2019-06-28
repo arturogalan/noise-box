@@ -5,11 +5,13 @@ $z-index-3: 3;
 $z-index-10: 10;
 
 $app-min-width: 1170px;
+
 // Colors
 $knob-grid-background: rgb(39,39,39);
 
-//Helpers
 
+
+//Helpers
 @for $i from 0 through 8 {
   .index-#{$i} {
     z-index: $i
@@ -20,6 +22,7 @@ $knob-grid-background: rgb(39,39,39);
     z-index: -$i
   }
 }
+
 //Effects
 @keyframes pulse_animation {
   0% {
@@ -100,17 +103,39 @@ $knob-grid-background: rgb(39,39,39);
 //   animation: pulse_animation 0.5s reverse;
 // }
 
-.tooltip-box {
-  font-family: 'Conthrax';
-  font-size: .6rem;
-  color: black;
-  background-color: white;
-  border: solid 1px rgb(122, 44, 44);
-  z-index: $z-index-2;
+.fade-in {
+  opacity: 1;
+  animation-name: fadeInOpacity;
+  animation-iteration-count: 1;
+  animation-timing-function: ease-in;
+  animation-duration: .5s;
 }
-.tooltip-text {
-  padding: 2px;
+
+@keyframes fadeInOpacity {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
+
+.fade-out {
+  opacity: 1;
+  animation-name: fadeOutOpacity;
+  animation-iteration-count: 1;
+  animation-timing-function: ease-out;
+  animation-duration: .25s;
+}
+@keyframes fadeOutOpacity {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
 
 .fade-valve-enter-active {
   transition: opacity 1s;
@@ -126,4 +151,17 @@ $knob-grid-background: rgb(39,39,39);
 .fade-enter,
 .fade-leave-to {
     opacity: 0
+}
+
+// Tooltip
+.tooltip-box {
+  font-family: 'Conthrax';
+  font-size: .6rem;
+  color: black;
+  background-color: white;
+  border: solid 1px rgb(122, 44, 44);
+  z-index: $z-index-2;
+}
+.tooltip-text {
+  padding: 2px;
 }

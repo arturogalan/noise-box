@@ -1,12 +1,12 @@
 <script>
-import ChickenHeadKnob from '../../common/chicken-head-knob.vue';
+import ChickenHeadKnob from '../common/chicken-head-knob.vue';
 import {mapActions, mapGetters} from 'vuex';
-import SwitchOn from './../../common/switch-on.vue';
-import {AMP_COMPONENT_TYPE, AMP_COMPONENT_NAME} from '../../../store/constants';
+import SwitchOn from './../common/switch-on.vue';
+import {AMP_COMPONENT_TYPE, AMP_COMPONENT_NAME} from '../../store/constants';
 
 
 export default {
-  name: 'Engl',
+  name: 'amp-engl',
   components: {
     ChickenHeadKnob,
     SwitchOn,
@@ -41,8 +41,6 @@ export default {
       if (!this.isAudioInitializated) {
         this.switchOnAudioContext();
         this.initAudioInputAndOutput();
-        // this.setAmpComponentEffectProperty({type: AMP_COMPONENT_TYPE.VOLUME, property: 'level', value: this.mainVolumeLevel});
-        // this.setAmpComponentEffectProperty({type: AMP_COMPONENT_TYPE.VOLUME, property: 'mute', value: this.isMuted});
         this.isAudioInitializated = true;
       }
     },
@@ -71,7 +69,7 @@ export default {
       <img
         ref="chicken"
         class="input-cable"
-        src="../../../assets/img/cable-input.svg"
+        src="../../assets/img/cable-input.svg"
       >
     </div>
     <div class="knob-grid" >

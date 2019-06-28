@@ -1,6 +1,6 @@
 <script>
 export default {
-  name: 'SwitchOn',
+  name: 'switch-on',
   props: {
     name: {
       type: String,

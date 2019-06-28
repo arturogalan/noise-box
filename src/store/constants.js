@@ -15,12 +15,13 @@ export const AMP_COMPONENT_TYPE = {
   PRESENCE: 'presence',
   DISTORTION: 'distortion',
 };
+// This order is the order the components appear in the amp header
 export const AMP_COMPONENT_NAME = {
-  VOLUME: 'volume',
-  MASTER: 'master',
+  DISTORTION: 'distortion',
   EQUALIZER: 'equalizer',
   PRESENCE: 'presence',
-  DISTORTION: 'distortion',
+  VOLUME: 'volume',
+  MASTER: 'master',
 };
 export const AMP_COMPONENT_PROPERTIES = {
   [AMP_COMPONENT_NAME.VOLUME]: {

@@ -1,3 +1,23 @@
+<script>
+import {mapActions} from 'vuex';
+
+export default {
+  name: 'pedals-palette',
+  props: {palettePedal: {type: Object, required: true},
+  },
+  data() {
+    return {};
+  },
+  methods: {
+    getAsset: function(assetName) {
+      return require('../../../'+assetName);
+    },
+    ...mapActions('pedal', [
+      'addPedal',
+    ]),
+  },
+};
+</script>
 <template>
   <div
     class="palette-card"
@@ -8,29 +28,6 @@
       class="icon-type">
   </div>
 </template>
-
-<script>
-import {mapActions} from 'vuex';
-
-export default {
-  name: 'PalettePedal',
-  props: {palettePedal: {type: Object, required: true},
-  },
-  data() {
-    return {};
-  },
-  methods: {
-    getAsset: function(assetName) {
-      return require('../'+assetName);
-    },
-    ...mapActions('pedal', [
-      'addPedal',
-    ]),
-  },
-};
-</script>
-
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style>
 .palette-card {
     display: flex;

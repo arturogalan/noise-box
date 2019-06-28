@@ -1,10 +1,10 @@
 <script>
 import {mapActions} from 'vuex';
 import pedalKnobGrid from './pedal-knob-grid.vue';
-import macButtons from '../common/mac-buttons.vue';
+import macButtons from '../../common/mac-buttons.vue';
 
 export default {
-  name: 'Pedal',
+  name: 'pedal',
   components: {
     pedalKnobGrid,
     macButtons,
@@ -87,7 +87,7 @@ export default {
       <img
         :style="{ backgroundColor: pedal.bgcolor }"
         class="pedal-svg"
-        src="../../assets/img/pedal.svg"
+        src="../../../assets/img/pedal.svg"
         alt
       >
     </div>

@@ -1,6 +1,6 @@
 <script>
 export default {
-  name: 'ChickenHeadKnob',
+  name: 'chicken-head-knob',
   props: {
     initValue: {
       type: Number,

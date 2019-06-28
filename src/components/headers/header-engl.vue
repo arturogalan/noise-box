@@ -1,12 +1,10 @@
 <script>
-import metalGrid from './common/metal-grid.vue';
-import engl from './amp/engl/engl.vue';
+import metalGrid from './../common/metal-grid.vue';
 import {mapGetters} from 'vuex';
 
 export default {
   components: {
     metalGrid,
-    engl,
   },
   data() {
     return {
@@ -39,11 +37,11 @@ export default {
           <div :key="amp.switchedOn">
             <img
               v-if="amp.switchedOn"
-              :src="require('../assets/img/valve-on.svg')"
+              :src="require('../../assets/img/valve-on.svg')"
               class="valves">
             <img
               v-else
-              :src="require('../assets/img/valve-off.svg')"
+              :src="require('../../assets/img/valve-off.svg')"
               class="valves">
           </div>
         </transition>
@@ -59,11 +57,11 @@ export default {
           <div :key="amp.switchedOn">
             <img
               v-if="amp.switchedOn"
-              :src="require('../assets/img/valve-on.svg')"
+              :src="require('../../assets/img/valve-on.svg')"
               class="valves">
             <img
               v-else
-              :src="require('../assets/img/valve-off.svg')"
+              :src="require('../../assets/img/valve-off.svg')"
               class="valves">
           </div>
         </transition>
@@ -80,15 +78,14 @@ export default {
     >
       <img
         v-if="amp.standBy"
-        :src="require('../assets/img/header-icon-on.png')"
+        :src="require('../../assets/img/header-icon-on.png')"
         class="logo-icon">
       <img
         v-else
-        :src="require('../assets/img/header-icon-off.png')"
+        :src="require('../../assets/img/header-icon-off.png')"
         class="logo-icon">
       <h1><span class="metal">NOISE BOX</span></h1>
     </div>
-    <engl/>
   </div>
 </template>
 

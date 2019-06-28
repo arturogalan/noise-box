@@ -1,10 +1,10 @@
 <script>
-import vueSliderNb from './common/vue-slider-nb.vue';
+import vueSliderNb from './vue-slider-nb.vue';
 import {mapActions} from 'vuex';
-import {PEDAL_TYPE} from '../store/constants';
+import {PEDAL_TYPE} from '../../store/constants';
 
 export default {
-  name: 'MasterControl',
+  name: 'master-control',
   components: {
     vueSliderNb,
   },

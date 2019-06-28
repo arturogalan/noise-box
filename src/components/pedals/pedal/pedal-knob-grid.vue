@@ -1,5 +1,5 @@
 <script>
-import vueKnobNb from '../common/vue-knob-nb.vue';
+import vueKnobNb from '../../common/vue-knob-nb.vue';
 export default {
   components: {
     vueKnobNb,

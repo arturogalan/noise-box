@@ -1,10 +1,10 @@
 <script>
 import {mapGetters, mapActions} from 'vuex';
 import pedalKnobGrid from './pedal-knob-grid.vue';
-import macButtons from '../common/mac-buttons.vue';
+import macButtons from '../../common/mac-buttons.vue';
 
 export default {
-  name: 'PedalZoomIn',
+  name: 'pedal-zoom-in',
   components: {
     pedalKnobGrid,
     macButtons,

@@ -1,6 +1,6 @@
 <script>
 export default {
-  name: 'MacButtons',
+  name: 'mac-buttons',
   props: {
     maximized: {
       type: Boolean,

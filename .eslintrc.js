@@ -142,7 +142,7 @@ module.exports = {
         MethodDefinition: true,
         ClassDeclaration: true,
       },
-    }],*/
+    }],*/ 
     'semi': [2, 'always'],
     'semi-spacing': 2,
     'space-before-blocks': 2,
@@ -179,7 +179,7 @@ module.exports = {
     // allow debugger during development
     'no-debugger': process.env.NODE_ENV === 'production' ? 2 : 0,
     'arrow-spacing': [2, { 'before': false, 'after': true }],
-
+    'vue/name-property-casing': ["error", "kebab-case"]
 
   }
 };

@@ -1,6 +1,6 @@
 <script>
 export default {
-  name: 'MetalGrid',
+  name: 'metal-grid',
 
 };
 </script>
