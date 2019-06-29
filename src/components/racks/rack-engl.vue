@@ -5,9 +5,7 @@ export default {
 };
 </script>
 <template>
-  <div class="rack-wrapper">
-
-</div>
+  <div class="rack-wrapper"/>
 </template>
 <style lang="scss" scoped>
 .rack-wrapper {
