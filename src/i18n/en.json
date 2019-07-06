@@ -28,15 +28,20 @@
         "LEVEL":"Volume"
         },
         "EQUALIZER": {
-        "TREBBLEGAIN":"Trebble",
-        "MIDDLEGAIN":"Middle",
-        "BASSGAIN":"Bass"
+          "TREBBLEGAIN":"Trebble",
+          "MIDDLEGAIN":"Middle",
+          "BASSGAIN":"Bass"
         },
         "PRESENCE":{
           "GAIN": "Presence"
         },
         "DISTORTION":{
           "INTENSITY":"Gain"
+        }
+      },
+      "RACK":{
+        "DISTORTION_SELECTOR": {
+          "TITLE": "Distortion"
         }
       }
     }

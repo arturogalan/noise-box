@@ -22,7 +22,7 @@ export default {
   },
   computed: {
     ...mapGetters('pedal', [
-      'ampComponentList',
+      'ampComponentsList',
     ]),
   },
   created() {
@@ -75,7 +75,7 @@ export default {
     <div class="knob-grid" >
 
       <div
-        v-for="component in ampComponentList"
+        v-for="component in ampComponentsList"
         :key="component.name"
         class="component-grid"
       >

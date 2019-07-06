@@ -4,6 +4,7 @@ import {PEDAL_TYPE} from '../store/constants';
 const irf = require('../static/audio/hall-reverb.ogg');
 
 const audioUtils = {
+  DISTORTION_TYPES: Noisefy.DISTORTION_TYPES,
   createAudioContext() {
     if (Noisefy.hasAudioContext) {
       return new AudioContext();

@@ -28,20 +28,31 @@ const pedalModule = {
     deviceList: [],
   },
   getters: {
-    palettePedalsList(state) {
-      return Object.values(state.palettePedals);
+    amp(state) {
+      return state.amp;
     },
     ampComponentsList(state) {
       return Object.values(state.amp.components);
     },
+    distortionTypes(state, getters) {
+      const distortionsList = [];
+      for (const distortionType in audioUtils.DISTORTION_TYPES) {
+        distortionsList.push({
+          id: distortionType,
+          name: audioUtils.DISTORTION_TYPES[distortionType],
+          selected: getters.ampDistortionType === audioUtils.DISTORTION_TYPES[distortionType],
+        });
+      }
+      return distortionsList;
+    },
+    ampDistortionType(state) {
+      return (state.amp.components[AMP_COMPONENT_NAME.DISTORTION] || {}).effect.distortionType;
+    },
+    palettePedalsList(state) {
+      return Object.values(state.palettePedals);
+    },
     pedalList(state) {
       return Object.values(state.pedalBoard.pedals);
-    },
-    amp(state) {
-      return state.amp;
-    },
-    ampComponentList(state) {
-      return Object.values(state.amp.components);
     },
     switchedOnPedalList(state) {
       return Object.values(state.pedalBoard.pedals).filter((pedal)=> {
@@ -78,6 +89,25 @@ const pedalModule = {
     toggleStandByAmp({commit}, data) {
       commit('toggleStandByAmp', data);
     },
+    initAmpComponents({dispatch}) {
+      for (const component in AMP_COMPONENT_NAME) {
+        dispatch('addAmpComponent', {name: AMP_COMPONENT_NAME[component]});
+      }
+    },
+    addAmpComponent({state, commit}, {name}) {
+      if (name && !state.amp.components[name]) { // add only if not exists
+        const component = {
+          name,
+          switchedOn: true,
+          dying: false,
+          ...AMP_COMPONENT_PROPERTIES[name],
+        };
+        commit('addComponent', component);
+      }
+    },
+    setAmpComponentEffectProperty({commit}, data) {
+      commit('setAmpComponentEffectProperty', data);
+    },
     initPalettePedals({commit, dispatch}) {
       commit('clearPalettePedals');
       for (let pedal in PEDAL_NAME) {
@@ -93,31 +123,12 @@ const pedalModule = {
         });
       }
     },
-    initAmpComponents({dispatch}) {
-      for (const component in AMP_COMPONENT_NAME) {
-        dispatch('addAmpComponent', {name: AMP_COMPONENT_NAME[component]});
-      }
-    },
     initAudioInputAndOutput({commit, getters, dispatch}) {
       commit('setUserInput');
       commit('setUserOutput');
       commit('connectAllNodes', getters.ampComponentsList, []);
       dispatch('setDevicesList');
       dispatch('setDevicesListHandler');
-    },
-    addAmpComponent({state, commit}, {name}) {
-      if (name && !state.amp.components[name]) { // add only if not exists
-        const component = {
-          name,
-          switchedOn: true,
-          dying: false,
-          ...AMP_COMPONENT_PROPERTIES[name],
-        };
-        commit('addComponent', component);
-      }
-    },
-    setAmpComponentEffectProperty({commit}, data) {
-      commit('setAmpComponentEffectProperty', data);
     },
     addPedal({state, commit, getters}, {type}) {
       if (type && !state.pedalBoard.pedals[type]) { // add only if not exists
@@ -197,7 +208,11 @@ const pedalModule = {
     setAmpComponentEffectProperty(state, {name, property, value}) {
       let component = state.amp.components[name];
       if (component) {
-        component.effect[property] = value / getPropertyCorrectionFactor(component, property);
+        if (typeof property === 'number') {
+          component.effect[property] = value / getPropertyCorrectionFactor(component, property);
+        } else {
+          component.effect[property] = value;
+        }
       }
     },
     addPedal(state, pedal) {
