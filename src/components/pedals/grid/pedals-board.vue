@@ -22,7 +22,11 @@ export default {
     ...mapActions('pedal', [
       'initPalettePedals',
       'removePedal',
+      'setPedalProperty',
     ]),
+    zoomPedal(pedal) {
+      this.setPedalProperty({name: pedal.name, property: 'zoomIn', value: true});
+    },
   },
 };
 </script>

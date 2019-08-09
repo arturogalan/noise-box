@@ -4,7 +4,7 @@ import modal from './components/common/modal.vue';
 import pedalZoomIn from './components/pedals/pedal/pedal-zoom-in';
 import englTheme from './components/themes/engl-theme.vue';
 import pedalsBoard from './components/pedals/grid/pedals-board';
-// import appFooter from './components/app-footer.vue';
+import appFooter from './components/app-footer.vue';
 
 export default {
   name: 'app',
@@ -13,7 +13,7 @@ export default {
     pedalZoomIn,
     englTheme,
     pedalsBoard,
-    // appFooter,
+    appFooter,
   },
   data() {
     return {
@@ -33,9 +33,6 @@ export default {
       'createAudioContext',
       'setPedalProperty',
     ]),
-    zoomPedal(pedal) {
-      this.setPedalProperty({name: pedal.name, property: 'zoomIn', value: true});
-    },
   },
 
 };
@@ -43,12 +40,12 @@ export default {
 <template>
   <div id="app">
     <modal
-      :show="zoomInPedal">
+      :show="zoomInPedal !== undefined">
       <pedal-zoom-in/>
     </modal>
     <engl-theme/>
     <pedals-board/>
-    <!-- <app-footer/> -->
+    <app-footer/>
   </div>
 </template>
 <style lang="scss">

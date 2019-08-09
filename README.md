@@ -28,3 +28,12 @@ npm test
 ```
 
 For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
+
+
+
+## TO-DO
+Remove unnecessary Vue.set when setting vars
+Move convertToMono to a property of noisefy input effect
+
+
+

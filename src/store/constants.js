@@ -1,14 +1,4 @@
 
-export const PEDAL_TYPE = {
-  DELAY: 'delay',
-  FLANGER: 'flanger',
-  REVERB: 'reverb',
-};
-export const PEDAL_NAME = {
-  DELAY: 'delay',
-  FLANGER: 'flanger',
-  REVERB: 'reverb',
-};
 export const AMP_COMPONENT_TYPE = {
   VOLUME: 'volume',
   EQUALIZER: 'equalizer',
@@ -125,6 +115,17 @@ export const AMP_COMPONENT_PROPERTIES = {
   },
 };
 
+
+export const PEDAL_TYPE = {
+  DELAY: 'delay',
+  FLANGER: 'flanger',
+  REVERB: 'reverb',
+};
+export const PEDAL_NAME = {
+  DELAY: 'delay',
+  FLANGER: 'flanger',
+  REVERB: 'reverb',
+};
 
 export const PEDAL_PROPERTIES = {
   [PEDAL_NAME.DELAY]: {
