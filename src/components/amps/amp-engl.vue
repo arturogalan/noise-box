@@ -22,7 +22,7 @@ export default {
   },
   computed: {
     ...mapGetters('pedal', [
-      'ampComponentsList',
+      'amp',
     ]),
   },
   created() {
@@ -75,12 +75,12 @@ export default {
     <div class="knob-grid" >
 
       <div
-        v-for="component in ampComponentsList"
+        v-for="component in amp.getKnobComponentsSettings()"
         :key="component.name"
         class="component-grid"
       >
         <chicken-head-knob
-          v-for="knobSetting in getKnobTypes(component.settingsList)"
+          v-for="knobSetting in component.knobSettingList"
           :key="knobSetting.name"
           :name="$t(`AMP.COMPONENT.${component.name.toUpperCase()}.${knobSetting.name.toUpperCase()}`)"
           :init-value="knobSetting.value"

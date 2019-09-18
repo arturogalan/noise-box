@@ -20,6 +20,7 @@
     "bunyan": "^1.8.12",
     "express": "^4.16.4",
     "lodash": "^4.17.11",
+    "mini-css-extract-plugin": "^0.8.0",
     "noisefy": "file:./../noisefy",
     "vue": "^2.6.10",
     "vue-i18n": "^8.11.2",

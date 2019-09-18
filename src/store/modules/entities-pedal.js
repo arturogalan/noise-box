@@ -1,5 +1,5 @@
 import Vue from 'vue';
-import {PEDAL_NAME, PEDAL_PROPERTIES, AMP_COMPONENT_NAME, AMP_COMPONENT_PROPERTIES} from '../constants';
+import {PEDAL_NAME, PEDAL_PROPERTIES, AMP_COMPONENT_NAME} from '../constants';
 import audioUtils from '../../helpers/audioUtils';
 import {isEmpty} from 'lodash';
 
@@ -19,7 +19,7 @@ const pedalModule = {
     amp: {
       switchedOn: false,
       standBy: false,
-      components: {},
+      multiEffectAmp: {},
     },
     pedalBoard: {
       pedals: {},
@@ -30,9 +30,6 @@ const pedalModule = {
   getters: {
     amp(state) {
       return state.amp;
-    },
-    ampComponentsList(state) {
-      return Object.values(state.amp.components);
     },
     distortionTypes(state, getters) {
       const distortionsList = [];
@@ -89,22 +86,25 @@ const pedalModule = {
     toggleStandByAmp({commit}, data) {
       commit('toggleStandByAmp', data);
     },
-    initAmpComponents({dispatch}) {
-      for (const component in AMP_COMPONENT_NAME) {
-        dispatch('addAmpComponent', {name: AMP_COMPONENT_NAME[component]});
-      }
+    createAmp({commit}) {
+      commit('createAmp', audioUtils.createMultiEffectAmp());
     },
-    addAmpComponent({state, commit}, {name}) {
-      if (name && !state.amp.components[name]) { // add only if not exists
-        const component = {
-          name,
-          switchedOn: true,
-          dying: false,
-          ...AMP_COMPONENT_PROPERTIES[name],
-        };
-        commit('addComponent', component);
-      }
-    },
+    // initAmpComponents({dispatch}) {
+    //   for (const component in AMP_COMPONENT_NAME) {
+    //     dispatch('addAmpComponent', {name: AMP_COMPONENT_NAME[component]});
+    //   }
+    // },
+    // addAmpComponent({state, commit}, {name}) {
+    //   if (name && !state.amp.components[name]) { // add only if not exists
+    //     const component = {
+    //       name,
+    //       switchedOn: true,
+    //       dying: false,
+    //       ...AMP_COMPONENT_PROPERTIES[name],
+    //     };
+    //     commit('addComponent', component);
+    //   }
+    // },
     setAmpComponentEffectProperty({commit}, data) {
       commit('setAmpComponentEffectProperty', data);
     },
@@ -123,12 +123,14 @@ const pedalModule = {
         });
       }
     },
-    initAudioInputAndOutput({commit, getters, dispatch}) {
+    initAudioInputAndOutput({commit, dispatch}) {
       commit('setUserInput');
       commit('setUserOutput');
-      commit('connectAllNodes', getters.ampComponentsList, []);
-      dispatch('setDevicesList');
-      dispatch('setDevicesListHandler');
+      dispatch('createAmp').then(()=> {
+        commit('connectAllNodes');
+        dispatch('setDevicesList');
+        dispatch('setDevicesListHandler');
+      });
     },
     addPedal({state, commit, getters}, {type}) {
       if (type && !state.pedalBoard.pedals[type]) { // add only if not exists
@@ -139,7 +141,7 @@ const pedalModule = {
           ...PEDAL_PROPERTIES[type],
         };
         commit('addPedal', pedal);
-        commit('connectAllNodes', getters.ampComponentsList, getters.switchedOnPedalList);
+        commit('connectAllNodes', getters.switchedOnPedalList);
       }
     },
     configurePedal({state}, type) {
@@ -151,7 +153,7 @@ const pedalModule = {
       setTimeout(()=> {
         if (state.pedalBoard.pedals[pedal.type] === pedal) { // check if the node is the same
           commit('removePedal', pedal);
-          commit('connectAllNodes', getters.ampComponentsList, getters.switchedOnPedalList);
+          commit('connectAllNodes', getters.switchedOnPedalList);
         }
       }, 200);
     },
@@ -190,6 +192,9 @@ const pedalModule = {
     toggleStandByAmp(state, {value}) {
       state.amp.standBy = value;
     },
+    createAmp(state, amp) {
+      state.amp.multiEffectAmp = amp;
+    },
     //Visual mutations
     addPalettePedal(state, palettePedal) {
       Vue.set(state.palettePedals, palettePedal.name, palettePedal);
@@ -206,14 +211,15 @@ const pedalModule = {
       Vue.set(state.amp.components, component.name, component);
     },
     setAmpComponentEffectProperty(state, {name, property, value}) {
-      let component = state.amp.components[name];
-      if (component) {
-        if (typeof property === 'number') {
-          component.effect[property] = value / getPropertyCorrectionFactor(component, property);
-        } else {
-          component.effect[property] = value;
-        }
-      }
+      // let component = state.amp.components[name];
+      // if (component) {
+      //   if (typeof property === 'number') {
+      //     component.effect[property] = value / getPropertyCorrectionFactor(component, property);
+      //   } else {
+      //     component.effect[property] = value;
+      //   }
+      // }
+      state.amp.multiEffectAmp.setAmpComponentEffectProperty({componentName: name, componentProperty: property, value});
     },
     addPedal(state, pedal) {
       pedal.effect = audioUtils.createAudioNode(state.audioContext, pedal.type);
@@ -261,21 +267,23 @@ const pedalModule = {
     // },
 
 
-    connectAllNodes(state, ampComponentList, switchedOnPedalList) {
-      ampComponentList.forEach((component, index)=> {
-        if (index === 0) {
-          state.audioInput.connect(component.effect);
-        }
-        if (index < ampComponentList.length - 1) {
-          component.effect.connect(ampComponentList[index + 1].effect);
-        }
-      });
-      const lastComponent = ampComponentList[ampComponentList.length - 1];
+    connectAllNodes(state, switchedOnPedalList) {
+      // ampComponentList.forEach((component, index)=> {
+      //   if (index === 0) {
+      //     state.audioInput.connect(component.effect);
+      //   }
+      //   if (index < ampComponentList.length - 1) {
+      //     component.effect.connect(ampComponentList[index + 1].effect);
+      //   }
+      // });
+      // const lastComponent = ampComponentList[ampComponentList.length - 1];
+      state.audioInput.connect(state.amp.multiEffectAmp.input);
+      const ampOutput = state.amp.multiEffectAmp.output;
 
       if (switchedOnPedalList && switchedOnPedalList.length) {
         switchedOnPedalList.forEach((pedal, index)=> {
           if (index === 0) {
-            lastComponent.effect.connect(pedal.effect);
+            ampOutput.connect(pedal.effect);
           } else if (index < (switchedOnPedalList.length - 1)) {
             pedal.effect.connect(switchedOnPedalList[index + 1].effect);
           } else {
@@ -283,7 +291,7 @@ const pedalModule = {
           }
         });
       } else {
-        lastComponent.effect.connect(state.audioOutput);
+        ampOutput.connect(state.audioOutput);
       }
 
 

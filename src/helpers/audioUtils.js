@@ -18,6 +18,7 @@ const audioUtils = {
     return audioNode;
   },
   configAudioNode(pedal) {
+    // TODO change this with proper initialization inside noisefy reverb
     if (pedal.type === PEDAL_TYPE.REVERB) {
       Noisefy.Reverb.getInputResponseFile(irf).then((buffer)=> {
         if (!pedal.effect.buffer) {
@@ -45,7 +46,9 @@ const audioUtils = {
   deviceListHandler(callback) {
     Noisefy.deviceListHandler(callback);
   },
-
+  createMultiEffectAmp() {
+    return new Noisefy.Amp(Noisefy.AMP_TYPES.WARSHALL);
+  },
 };
 
 function convertToMono(input, audioContext) {

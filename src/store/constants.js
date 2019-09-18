@@ -13,6 +13,7 @@ export const AMP_COMPONENT_NAME = {
   VOLUME: 'volume',
   MASTER: 'master',
 };
+// Properties for each of the components added to the amp mapped by name
 export const AMP_COMPONENT_PROPERTIES = {
   [AMP_COMPONENT_NAME.VOLUME]: {
     name: AMP_COMPONENT_NAME.VOLUME,
