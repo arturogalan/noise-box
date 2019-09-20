@@ -29,6 +29,7 @@ const pedalModule = {
   },
   getters: {
     amp(state) {
+      debugger;
       return state.amp;
     },
     distortionTypes(state, getters) {
@@ -37,7 +38,7 @@ const pedalModule = {
         distortionsList.push({
           id: distortionType,
           name: audioUtils.DISTORTION_TYPES[distortionType],
-          selected: getters.ampDistortionType === audioUtils.DISTORTION_TYPES[distortionType],
+          selected: false,
         });
       }
       return distortionsList;
@@ -87,7 +88,7 @@ const pedalModule = {
       commit('toggleStandByAmp', data);
     },
     createAmp({commit}) {
-      commit('createAmp', audioUtils.createMultiEffectAmp());
+      commit('createAmp');
     },
     // initAmpComponents({dispatch}) {
     //   for (const component in AMP_COMPONENT_NAME) {
@@ -126,11 +127,14 @@ const pedalModule = {
     initAudioInputAndOutput({commit, dispatch}) {
       commit('setUserInput');
       commit('setUserOutput');
-      dispatch('createAmp').then(()=> {
-        commit('connectAllNodes');
-        dispatch('setDevicesList');
-        dispatch('setDevicesListHandler');
-      });
+      commit('connectAllNodes');
+      dispatch('setDevicesList');
+      dispatch('setDevicesListHandler');
+      // dispatch('createAmp').then(()=> {
+      //   commit('connectAllNodes');
+      //   dispatch('setDevicesList');
+      //   dispatch('setDevicesListHandler');
+      // });
     },
     addPedal({state, commit, getters}, {type}) {
       if (type && !state.pedalBoard.pedals[type]) { // add only if not exists
@@ -193,7 +197,7 @@ const pedalModule = {
       state.amp.standBy = value;
     },
     createAmp(state, amp) {
-      state.amp.multiEffectAmp = amp;
+      state.amp.multiEffectAmp = audioUtils.createMultiEffectAmp(state.audioContext);
     },
     //Visual mutations
     addPalettePedal(state, palettePedal) {

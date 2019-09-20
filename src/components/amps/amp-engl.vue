@@ -26,12 +26,10 @@ export default {
     ]),
   },
   created() {
-    this.initAmpComponents();
   },
   methods: {
     ...mapActions('pedal', [
       'switchOnAudioContext',
-      'initAmpComponents',
       'initAudioInputAndOutput',
       'setAmpComponentEffectProperty',
       'toggleAmp',
@@ -75,7 +73,7 @@ export default {
     <div class="knob-grid" >
 
       <div
-        v-for="component in amp.getKnobComponentsSettings()"
+        v-for="component in amp.multiEffectAmp.getKnobComponentsSettings()"
         :key="component.name"
         class="component-grid"
       >

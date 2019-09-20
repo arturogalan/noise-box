@@ -37,6 +37,12 @@
         },
         "DISTORTION":{
           "INTENSITY":"Gain"
+        },
+        "DISTORTIONSTAGE1":{
+          "INTENSITY":"Gain1"
+        },
+        "DISTORTIONSTAGE2":{
+          "INTENSITY":"Gain2"
         }
       },
       "RACK":{

@@ -4,6 +4,7 @@ import {PEDAL_TYPE} from '../store/constants';
 const irf = require('../static/audio/hall-reverb.ogg');
 
 const audioUtils = {
+  AMP_TYPES: Noisefy.AMP_TYPES,
   DISTORTION_TYPES: Noisefy.DISTORTION_TYPES,
   createAudioContext() {
     if (Noisefy.hasAudioContext) {
@@ -46,8 +47,8 @@ const audioUtils = {
   deviceListHandler(callback) {
     Noisefy.deviceListHandler(callback);
   },
-  createMultiEffectAmp() {
-    return new Noisefy.Amp(Noisefy.AMP_TYPES.WARSHALL);
+  createMultiEffectAmp(audioContext) {
+    return new Noisefy.Amp(audioContext, Noisefy.AMP_TYPES.WARSHALL);
   },
 };
 

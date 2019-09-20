@@ -27,10 +27,12 @@ export default {
   },
   created() {
     this.createAudioContext();
+    this.createAmp();
   },
   methods: {
     ...mapActions('pedal', [
       'createAudioContext',
+      'createAmp',
       'setPedalProperty',
     ]),
   },
