@@ -32,11 +32,9 @@ const audioUtils = {
   },
   createInput(audioContext) {
     const input = new Noisefy.Input(audioContext);
-
     let stream = input.getUserMedia();
     console.log(stream);
-    console.log('latency', audioContext.baseLatency);
-    return convertToMono(input, audioContext);
+    return input;
   },
   createOutput(audioContext) {
     return new Noisefy.Output(audioContext);
@@ -51,16 +49,5 @@ const audioUtils = {
     return new Noisefy.Amp(audioContext, Noisefy.AMP_TYPES.WARSHALL);
   },
 };
-
-function convertToMono(input, audioContext) {
-  let splitter = audioContext.createChannelSplitter(2);
-  let merger = audioContext.createChannelMerger(2);
-
-  input.connect(splitter);
-  splitter.connect(merger, 0, 0);
-  splitter.connect(merger, 0, 1);
-  return input;
-}
-
 
 export default audioUtils;
