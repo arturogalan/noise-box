@@ -1,5 +1,6 @@
 <script>
 import ChickenHeadKnob from '../common/chicken-head-knob.vue';
+import audioMaps from '../../helpers/audioMaps';
 import {mapActions, mapGetters} from 'vuex';
 import SwitchOn from './../common/switch-on.vue';
 import {AMP_COMPONENT_TYPE, AMP_COMPONENT_NAME} from '../../store/constants';
@@ -55,8 +56,11 @@ export default {
       this.isSwitchedOn = !this.isSwitchedOn;
       this.toggleAmp({value: this.isSwitchedOn});
     },
-    getKnobTypes(settingsList) {
-      return settingsList.filter((setting)=> setting.type === 'knob');
+    normalize(value) {
+      return audioMaps.getNormalizedSettingValue(value);
+    },
+    denormalize(value) {
+      return audioMaps.setNormalizedSettingValue(value);
     },
   },
 };
@@ -81,8 +85,8 @@ export default {
           v-for="knobSetting in component.knobSettingList"
           :key="knobSetting.name"
           :name="$t(`AMP.COMPONENT.${component.name.toUpperCase()}.${knobSetting.name.toUpperCase()}`)"
-          :init-value="knobSetting.value"
-          @valueChanged="setAmpComponentEffectProperty({name: component.name, property: knobSetting.name, value: $event})"
+          :init-value="normalize(knobSetting.value)"
+          @valueChanged="setAmpComponentEffectProperty({name: component.name, property: knobSetting.name, value: denormalize($event)})"
         />
       </div>
     </div>

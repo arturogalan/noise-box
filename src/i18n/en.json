@@ -21,11 +21,11 @@
     },
     "AMP": {
       "COMPONENT": {
-        "MASTER":{
-          "LEVEL":"Master"
+        "OUTPUTGAIN":{
+          "LEVEL":"Volume"
           },
-        "VOLUME":{
-        "LEVEL":"Volume"
+        "MASTER":{
+        "LEVEL":"Master"
         },
         "EQUALIZER": {
           "TREBBLEGAIN":"Trebble",

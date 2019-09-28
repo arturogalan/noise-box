@@ -1,5 +1,5 @@
 import Vue from 'vue';
-import {PEDAL_NAME, PEDAL_PROPERTIES, AMP_COMPONENT_NAME} from '../constants';
+import {PEDAL_NAME, PEDAL_PROPERTIES} from '../constants';
 import audioUtils from '../../helpers/audioUtils';
 import {isEmpty} from 'lodash';
 
@@ -44,7 +44,8 @@ const pedalModule = {
       return distortionsList;
     },
     ampDistortionType(state) {
-      return (state.amp.components[AMP_COMPONENT_NAME.DISTORTION] || {}).effect.distortionType;
+      debugger;
+      return state.amp.multiEffectAmp.getDistortionTypes();
     },
     palettePedalsList(state) {
       return Object.values(state.palettePedals);
@@ -206,23 +207,8 @@ const pedalModule = {
     clearPalettePedals(state) {
       state.palettePedals = {};
     },
-    addComponent(state, component) {
-      component.effect = audioUtils.createAudioNode(state.audioContext, component.type);
-      for (let setting of component.settingsList) {
-        component.effect[setting.name] = setting.value / getPropertyCorrectionFactor(component, setting.name);
-      }
-      audioUtils.configAudioNode(component);
-      Vue.set(state.amp.components, component.name, component);
-    },
+
     setAmpComponentEffectProperty(state, {name, property, value}) {
-      // let component = state.amp.components[name];
-      // if (component) {
-      //   if (typeof property === 'number') {
-      //     component.effect[property] = value / getPropertyCorrectionFactor(component, property);
-      //   } else {
-      //     component.effect[property] = value;
-      //   }
-      // }
       state.amp.multiEffectAmp.setAmpComponentEffectProperty({componentName: name, componentProperty: property, value});
     },
     addPedal(state, pedal) {
@@ -281,6 +267,7 @@ const pedalModule = {
       //   }
       // });
       // const lastComponent = ampComponentList[ampComponentList.length - 1];
+      debugger;
       state.audioInput.connect(state.amp.multiEffectAmp.input);
       const ampOutput = state.amp.multiEffectAmp.output;
 

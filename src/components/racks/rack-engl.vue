@@ -10,7 +10,7 @@ export default {
   },
   computed: {
     ...mapGetters('pedal', [
-      'ampDistortionType',
+      // 'ampDistortionType',
       'distortionTypes',
     ]),
   },

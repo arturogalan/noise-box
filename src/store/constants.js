@@ -7,10 +7,10 @@ export const AMP_COMPONENT_TYPE = {
 };
 // This order is the order the components appear in the amp header
 export const AMP_COMPONENT_NAME = {
-  DISTORTION: 'distortion',
+  DISTORTION: 'distortionStage2',
   EQUALIZER: 'equalizer',
   PRESENCE: 'presence',
-  VOLUME: 'volume',
+  VOLUME: 'outputGain',
   MASTER: 'master',
 };
 // Properties for each of the components added to the amp mapped by name
