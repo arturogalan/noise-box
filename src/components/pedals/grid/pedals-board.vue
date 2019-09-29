@@ -16,11 +16,11 @@ export default {
     ]),
   },
   created() {
-    this.initPalettePedals();
+    this.initPedals();
   },
   methods: {
     ...mapActions('pedal', [
-      'initPalettePedals',
+      'initPedals',
       'removePedal',
       'setPedalProperty',
     ]),
@@ -33,27 +33,15 @@ export default {
 
 <template>
   <article>
-    <div class="pedal-palette">
-      <div class="palette-title">{{ this.$t('MAIN.STEP_1') }}</div>
-      <div class="grid-container">
-        <pedals-palette
-          v-tooltip="{text: $t('TOOLTIP.PEDAL.ADD', { effect: palettePedal.name })}"
-          v-for="palettePedal in palettePedalsList"
-          :key="palettePedal.name"
-          :palette-pedal="palettePedal"
-        />
-      </div>
-    </div>
+    <div class="pedal-palette"/>
     <div class="pedal-board">
-      <div class="palette-title">{{ this.$t('MAIN.STEP_2') }}</div>
-
 
       <div class="noise-board column">
         <div>
           <div
             class="column left"/>
           <div
-            class="column middle">
+            class="column middle ">
             <div>
               <pedal
                 v-for="pedal in pedalList"
@@ -83,11 +71,12 @@ export default {
 }
 .pedal-board {
    height: 100%;
-     background-color:#ccc;
+  background-color:#ccc;
 }
 
 .noise-board{
   width: 80%;
+  background-color: rgb(70,70,70);
 }
 /* Create three unequal columns that floats next to each other */
 .column {

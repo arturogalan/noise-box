@@ -42,7 +42,10 @@
           "INTENSITY":"Gain1"
         },
         "DISTORTIONSTAGE2":{
-          "INTENSITY":"Gain2"
+          "INTENSITY":"Gain"
+        },
+        "OUTPUT":{
+          "LEVEL":"Output"
         }
       },
       "RACK":{

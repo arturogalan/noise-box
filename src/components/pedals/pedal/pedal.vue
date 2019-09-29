@@ -35,6 +35,7 @@ export default {
   methods: {
     ...mapActions('pedal', [
       'togglePedal',
+      'connectAll',
     ]),
     deleteClick() {
       if (!this.pedal.dying) {
@@ -42,7 +43,7 @@ export default {
       }
     },
     switchPedal() {
-      this.togglePedal(this.pedal.type);
+      this.togglePedal(this.pedal.type); //.then(()=> this.connectAll());
     },
   },
 };
