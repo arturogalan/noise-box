@@ -31,20 +31,40 @@ const pedalModule = {
     amp(state) {
       return state.amp;
     },
-    distortionTypes(state, getters) {
-      const distortionsList = [];
-      for (const distortionType in audioUtils.DISTORTION_TYPES) {
-        distortionsList.push({
-          id: distortionType,
-          name: audioUtils.DISTORTION_TYPES[distortionType],
-          selected: false,
-        });
-      }
-      return distortionsList;
+    ampSelectedDistos(state) {
+      return state.amp.multiEffectAmp.getSelectedDistortions();
     },
-    ampDistortionType(state) {
-      return state.amp.multiEffectAmp.getDistortionTypes();
+    ampDistortionsLists(state, getters) {
+      const lists = [];
+      state.amp.multiEffectAmp.getSelectedDistortions().forEach((distortion)=> {
+        lists.push(
+          {
+            componentName: distortion.componentName,
+            list: state.amp.multiEffectAmp.getDistortionTypes().map((disto)=> {
+              return {
+                id: disto,
+                name: disto,
+                selected: disto === distortion.distortionType,
+              };
+            }),
+          }
+        );
+      });
+      return lists;
     },
+    ampMainSelectedDisto(state, getters) {
+      return getters.ampSelectedDistos.find((disto)=> disto.componentName === 'distortionStage2').distortionType;
+    },
+    ampDistortionType(state, getters) {
+      return state.amp.multiEffectAmp.getDistortionTypes().map((disto)=> {
+        return {
+          id: disto,
+          name: disto,
+          selected: disto === getters.ampMainSelectedDisto,
+        };
+      });
+    },
+    // TODO: At the moment only working with main disto but distortionStage1 is also customizable
     pedalList(state) {
       return Object.values(state.pedalBoard.pedals);
     },

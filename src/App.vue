@@ -51,7 +51,8 @@ export default {
   </div>
 </template>
 <style lang="scss">
-body,p { margin:0; }
+body { margin:0; background-color: rgb(70,70,70);}
+p { margin:0;}
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;

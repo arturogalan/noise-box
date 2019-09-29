@@ -67,11 +67,9 @@ export default {
   width: 15%;
   height: 100%;
   float: left;
-  background-color:#aaa;
 }
 .pedal-board {
    height: 100%;
-  background-color:#ccc;
 }
 
 .noise-board{

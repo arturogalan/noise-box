@@ -6,6 +6,10 @@ export default {
       type: Array,
       required: true,
     },
+    name: {
+      type: String,
+      required: true,
+    },
   },
   computed: {
     selectedItem() {
@@ -18,7 +22,7 @@ export default {
       this.close();
     },
     close() {
-      this.$refs.checkbox_toogle.checked = false;
+      this.$refs[`checkbox_toggle${this.name}`].checked = false;
     },
   },
 };
@@ -26,10 +30,10 @@ export default {
 <template>
   <div class="dropdown">
     <input
-      id="checkbox_toggle"
-      ref="checkbox_toogle"
+      :id="`checkbox_toggle${name}`"
+      :ref="`checkbox_toggle${name}`"
       type="checkbox">
-    <label for="checkbox_toggle">{{ selectedItem.name }}</label>
+    <label :for="`checkbox_toggle${name}`">{{ selectedItem.name }}</label>
     <ul>
       <li
         v-for="item in list"
@@ -46,15 +50,16 @@ export default {
     font-family: "FontPbio";
     font-size: .8rem;
     color: #FFF;
-      min-width: 200px;
+    min-width: 200px;
   }
   label{
+      z-index: 999999;
       box-sizing: border-box;
       display: inline-block;
       width: 100%;
       background-color: black;
       padding: 15px 20px;
-
+      color: #FFF;
       cursor: pointer;
       text-align: center;
       box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);

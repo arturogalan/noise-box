@@ -79,7 +79,7 @@ export default {
     <div class="knob-grid" >
 
       <div
-        v-for="component in amp.multiEffectAmp.getKnobComponentsSettings()"
+        v-for="component in amp.multiEffectAmp.getKnobTypeComponents()"
         :key="component.name"
         class="component-grid"
       >

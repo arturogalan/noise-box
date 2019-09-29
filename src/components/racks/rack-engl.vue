@@ -1,7 +1,7 @@
 <script>
 import dropdown from '../common/dropdown';
 import {mapGetters, mapActions} from 'vuex';
-import {AMP_COMPONENT_NAME} from '../../store/constants';
+// import {AMP_COMPONENT_NAME} from '../../store/constants';
 
 export default {
   name: 'rack-engl',
@@ -10,8 +10,7 @@ export default {
   },
   computed: {
     ...mapGetters('pedal', [
-      // 'ampDistortionType',
-      'distortionTypes',
+      'ampDistortionsLists',
     ]),
   },
 
@@ -19,8 +18,8 @@ export default {
     ...mapActions('pedal', [
       'setAmpComponentEffectProperty',
     ]),
-    setDistortionType(selectedDisto) {
-      this.setAmpComponentEffectProperty({name: AMP_COMPONENT_NAME.DISTORTION, property: 'distortionType', value: selectedDisto.name});
+    setDistortionType(distoList, selectedDisto) {
+      this.setAmpComponentEffectProperty({name: distoList.componentName, property: 'distortionType', value: selectedDisto.name});
     },
   },
 };
@@ -28,8 +27,11 @@ export default {
 <template>
   <div class="rack-wrapper">
     <dropdown
-      :list="distortionTypes"
-      @selected="setDistortionType"/>
+      v-for="distoList of ampDistortionsLists"
+      :key="distoList.componentName"
+      :list="distoList.list"
+      :name="distoList.componentName"
+      @selected="setDistortionType(distoList, $event)"/>
   </div>
 </template>
 <style lang="scss" scoped>
