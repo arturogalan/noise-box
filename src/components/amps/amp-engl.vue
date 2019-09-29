@@ -3,7 +3,7 @@ import ChickenHeadKnob from '../common/chicken-head-knob.vue';
 import audioMaps from '../../helpers/audioMaps';
 import {mapActions, mapGetters} from 'vuex';
 import SwitchOn from './../common/switch-on.vue';
-import {AMP_COMPONENT_TYPE, AMP_COMPONENT_NAME} from '../../store/constants';
+import {AMP_COMPONENT_TYPE} from '../../store/constants';
 
 
 export default {
@@ -45,16 +45,18 @@ export default {
     },
     toogleMuteAudio() {
       // Only toggle if power switch is ON
-      if (this.isSwitchedOn) {
-        this.isMuted = !this.isMuted;
-        this.setAmpComponentEffectProperty({name: AMP_COMPONENT_NAME.VOLUME, property: 'mute', value: this.isMuted});
-        this.toggleStandByAmp({value: !this.isMuted});
-      }
+      // if (this.isSwitchedOn) {
+      //   this.isMuted = !this.isMuted;
+      //   this.setAmpComponentEffectProperty({name: AMP_COMPONENT_NAME.VOLUME, property: 'mute', value: this.isMuted});
+      //   this.toggleStandByAmp({value: !this.isMuted});
+      // }
+      this.toggleStandByAmp();
     },
     toogleSwitchOnAmp() {
-      this.initAudioInterface();
-      this.isSwitchedOn = !this.isSwitchedOn;
-      this.toggleAmp({value: this.isSwitchedOn});
+      // this.initAudioInterface();
+      // this.isSwitchedOn = !this.isSwitchedOn;
+      // this.toggleAmp({value: this.isSwitchedOn});
+      this.toggleAmp();
     },
     normalize(value) {
       return audioMaps.getNormalizedSettingValue(value);

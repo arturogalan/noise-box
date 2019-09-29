@@ -1,5 +1,5 @@
 import Vue from 'vue';
-import {PEDAL_NAME, PEDAL_PROPERTIES} from '../constants';
+import {AMP_COMPONENT_NAME, PEDAL_NAME, PEDAL_PROPERTIES} from '../constants';
 import audioUtils from '../../helpers/audioUtils';
 import {isEmpty} from 'lodash';
 
@@ -20,6 +20,7 @@ const pedalModule = {
       standBy: false,
       multiEffectAmp: {},
     },
+    nodesConnected: false,
     pedalBoard: {
       pedals: {},
     },
@@ -76,12 +77,18 @@ const pedalModule = {
   },
 
   actions: {
-    toggleAmp({commit}, data) {
+    toggleAmp({state, commit, dispatch, getters}, data) {
       commit('toggleAmp', data);
+      if (!state.nodesConnected) {
+        dispatch('switchOnAudioContext');
+        dispatch('initAudioInputAndOutput');
+        commit('connectAllNodes', getters.pedalList);
+      }
+      dispatch('setAmpComponentEffectProperty', {name: AMP_COMPONENT_NAME.VOLUME, property: 'mute', value: !state.amp.switchedOn || !state.amp.standBy});
     },
-    toggleStandByAmp({state, commit, getters}, data) {
+    toggleStandByAmp({state, commit, dispatch}, data) {
       commit('toggleStandByAmp', data);
-      if (state.amp.standBy) commit('connectAllNodes', getters.pedalList);
+      dispatch('setAmpComponentEffectProperty', {name: AMP_COMPONENT_NAME.VOLUME, property: 'mute', value: !state.amp.switchedOn || !state.amp.standBy});
     },
     createAmp({commit}) {
       commit('createAmp');
@@ -97,7 +104,6 @@ const pedalModule = {
     initAudioInputAndOutput({commit, dispatch, getters}) {
       commit('setUserInput');
       commit('setUserOutput');
-      // commit('connectAllNodes', getters.pedalList);
       dispatch('setDevicesList');
       dispatch('setDevicesListHandler');
     },
@@ -157,11 +163,11 @@ const pedalModule = {
   },
 
   mutations: {
-    toggleAmp(state, {value}) {
-      state.amp.switchedOn = value;
+    toggleAmp(state) {
+      state.amp.switchedOn = !state.amp.switchedOn;
     },
-    toggleStandByAmp(state, {value}) {
-      state.amp.standBy = value;
+    toggleStandByAmp(state) {
+      state.amp.standBy = !state.amp.standBy;
     },
     createAmp(state) {
       state.amp.multiEffectAmp = audioUtils.createMultiEffectAmp(state.audioContext);
@@ -193,6 +199,7 @@ const pedalModule = {
     },
 
     connectAllNodes(state, pedalList) {
+      state.nodesConnected = true;
       state.audioInput.connect(state.amp.multiEffectAmp.input);
       const ampOutput = state.amp.multiEffectAmp.output;
       const switchedOnPedalList = pedalList.filter((pedal)=> pedal.switchedOn);
