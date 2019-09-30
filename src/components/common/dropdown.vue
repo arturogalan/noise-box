@@ -1,6 +1,9 @@
 <script>
+import closeable from '../../mixins/closeable';
+
 export default {
   name: 'dropdown',
+  mixins: [closeable],
   props: {
     list: {
       type: Array,
@@ -28,7 +31,8 @@ export default {
 };
 </script>
 <template>
-  <div class="dropdown">
+  <div
+    class="dropdown">
     <input
       :id="`checkbox_toggle${name}`"
       :ref="`checkbox_toggle${name}`"
@@ -45,6 +49,7 @@ export default {
 </template>
 <style lang="scss" scoped>
   .dropdown{
+    z-index: $z-index-3;
     position: relative;
     display: inline-block;
     font-family: "FontPbio";
@@ -53,7 +58,6 @@ export default {
     min-width: 200px;
   }
   label{
-      z-index: 999999;
       box-sizing: border-box;
       display: inline-block;
       width: 100%;
@@ -107,7 +111,8 @@ export default {
     display: none;
   }
   input[type=checkbox]:checked ~ ul {
-      display: block
+      display: block;
+      @extend .fade-in;
   }
 </style>
 

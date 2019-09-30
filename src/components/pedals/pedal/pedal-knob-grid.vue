@@ -36,7 +36,7 @@ export default {
 <style lang="scss">
 .knob-grid {
     position: absolute;
-    z-index: $z-index-3;
+    z-index: $z-index-2;
     display: flex;
     justify-content: space-around;
     width: 100%;

@@ -28,7 +28,7 @@ export default {
       class="icon-type">
   </div>
 </template>
-<style>
+<style lang="scss" scoped>
 .palette-card {
     display: flex;
     position: relative;
@@ -55,7 +55,7 @@ export default {
 }
 .icon-type{
     max-width: 5rem;
-       display:block;
+    display:block;
     margin:auto;
 }
 .overlay {

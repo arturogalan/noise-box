@@ -55,16 +55,18 @@ const pedalModule = {
     ampMainSelectedDisto(state, getters) {
       return getters.ampSelectedDistos.find((disto)=> disto.componentName === 'distortionStage2').distortionType;
     },
-    ampDistortionType(state, getters) {
-      return state.amp.multiEffectAmp.getDistortionTypes().map((disto)=> {
+    ampSelectedCabinet(state) {
+      return state.amp.multiEffectAmp.getSelectedCabinet();
+    },
+    ampCabinetList(state, getters) {
+      return state.amp.multiEffectAmp.getCabinetTypes().map((cabinet)=> {
         return {
-          id: disto,
-          name: disto,
-          selected: disto === getters.ampMainSelectedDisto,
+          id: cabinet,
+          name: cabinet,
+          selected: cabinet === getters.ampSelectedCabinet,
         };
       });
     },
-    // TODO: At the moment only working with main disto but distortionStage1 is also customizable
     pedalList(state) {
       return Object.values(state.pedalBoard.pedals);
     },
@@ -115,6 +117,12 @@ const pedalModule = {
     },
     setAmpComponentEffectProperty({commit}, data) {
       commit('setAmpComponentEffectProperty', data);
+    },
+    setComponentDistoType({commit}, data) {
+      commit('setComponentDistoType', data);
+    },
+    setAmpCabinetType({commit}, data) {
+      commit('setAmpCabinetType', data);
     },
     initPedals({commit, dispatch}) {
       for (let pedal in PEDAL_NAME) {
@@ -194,6 +202,24 @@ const pedalModule = {
     },
     setAmpComponentEffectProperty(state, {name, property, value}) {
       state.amp.multiEffectAmp.setAmpComponentEffectProperty({componentName: name, componentProperty: property, value});
+    },
+    setComponentDistoType(state, {name, value}) {
+      state.amp.multiEffectAmp.setAmpComponentEffectProperty(
+        {
+          componentName: name,
+          componentProperty: audioUtils.AMP_SETTING_NAME.DISTORTION_TYPE,
+          value,
+        }
+      );
+    },
+    setAmpCabinetType(state, {value}) {
+      state.amp.multiEffectAmp.setAmpComponentEffectProperty(
+        {
+          componentName: audioUtils.AMP_COMPONENT_NAME.CABINET,
+          componentProperty: audioUtils.AMP_SETTING_NAME.CABINET_IMPULSE,
+          value,
+        }
+      );
     },
     addPedal(state, pedal) {
       pedal.effect = audioUtils.createAudioNode(state.audioContext, pedal.type);

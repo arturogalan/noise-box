@@ -1,5 +1,8 @@
 <script>
 import {mapGetters} from 'vuex';
+// const input = require('../assets/icons/input.svg');
+// const output = require('../assets/icons/output.svg');
+
 export default {
   data() {
     return {
@@ -17,7 +20,6 @@ export default {
   },
   methods: {
   },
-
 };
 </script>
 
@@ -25,14 +27,36 @@ export default {
   <div>
     <div
       class="footer">
-      <p v-if="defaultInputDevice || defaultInputDevice">
-        Input:{{ defaultInputDevice.label }} Output:{{ defaultOutputDevice.label }}
-      </p>
+      <section v-if="defaultInputDevice || defaultInputDevice">
+        <div class="footer-container">
+          <div class="footer-section">
+            <span>
+              <img
+                src="../assets/icons/input.svg"
+                class="icon-type">
+            </span>
+            <span>
+              Input:{{ defaultInputDevice.label }}
+            </span>
+          </div>
+          <div class="footer-section">
+            <span>
+              <img
+                src="../assets/icons/output.svg"
+                class="icon-type">
+            </span>
+            <span>
+              Output:{{ defaultOutputDevice.label }}
+            </span>
+          </div>
+
+        </div>
+      </section>
     </div>
   </div>
 </template>
 
-<style>
+<style lang="scss" scoped>
 .footer {
    position: fixed;
    left: 0;
@@ -42,5 +66,26 @@ export default {
    background-color: black;
    color: white;
    text-align: center;
+}
+.footer-container {
+  display: flex;
+  justify-content: space-around
+}
+.footer-section {
+  display: table;
+
+img {
+  vertical-align: middle;
+  display: table-cell;
+  margin-right: 1rem;
+}
+span {
+  vertical-align: middle;
+  display: table-cell;
+}
+}
+
+.icon-type{
+    max-width: 2rem;
 }
 </style>

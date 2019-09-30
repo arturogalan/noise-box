@@ -4,6 +4,8 @@ import * as Noisefy from 'noisefy';
 const audioUtils = {
   AMP_TYPES: Noisefy.AMP_TYPES,
   DISTORTION_TYPES: Noisefy.DISTORTION_TYPES,
+  AMP_COMPONENT_NAME: Noisefy.AMP_COMPONENT_NAME,
+  AMP_SETTING_NAME: Noisefy.AMP_SETTING_NAME,
   createAudioContext() {
     if (Noisefy.hasAudioContext) {
       return new AudioContext();

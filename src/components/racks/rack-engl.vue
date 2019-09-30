@@ -11,15 +11,20 @@ export default {
   computed: {
     ...mapGetters('pedal', [
       'ampDistortionsLists',
+      'ampCabinetList',
     ]),
   },
 
   methods: {
     ...mapActions('pedal', [
-      'setAmpComponentEffectProperty',
+      'setComponentDistoType',
+      'setAmpCabinetType',
     ]),
     setDistortionType(distoList, selectedDisto) {
-      this.setAmpComponentEffectProperty({name: distoList.componentName, property: 'distortionType', value: selectedDisto.name});
+      this.setComponentDistoType({name: distoList.componentName, value: selectedDisto.name});
+    },
+    setCabinetType(selectedCabinet) {
+      this.setAmpCabinetType({value: selectedCabinet.name});
     },
   },
 };
@@ -32,6 +37,12 @@ export default {
       :list="distoList.list"
       :name="distoList.componentName"
       @selected="setDistortionType(distoList, $event)"/>
+
+    <dropdown
+      :list="ampCabinetList"
+      name="cabinetType"
+      @selected="setCabinetType"/>
+    />
   </div>
 </template>
 <style lang="scss" scoped>

@@ -5,6 +5,7 @@ import pedalZoomIn from './components/pedals/pedal/pedal-zoom-in';
 import englTheme from './components/themes/engl-theme.vue';
 import pedalsBoard from './components/pedals/grid/pedals-board';
 import appFooter from './components/app-footer.vue';
+import closeable from './mixins/closeable';
 
 export default {
   name: 'app',
@@ -15,6 +16,7 @@ export default {
     pedalsBoard,
     appFooter,
   },
+  mixins: [closeable],
   data() {
     return {
       audioContext: null,
@@ -40,7 +42,8 @@ export default {
 };
 </script>
 <template>
-  <div id="app">
+  <div
+    id="app">
     <modal
       :show="zoomInPedal !== undefined">
       <pedal-zoom-in/>

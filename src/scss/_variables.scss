@@ -108,7 +108,7 @@ $knob-grid-background: rgb(39,39,39);
   animation-name: fadeInOpacity;
   animation-iteration-count: 1;
   animation-timing-function: ease-in;
-  animation-duration: .5s;
+  animation-duration: .25s;
 }
 
 @keyframes fadeInOpacity {
@@ -146,7 +146,7 @@ $knob-grid-background: rgb(39,39,39);
 
 .fade-enter-active,
 .fade-leave-active {
-    transition: opacity .2s
+    transition: opacity 5s
 }
 .fade-enter,
 .fade-leave-to {
