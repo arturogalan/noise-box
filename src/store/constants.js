@@ -121,11 +121,13 @@ export const PEDAL_TYPE = {
   DELAY: 'delay',
   FLANGER: 'flanger',
   REVERB: 'reverb',
+  TREMOLO: 'tremolo',
 };
 export const PEDAL_NAME = {
   DELAY: 'delay',
   FLANGER: 'flanger',
   REVERB: 'reverb',
+  TREMOLO: 'tremolo',
 };
 
 export const PEDAL_PROPERTIES = {
@@ -139,26 +141,17 @@ export const PEDAL_PROPERTIES = {
     settingsList: [
       {
         name: 'wet',
-        min: 0,
-        max: 100,
         value: 1,
-        correctionFactor: 1,
         color: 'lightskyblue',
       },
       {
         name: 'speed',
-        min: 0,
-        max: 10,
-        value: 5, //0.5 0->1,
-        correctionFactor: 10,
+        value: 5,
         color: 'lightslategray',
       },
       {
         name: 'duration',
-        min: 0,
-        max: 10,
-        value: 4, //0.4 0->1,
-        correctionFactor: 10,
+        value: 4,
         color: 'lightseagreen',
       },
     ],
@@ -173,34 +166,22 @@ export const PEDAL_PROPERTIES = {
     settingsList: [
       {
         name: 'delay',
-        min: 0,
-        max: 0.1,
         value: 5, //0.005 0->0.1?,
-        correctionFactor: 1,
         color: 'lightslategray',
       },
       {
         name: 'depth',
-        min: 0,
-        max: 100,
         value: 2, //0.002 0->0.1,
-        correctionFactor: 1000,
         color: 'lightseagreen',
       },
       {
         name: 'feedback',
-        min: 0,
-        max: 100,
         value: 5, //0.5 0->1,
-        correctionFactor: 100,
         color: 'lightskyblue',
       },
       {
         name: 'speed',
-        min: 0,
-        max: 100,
-        value: 25, // 0.25 0->1,
-        correctionFactor: 100,
+        value: 5,
         color: 'brown',
       },
     ],
@@ -211,23 +192,32 @@ export const PEDAL_PROPERTIES = {
     zoomIn: false,
     icon: 'assets/icons/flanger.svg',
     bgcolor: 'rgb(139,98,79)',
-    fcolor: 'black',
+    fcolor: 'white',
     settingsList: [
       {
         name: 'wet',
-        min: 0,
-        max: 1,
         value: 1,
-        correctionFactor: 1,
         color: 'lightslategray',
       },
       {
         name: 'level',
-        min: 0,
-        max: 1,
         value: 1,
-        correctionFactor: 1,
         color: 'lightseagreen',
+      },
+    ],
+  },
+  [PEDAL_NAME.TREMOLO]: {
+    name: PEDAL_NAME.TREMOLO,
+    type: PEDAL_TYPE.TREMOLO,
+    zoomIn: false,
+    icon: 'assets/icons/flanger.svg',
+    bgcolor: 'rgb(51,133,133)',
+    fcolor: 'white',
+    settingsList: [
+      {
+        name: 'speed',
+        value: 5,
+        color: 'brown',
       },
     ],
   },

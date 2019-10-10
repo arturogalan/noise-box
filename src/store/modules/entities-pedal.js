@@ -3,12 +3,6 @@ import {AMP_COMPONENT_NAME, PEDAL_NAME, PEDAL_PROPERTIES} from '../constants';
 import audioUtils from '../../helpers/audioUtils';
 import {isEmpty} from 'lodash';
 
-
-const getPropertyCorrectionFactor = (component, property)=> {
-  return (component.settingsList.find((el)=> el.name===property) || {}).correctionFactor || 1;
-};
-
-
 const pedalModule = {
   namespaced: true,
   state: {
@@ -149,16 +143,6 @@ const pedalModule = {
     configurePedal({state}, type) {
       audioUtils.configAudioNode(state.pedalBoard.pedals[type]);
     },
-    // removePedal({state, commit, getters}, pedal) {
-    //   if (pedal.dying) return;
-    //   commit('killPedal', pedal.type);
-    //   setTimeout(()=> {
-    //     if (state.pedalBoard.pedals[pedal.type] === pedal) { // check if the node is the same
-    //       commit('removePedal', pedal);
-    //       commit('connectAllNodes', getters.switchedOnPedalList);
-    //     }
-    //   }, 200);
-    // },
     setPedalProperty({commit}, data) {
       commit('setPedalProperty', data);
     },
@@ -224,7 +208,7 @@ const pedalModule = {
     addPedal(state, pedal) {
       pedal.effect = audioUtils.createAudioNode(state.audioContext, pedal.type);
       for (let setting of pedal.settingsList) {
-        pedal.effect[setting.name] = setting.value / getPropertyCorrectionFactor(pedal, setting.name);
+        pedal.effect[setting.name] = setting.value;
       }
       Vue.set(state.pedalBoard.pedals, pedal.name, pedal);
     },
@@ -240,7 +224,7 @@ const pedalModule = {
     setPedalEffectProperty(state, {name, property, value}) {
       let pedal = state.pedalBoard.pedals[name];
       if (pedal) {
-        pedal.effect[property] = value / getPropertyCorrectionFactor(pedal, property);
+        pedal.effect[property] = value;
       }
     },
 

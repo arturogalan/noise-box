@@ -132,6 +132,7 @@ export default {
       let adjustDegrees = degress + deltaDegrees;
       adjustDegrees = adjustDegrees > 360 ? adjustDegrees - 360 : adjustDegrees;
       this.selectorValue = adjustDegrees;
+      this.$emit('valueChanged', this.currentValue);
       // console.log(this.maxValue * Math.trunc(adjustPercentage/this.maxValue))
     },
     numDigits(x) {

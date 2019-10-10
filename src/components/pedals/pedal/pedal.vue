@@ -65,7 +65,7 @@ export default {
         class="knob-grid-wrapper">
         <div class="knob-grid-container">
 
-          <pedal-knob-grid :settings-list="pedal.settingsList"/>
+          <pedal-knob-grid :pedal="pedal"/>
         </div>
       </div>
       <div class="pedal-name-wrapper">

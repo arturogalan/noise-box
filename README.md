@@ -32,8 +32,12 @@ For a detailed explanation on how things work, check out the [guide](http://vuej
 
 
 ## TO-DO
-Remove unnecessary Vue.set when setting vars
+Remove unnecessary Vue.set when setting vars and separete entities pedal and entities amp
 Move convertToMono to a property of noisefy input effect
-
+Fill all the distortion curves
+Quit input and output from amp and draw them apart from amp header (maybe in the footer?)
+Tuner
+Curves graphs
+make a mixin for the knobs
 
 

@@ -42,7 +42,7 @@ export default {
       {{ zoomInPedal.name }}
     </div>
     <pedal-knob-grid
-      :settings-list="zoomInPedal.settingsList"
+      :pedal="zoomInPedal"
       class="knob-grid-container"
       size="zoom-in"/>
   </div>

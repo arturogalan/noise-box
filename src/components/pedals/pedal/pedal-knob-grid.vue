@@ -1,11 +1,14 @@
 <script>
 import vueKnobNb from '../../common/vue-knob-nb.vue';
+import {mapActions} from 'vuex';
+import audioMaps from '../../../helpers/audioMaps';
+
 export default {
   components: {
     vueKnobNb,
   },
   props: {
-    settingsList: {type: Array, required: true, default: ()=> []},
+    pedal: {type: Object, required: true},
     size: {type: String, required: false, default: ()=> 'normal'},
   },
   data() {
@@ -13,23 +16,34 @@ export default {
       myVal: 50,
     };
   },
-  methods: {},
+  methods: {
+    ...mapActions('pedal', [
+      'setPedalEffectProperty',
+    ]),
+    normalize(value) {
+      return audioMaps.getNormalizedSettingValue(value);
+    },
+    denormalize(value) {
+      return audioMaps.setNormalizedSettingValue(value);
+    },
+  },
 };
 </script>
 <template>
   <div class="knob-grid" >
     <vue-knob-nb
-      v-for="(setting, index) in settingsList"
+      v-for="(setting, index) in pedal.settingsList"
       :key="index"
       :name="setting.name"
       :barcolor="setting.color"
-      :init-value="setting.value"
+      :init-value="normalize(setting.value)"
       :class="'one-knob--'+size"
       :size="size"
-      :knobs-number="settingsList.length"
+      :knobs-number="pedal.settingsList.length"
       class="one-knob"
       fillcolor="none"
       bgcolor="none"
+      @valueChanged="setPedalEffectProperty({name: pedal.name, property: setting.name, value: denormalize($event)})"
     />
   </div>
 </template>
