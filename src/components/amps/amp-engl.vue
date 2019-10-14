@@ -84,7 +84,7 @@ export default {
         class="component-grid"
       >
         <chicken-head-knob
-          v-for="knobSetting in component.knobSettingList"
+          v-for="knobSetting in component.settingList"
           :key="knobSetting.name"
           :name="$t(`AMP.COMPONENT.${component.name.toUpperCase()}.${knobSetting.name.toUpperCase()}`)"
           :init-value="normalize(knobSetting.value)"
