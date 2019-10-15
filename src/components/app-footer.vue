@@ -31,6 +31,7 @@ export default {
 };
 </script>
 
+<!-- amp.multiEffectAmp.getInputComponent().settingList[0].value -->
 <template>
   <div>
     <div
@@ -38,27 +39,32 @@ export default {
       class="footer">
       <div class="footer-section">
         <img
-          class="footer-items icon-type"
+          class="footer-label icon-type"
           src="../assets/icons/input.svg">
-        <div>
-          Input:{{ defaultInputDevice.label }}
+        <div class="footer-label footer-title--input">
+          <span class="footer-title">Input: </span>
+          {{ defaultInputDevice }}
         </div>
-        <div>
-          <vue-slider-nb :value="10"/>
-          <!-- amp.multiEffectAmp.getInputComponent().settingList[0].value -->
+        <div class="footer-label">
+          <vue-slider-nb
+            :value="10"
+            :value-color="'rgb(146, 215, 146)'"
+            class="footer-slider"/>
         </div>
       </div>
       <div class="footer-section">
-        <div>
-          <img
-            src="../assets/icons/output.svg"
-            class="icon-type">
+        <img
+          class="footer-label icon-type"
+          src="../assets/icons/output.svg">
+        <div class="footer-label footer-title--output">
+          <span class="footer-title">Output: </span>
+          {{ defaultOutputDevice }}
         </div>
-        <div>
-          Output:{{ defaultOutputDevice.label }}
-        </div>
-        <div>
-          <vue-slider-nb :value="10"/>
+        <div class="footer-label">
+          <vue-slider-nb
+            :value="10"
+            :value-color="'rgb(206, 71, 73)'"
+            class="footer-slider"/>
         </div>
       </div>
     </div>
@@ -67,33 +73,45 @@ export default {
 
 <style lang="scss" scoped>
 .footer {
-   position: fixed;
-   left: 0;
-   bottom: 0;
-   width: 100%;
-   height: 3em;
-   background-color: black;
-   color: white;
-   text-align: center;
-     display: grid;
+  z-index: $z-index-10; /* Sit on top */
+  padding: 0 2rem 0 2rem;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 3em;
+  background-color: black;
+  color: white;
+  text-align: center;
+  display: grid;
   justify-content: center;
   grid-template-columns: 50% 50%;/*Make the grid smaller than the container*/
   grid-gap: 5px;
 }
-
-// .footer-section {
-//   display: grid;
-//   justify-content: center;
-//   grid-template-columns: 50% 50%;/*Make the grid smaller than the container*/
-//   grid-gap: 5px;
-// }
-
-
+.footer-label {
+  white-space: nowrap;
+  margin-left: .2rem;
+  font-family: "Conthrax";
+  font-size: .7rem;
+}
+.footer-title {
+  font-weight: bold;
+  font-size: .9rem;
+  &--input {
+    color: rgb(146, 215, 146);
+  }
+  &--output {
+    color: rgb(206, 71, 73);
+  }
+}
 .footer-section {
   max-width: 50%;
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+.footer-slider {
+  margin-left: 1rem;
 }
 // img {
 //   vertical-align: middle;

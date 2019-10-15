@@ -85,10 +85,28 @@ const pedalModule = {
       return state.deviceList.filter((el)=> el.deviceId==='default');
     },
     defaultInputDevice(state, getters) {
-      return getters.defaultAudioDevicesList.find((el)=> el.direction === 'input');
+      const inputDevice = getters.defaultAudioDevicesList.find((el)=> el.direction === 'input');
+      if (!inputDevice) return '';
+      let formattedInput = inputDevice.label;
+      [
+        'Predeterminado',
+        ' - ',
+      ].forEach((word)=> {
+        formattedInput = formattedInput.replace(word, '');
+      });
+      return formattedInput;
     },
     defaultOutputDevice(state, getters) {
-      return getters.defaultAudioDevicesList.find((el)=> el.direction === 'output');
+      const outputDevice = getters.defaultAudioDevicesList.find((el)=> el.direction === 'output');
+      if (!outputDevice) return '';
+      let formattedOutput = outputDevice.label;
+      [
+        'Predeterminado',
+        ' - ',
+      ].forEach((word)=> {
+        formattedOutput = formattedOutput.replace(word, '');
+      });
+      return formattedOutput;
     },
   },
 
