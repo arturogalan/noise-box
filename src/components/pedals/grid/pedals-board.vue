@@ -35,27 +35,22 @@ export default {
   <article>
     <div class="pedal-palette"/>
     <div class="pedal-board">
-
-      <div class="noise-board column">
-        <div>
-          <div
-            class="column left"/>
-          <div
-            class="column middle ">
-            <div>
-              <pedal
-                v-for="pedal in pedalList"
-                :key="pedal.name"
-                :pedal="pedal"
-                class="column"
-                @delete="removePedal(pedal)"
-                @maximize="zoomPedal(pedal)"
-              />
-            </div>
-          </div>
-          <div
-            class="column right"/>
+      <div class="noise-board">
+        <div
+          class="column left"/>
+        <div
+          class="column middle ">
+          <pedal
+            v-for="pedal in pedalList"
+            :key="pedal.name"
+            :pedal="pedal"
+            class="column"
+            @delete="removePedal(pedal)"
+            @maximize="zoomPedal(pedal)"
+          />
         </div>
+        <div
+          class="column right"/>
       </div>
     </div>
   </article>
@@ -64,7 +59,7 @@ export default {
 .pedal-palette {
   /* display: flex; */
   /* flex-wrap: wrap; */
-  width: 15%;
+  width: 15%;display: grid;
   height: 100%;
   float: left;
 }
@@ -73,24 +68,23 @@ export default {
 }
 
 .noise-board{
-  width: 80%;
+  width: 100%;
   background-color: rgb(70,70,70);
+  display: grid;
+  grid-template-columns: 10% 80% 10%;
 }
 /* Create three unequal columns that floats next to each other */
-.column {
-    float: left;
-    height: 100%;
-}
+// .column {
+//     float: left;
+//     height: 100%;
+// }
 .left {
-  width: 2%;
-  background-color:#bbb;
 }
 .middle {
-  width: 95%;
+  display: flex;
+  justify-content: space-around;
 }
 .right {
-  width: 5%;
-  background-color:#ddd;
 }
 
 /* Clear floats after the columns */

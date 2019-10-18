@@ -6,16 +6,21 @@ export default {
     value: {type: Number, required: true, default: ()=> 0},
     positionVertical: {type: Boolean, required: false, default: false},
     valueColor: {type: String, required: false, default: ''},
+    valueFillColor: {type: String, required: false, default: ''},
   },
   data() {
     return {
       isVisible: true,
       inputValue: this.value,
+      valueKey: '',
     };
   },
   computed: {
     valueLeftMargin() {
       return (this.inputValue * 11)/100;
+    },
+    fillColorLeftMargin() {
+      return 102 - this.inputValue;
     },
   },
   watch: {
@@ -25,7 +30,9 @@ export default {
   },
   methods: {
     trackValue() {
-      console.log(this.$refs.slider);
+      // Change the value key to trigger animation
+      this.valueKey = 'bounce-tiny';
+      this.$nextTick(()=> this.valueKey = '');
     },
   },
 };
@@ -33,12 +40,22 @@ export default {
 <template>
   <div class="slider-container">
     <div
-      :style="{left: `${valueLeftMargin}em`, color: valueColor}"
-      :class="[inputValue < 10 ? 'range-value-one-digit' : 'range-value-two-digits']"
-      class="range-value"
-    >
-      {{ inputValue }}
-    </div>
+      class="range-background"
+    />
+    <div
+      :style="{right: `${fillColorLeftMargin}%`, backgroundColor: valueFillColor}"
+      class="range-value-background"
+    />
+    <transition name="bounce-tiny">
+      <div
+        :key="valueKey"
+        :style="{left: `${valueLeftMargin}em`, color: valueColor}"
+        :class="[inputValue < 10 ? 'range-value-one-digit' : 'range-value-two-digits']"
+        class="range-value"
+      >
+        {{ inputValue }}
+      </div>
+    </transition>
     <input
       ref="slider"
       v-model="inputValue"
@@ -55,16 +72,16 @@ export default {
           class="tick tick--big"/>
         <p
           :key="`${index}-2`"
-          class="tick"/>
+          class="tick tick--small"/>
         <p
           :key="`${index}-3`"
-          class="tick"/>
+          class="tick tick--small"/>
         <p
           :key="`${index}-4`"
-          class="tick"/>
+          class="tick tick--small"/>
         <p
           :key="`${index}-5`"
-          class="tick"/>
+          class="tick tick--small"/>
       </template>
       <p
         class="tick tick--big"/>
@@ -75,6 +92,53 @@ export default {
 .slider-container {
   position: relative;
   display: flex;
+  float: left;
+}
+.sliderticks {
+  z-index: $z-index-0;
+  pointer-events: none;
+  position: absolute;
+  display: flex;
+  justify-content: space-between;
+  width: calc(100% + 2px);
+}
+
+.tick {
+  position: relative;
+  display: flex;
+  width: 1px;
+  background: #D3D3D3;
+ &--small {
+  height: 1.2rem;
+  top: -.1rem;
+ }
+ &--big {
+   height: 30px;
+   transform: translateY(calc(-25%));
+ }
+}
+.range-background {
+  z-index: $z-index-1;
+  position: absolute;
+  pointer-events: none;
+  left: .2rem;
+  right: 0;
+  top: calc(50% - .25rem);
+  height: .6rem;;
+  border-radius: 0.3em;
+  border: 1px inset #474747;
+  background: rgba(21,18,17,1);
+}
+
+.range-value-background {
+  z-index: $z-index-2;
+  position: absolute;
+  pointer-events: none;
+  left: .2rem;
+  right: 0;
+  top: calc(50% - .1rem);
+  height: .4rem;
+  border-radius: .1rem;
 }
 .range {
   cursor: pointer;
@@ -83,20 +147,20 @@ export default {
   outline: none;
   width: 20em;
   height: 0.8em;
-  border-radius: 0.3em;
-  border: 1px inset #474747;
-  background: rgba(21,18,17,1);
+  background-color: transparent;
+  z-index: $z-index-3;
 }
 .range-value {
+  z-index: $z-index-4;
   position: absolute;
-  top: 0;
-  transform: translateY(calc(-50% + 0.3em));
+  height: 1.2rem;
+  bottom: calc(50% - .6rem);
   pointer-events: none;
   font-family: "FontPbio";
   font-size: 1rem;;
 }
 .range-value-one-digit {
-  margin-left: .9em;
+  margin-left: 1.5rem;
 }
 .range-value-two-digits {
   margin-left: .6em;
@@ -141,37 +205,11 @@ input[type="range"]::-webkit-slider-thumb {
 @include thumb;
 }
 .range::-moz-range-thumb {
-@include thumb;
+  @include thumb;
 }
 .range::-ms-thumb {
 @include thumb;
 }
 
 
-.sliderticks {
-  z-index: -1;
-  pointer-events: none;
-  position: absolute;
-  // transform: translateY(calc(-50% + 0.4em));
-  display: flex;
-  justify-content: space-between;
-  padding: 0 3px;
-  width: calc(100% - 5px); //calc(100%-2px);
-}
-
-.tick {
-  position: relative;
-  display: flex;
-  // justify-content: center;
-  // text-align: center;
-  width: 1px;
-  background: #D3D3D3;
-  height: 20px;
-  line-height: 40px;
- // margin: 0 0 20% 0;
- &--big {
-   height: 30px;
-   transform: translateY(calc(-25%));
- }
-}
 </style>

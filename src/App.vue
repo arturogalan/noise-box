@@ -89,4 +89,16 @@ p { margin:0;}
   font-weight: 400;
   font-style: normal;
 }
+@font-face {
+  font-family: "Stencilia";
+  src: url("./assets/fonts/stencilia.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Dyslexic";
+  src: url("./assets/fonts/OpenDyslexic-Bold.otf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+}
 </style>

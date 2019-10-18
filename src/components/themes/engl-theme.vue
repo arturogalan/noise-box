@@ -16,5 +16,6 @@ export default {
   <section>
     <app-header-engl/>
     <amp-engl/>
-  <rack-engl/></section>
+    <rack-engl/>
+  </section>
 </template>

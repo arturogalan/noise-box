@@ -1,5 +1,6 @@
 {
-    "close": "\\f101",
-    "maximize": "\\f102",
-    "minimize": "\\f103"
+    "arrow": "\\f101",
+    "close": "\\f102",
+    "maximize": "\\f103",
+    "minimize": "\\f104"
 }

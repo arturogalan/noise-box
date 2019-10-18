@@ -23,11 +23,15 @@ export default {
         minimize: false,
         maximize: false,
       },
+      strokeColor: '',
     };
   },
   computed: {
     helper() {
       return this.pedal.switchedOn ? 'Switch off pedal' : 'Switch on pedal';
+    },
+    strokeBorder() {
+      return this.strokeColor ? `2px solid ${this.strokeColor}` : '';
     },
   },
   mounted() {
@@ -43,7 +47,10 @@ export default {
       }
     },
     switchPedal() {
-      this.togglePedal(this.pedal.type); //.then(()=> this.connectAll());
+      this.togglePedal(this.pedal.type);
+    },
+    setStroke(isHover) {
+      this.strokeColor = isHover ? '#3f7f00' : '';
     },
   },
 };
@@ -51,7 +58,9 @@ export default {
 <template>
   <div
     :class="[pedal.dying && 'fade-out']"
-    class="pedal-card">
+    class="pedal-card"
+    @mouseover="setStroke(true)"
+    @mouseleave="setStroke(false)">
     <mac-buttons
       :button-literals="{
         close: 'TOOLTIP.PEDAL.REMOVE',
@@ -86,7 +95,7 @@ export default {
         class="push-wrapper"
         @click="switchPedal()"/>
       <img
-        :style="{ backgroundColor: pedal.bgcolor }"
+        :style="{ backgroundColor: pedal.bgcolor, border: strokeBorder}"
         class="pedal-svg"
         src="../../../assets/img/pedal.svg"
         alt

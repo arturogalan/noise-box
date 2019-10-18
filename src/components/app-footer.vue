@@ -49,10 +49,11 @@ export default {
           <vue-slider-nb
             :value="10"
             :value-color="'rgb(146, 215, 146)'"
+            :value-fill-color="'hsl(100,16%,30%)'"
             class="footer-slider"/>
         </div>
       </div>
-      <div class="footer-section">
+      <div class="footer-section footer-section--right">
         <img
           class="footer-label icon-type"
           src="../assets/icons/output.svg">
@@ -64,6 +65,7 @@ export default {
           <vue-slider-nb
             :value="10"
             :value-color="'rgb(206, 71, 73)'"
+            :value-fill-color="'hsl(359,37%,34%)'"
             class="footer-slider"/>
         </div>
       </div>
@@ -78,7 +80,7 @@ export default {
   position: fixed;
   left: 0;
   bottom: 0;
-  width: 100%;
+  width: calc(100% - 70px);
   height: 3em;
   background-color: black;
   color: white;
@@ -87,16 +89,17 @@ export default {
   justify-content: center;
   grid-template-columns: 50% 50%;/*Make the grid smaller than the container*/
   grid-gap: 5px;
+  border: 3px solid rgb(21,18,17);
 }
 .footer-label {
   white-space: nowrap;
   margin-left: .2rem;
   font-family: "Conthrax";
-  font-size: .7rem;
+  font-size: .9rem;
 }
 .footer-title {
   font-weight: bold;
-  font-size: .9rem;
+  font-size: 1.1rem;
   &--input {
     color: rgb(146, 215, 146);
   }
@@ -105,25 +108,19 @@ export default {
   }
 }
 .footer-section {
-  max-width: 50%;
+  max-width: 100%;
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
   align-items: center;
+  &--right {
+    right: 0;
+    justify-content: flex-end;
+  }
 }
 .footer-slider {
   margin-left: 1rem;
 }
-// img {
-//   vertical-align: middle;
-//   display: table-cell;
-//   margin-right: 1rem;
-// }
-// span {
-//   vertical-align: middle;
-//   display: table-cell;
-// }
-
 .icon-type{
-    max-width: 2rem;
+    max-width: 2.5rem;
 }
 </style>

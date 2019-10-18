@@ -2,20 +2,23 @@
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd" >
 <svg xmlns="http://www.w3.org/2000/svg">
 <defs>
-  <font id="noisefont" horiz-adv-x="24">
+  <font id="noisefont" horiz-adv-x="777">
     <font-face font-family="noisefont"
-      units-per-em="24" ascent="24"
+      units-per-em="480" ascent="480"
       descent="0" />
     <missing-glyph horiz-adv-x="0" />
-    <glyph glyph-name="close"
+    <glyph glyph-name="arrow"
       unicode="&#xF101;"
-      horiz-adv-x="24" d=" M19 17.6L17.6 19L12 13.4L6.4 19L5 17.6L10.6 12L5 6.4L6.4 5L12 10.6L17.6 5L19 6.4L13.4 12z" />
-    <glyph glyph-name="maximize"
+      horiz-adv-x="777" d=" M0 480H100V380H0V480z M333.2135161955494 149.1545618415612L387.8693484279709 203.8103940739363L333.2135161955494 258.4662263062667L364.4504683167103 289.7031784274283L450.3520866500179 203.8103940739363L364.4504683167103 117.8911077813605" />
+    <glyph glyph-name="close"
       unicode="&#xF102;"
-      horiz-adv-x="24" d=" M5.004736 4.807664L5.004736 16.558176L17.629408 4.807664L5.004736 4.807664z M19.192336 18.995264L19.192336 7.244752L6.567664 18.995264L19.192336 18.995264z" />
-    <glyph glyph-name="minimize"
+      horiz-adv-x="480" d=" M380 352L352 380L240 268L128 380L100 352L212 240L100 128L128 100L240 212L352 100L380 128L268 240z" />
+    <glyph glyph-name="maximize"
       unicode="&#xF103;"
-      horiz-adv-x="24" d=" M3.816496 13.627152L20.764624 13.627152L20.764624 10.507152L3.816496 10.507152L3.816496 13.627152z" />
+      horiz-adv-x="480" d=" M100.09472 96.15328L100.09472 331.16352L352.58816 96.15328L100.09472 96.15328z M383.84672 379.90528L383.84672 144.89504L131.35328 379.90528L383.84672 379.90528z" />
+    <glyph glyph-name="minimize"
+      unicode="&#xF104;"
+      horiz-adv-x="480" d=" M76.32992 272.54304L415.29248 272.54304L415.29248 210.14304L76.32992 210.14304L76.32992 272.54304z" />
   </font>
 </defs>
 </svg>

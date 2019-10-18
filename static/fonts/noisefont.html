@@ -54,11 +54,11 @@
 
         @font-face {
     font-family: "noisefont";
-    src: url("./noisefont.eot?b4f1094530841e2050a52894b596960a?#iefix") format("embedded-opentype"),
-url("./noisefont.woff2?b4f1094530841e2050a52894b596960a") format("woff2"),
-url("./noisefont.woff?b4f1094530841e2050a52894b596960a") format("woff"),
-url("./noisefont.ttf?b4f1094530841e2050a52894b596960a") format("truetype"),
-url("./noisefont.svg?b4f1094530841e2050a52894b596960a#noisefont") format("svg");
+    src: url("./noisefont.eot?bdb6ea6750c0c3c4d816ac021ac2b314?#iefix") format("embedded-opentype"),
+url("./noisefont.woff2?bdb6ea6750c0c3c4d816ac021ac2b314") format("woff2"),
+url("./noisefont.woff?bdb6ea6750c0c3c4d816ac021ac2b314") format("woff"),
+url("./noisefont.ttf?bdb6ea6750c0c3c4d816ac021ac2b314") format("truetype"),
+url("./noisefont.svg?bdb6ea6750c0c3c4d816ac021ac2b314#noisefont") format("svg");
 }
 
 i {
@@ -71,14 +71,17 @@ i:before {
     font-weight: normal !important;
 }
 
-.ico-close:before {
+.ico-arrow:before {
     content: "\f101";
 }
-.ico-maximize:before {
+.ico-close:before {
     content: "\f102";
 }
-.ico-minimize:before {
+.ico-maximize:before {
     content: "\f103";
+}
+.ico-minimize:before {
+    content: "\f104";
 }
 
 i-after {
@@ -92,14 +95,17 @@ i-after:after {
   vertical-align: top;
 }
 
-.ico-close-after:after {
+.ico-arrow-after:after {
   content: "\f101";
 }
-.ico-maximize-after:after {
+.ico-close-after:after {
   content: "\f102";
 }
-.ico-minimize-after:after {
+.ico-maximize-after:after {
   content: "\f103";
+}
+.ico-minimize-after:after {
+  content: "\f104";
 }
 
 
@@ -108,6 +114,15 @@ i-after:after {
 <body>
 
     <h1>noisefont</h1>
+
+
+        <div class="preview">
+            <span class="inner">
+                <i class="ico-arrow"></i>
+            </span>
+            <br>
+            <span class='label'>arrow</span>
+        </div>
 
 
         <div class="preview">
