@@ -32,6 +32,7 @@ For a detailed explanation on how things work, check out the [guide](http://vuej
 
 
 ## TO-DO
+Watchers in chickenKnob to bind the preset value when selected
 Connect input and output sliders
 Remove unnecessary Vue.set when setting vars and separete entities pedal and entities amp
 Fill all the distortion curves DONE

@@ -1,4 +1,15 @@
 <script>
+const debounce = (func, delay)=> {
+  let debounceTimer;
+  return function() {
+    const context = this;
+    // eslint-disable-next-line prefer-rest-params
+    const args = arguments;
+    clearTimeout(debounceTimer);
+    debounceTimer = setTimeout(()=> func.apply(context, args), delay);
+  };
+};
+
 export default {
   name: 'vue-slider-nb',
   components: {},
@@ -25,7 +36,7 @@ export default {
   },
   watch: {
     inputValue(newValue) {
-      this.$emit('change', newValue);
+      this.emitChangeDebounced(newValue);
     },
   },
   methods: {
@@ -34,6 +45,9 @@ export default {
       this.valueKey = 'bounce-tiny';
       this.$nextTick(()=> this.valueKey = '');
     },
+    emitChangeDebounced: debounce(function(newValue) {
+      this.$emit('change', newValue);
+    }, 250),
   },
 };
 </script>
@@ -60,7 +74,7 @@ export default {
       ref="slider"
       v-model="inputValue"
       type="range"
-      min="0"
+      min="1"
       max="99"
       value="85"
       class="range"

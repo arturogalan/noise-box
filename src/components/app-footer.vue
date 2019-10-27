@@ -22,10 +22,13 @@ export default {
   created() {
   },
   mounted() {
+    console.log(this.amp.multiEffectAmp.getInputGainComponent());
   },
   methods: {
     ...mapActions('pedal', [
       'setAmpComponentEffectProperty',
+      'setAmpInputGain',
+      'setAmpOutputGain',
     ]),
   },
 };
@@ -50,7 +53,8 @@ export default {
             :value="10"
             :value-color="'rgb(146, 215, 146)'"
             :value-fill-color="'hsl(100,16%,30%)'"
-            class="footer-slider"/>
+            class="footer-slider"
+            @change="setAmpInputGain($event)"/>
         </div>
       </div>
       <div class="footer-section footer-section--right">
@@ -66,7 +70,8 @@ export default {
             :value="10"
             :value-color="'rgb(206, 71, 73)'"
             :value-fill-color="'hsl(359,37%,34%)'"
-            class="footer-slider"/>
+            class="footer-slider"
+            @change="setAmpOutputGain($event)"/>
         </div>
       </div>
     </div>

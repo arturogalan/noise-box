@@ -14,6 +14,7 @@ const pedalModule = {
       standBy: false,
       multiEffectAmp: {},
     },
+    selectedPreset: '',
     nodesConnected: false,
     pedalBoard: {
       pedals: {},
@@ -34,6 +35,7 @@ const pedalModule = {
         lists.push(
           {
             componentName: distortion.componentName,
+            distortionType: distortion.distortionType,
             list: state.amp.multiEffectAmp.getDistortionTypes().map((disto)=> {
               return {
                 id: disto,
@@ -45,6 +47,20 @@ const pedalModule = {
         );
       });
       return lists;
+    },
+    ampDistortionPresets(state, getters) {
+      const presetSelected = (preset)=> {
+        return preset.distortionStage1 === getters.ampDistortionsLists.find((el)=> el.componentName === 'distortionStage1').distortionType &&
+        preset.distortionStage2 === getters.ampDistortionsLists.find((el)=> el.componentName === 'distortionStage2').distortionType;
+      };
+
+      return audioUtils.DISTORTION_PRESETS.map((preset)=> {
+        return {
+          id: preset.name,
+          ...preset,
+          selected: presetSelected(preset),
+        };
+      });
     },
     ampMainSelectedDisto(state, getters) {
       return getters.ampSelectedDistos.find((disto)=> disto.componentName === 'distortionStage2').distortionType;
@@ -58,6 +74,21 @@ const pedalModule = {
           id: cabinet,
           name: cabinet,
           selected: cabinet === getters.ampSelectedCabinet,
+        };
+      });
+    },
+    ampCabinetWet(state) {
+      return state.amp.multiEffectAmp.getCabinetSettings().find((setting)=> setting.name === audioUtils.AMP_SETTING_NAME.CABINET_WET).value;
+    },
+    ampCabinetSettings(state) {
+      return state.amp.multiEffectAmp.getCabinetSettings();
+    },
+    ampPresetList(state) {
+      return audioUtils.getPresetList().map((preset)=> {
+        return {
+          id: preset,
+          name: preset,
+          selected: preset === state.selectedPreset,
         };
       });
     },
@@ -130,11 +161,44 @@ const pedalModule = {
     setAmpComponentEffectProperty({commit}, data) {
       commit('setAmpComponentEffectProperty', data);
     },
+    setAmpInputGain({commit}, value) {
+      commit('setAmpComponentEffectProperty', {name: 'input', property: 'level', value});
+    },
+    setAmpOutputGain({commit}, value) {
+      commit('setAmpComponentEffectProperty', {name: 'output', property: 'level', value});
+    },
     setComponentDistoType({commit}, data) {
       commit('setComponentDistoType', data);
     },
-    setAmpCabinetType({commit}, data) {
-      commit('setAmpCabinetType', data);
+    setAmpCabinetType({commit}, {value}) {
+      commit('setAmpComponentEffectProperty',
+        {
+          name: audioUtils.AMP_COMPONENT_NAME.CABINET,
+          property: audioUtils.AMP_SETTING_NAME.CABINET_IMPULSE,
+          value,
+        }
+      );
+    },
+    setAmpCabinetSettings({commit}, {property, value}) {
+      commit('setAmpComponentEffectProperty',
+        {
+          name: audioUtils.AMP_COMPONENT_NAME.CABINET,
+          property,
+          value,
+        }
+      );
+    },
+    setAmpCabinetWet({commit}, {value}) {
+      commit('setAmpComponentEffectProperty',
+        {
+          name: audioUtils.AMP_COMPONENT_NAME.CABINET,
+          property: audioUtils.AMP_SETTING_NAME.CABINET_WET,
+          value,
+        }
+      );
+    },
+    setPreset({commit}, data) {
+      commit('setPreset', data.id);
     },
     initPedals({commit, dispatch}) {
       for (let pedal in PEDAL_NAME) {
@@ -214,14 +278,9 @@ const pedalModule = {
         }
       );
     },
-    setAmpCabinetType(state, {value}) {
-      state.amp.multiEffectAmp.setAmpComponentEffectProperty(
-        {
-          componentName: audioUtils.AMP_COMPONENT_NAME.CABINET,
-          componentProperty: audioUtils.AMP_SETTING_NAME.CABINET_IMPULSE,
-          value,
-        }
-      );
+    setPreset(state, value) {
+      state.selectedPreset = value;
+      state.amp.multiEffectAmp.preset = state.selectedPreset;
     },
     addPedal(state, pedal) {
       pedal.effect = audioUtils.createAudioNode(state.audioContext, pedal.type);

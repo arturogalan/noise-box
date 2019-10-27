@@ -13,6 +13,15 @@ export const AMP_COMPONENT_NAME = {
   VOLUME: 'outputGain',
   MASTER: 'master',
 };
+export const AMP_SETTING_TYPE = {
+  INPUT: 'input',
+  OUTPUT: 'output',
+  KNOB: 'knob',
+  INTERNAL: 'internal',
+  BOOLEAN: 'boolean',
+  SELECT: 'select',
+  CABINET: 'cabinet',
+};
 // Properties for each of the components added to the amp mapped by name
 export const AMP_COMPONENT_PROPERTIES = {
   [AMP_COMPONENT_NAME.VOLUME]: {

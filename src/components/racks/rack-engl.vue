@@ -1,5 +1,7 @@
 <script>
 import dropdown from '../common/dropdown';
+import vueKnobNb from '../common/vue-knob-nb.vue';
+import audioMaps from '../../helpers/audioMaps';
 import {mapGetters, mapActions} from 'vuex';
 // import {AMP_COMPONENT_NAME} from '../../store/constants';
 
@@ -7,11 +9,16 @@ export default {
   name: 'rack-engl',
   components: {
     dropdown,
+    vueKnobNb,
   },
   computed: {
     ...mapGetters('pedal', [
       'ampDistortionsLists',
+      'ampDistortionPresets',
       'ampCabinetList',
+      'ampCabinetSettings',
+      'ampCabinetWet',
+      'ampPresetList',
     ]),
   },
 
@@ -19,12 +26,22 @@ export default {
     ...mapActions('pedal', [
       'setComponentDistoType',
       'setAmpCabinetType',
+      'setAmpCabinetWet',
+      'setAmpCabinetSettings',
+      'setPreset',
     ]),
-    setDistortionType(distoList, selectedDisto) {
-      this.setComponentDistoType({name: distoList.componentName, value: selectedDisto.name});
+    setDistortionType(selectedPreset) {
+      this.setComponentDistoType({name: 'distortionStage1', value: selectedPreset.distortionStage1});
+      this.setComponentDistoType({name: 'distortionStage2', value: selectedPreset.distortionStage2});
     },
     setCabinetType(selectedCabinet) {
       this.setAmpCabinetType({value: selectedCabinet.name});
+    },
+    normalize(value) {
+      return audioMaps.getNormalizedSettingValue(value);
+    },
+    denormalize(value) {
+      return audioMaps.setNormalizedSettingValue(value);
     },
   },
 };
@@ -37,14 +54,13 @@ export default {
           DISTORTION
         </div>
         <dropdown
-          v-for="distoList of ampDistortionsLists"
-          :key="distoList.componentName"
-          :list="distoList.list"
-          :name="distoList.componentName"
-          @selected="setDistortionType(distoList, $event)"/>
+          :list="ampDistortionPresets"
+          name="distoType"
+          @selected="setDistortionType"/>
+          <!-- :name="distoList.componentName" -->
       </div>
     </div>
-    <div class="rack-section rack-section--right">
+    <div class="rack-section">
       <div class="rack-box">
         <div class="rack-label">
           CABINET
@@ -53,6 +69,32 @@ export default {
           :list="ampCabinetList"
           name="cabinetType"
           @selected="setCabinetType"/>
+
+        <vue-knob-nb
+          v-for="setting in ampCabinetSettings"
+          :key="setting.name"
+          :init-value="normalize(setting.value)"
+          :name="setting.name"
+          :knobs-number="ampCabinetSettings.length"
+          barcolor="grey"
+          size="normal"
+          class="one-knob"
+          fillcolor="none"
+          bgcolor="none"
+          @valueChanged="setAmpCabinetSettings({property: setting.name, value: denormalize($event)})"
+        />
+      </div>
+    </div>
+    <div class="rack-section rack-section--right">
+      <div class="rack-box">
+        <div class="rack-label">
+          PRESET
+        </div>
+        <dropdown
+          :list="ampPresetList"
+          name="presetType"
+          placeholder="Select a preset"
+          @selected="setPreset"/>
       </div>
     </div>
   </div>
@@ -65,7 +107,7 @@ export default {
   box-shadow: inset 0px 1px 10px 0px rgb(0, 0, 0);
   min-width: $app-min-width + 12px;
   display: grid;
-  grid-template-columns: 50% 50%;
+  grid-template-columns: 33% 33% 33%;
   // grid-gap: 2px;
   // justify-content: center;
   // text-align: center;
@@ -97,6 +139,19 @@ export default {
   font-size: 1.2rem;
   color: aliceblue;
   text-shadow: 2px 2px rgba(0, 0, 0, 0.8);
-
+}
+.one-knob {
+  cursor: pointer;
+  margin-right: .3rem;
+  width: 3rem;
+  display: flex;
+  z-index: $z-index-2;
+}
+.knob-grid {
+    // position: absolute;
+    z-index: $z-index-2;
+    // display: flex;
+    // justify-content: space-around;
+    // width: 100%;
 }
 </style>

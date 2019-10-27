@@ -44,18 +44,9 @@ export default {
       }
     },
     toogleMuteAudio() {
-      // Only toggle if power switch is ON
-      // if (this.isSwitchedOn) {
-      //   this.isMuted = !this.isMuted;
-      //   this.setAmpComponentEffectProperty({name: AMP_COMPONENT_NAME.VOLUME, property: 'mute', value: this.isMuted});
-      //   this.toggleStandByAmp({value: !this.isMuted});
-      // }
       this.toggleStandByAmp();
     },
     toogleSwitchOnAmp() {
-      // this.initAudioInterface();
-      // this.isSwitchedOn = !this.isSwitchedOn;
-      // this.toggleAmp({value: this.isSwitchedOn});
       this.toggleAmp();
     },
     normalize(value) {
@@ -63,6 +54,13 @@ export default {
     },
     denormalize(value) {
       return audioMaps.setNormalizedSettingValue(value);
+    },
+    setKnobValue(component, knobSetting, value) {
+      // when setting disto intensity also set the asymetric disto intensity to the same value in SIMPLE mode
+      if (component.name === 'distortionStage2') {
+        this.setAmpComponentEffectProperty({name: 'distortionStage1', property: knobSetting.name, value: this.denormalize(value)});
+      }
+      this.setAmpComponentEffectProperty({name: component.name, property: knobSetting.name, value: this.denormalize(value)});
     },
   },
 };
@@ -79,7 +77,7 @@ export default {
     <div class="knob-grid" >
 
       <div
-        v-for="component in amp.multiEffectAmp.getKnobTypeComponents()"
+        v-for="component in amp.multiEffectAmp.getKnobTypeComponents().filter((component)=> component.name !== 'distortionStage1')"
         :key="component.name"
         class="component-grid"
       >
@@ -88,7 +86,7 @@ export default {
           :key="knobSetting.name"
           :name="$t(`AMP.COMPONENT.${component.name.toUpperCase()}.${knobSetting.name.toUpperCase()}`)"
           :init-value="normalize(knobSetting.value)"
-          @valueChanged="setAmpComponentEffectProperty({name: component.name, property: knobSetting.name, value: denormalize($event)})"
+          @valueChanged="setKnobValue(component, knobSetting, $event)"
         />
       </div>
     </div>

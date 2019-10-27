@@ -13,6 +13,11 @@ export default {
       type: String,
       required: true,
     },
+    placeholder: {
+      type: String,
+      required: false,
+      default: '',
+    },
   },
   data() {
     return {
@@ -49,12 +54,14 @@ export default {
     <input
       :id="`checkbox_toggle${name}`"
       :ref="`checkbox_toggle${name}`"
-      type="checkbox">
+      type="checkbox"
+    >
     <label
       :for="`checkbox_toggle${name}`"
       :style="{ boxShadow: strokeBoxShadow}"
+      :class="[!selectedItem.name && 'placeholder']"
     >
-      {{ selectedItem.name }}
+      {{ selectedItem.name || placeholder }}
       <img
         class="arrow"
         src="../../assets/icons/arrow.png"></label>
@@ -82,6 +89,10 @@ export default {
     font-size: .8rem;
     color: #FFF;
     min-width: 200px;
+  }
+  .placeholder{
+    font-style: italic;
+    color: rgba(255, 255, 255, 0.5);
   }
   label{
       box-sizing: border-box;

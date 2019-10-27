@@ -4,6 +4,7 @@ import * as Noisefy from 'noisefy';
 const audioUtils = {
   AMP_TYPES: Noisefy.AMP_TYPES,
   DISTORTION_TYPES: Noisefy.DISTORTION_TYPES,
+  DISTORTION_PRESETS: Noisefy.DISTORTION_PRESETS,
   AMP_COMPONENT_NAME: Noisefy.AMP_COMPONENT_NAME,
   AMP_SETTING_NAME: Noisefy.AMP_SETTING_NAME,
   createAudioContext() {
@@ -35,6 +36,9 @@ const audioUtils = {
   },
   createMultiEffectAmp(audioContext) {
     return new Noisefy.Amp(audioContext, Noisefy.AMP_TYPES.WARSHALL);
+  },
+  getPresetList() {
+    return Object.values(Noisefy.PRESET_TYPES);
   },
 };
 
