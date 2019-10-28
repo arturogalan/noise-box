@@ -9,16 +9,29 @@ export default {
   data() {
     return {
       isVisible: true,
+      isHover: false,
     };
   },
   computed: {
     ...mapGetters('pedal', [
       'amp',
     ]),
+    showOnIcon() {
+      return !this.isHover && this.amp.switchedOn;
+    },
+    showOffIcon() {
+      return !this.isHover && !this.amp.switchedOn;
+    },
+    showHoverIcon() {
+      return this.isHover;
+    },
   },
   created() {
   },
   methods: {
+    setHover(status) {
+      console.log('eee');
+    },
   },
 
 };
@@ -67,7 +80,7 @@ export default {
         </transition>
       </div>
     </div>
-    <div class="grid-wrapper">
+    <div class="grid-wrapper n-index-1">
       <metal-grid
         v-for="i in 240"
         :key="i"/>
@@ -76,14 +89,30 @@ export default {
       v-tooltip="{text: 'F*king awesome noise box!!!'}"
       class="title"
     >
-      <img
-        v-if="amp.standBy"
-        :src="require('../../assets/img/header-icon-on.png')"
-        class="logo-icon">
-      <img
-        v-else
-        :src="require('../../assets/img/header-icon-off.png')"
-        class="logo-icon">
+      <section
+        @mouseover="isHover = true"
+        @mouseleave="isHover = false"
+      >
+
+        <img
+          v-if="showHoverIcon"
+          :src="require('../../assets/img/header-icon-animated3.gif')"
+          class="logo-icon">
+        <img
+          v-if="showOnIcon"
+          :src="require('../../assets/img/header-icon-on.png')"
+          class="logo-icon"
+          @mouseover="setHover(true)"
+          @mouseleave="isHover = false"
+        >
+        <img
+          v-if="showOffIcon"
+          :src="require('../../assets/img/header-icon-off.png')"
+          class="logo-icon"
+          @mouseover="isHover = true"
+          @mouseleave="isHover = false"
+        >
+      </section>
       <h1><span class="metal">NOISE BOX</span></h1>
     </div>
   </div>
@@ -171,6 +200,8 @@ h1 {
   width: $logo-height + px;
   float: left;
   margin-top: 4px;
+  position: absolute;
+  left: 0;
 }
 
 

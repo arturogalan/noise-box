@@ -69,20 +69,23 @@ export default {
           :list="ampCabinetList"
           name="cabinetType"
           @selected="setCabinetType"/>
-
-        <vue-knob-nb
-          v-for="setting in ampCabinetSettings"
-          :key="setting.name"
-          :init-value="normalize(setting.value)"
-          :name="setting.name"
-          :knobs-number="ampCabinetSettings.length"
-          barcolor="grey"
-          size="normal"
-          class="one-knob"
-          fillcolor="none"
-          bgcolor="none"
-          @valueChanged="setAmpCabinetSettings({property: setting.name, value: denormalize($event)})"
-        />
+        <div class="knob-grid-wrapper">
+          <section class="knob-grid">
+            <vue-knob-nb
+              v-for="setting in ampCabinetSettings"
+              :key="setting.name"
+              :init-value="normalize(setting.value)"
+              :name="setting.name"
+              :knobs-number="ampCabinetSettings.length"
+              barcolor="aliceblue"
+              size="rack"
+              class="one-knob"
+              fillcolor="none"
+              bgcolor="none"
+              @valueChanged="setAmpCabinetSettings({property: setting.name, value: denormalize($event)})"
+            />
+          </section>
+        </div>
       </div>
     </div>
     <div class="rack-section rack-section--right">
@@ -140,18 +143,25 @@ export default {
   color: aliceblue;
   text-shadow: 2px 2px rgba(0, 0, 0, 0.8);
 }
+.knob-grid-wrapper {
+  position: relative;
+  width: 6rem;
+  height: 2.4rem;
+  min-height: 100%;
+  margin-left: .4rem;
+}
+.knob-grid {
+  position: absolute;
+  transform: translateY(-15%);
+  z-index: $z-index-2;
+}
 .one-knob {
   cursor: pointer;
   margin-right: .3rem;
+  margin-left: .3rem;
+  top: 0;
   width: 3rem;
-  display: flex;
+  // display: flex;
   z-index: $z-index-2;
-}
-.knob-grid {
-    // position: absolute;
-    z-index: $z-index-2;
-    // display: flex;
-    // justify-content: space-around;
-    // width: 100%;
 }
 </style>

@@ -70,10 +70,12 @@ export default {
       @maximize="$emit('maximize')"/>
     <div class="pedal-wrapper">
       <div
-        :style="{height: pedal.settingsList.length < 3 ? '45%': '51%'}"
+        :style="{
+          height: pedal.settingsList.length < 3 ? '45%': '51%',
+          marginTop: pedal.settingsList.length === 1 ? '3px': '0'
+        }"
         class="knob-grid-wrapper">
         <div class="knob-grid-container">
-
           <pedal-knob-grid :pedal="pedal"/>
         </div>
       </div>
