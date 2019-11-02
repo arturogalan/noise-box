@@ -63,10 +63,11 @@ export default {
 </template>
 <style lang="scss" scoped>
 .ico-led {
-  width: 10px;
-  line-height: 10px;
-  font-size: 8px;
-  margin-left: .5px;
+  width: 11px;
+  line-height: 11px;
+  font-size: 10px;
+  // margin-left: 1px;
+  margin-top: 1px;
   display: none;
 }
 .pedal-led--strip:hover {

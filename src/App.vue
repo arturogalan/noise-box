@@ -2,6 +2,8 @@
 import {mapGetters, mapActions} from 'vuex';
 import modal from './components/common/modal.vue';
 import pedalZoomIn from './components/pedals/pedal/pedal-zoom-in';
+import infoModal from './components/common/info-modal';
+
 import englTheme from './components/themes/engl-theme.vue';
 import pedalsBoard from './components/pedals/grid/pedals-board';
 import appFooter from './components/app-footer.vue';
@@ -11,6 +13,7 @@ export default {
   name: 'app',
   components: {
     modal,
+    infoModal,
     pedalZoomIn,
     englTheme,
     pedalsBoard,
@@ -25,6 +28,9 @@ export default {
   computed: {
     ...mapGetters('pedal', [
       'zoomInPedal',
+    ]),
+    ...mapGetters('ui', [
+      'showInfoModal',
     ]),
   },
   created() {
@@ -47,6 +53,11 @@ export default {
     <modal
       :show="zoomInPedal !== undefined">
       <pedal-zoom-in/>
+    </modal>
+    <modal
+      :show="showInfoModal"
+      size="big">
+      <infoModal/>
     </modal>
     <engl-theme/>
     <pedals-board/>
@@ -90,14 +101,14 @@ p { margin:0;}
   font-style: normal;
 }
 @font-face {
-  font-family: "Stencilia";
-  src: url("./assets/fonts/stencilia.ttf") format("truetype");
+  font-family: "Dyslexic";
+  src: url("./assets/fonts/OpenDyslexic-Bold.otf") format("truetype");
   font-weight: 400;
   font-style: normal;
 }
 @font-face {
-  font-family: "Dyslexic";
-  src: url("./assets/fonts/OpenDyslexic-Bold.otf") format("truetype");
+  font-family: "Pixel";
+  src: url("./assets/fonts/pixel.ttf") format("truetype");
   font-weight: 400;
   font-style: normal;
 }

@@ -1,6 +1,6 @@
 # noise-box
-
-> A Vue project to test Vue and WebAudio
+> A Vue project to test Vue and WebAudio capabilites.
+All the webaudio nodes and structures of different pedal effects and amp simulation relies on noisefy library.
 
 ## Build Setup
 
@@ -14,32 +14,20 @@ npm run dev
 # build for production with minification
 npm run build
 
-# build for production and view the bundle analyzer report
-npm run build --report
-
-# run unit tests
-npm run unit
-
-# run e2e tests
-npm run e2e
-
-# run all tests
-npm test
+# generate icons
+npm run build:icons
 ```
 
-For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
 
 
 
 ## TO-DO
-Watchers in chickenKnob to bind the preset value when selected
-Connect input and output sliders
+Watchers in chickenKnob to bind the preset value when selected, more presets
 Remove unnecessary Vue.set when setting vars and separete entities pedal and entities amp
-Fill all the distortion curves DONE
-magnet of distos gain
-Quit input and output from amp and draw them apart from amp header (maybe in the footer?)
+Disto advanced settings to make own distos by users.
+LocalStorage saving of user presets
 Tuner
 Curves graphs
-make a mixin for the knobs
-
+Mixin for all the different knobs
+Midi
 

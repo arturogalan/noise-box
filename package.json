@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "description": "A Vue project to test Vue and WebAudio",
   "author": "Arturo Galan <arturo.galan@gmail.com>",
-  "private": true,
   "scripts": {
     "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",
     "prestart": "npm run build",

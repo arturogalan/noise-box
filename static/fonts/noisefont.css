@@ -1,10 +1,10 @@
 @font-face {
     font-family: "noisefont";
-    src: url("./noisefont.eot?979f86d39eda7b11fb42fe8200af0546?#iefix") format("embedded-opentype"),
-url("./noisefont.woff2?979f86d39eda7b11fb42fe8200af0546") format("woff2"),
-url("./noisefont.woff?979f86d39eda7b11fb42fe8200af0546") format("woff"),
-url("./noisefont.ttf?979f86d39eda7b11fb42fe8200af0546") format("truetype"),
-url("./noisefont.svg?979f86d39eda7b11fb42fe8200af0546#noisefont") format("svg");
+    src: url("./noisefont.eot?85ae6156386fb366f871eb686d9dbfe0?#iefix") format("embedded-opentype"),
+url("./noisefont.woff2?85ae6156386fb366f871eb686d9dbfe0") format("woff2"),
+url("./noisefont.woff?85ae6156386fb366f871eb686d9dbfe0") format("woff"),
+url("./noisefont.ttf?85ae6156386fb366f871eb686d9dbfe0") format("truetype"),
+url("./noisefont.svg?85ae6156386fb366f871eb686d9dbfe0#noisefont") format("svg");
 }
 
 i {
@@ -17,17 +17,14 @@ i:before {
     font-weight: normal !important;
 }
 
-.ico-arrow:before {
+.ico-close:before {
     content: "\f101";
 }
-.ico-close:before {
+.ico-maximize:before {
     content: "\f102";
 }
-.ico-maximize:before {
-    content: "\f103";
-}
 .ico-minimize:before {
-    content: "\f104";
+    content: "\f103";
 }
 
 i-after {
@@ -41,15 +38,12 @@ i-after:after {
   vertical-align: top;
 }
 
-.ico-arrow-after:after {
+.ico-close-after:after {
   content: "\f101";
 }
-.ico-close-after:after {
+.ico-maximize-after:after {
   content: "\f102";
 }
-.ico-maximize-after:after {
-  content: "\f103";
-}
 .ico-minimize-after:after {
-  content: "\f104";
+  content: "\f103";
 }

@@ -63,7 +63,6 @@ export default {
     @mouseleave="setStroke(false)">
     <mac-buttons
       :button-literals="{
-        close: 'TOOLTIP.PEDAL.REMOVE',
         maximize: 'TOOLTIP.PEDAL.MAXIMIZE',
       }"
       @close="deleteClick"
