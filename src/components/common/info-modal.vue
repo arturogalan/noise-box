@@ -66,7 +66,7 @@ export default {
         Made with <a
           class="vue-color"
           href="https://vuejs.org/"
-          target="_blank">Vue.js</a>, deployed in <a
+          target="_blank">Vue.js</a>, in the cloud thanks to <a
             class="netlify-color"
             href="https://www.netlify.com/"
             target="_blank">netlify</a>, code hosted in <a

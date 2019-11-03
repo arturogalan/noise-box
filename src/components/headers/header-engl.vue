@@ -246,7 +246,7 @@ h1 {
 
 .contact-section {
   float: right;
-  margin-top: 4px;
+  // margin-top: 4px;
   position: absolute;
   top: 0;
   right: 0;
@@ -254,12 +254,13 @@ h1 {
   justify-content: flex-start;
   align-items: center;
   cursor: pointer;
+  transform: translateY(-15%);
 }
 .contact-text {
   vertical-align: bottom;
 }
 .icon-type-1{
-  max-width: 1rem;
+  max-width: .8rem;
   margin-right: .5rem;
   // margin-bottom: .2rem;
 }
