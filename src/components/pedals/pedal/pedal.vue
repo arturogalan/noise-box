@@ -23,11 +23,15 @@ export default {
         minimize: false,
         maximize: false,
       },
+      strokeColor: '',
     };
   },
   computed: {
     helper() {
       return this.pedal.switchedOn ? 'Switch off pedal' : 'Switch on pedal';
+    },
+    strokeBorder() {
+      return this.strokeColor ? `2px solid ${this.strokeColor}` : '';
     },
   },
   mounted() {
@@ -35,6 +39,7 @@ export default {
   methods: {
     ...mapActions('pedal', [
       'togglePedal',
+      'connectAll',
     ]),
     deleteClick() {
       if (!this.pedal.dying) {
@@ -44,27 +49,33 @@ export default {
     switchPedal() {
       this.togglePedal(this.pedal.type);
     },
+    setStroke(isHover) {
+      this.strokeColor = isHover ? '#3f7f00' : '';
+    },
   },
 };
 </script>
 <template>
   <div
     :class="[pedal.dying && 'fade-out']"
-    class="pedal-card">
+    class="pedal-card"
+    @mouseover="setStroke(true)"
+    @mouseleave="setStroke(false)">
     <mac-buttons
       :button-literals="{
-        close: 'TOOLTIP.PEDAL.REMOVE',
         maximize: 'TOOLTIP.PEDAL.MAXIMIZE',
       }"
       @close="deleteClick"
       @maximize="$emit('maximize')"/>
     <div class="pedal-wrapper">
       <div
-        :style="{height: pedal.settingsList.length < 3 ? '45%': '51%'}"
+        :style="{
+          height: pedal.settingsList.length < 3 ? '45%': '51%',
+          marginTop: pedal.settingsList.length === 1 ? '3px': '0'
+        }"
         class="knob-grid-wrapper">
         <div class="knob-grid-container">
-
-          <pedal-knob-grid :settings-list="pedal.settingsList"/>
+          <pedal-knob-grid :pedal="pedal"/>
         </div>
       </div>
       <div class="pedal-name-wrapper">
@@ -85,7 +96,7 @@ export default {
         class="push-wrapper"
         @click="switchPedal()"/>
       <img
-        :style="{ backgroundColor: pedal.bgcolor }"
+        :style="{ backgroundColor: pedal.bgcolor, border: strokeBorder}"
         class="pedal-svg"
         src="../../../assets/img/pedal.svg"
         alt

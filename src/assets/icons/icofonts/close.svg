@@ -1,3 +1,6 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-    <path fill="#000" fill-rule="evenodd" d="M19 6.4L17.6 5 12 10.6 6.4 5 5 6.4l5.6 5.6L5 17.6 6.4 19l5.6-5.6 5.6 5.6 1.4-1.4-5.6-5.6z"/>
+<svg width="23.999999999999996" height="23.999999999999996" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg">
+ <g>
+  <title>Layer 1</title>
+  <path id="svg_7" d="m21.10843,18.59114l-5.87707,-6.28851l5.876,-6.28851l-3.02079,-3.23455l-5.87707,6.28851l-5.87707,-6.28851l-3.02079,3.23455l5.876,6.28851l-5.87707,6.28851l3.02292,3.2334l5.876,-6.28851l5.876,6.28851" stroke-linecap="null" stroke-linejoin="null" stroke-dasharray="null" stroke-width="null" fill="#000"/>
+ </g>
 </svg>

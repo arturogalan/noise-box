@@ -2,9 +2,9 @@
  <!-- Created with SVG-edit - https://github.com/SVG-Edit/svgedit-->
  <g class="layer">
   <title>Layer 1</title>
-  <g id="svg_3">
-   <path d="m3.12796,11.99521l0,-7.34407l7.89042,7.34407l-7.89042,0z" fill="#000000" id="svg_1" stroke="#000000" stroke-dasharray="null" stroke-linecap="null" stroke-linejoin="null" stroke-width="0"/>
-   <path d="m11.99521,3.12796l0,7.34407l-7.89042,-7.34407l7.89042,0z" fill="#000000" id="svg_4" stroke="#000000" stroke-dasharray="null" stroke-linecap="null" stroke-linejoin="null" stroke-width="0"/>
+  <g stroke="null" id="svg_3">
+   <path stroke="#000000" d="m12.68454,2.96684l0,6.45285l-7.20233,-6.45285l7.20233,0z" fill="#000000" id="svg_4" stroke-dasharray="null" stroke-linecap="null" stroke-linejoin="null" stroke-width="0"/>
+   <path stroke="#000000" d="m3.55049,11.85696l0,-6.45285l7.20233,6.45285l-7.20233,0z" fill="#000000" id="svg_1" stroke-dasharray="null" stroke-linecap="null" stroke-linejoin="null" stroke-width="0"/>
   </g>
  </g>
 </svg>

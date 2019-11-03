@@ -1,9 +1,10 @@
-# noise-box
+# 🎸noise-box
+> A Vue project to test WebAudio capabilites and deal with Vue/Vuex/css/html/javascript.
+All the webaudio nodes creation and structures of different pedal effects and amp simulation relies on noisefy library.
 
-> A Vue project to test Vue and WebAudio
+Bug or new funcionalities to add? [Issues section](https://github.com/arturogalan/noise-box/issues)
 
 ## Build Setup
-
 ``` bash
 # install dependencies
 npm install
@@ -14,26 +15,16 @@ npm run dev
 # build for production with minification
 npm run build
 
-# build for production and view the bundle analyzer report
-npm run build --report
-
-# run unit tests
-npm run unit
-
-# run e2e tests
-npm run e2e
-
-# run all tests
-npm test
+# generate icons
+npm run build:icons
 ```
-
-For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
-
-
-
 ## TO-DO
-Remove unnecessary Vue.set when setting vars
-Move convertToMono to a property of noisefy input effect
-
-
+Watchers in chickenKnob to bind the preset value when selected, more presets
+Remove unnecessary Vue.set when setting vars and separete entities pedal and entities amp
+Disto advanced settings to make own distos by users.
+LocalStorage saving of user presets
+Tuner
+Curves graphs
+Mixin for all the different knobs
+Midi
 

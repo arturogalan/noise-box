@@ -329,5 +329,6 @@ export default {
   height: 110%;
   position: absolute;
   z-index: $z-index-3;
+  cursor: pointer;
 }
 </style>

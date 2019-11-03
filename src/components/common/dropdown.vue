@@ -1,15 +1,35 @@
 <script>
+import closeable from '../../mixins/closeable';
+
 export default {
   name: 'dropdown',
+  mixins: [closeable],
   props: {
     list: {
       type: Array,
       required: true,
     },
+    name: {
+      type: String,
+      required: true,
+    },
+    placeholder: {
+      type: String,
+      required: false,
+      default: '',
+    },
+  },
+  data() {
+    return {
+      strokeColor: '',
+    };
   },
   computed: {
     selectedItem() {
       return this.list.find((el)=> el.selected) || {};
+    },
+    strokeBoxShadow() {
+      return this.strokeColor ? `0 0px 4px 0 ${this.strokeColor}` : '0 0px 4px 0 grey';
     },
   },
   methods: {
@@ -18,18 +38,33 @@ export default {
       this.close();
     },
     close() {
-      this.$refs.checkbox_toogle.checked = false;
+      this.$refs[`checkbox_toggle${this.name}`].checked = false;
+    },
+    setStroke(isHover) {
+      this.strokeColor = isHover ? '#3f7f00' : '';
     },
   },
 };
 </script>
 <template>
-  <div class="dropdown">
+  <div
+    class="dropdown"
+    @mouseover="setStroke(true)"
+    @mouseleave="setStroke(false)">
     <input
-      id="checkbox_toggle"
-      ref="checkbox_toogle"
-      type="checkbox">
-    <label for="checkbox_toggle">{{ selectedItem.name }}</label>
+      :id="`checkbox_toggle${name}`"
+      :ref="`checkbox_toggle${name}`"
+      type="checkbox"
+    >
+    <label
+      :for="`checkbox_toggle${name}`"
+      :style="{ boxShadow: strokeBoxShadow}"
+      :class="[!selectedItem.name && 'placeholder']"
+    >
+      {{ selectedItem.name || placeholder }}
+      <img
+        class="arrow"
+        src="../../assets/icons/arrow.png"></label>
     <ul>
       <li
         v-for="item in list"
@@ -40,35 +75,48 @@ export default {
   </div>
 </template>
 <style lang="scss" scoped>
+  .arrow{
+    position: absolute;
+    top: .7rem;
+    right: .5rem;
+    width: 1rem;
+  }
   .dropdown{
+    z-index: $z-index-3;
     position: relative;
     display: inline-block;
-    font-family: "FontPbio";
+    font-family: "Dyslexic";
     font-size: .8rem;
     color: #FFF;
-      min-width: 200px;
+    min-width: 200px;
+  }
+  .placeholder{
+    font-style: italic;
+    color: rgba(255, 255, 255, 0.5);
   }
   label{
       box-sizing: border-box;
-      display: inline-block;
+      display: block;
       width: 100%;
-      background-color: black;
-      padding: 15px 20px;
-
+      background-color: rgba(88, 49, 49, .5);
+      padding: .5rem 0rem;
+      color: #FFF;
       cursor: pointer;
       text-align: center;
-      box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
-
+      // box-shadow: 0 0px 4px 0 grey;
+      border-radius: .3rem;
       -webkit-user-select: none;
       -moz-user-select: none;
       -ms-user-select: none;
       user-select: none;
+      text-shadow: 2px 2px rgba(0, 0, 0, 0.8);
   }
   ul{
       position: absolute;
       list-style: none;
       text-align: left;
       width: 100%;
+      left: 0;
       z-index: 1;
       margin:0;
       padding:0;
@@ -77,17 +125,18 @@ export default {
       display: none;
       overflow-y: auto;
       max-height: 20rem;
+      border-radius: .2rem;
   }
   ul li{
-      padding: 15px;
-      background-color: #fff;
-      color: #4FB9A7;
+      padding: 8px;
+      background-color: azure;
+      color: rebeccapurple;
       // margin-bottom: 1px;
       cursor: pointer;
   }
 
   ul li:hover{
-      background-color: #4FB9A7;
+      background-color: slategray;
       color: #FFF;
   }
 
@@ -102,7 +151,8 @@ export default {
     display: none;
   }
   input[type=checkbox]:checked ~ ul {
-      display: block
+      display: block;
+      @extend .fade-in;
   }
 </style>
 

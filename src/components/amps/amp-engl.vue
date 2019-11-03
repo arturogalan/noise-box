@@ -1,8 +1,9 @@
 <script>
 import ChickenHeadKnob from '../common/chicken-head-knob.vue';
+import audioMaps from '../../helpers/audioMaps';
 import {mapActions, mapGetters} from 'vuex';
 import SwitchOn from './../common/switch-on.vue';
-import {AMP_COMPONENT_TYPE, AMP_COMPONENT_NAME} from '../../store/constants';
+import {AMP_COMPONENT_TYPE} from '../../store/constants';
 
 
 export default {
@@ -22,16 +23,14 @@ export default {
   },
   computed: {
     ...mapGetters('pedal', [
-      'ampComponentsList',
+      'amp',
     ]),
   },
   created() {
-    this.initAmpComponents();
   },
   methods: {
     ...mapActions('pedal', [
       'switchOnAudioContext',
-      'initAmpComponents',
       'initAudioInputAndOutput',
       'setAmpComponentEffectProperty',
       'toggleAmp',
@@ -45,20 +44,23 @@ export default {
       }
     },
     toogleMuteAudio() {
-      // Only toggle if power switch is ON
-      if (this.isSwitchedOn) {
-        this.isMuted = !this.isMuted;
-        this.setAmpComponentEffectProperty({name: AMP_COMPONENT_NAME.VOLUME, property: 'mute', value: this.isMuted});
-        this.toggleStandByAmp({value: !this.isMuted});
-      }
+      this.toggleStandByAmp();
     },
     toogleSwitchOnAmp() {
-      this.initAudioInterface();
-      this.isSwitchedOn = !this.isSwitchedOn;
-      this.toggleAmp({value: this.isSwitchedOn});
+      this.toggleAmp();
     },
-    getKnobTypes(settingsList) {
-      return settingsList.filter((setting)=> setting.type === 'knob');
+    normalize(value) {
+      return audioMaps.getNormalizedSettingValue(value);
+    },
+    denormalize(value) {
+      return audioMaps.setNormalizedSettingValue(value);
+    },
+    setKnobValue(component, knobSetting, value) {
+      // when setting disto intensity also set the asymetric disto intensity to the same value in SIMPLE mode
+      if (component.name === 'distortionStage2') {
+        this.setAmpComponentEffectProperty({name: 'distortionStage1', property: knobSetting.name, value: this.denormalize(value)});
+      }
+      this.setAmpComponentEffectProperty({name: component.name, property: knobSetting.name, value: this.denormalize(value)});
     },
   },
 };
@@ -75,16 +77,16 @@ export default {
     <div class="knob-grid" >
 
       <div
-        v-for="component in ampComponentsList"
+        v-for="component in amp.multiEffectAmp.getKnobTypeComponents().filter((component)=> component.name !== 'distortionStage1')"
         :key="component.name"
         class="component-grid"
       >
         <chicken-head-knob
-          v-for="knobSetting in getKnobTypes(component.settingsList)"
+          v-for="knobSetting in component.settingList"
           :key="knobSetting.name"
           :name="$t(`AMP.COMPONENT.${component.name.toUpperCase()}.${knobSetting.name.toUpperCase()}`)"
-          :init-value="knobSetting.value"
-          @valueChanged="setAmpComponentEffectProperty({name: component.name, property: knobSetting.name, value: $event})"
+          :init-value="normalize(knobSetting.value)"
+          @valueChanged="setKnobValue(component, knobSetting, $event)"
         />
       </div>
     </div>

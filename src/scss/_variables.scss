@@ -1,8 +1,14 @@
 $bg-classroom: pink;
 
+$z-index-0: 0;
+$z-index-1: 1;
 $z-index-2: 2;
 $z-index-3: 3;
+$z-index-4: 4;
+$z-index-5: 5;
+$z-index-6: 6;
 $z-index-10: 10;
+
 
 $app-min-width: 1170px;
 
@@ -108,7 +114,7 @@ $knob-grid-background: rgb(39,39,39);
   animation-name: fadeInOpacity;
   animation-iteration-count: 1;
   animation-timing-function: ease-in;
-  animation-duration: .5s;
+  animation-duration: .25s;
 }
 
 @keyframes fadeInOpacity {
@@ -146,7 +152,7 @@ $knob-grid-background: rgb(39,39,39);
 
 .fade-enter-active,
 .fade-leave-active {
-    transition: opacity .2s
+    transition: opacity .5s
 }
 .fade-enter,
 .fade-leave-to {

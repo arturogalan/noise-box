@@ -6,6 +6,10 @@ export default {
       type: Boolean,
       default: false,
     },
+    size: {
+      type: String,
+      default: 'normal',
+    },
   },
 };
 </script>
@@ -16,7 +20,9 @@ export default {
     <div
       v-if="show"
       class="modal">
-      <div class="modal-content">
+      <div
+        :class="[size === 'big' && 'modal-content--big']"
+        class="modal-content">
         <slot/>
       </div>
     </div>
@@ -36,9 +42,14 @@ export default {
 }
 /* Modal Content/Box */
 .modal-content {
+  display: flex;
   margin: 5% auto; /* 15% from the top and centered */
   width: 80%; /* Could be more or less, depending on screen size */
-  height: 80%; /* Could be more or less, depending on screen size */
+  height: 75%; /* Could be more or less, depending on screen size */
+  &--big {
+    max-width: 90%; /* Could be more or less, depending on screen size */
+    max-height: 95%; /* Could be more or less, depending on screen size */
+  }
 }
 </style>
 

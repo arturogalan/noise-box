@@ -16,53 +16,75 @@ export default {
   data() {
     return {
       switchedOn: false,
+      strokeColor: '',
     };
+  },
+  computed: {
+    strokeStyle() {
+      return {
+        border: this.strokeColor ? `1px solid ${this.strokeColor}` : '1px solid transparent',
+      };
+    },
   },
   methods: {
     toogleSwitch() {
       this.switchedOn = !this.switchedOn;
       this.$emit('click');
     },
+    setStroke(isHover) {
+      this.strokeColor = isHover ? '#3f7f00' : '';
+    },
   },
 };
 </script>
 <template>
-  <div class="container">
-    <div class="frame">
+  <div
+    class="container"
+    @mouseover="setStroke(true)"
+    @mouseleave="setStroke(false)"
+  >
+    <section
+      :style="strokeStyle"
+    >
+
       <div
-        :class="`switch-border--${color}`"
-        class="switch-border">
+        class="frame"
+      >
         <div
-          v-if="switchedOn"
-          :class="`switch-top-side--${color}`"
-          class="switch-top-side"/>
-        <div
-          :class="switchedOn ? `switch-on--${color}` : `switch-off--${color}`"
-          class="switch">
-          <div class="inner-switch-grid"/>
-          <label
-            :class="[switchedOn && `switch-right switch-right--${color}`]"
-            class="letter"
-            @click="toogleSwitch()">
-            <span :class="switchedOn && 'switch-letter-right'">
-              0
-            </span>
-          </label>
-          <label
-            :class="[!switchedOn && `switch-left switch-left--${color}`]"
-            class="letter"
-            @click="toogleSwitch()">
-            <span :class="!switchedOn && 'switch-letter-left'">
-              I
-            </span>
-          </label>
+          :class="`switch-border--${color}`"
+          class="switch-border">
+          <div
+            v-if="switchedOn"
+            :class="`switch-top-side--${color}`"
+            class="switch-top-side"/>
+          <div
+            :class="switchedOn ? `switch-on--${color}` : `switch-off--${color}`"
+            class="switch">
+            <div class="inner-switch-grid"/>
+            <label
+              :class="[switchedOn && `switch-right switch-right--${color}`]"
+              class="letter"
+              @click="toogleSwitch()">
+              <span :class="switchedOn && 'switch-letter-right'">
+                0
+              </span>
+            </label>
+            <label
+              :class="[!switchedOn && `switch-left switch-left--${color}`]"
+              class="letter"
+              @click="toogleSwitch()">
+              <span :class="!switchedOn && 'switch-letter-left'">
+                I
+              </span>
+            </label>
+          </div>
+          <div
+            v-if="!switchedOn"
+            :class="`switch-bottom-side--${color}`"
+            class="switch-bottom-side"/>
         </div>
-        <div
-          v-if="!switchedOn"
-          :class="`switch-bottom-side--${color}`"
-          class="switch-bottom-side"/>
       </div>
-    </div>
+    </section>
     <div
       class="setting-name"
     >

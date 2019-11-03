@@ -1,9 +1,9 @@
 {
   "name": "noise-box",
-  "version": "1.0.0",
-  "description": "A Vue project to test Vue and WebAudio",
+  "version": "0.1.0",
+  "description": "A Vue project to make a guitar amp in the browser",
   "author": "Arturo Galan <arturo.galan@gmail.com>",
-  "private": true,
+  "license": "MIT",
   "scripts": {
     "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",
     "prestart": "npm run build",
@@ -16,10 +16,15 @@
     "lintfix": "eslint --fix src/**",
     "build:icons": "icon-font-generator src/assets/icons/icofonts/*.svg -o static/fonts -n noisefont normalize -p ico --center --csstp src/helpers/iconscss.hbs"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/arturogalan/noise-box.git"
+  },
   "dependencies": {
     "bunyan": "^1.8.12",
     "express": "^4.16.4",
     "lodash": "^4.17.11",
+    "mini-css-extract-plugin": "^0.8.0",
     "noisefy": "file:./../noisefy",
     "vue": "^2.6.10",
     "vue-i18n": "^8.11.2",

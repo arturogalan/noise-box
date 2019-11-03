@@ -132,6 +132,7 @@ export default {
       let adjustDegrees = degress + deltaDegrees;
       adjustDegrees = adjustDegrees > 360 ? adjustDegrees - 360 : adjustDegrees;
       this.selectorValue = adjustDegrees;
+      this.$emit('valueChanged', this.currentValue);
       // console.log(this.maxValue * Math.trunc(adjustPercentage/this.maxValue))
     },
     numDigits(x) {
@@ -142,7 +143,12 @@ export default {
 };
 </script>
 <template>
-  <div class="container">
+  <section class="container">
+    <div
+      :class="'setting-name--'+size"
+      class="setting-name">
+      <span>{{ name }}</span>
+    </div>
     <svg
       id="rotationSVG"
       :style="svgAbove"
@@ -209,13 +215,9 @@ export default {
         </div>
       </div>
     </transition>
-    <div
-      :class="'setting-name--'+size"
-      :style="{top: knobsNumber > 3 ? '-20%' : '-8%'}"
-      class="setting-name">
-      <span>{{ name }}</span>
-    </div>
-  </div>
+    <!-- :style="{top: knobsNumber > 3 ? '-20%' : '-8%'}" -->
+  </section>
+
 </template>
 <style lang="scss" scoped>
 .value-label{
@@ -259,11 +261,16 @@ export default {
   font-weight: bold;
   color: aliceblue;
   position: absolute;
+  top: 0;
   width: 100%;
   // top: -15%;
   z-index: -1;
+  transform: translateY(-50%);
   &--normal {
-    font-size: .45rem;
+    font-size: .46rem;
+  }
+  &--rack {
+    font-size: .5rem;
   }
   &--zoom-in {
     font-size: 1.2rem;

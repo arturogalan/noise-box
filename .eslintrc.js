@@ -21,7 +21,7 @@ module.exports = {
   'rules': {
     // Possible Errors
     // http://eslint.org/docs/rules/#possible-errors
-    'no-console': 'off',
+    'no-console': "off",
     'no-cond-assign': 0, // eslint:recommended
     'no-constant-condition': 2,
     'no-control-regex': 2,
