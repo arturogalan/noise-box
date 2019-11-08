@@ -1,6 +1,6 @@
 <script>
 import vueKnobNb from '../../common/vue-knob-nb.vue';
-import {mapActions} from 'vuex';
+import { mapActions } from 'vuex';
 import audioMaps from '../../../helpers/audioMaps';
 
 export default {
@@ -8,8 +8,8 @@ export default {
     vueKnobNb,
   },
   props: {
-    pedal: {type: Object, required: true},
-    size: {type: String, required: false, default: ()=> 'normal'},
+    pedal: { type: Object, required: true },
+    size: { type: String, required: false, default: ()=> 'normal' },
   },
   data() {
     return {
@@ -30,7 +30,7 @@ export default {
 };
 </script>
 <template>
-  <div class="knob-grid" >
+  <div class="knob-grid">
     <vue-knob-nb
       v-for="(setting, index) in pedal.settingsList"
       :key="index"

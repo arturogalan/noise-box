@@ -1,12 +1,10 @@
 <script>
-import {mapGetters, mapActions} from 'vuex';
-import pedalsPalette from '../../pedals/grid/pedals-palette.vue';
+import { mapGetters, mapActions } from 'vuex';
 import pedal from '../../pedals/pedal/pedal.vue';
 
 export default {
   name: 'pedals-board',
   components: {
-    pedalsPalette,
     pedal,
   },
   computed: {
@@ -25,7 +23,7 @@ export default {
       'setPedalProperty',
     ]),
     zoomPedal(pedal) {
-      this.setPedalProperty({name: pedal.name, property: 'zoomIn', value: true});
+      this.setPedalProperty({ name: pedal.name, property: 'zoomIn', value: true });
     },
   },
 };
@@ -33,13 +31,15 @@ export default {
 
 <template>
   <article>
-    <div class="pedal-palette"/>
+    <div class="pedal-palette" />
     <div class="pedal-board">
       <div class="noise-board">
         <div
-          class="column left"/>
+          class="column left"
+        />
         <div
-          class="column middle ">
+          class="column middle "
+        >
           <pedal
             v-for="pedal in pedalList"
             :key="pedal.name"
@@ -50,7 +50,8 @@ export default {
           />
         </div>
         <div
-          class="column right"/>
+          class="column right"
+        />
       </div>
     </div>
   </article>

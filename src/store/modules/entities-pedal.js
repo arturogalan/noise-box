@@ -1,12 +1,12 @@
 import Vue from 'vue';
-import {AMP_COMPONENT_NAME, PEDAL_NAME, PEDAL_PROPERTIES} from '../constants';
+import { AMP_COMPONENT_NAME, PEDAL_NAME, PEDAL_PROPERTIES } from '../constants';
 import audioUtils from '../../helpers/audioUtils';
-import {isEmpty} from 'lodash';
+import { isEmpty } from 'lodash';
 
 const pedalModule = {
   namespaced: true,
   state: {
-    //best practice to store lists as objects because you can access faster than with arrays
+    // best practice to store lists as objects because you can access faster than with arrays
     audioInput: {},
     audioOutput: {},
     amp: {
@@ -43,7 +43,7 @@ const pedalModule = {
                 selected: disto === distortion.distortionType,
               };
             }),
-          }
+          },
         );
       });
       return lists;
@@ -113,7 +113,7 @@ const pedalModule = {
       return state.audioOut;
     },
     defaultAudioDevicesList(state) {
-      return state.deviceList.filter((el)=> el.deviceId==='default');
+      return state.deviceList.filter((el)=> el.deviceId === 'default');
     },
     defaultInputDevice(state, getters) {
       const inputDevice = getters.defaultAudioDevicesList.find((el)=> el.direction === 'input');
@@ -142,76 +142,76 @@ const pedalModule = {
   },
 
   actions: {
-    toggleAmp({state, commit, dispatch, getters}, data) {
+    toggleAmp({ state, commit, dispatch, getters }, data) {
       commit('toggleAmp', data);
       if (!state.nodesConnected) {
         dispatch('switchOnAudioContext');
         dispatch('initAudioInputAndOutput');
         commit('connectAllNodes', getters.pedalList);
       }
-      dispatch('setAmpComponentEffectProperty', {name: AMP_COMPONENT_NAME.VOLUME, property: 'mute', value: !state.amp.switchedOn || !state.amp.standBy});
+      dispatch('setAmpComponentEffectProperty', { name: AMP_COMPONENT_NAME.VOLUME, property: 'mute', value: !state.amp.switchedOn || !state.amp.standBy });
     },
-    toggleStandByAmp({state, commit, dispatch}, data) {
+    toggleStandByAmp({ state, commit, dispatch }, data) {
       commit('toggleStandByAmp', data);
-      dispatch('setAmpComponentEffectProperty', {name: AMP_COMPONENT_NAME.VOLUME, property: 'mute', value: !state.amp.switchedOn || !state.amp.standBy});
+      dispatch('setAmpComponentEffectProperty', { name: AMP_COMPONENT_NAME.VOLUME, property: 'mute', value: !state.amp.switchedOn || !state.amp.standBy });
     },
-    createAmp({commit}) {
+    createAmp({ commit }) {
       commit('createAmp');
     },
-    setAmpComponentEffectProperty({commit}, data) {
+    setAmpComponentEffectProperty({ commit }, data) {
       commit('setAmpComponentEffectProperty', data);
     },
-    setAmpInputGain({commit}, value) {
-      commit('setAmpComponentEffectProperty', {name: 'input', property: 'level', value});
+    setAmpInputGain({ commit }, value) {
+      commit('setAmpComponentEffectProperty', { name: 'input', property: 'level', value });
     },
-    setAmpOutputGain({commit}, value) {
-      commit('setAmpComponentEffectProperty', {name: 'output', property: 'level', value});
+    setAmpOutputGain({ commit }, value) {
+      commit('setAmpComponentEffectProperty', { name: 'output', property: 'level', value });
     },
-    setComponentDistoType({commit}, data) {
+    setComponentDistoType({ commit }, data) {
       commit('setComponentDistoType', data);
     },
-    setAmpCabinetType({commit}, {value}) {
+    setAmpCabinetType({ commit }, { value }) {
       commit('setAmpComponentEffectProperty',
         {
           name: audioUtils.AMP_COMPONENT_NAME.CABINET,
           property: audioUtils.AMP_SETTING_NAME.CABINET_IMPULSE,
           value,
-        }
+        },
       );
     },
-    setAmpCabinetSettings({commit}, {property, value}) {
+    setAmpCabinetSettings({ commit }, { property, value }) {
       commit('setAmpComponentEffectProperty',
         {
           name: audioUtils.AMP_COMPONENT_NAME.CABINET,
           property,
           value,
-        }
+        },
       );
     },
-    setAmpCabinetWet({commit}, {value}) {
+    setAmpCabinetWet({ commit }, { value }) {
       commit('setAmpComponentEffectProperty',
         {
           name: audioUtils.AMP_COMPONENT_NAME.CABINET,
           property: audioUtils.AMP_SETTING_NAME.CABINET_WET,
           value,
-        }
+        },
       );
     },
-    setPreset({commit}, data) {
+    setPreset({ commit }, data) {
       commit('setPreset', data.id);
     },
-    initPedals({commit, dispatch}) {
-      for (let pedal in PEDAL_NAME) {
+    initPedals({ commit, dispatch }) {
+      for (const pedal in PEDAL_NAME) {
         dispatch('addPedal', PEDAL_NAME[pedal]);
       }
     },
-    initAudioInputAndOutput({commit, dispatch, getters}) {
+    initAudioInputAndOutput({ commit, dispatch, getters }) {
       commit('setUserInput');
       commit('setUserOutput');
       dispatch('setDevicesList');
       dispatch('setDevicesListHandler');
     },
-    addPedal({state, commit, getters}, type) {
+    addPedal({ state, commit, getters }, type) {
       if (type && !state.pedalBoard.pedals[type]) { // add only if not exists
         const pedal = {
           type,
@@ -222,34 +222,34 @@ const pedalModule = {
         commit('addPedal', pedal);
       }
     },
-    configurePedal({state}, type) {
+    configurePedal({ state }, type) {
       audioUtils.configAudioNode(state.pedalBoard.pedals[type]);
     },
-    setPedalProperty({commit}, data) {
+    setPedalProperty({ commit }, data) {
       commit('setPedalProperty', data);
     },
-    setPedalEffectProperty({commit}, data) {
+    setPedalEffectProperty({ commit }, data) {
       commit('setPedalEffectProperty', data);
     },
-    togglePedal({state, commit, getters}, type) {
+    togglePedal({ state, commit, getters }, type) {
       commit('togglePedal', type);
       if (state.amp.switchedOn) commit('connectAllNodes', getters.pedalList);
     },
-    connectAll({state, commit, getters}) {
+    connectAll({ state, commit, getters }) {
       if (state.amp.switchedOn) commit('connectAllNodes', getters.pedalList);
     },
-    createAudioContext({commit}) {
+    createAudioContext({ commit }) {
       commit('setAudioContext', audioUtils.createAudioContext());
     },
-    switchOnAudioContext({commit}) {
+    switchOnAudioContext({ commit }) {
       commit('resumeAudioContext');
     },
-    setDevicesList({commit}) {
+    setDevicesList({ commit }) {
       audioUtils.deviceList().then((deviceList)=> {
         commit('setDevicesList', deviceList.filter((el)=> el.type === 'audio'));
       });
     },
-    setDevicesListHandler({commit}) {
+    setDevicesListHandler({ commit }) {
       audioUtils.deviceListHandler((newDeviceList, event)=> {
         commit('setDevicesList', newDeviceList.filter((el)=> el.type === 'audio'));
       });
@@ -266,16 +266,16 @@ const pedalModule = {
     createAmp(state) {
       state.amp.multiEffectAmp = audioUtils.createMultiEffectAmp(state.audioContext);
     },
-    setAmpComponentEffectProperty(state, {name, property, value}) {
-      state.amp.multiEffectAmp.setAmpComponentEffectProperty({componentName: name, componentProperty: property, value});
+    setAmpComponentEffectProperty(state, { name, property, value }) {
+      state.amp.multiEffectAmp.setAmpComponentEffectProperty({ componentName: name, componentProperty: property, value });
     },
-    setComponentDistoType(state, {name, value}) {
+    setComponentDistoType(state, { name, value }) {
       state.amp.multiEffectAmp.setAmpComponentEffectProperty(
         {
           componentName: name,
           componentProperty: audioUtils.AMP_SETTING_NAME.DISTORTION_TYPE,
           value,
-        }
+        },
       );
     },
     setPreset(state, value) {
@@ -284,7 +284,7 @@ const pedalModule = {
     },
     addPedal(state, pedal) {
       pedal.effect = audioUtils.createAudioNode(state.audioContext, pedal.type);
-      for (let setting of pedal.settingsList) {
+      for (const setting of pedal.settingsList) {
         pedal.effect[setting.name] = setting.value;
       }
       Vue.set(state.pedalBoard.pedals, pedal.name, pedal);
@@ -292,14 +292,14 @@ const pedalModule = {
     togglePedal(state, name) {
       state.pedalBoard.pedals[name].switchedOn = !state.pedalBoard.pedals[name].switchedOn;
     },
-    setPedalProperty(state, {name, property, value}) {
-      let pedal = state.pedalBoard.pedals[name];
+    setPedalProperty(state, { name, property, value }) {
+      const pedal = state.pedalBoard.pedals[name];
       if (pedal) {
         pedal[property] = value;
       }
     },
-    setPedalEffectProperty(state, {name, property, value}) {
-      let pedal = state.pedalBoard.pedals[name];
+    setPedalEffectProperty(state, { name, property, value }) {
+      const pedal = state.pedalBoard.pedals[name];
       if (pedal) {
         pedal.effect[property] = value;
       }
@@ -331,7 +331,7 @@ const pedalModule = {
         ampOutput.connect(state.audioOutput);
       }
     },
-    //Audio mutations
+    // Audio mutations
     setAudioContext(state, audioContext) {
       Vue.set(state, 'audioContext', audioContext);
     },

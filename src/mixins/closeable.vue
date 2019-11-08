@@ -16,14 +16,14 @@ export default {
     eventBus.$off('closeAllExceptMe', this.closeAllExceptMe);
   },
   methods: {
-    closeAllExceptMe({uniqueId}) {
+    closeAllExceptMe({ uniqueId }) {
       if (this.uniqueId !== uniqueId && this.close && typeof this.close === 'function') {
         this.close();
       }
     },
     emitClose(event) {
       event.stopPropagation();
-      eventBus.$emit('closeAllExceptMe', {uniqueId: this.uniqueId});
+      eventBus.$emit('closeAllExceptMe', { uniqueId: this.uniqueId });
     },
   },
 };

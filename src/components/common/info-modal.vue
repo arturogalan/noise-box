@@ -1,5 +1,5 @@
 <script>
-import {mapActions} from 'vuex';
+import { mapActions } from 'vuex';
 import macButtons from './mac-buttons.vue';
 
 export default {
@@ -14,7 +14,7 @@ export default {
       'toggleModal',
     ]),
     closeModal() {
-      this.toggleModal({modalName: 'infoModal', status: false});
+      this.toggleModal({ modalName: 'infoModal', status: false });
     },
   },
 };
@@ -22,10 +22,12 @@ export default {
 <template>
   <div
     :style="{ borderColor: 'brown' }"
-    class="info-container">
+    class="info-container"
+  >
     <div
       :style="{ color: 'black', backgroundColor: 'brown'}"
-      class="info-name">
+      class="info-name"
+    >
       <mac-buttons
         :button-literals="{
           close: 'TOOLTIP.PEDAL.CLOSE',
@@ -33,11 +35,13 @@ export default {
         :maximized="true"
         class="buttons-absolute"
         @close="closeModal"
-        @maximize="$emit('maximize')"/>
+        @maximize="$emit('maximize')"
+      />
       <img
         class="icon-type-1"
         src="../../assets/icons/marioquestion.png"
-        alt="">
+        alt=""
+      >
       Noise Box/Noisefy
     </div>
     <div class="info-wrapper">
@@ -47,33 +51,44 @@ export default {
         <div class="contact-text">
           <span class="develop">Developed by:</span>
           <span
-            class="contact">
+            class="contact"
+          >
             Arturo Galán&nbsp;&nbsp;</span>
         </div>
       </div>
-      <div class="info-text">Developed in several months as a pet project to merge two passions: Play guitar and Javascript.
-      Webaudio ideas seeing talks and Github code accounts from great developers like...
+      <div class="info-text">
+        Developed in several months as a pet project to merge two passions: Play guitar and Javascript.
+        Webaudio ideas seeing talks and Github code accounts from great developers like...
         <ul>
-          <li class="pt"><a
-            class="developers-color"
-            href="https://twitter.com/sambego"
-            target="_blank">Sam Bellem</a></li>
-          <li class="pt"><a
-            class="developers-color"
-            href="https://twitter.com/micbuffa"
-            target="_blank">Michel Buffa</a></li>
+          <li class="pt">
+            <a
+              class="developers-color"
+              href="https://twitter.com/sambego"
+              target="_blank"
+            >Sam Bellem</a>
+          </li>
+          <li class="pt">
+            <a
+              class="developers-color"
+              href="https://twitter.com/micbuffa"
+              target="_blank"
+            >Michel Buffa</a>
+          </li>
         </ul>
         Made with <a
           class="vue-color"
           href="https://vuejs.org/"
-          target="_blank">Vue.js</a>, in the cloud thanks to <a
-            class="netlify-color"
-            href="https://www.netlify.com/"
-            target="_blank">netlify</a>, code hosted in <a
-              class="netlify-color"
-              href="https://github.com/"
-              target="_blank">github</a>.
-              Any ideas, feedback, bugs or comments on Github or Twitter will be really appreciated.
+          target="_blank"
+        >Vue.js</a>, in the cloud thanks to <a
+          class="netlify-color"
+          href="https://www.netlify.com/"
+          target="_blank"
+        >netlify</a>, code hosted in <a
+          class="netlify-color"
+          href="https://github.com/"
+          target="_blank"
+        >github</a>.
+        Any ideas, feedback, bugs or comments on Github or Twitter will be really appreciated.
       </div>
       <div class="contact-section--center">
         <section class="contact-section">
@@ -81,49 +96,64 @@ export default {
             class="icon-clickable icon-type-2"
             src="../../assets/icons/github.png"
             alt=""
-            href="">
-          <div class="info-text no-padding"><a
-            class="personal-links-color"
+            href=""
+          >
+          <div class="info-text no-padding">
+            <a
+              class="personal-links-color"
 
-            href="https://github.com/arturogalan"
-            target="_blank">github.com/arturogalan</a></div>
+              href="https://github.com/arturogalan"
+              target="_blank"
+            >github.com/arturogalan</a>
+          </div>
         </section>
         <section class="contact-section">
           <img
             class="icon-clickable icon-type-3"
             src="../../assets/icons/twitter.png"
-            alt="">
-          <div class="info-text no-padding"><a
-            class="personal-links-color"
-            href="https://twitter.com/turugalan"
-            target="_blank">twitter.com/turugalan</a></div>
+            alt=""
+          >
+          <div class="info-text no-padding">
+            <a
+              class="personal-links-color"
+              href="https://twitter.com/turugalan"
+              target="_blank"
+            >twitter.com/turugalan</a>
+          </div>
         </section>
       </div>
-      <div class="info-text">Project also possible thanks to free fonts resources provided by <a
-        class="netlify-color"
-        href="https://www.dafont.com"
-        target="_blank">dafont</a>:<br>
+      <div class="info-text">
+        Project also possible thanks to free fonts resources provided by <a
+          class="netlify-color"
+          href="https://www.dafont.com"
+          target="_blank"
+        >dafont</a>:<br>
         <div class="info-text--center pt">
           <a
             class="font-link-color"
             href="https://www.dafont.com/pbio.font"
-            target="_blank">Pbio</a>
+            target="_blank"
+          >Pbio</a>
           <a
             class="font-link-color"
             href="https://www.dafont.com/Conthrax.font"
-            target="_blank">Conthrax</a>
+            target="_blank"
+          >Conthrax</a>
           <a
             class="font-link-color"
             href="https://www.dafont.com/Fatsans.font"
-            target="_blank">Fatsans</a>
+            target="_blank"
+          >Fatsans</a>
           <a
             class="font-link-color"
             href="https://www.dafont.com/open-dyslexic.font"
-            target="_blank">Open Dyslexic</a>
+            target="_blank"
+          >Open Dyslexic</a>
           <a
             class="font-link-color"
             href="https://www.dafont.com/pixel-square.font"
-            target="_blank">Pixel Square</a>
+            target="_blank"
+          >Pixel Square</a>
         </div>
       </div>
       <div class="license-text">

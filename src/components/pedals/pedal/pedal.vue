@@ -1,5 +1,5 @@
 <script>
-import {mapActions} from 'vuex';
+import { mapActions } from 'vuex';
 import pedalKnobGrid from './pedal-knob-grid.vue';
 import macButtons from '../../common/mac-buttons.vue';
 
@@ -60,41 +60,50 @@ export default {
     :class="[pedal.dying && 'fade-out']"
     class="pedal-card"
     @mouseover="setStroke(true)"
-    @mouseleave="setStroke(false)">
+    @mouseleave="setStroke(false)"
+  >
     <mac-buttons
       :button-literals="{
         maximize: 'TOOLTIP.PEDAL.MAXIMIZE',
       }"
       @close="deleteClick"
-      @maximize="$emit('maximize')"/>
+      @maximize="$emit('maximize')"
+    />
     <div class="pedal-wrapper">
       <div
         :style="{
           height: pedal.settingsList.length < 3 ? '45%': '51%',
           marginTop: pedal.settingsList.length === 1 ? '3px': '0'
         }"
-        class="knob-grid-wrapper">
+        class="knob-grid-wrapper"
+      >
         <div class="knob-grid-container">
-          <pedal-knob-grid :pedal="pedal"/>
+          <pedal-knob-grid :pedal="pedal" />
         </div>
       </div>
       <div class="pedal-name-wrapper">
         <div class="check-wrapper">
-          <div class="check">Check
+          <div class="check">
+            Check
           </div>
           <div
             :class="[pedal.switchedOn ? 'pedal-led--on' : 'pedal-led--off']"
-            class="pedal-led"/>
+            class="pedal-led"
+          />
         </div>
         <div
           :style="{ color: pedal.fcolor }"
-          class="pedal-name">{{ pedal.name }}</div>
+          class="pedal-name"
+        >
+          {{ pedal.name }}
+        </div>
       </div>
       <div
-        v-tooltip="{text: $t(`TOOLTIP.PEDAL.SWITCH_${pedal.switchedOn ? 'OFF' : 'ON'}`)}"
         ref="push-wrapper"
+        v-tooltip="{text: $t(`TOOLTIP.PEDAL.SWITCH_${pedal.switchedOn ? 'OFF' : 'ON'}`)}"
         class="push-wrapper"
-        @click="switchPedal()"/>
+        @click="switchPedal()"
+      />
       <img
         :style="{ backgroundColor: pedal.bgcolor, border: strokeBorder}"
         class="pedal-svg"

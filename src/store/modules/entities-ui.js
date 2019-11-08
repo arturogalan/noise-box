@@ -10,12 +10,12 @@ const pedalModule = {
     },
   },
   actions: {
-    toggleModal({commit}, {modalName, status}) {
-      commit('toggleModal', {modalName, status});
+    toggleModal({ commit }, { modalName, status }) {
+      commit('toggleModal', { modalName, status });
     },
   },
   mutations: {
-    toggleModal(state, {modalName, status}) {
+    toggleModal(state, { modalName, status }) {
       state[modalName] = status;
     },
   },

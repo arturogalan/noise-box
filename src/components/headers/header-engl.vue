@@ -1,6 +1,6 @@
 <script>
 import metalGrid from './../common/metal-grid.vue';
-import {mapGetters, mapActions} from 'vuex';
+import { mapGetters, mapActions } from 'vuex';
 
 export default {
   components: {
@@ -39,7 +39,7 @@ export default {
       console.log('eee');
     },
     openInfo() {
-      this.toggleModal({modalName: 'infoModal', status: true});
+      this.toggleModal({ modalName: 'infoModal', status: true });
     },
   },
 
@@ -48,23 +48,26 @@ export default {
 
 <template>
   <div>
-    <div class="header-background n-index-7"/>
+    <div class="header-background n-index-7" />
     <div class="valves-behind valve-left n-index-5">
       <div
         v-for="index in 2"
         :key="index"
       >
         <transition
-          name="fade-valve">
+          name="fade-valve"
+        >
           <div :key="amp.switchedOn">
             <img
               v-if="amp.switchedOn"
               :src="require('../../assets/img/valve-on.svg')"
-              class="valves">
+              class="valves"
+            >
             <img
               v-else
               :src="require('../../assets/img/valve-off.svg')"
-              class="valves">
+              class="valves"
+            >
           </div>
         </transition>
       </div>
@@ -75,16 +78,19 @@ export default {
         :key="index"
       >
         <transition
-          name="fade-valve">
+          name="fade-valve"
+        >
           <div :key="amp.switchedOn">
             <img
               v-if="amp.switchedOn"
               :src="require('../../assets/img/valve-on.svg')"
-              class="valves">
+              class="valves"
+            >
             <img
               v-else
               :src="require('../../assets/img/valve-off.svg')"
-              class="valves">
+              class="valves"
+            >
           </div>
         </transition>
       </div>
@@ -92,7 +98,8 @@ export default {
     <div class="grid-wrapper n-index-1">
       <metal-grid
         v-for="i in 240"
-        :key="i"/>
+        :key="i"
+      />
     </div>
     <div
       class="title"
@@ -105,7 +112,8 @@ export default {
         <img
           v-if="showHoverIcon"
           :src="require('../../assets/img/header-icon-animated.gif')"
-          class="logo-icon">
+          class="logo-icon"
+        >
         <img
           v-if="showOnIcon"
           :src="require('../../assets/img/header-icon-animated.gif')"
@@ -128,20 +136,26 @@ export default {
           @mouseleave="isHover = false"
         >
       </section>
-      <h1><span
-        class="metal">NOISE BOX</span></h1>
+      <h1>
+        <span
+          class="metal"
+        >NOISE BOX</span>
+      </h1>
     </div>
     <div
       class="contact-section"
-      @click="openInfo">
+      @click="openInfo"
+    >
       <img
         class="footer-label icon-type-1"
         src="../../assets/icons/marioquestion.png"
-        alt="">
+        alt=""
+      >
       <div class="contact-text">
         <span class="develop">Developed by:</span>
         <span
-          class="contact">
+          class="contact"
+        >
           Arturo Galán&nbsp;&nbsp;</span>
       </div>
       <!-- <img
@@ -152,9 +166,7 @@ export default {
         class="footer-label icon-type-2"
         src="../../assets/icons/twitter.png"
         alt=""> -->
-
     </div>
-
   </div>
 </template>
 

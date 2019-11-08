@@ -16,14 +16,17 @@ export default {
 <template>
   <transition
     name="fade"
-    mode="out-in">
+    mode="out-in"
+  >
     <div
       v-if="show"
-      class="modal">
+      class="modal"
+    >
       <div
         :class="[size === 'big' && 'modal-content--big']"
-        class="modal-content">
-        <slot/>
+        class="modal-content"
+      >
+        <slot />
       </div>
     </div>
   </transition>

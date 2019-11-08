@@ -50,7 +50,8 @@ export default {
   <div
     class="dropdown"
     @mouseover="setStroke(true)"
-    @mouseleave="setStroke(false)">
+    @mouseleave="setStroke(false)"
+  >
     <input
       :id="`checkbox_toggle${name}`"
       :ref="`checkbox_toggle${name}`"
@@ -64,12 +65,15 @@ export default {
       {{ selectedItem.name || placeholder }}
       <img
         class="arrow"
-        src="../../assets/icons/arrow.png"></label>
+        src="../../assets/icons/arrow.png"
+      ></label>
     <ul>
       <li
         v-for="item in list"
         :key="item.name"
-        @click="emitSelected(item)">{{ item.name }}
+        @click="emitSelected(item)"
+      >
+        {{ item.name }}
       </li>
     </ul>
   </div>

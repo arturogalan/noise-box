@@ -14,10 +14,10 @@ export default {
   name: 'vue-slider-nb',
   components: {},
   props: {
-    value: {type: Number, required: true, default: ()=> 0},
-    positionVertical: {type: Boolean, required: false, default: false},
-    valueColor: {type: String, required: false, default: ''},
-    valueFillColor: {type: String, required: false, default: ''},
+    value: { type: Number, required: true, default: ()=> 0 },
+    positionVertical: { type: Boolean, required: false, default: false },
+    valueColor: { type: String, required: false, default: '' },
+    valueFillColor: { type: String, required: false, default: '' },
   },
   data() {
     return {
@@ -28,7 +28,7 @@ export default {
   },
   computed: {
     valueLeftMargin() {
-      return (this.inputValue * 11)/100;
+      return (this.inputValue * 11) / 100;
     },
     fillColorLeftMargin() {
       return 102 - this.inputValue;
@@ -43,7 +43,7 @@ export default {
     trackValue() {
       // Change the value key to trigger animation
       this.valueKey = 'bounce-tiny';
-      this.$nextTick(()=> this.valueKey = '');
+      this.$nextTick(()=> (this.valueKey = ''));
     },
     emitChangeDebounced: debounce(function(newValue) {
       this.$emit('change', newValue);
@@ -78,27 +78,34 @@ export default {
       max="99"
       value="85"
       class="range"
-      @click="trackValue">
+      @click="trackValue"
+    >
     <div class="sliderticks">
       <template v-for="index in 5">
         <p
           :key="`${index}-1`"
-          class="tick tick--big"/>
+          class="tick tick--big"
+        />
         <p
           :key="`${index}-2`"
-          class="tick tick--small"/>
+          class="tick tick--small"
+        />
         <p
           :key="`${index}-3`"
-          class="tick tick--small"/>
+          class="tick tick--small"
+        />
         <p
           :key="`${index}-4`"
-          class="tick tick--small"/>
+          class="tick tick--small"
+        />
         <p
           :key="`${index}-5`"
-          class="tick tick--small"/>
+          class="tick tick--small"
+        />
       </template>
       <p
-        class="tick tick--big"/>
+        class="tick tick--big"
+      />
     </div>
   </div>
 </template>

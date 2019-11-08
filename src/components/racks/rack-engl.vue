@@ -2,7 +2,7 @@
 import dropdown from '../common/dropdown';
 import vueKnobNb from '../common/vue-knob-nb.vue';
 import audioMaps from '../../helpers/audioMaps';
-import {mapGetters, mapActions} from 'vuex';
+import { mapGetters, mapActions } from 'vuex';
 // import {AMP_COMPONENT_NAME} from '../../store/constants';
 
 export default {
@@ -31,11 +31,11 @@ export default {
       'setPreset',
     ]),
     setDistortionType(selectedPreset) {
-      this.setComponentDistoType({name: 'distortionStage1', value: selectedPreset.distortionStage1});
-      this.setComponentDistoType({name: 'distortionStage2', value: selectedPreset.distortionStage2});
+      this.setComponentDistoType({ name: 'distortionStage1', value: selectedPreset.distortionStage1 });
+      this.setComponentDistoType({ name: 'distortionStage2', value: selectedPreset.distortionStage2 });
     },
     setCabinetType(selectedCabinet) {
-      this.setAmpCabinetType({value: selectedCabinet.name});
+      this.setAmpCabinetType({ value: selectedCabinet.name });
     },
     normalize(value) {
       return audioMaps.getNormalizedSettingValue(value);
@@ -56,8 +56,9 @@ export default {
         <dropdown
           :list="ampDistortionPresets"
           name="distoType"
-          @selected="setDistortionType"/>
-          <!-- :name="distoList.componentName" -->
+          @selected="setDistortionType"
+        />
+        <!-- :name="distoList.componentName" -->
       </div>
     </div>
     <div class="rack-section">
@@ -68,7 +69,8 @@ export default {
         <dropdown
           :list="ampCabinetList"
           name="cabinetType"
-          @selected="setCabinetType"/>
+          @selected="setCabinetType"
+        />
         <div class="knob-grid-wrapper">
           <section class="knob-grid">
             <vue-knob-nb
@@ -97,7 +99,8 @@ export default {
           :list="ampPresetList"
           name="presetType"
           placeholder="Select a preset"
-          @selected="setPreset"/>
+          @selected="setPreset"
+        />
       </div>
     </div>
   </div>

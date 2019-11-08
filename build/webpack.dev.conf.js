@@ -86,7 +86,14 @@ module.exports = new Promise((resolve, reject)=> {
       // Add FriendlyErrorsPlugin
       devWebpackConfig.plugins.push(new FriendlyErrorsPlugin({
         compilationSuccessInfo: {
-          messages: [`NOISE-BOX is running on http://${devWebpackConfig.devServer.host}:${port}`],
+          messages: [`
+              _  _     ___     ___     ___     ___             ___     ___   __  __  
+             | \\| |   / _ \\   |_ _|   / __|   | __|    ___    | _ )   / _ \\  \\ \\/ /  
+             | .| |  | (_) |   | |    \\__ \\   | _|    |___|   | _ \\  | (_) |  >  <   
+             |_|\\_|   \\___/   |___|   |___/   |___|           |___/   \\___/  /_/\\_\\
+
+             
+                    is running on http://${devWebpackConfig.devServer.host}:${port}`],
           notes: [],
         },
         onErrors: config.dev.notifyOnErrors ? utils.createNotifierCallback() : undefined,

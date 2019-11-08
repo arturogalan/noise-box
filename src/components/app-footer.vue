@@ -1,5 +1,5 @@
 <script>
-import {mapGetters, mapActions} from 'vuex';
+import { mapGetters, mapActions } from 'vuex';
 import vueSliderNb from './common/vue-slider-nb';
 // const input = require('../assets/icons/input.svg');
 // const output = require('../assets/icons/output.svg');
@@ -39,11 +39,13 @@ export default {
   <div>
     <div
       v-if="defaultInputDevice || defaultInputDevice"
-      class="footer">
+      class="footer"
+    >
       <div class="footer-section">
         <img
           class="footer-label icon-type"
-          src="../assets/icons/input.svg">
+          src="../assets/icons/input.svg"
+        >
         <div class="footer-label footer-title--input">
           <span class="footer-title">Input: </span>
           {{ defaultInputDevice }}
@@ -54,13 +56,15 @@ export default {
             :value-color="'rgb(146, 215, 146)'"
             :value-fill-color="'hsl(100,16%,30%)'"
             class="footer-slider"
-            @change="setAmpInputGain($event)"/>
+            @change="setAmpInputGain($event)"
+          />
         </div>
       </div>
       <div class="footer-section footer-section--right">
         <img
           class="footer-label icon-type"
-          src="../assets/icons/output.svg">
+          src="../assets/icons/output.svg"
+        >
         <div class="footer-label footer-title--output">
           <span class="footer-title">Output: </span>
           {{ defaultOutputDevice }}
@@ -71,7 +75,8 @@ export default {
             :value-color="'rgb(206, 71, 73)'"
             :value-fill-color="'hsl(359,37%,34%)'"
             class="footer-slider"
-            @change="setAmpOutputGain($event)"/>
+            @change="setAmpOutputGain($event)"
+          />
         </div>
       </div>
     </div>

@@ -1,5 +1,5 @@
 <script>
-import {mapGetters, mapActions} from 'vuex';
+import { mapGetters, mapActions } from 'vuex';
 import pedalKnobGrid from './pedal-knob-grid.vue';
 import macButtons from '../../common/mac-buttons.vue';
 
@@ -19,7 +19,7 @@ export default {
       'setPedalProperty',
     ]),
     zoomPedalOut(pedal) {
-      this.setPedalProperty({name: this.zoomInPedal.name, property: 'zoomIn', value: false});
+      this.setPedalProperty({ name: this.zoomInPedal.name, property: 'zoomIn', value: false });
     },
   },
 };
@@ -27,10 +27,12 @@ export default {
 <template>
   <div
     :style="{ borderColor: zoomInPedal.bgcolor }"
-    class="knob-container">
+    class="knob-container"
+  >
     <div
       :style="{ color: zoomInPedal.fcolor, backgroundColor: zoomInPedal.bgcolor}"
-      class="pedal-name">
+      class="pedal-name"
+    >
       <mac-buttons
         :button-literals="{
           close: 'TOOLTIP.PEDAL.CLOSE',
@@ -38,13 +40,15 @@ export default {
         :maximized="true"
         class="buttons-absolute"
         @close="zoomPedalOut"
-        @maximize="$emit('maximize')"/>
+        @maximize="$emit('maximize')"
+      />
       {{ zoomInPedal.name }}
     </div>
     <pedal-knob-grid
       :pedal="zoomInPedal"
       class="knob-grid-container"
-      size="zoom-in"/>
+      size="zoom-in"
+    />
   </div>
 </template>
 

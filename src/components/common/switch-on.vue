@@ -46,25 +46,28 @@ export default {
     <section
       :style="strokeStyle"
     >
-
       <div
         class="frame"
       >
         <div
           :class="`switch-border--${color}`"
-          class="switch-border">
+          class="switch-border"
+        >
           <div
             v-if="switchedOn"
             :class="`switch-top-side--${color}`"
-            class="switch-top-side"/>
+            class="switch-top-side"
+          />
           <div
             :class="switchedOn ? `switch-on--${color}` : `switch-off--${color}`"
-            class="switch">
-            <div class="inner-switch-grid"/>
+            class="switch"
+          >
+            <div class="inner-switch-grid" />
             <label
               :class="[switchedOn && `switch-right switch-right--${color}`]"
               class="letter"
-              @click="toogleSwitch()">
+              @click="toogleSwitch()"
+            >
               <span :class="switchedOn && 'switch-letter-right'">
                 0
               </span>
@@ -72,7 +75,8 @@ export default {
             <label
               :class="[!switchedOn && `switch-left switch-left--${color}`]"
               class="letter"
-              @click="toogleSwitch()">
+              @click="toogleSwitch()"
+            >
               <span :class="!switchedOn && 'switch-letter-left'">
                 I
               </span>
@@ -81,7 +85,8 @@ export default {
           <div
             v-if="!switchedOn"
             :class="`switch-bottom-side--${color}`"
-            class="switch-bottom-side"/>
+            class="switch-bottom-side"
+          />
         </div>
       </div>
     </section>

@@ -27,4 +27,3 @@ Tuner
 Curves graphs
 Mixin for all the different knobs
 Midi
-
