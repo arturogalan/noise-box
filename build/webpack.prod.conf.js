@@ -42,13 +42,11 @@ const webpackConfig = merge(baseWebpackConfig, {
           // Eliminate comments
           comments: false,
           compress: {
-            // hide warnings
-            'warnings': false,
             // Drop console statements
             'drop_console': true,
           },
         },
-        sourceMap: config.build.productionSourceMap,
+        sourceMap: false,
         parallel: true,
       }),
     ],
@@ -98,17 +96,6 @@ const webpackConfig = merge(baseWebpackConfig, {
         // https://github.com/kangax/html-minifier#options-quick-reference
       },
     }),
-    new HtmlWebpackPlugin({
-      filename: 'widget.html',
-      template: 'widget.html',
-      chunks: ['widgetApp'],
-      inject: true,
-      minify: {
-        removeComments: true,
-        collapseWhitespace: true,
-        removeAttributeQuotes: true,
-      },
-    }),
     // keep module.id stable when vendor modules does not change
     new webpack.HashedModuleIdsPlugin(),
     // copy custom static assets
@@ -118,7 +105,6 @@ const webpackConfig = merge(baseWebpackConfig, {
         to: config.build.assetsSubDirectory,
         ignore: ['.*'],
       },
-      ...utils.customAssets,
     ]),
     ...(config.build.productionSourceMap ? (
       [

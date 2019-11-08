@@ -36,5 +36,12 @@ module.exports = app;
 let server = null;
 
 server = app.listen(process.env.PORT || 8080, function(){
-    logger.info('NOISE-BOX is listening at ' + server.address().port + '/');
+    logger.info(`
+#      _   ______  _________ ______     ____  ____ _  __
+#     / | / / __ \/  _/ ___// ____/    / __ )/ __ \ |/ /
+#    /  |/ / / / // / \__ \/ __/______/ __  / / / /   / 
+#   / /|  / /_/ // / ___/ / /__/_____/ /_/ / /_/ /   |  
+#  /_/ |_/\____/___//____/_____/    /_____/\____/_/|_|  
+#                                                       
+        is listening at ${server.address().port}/`);
 })

@@ -10,17 +10,6 @@ exports.assetsPath = function(_path) {
   return path.posix.join(assetsSubDirectory, _path);
 };
 
-exports.widgetPath = function(_path) {
-  return path.posix.join(config.build.widgetDirectory, _path);
-};
-
-exports.customAssets = ['langs', 'config', 'schemas', 'mocks'].map(function(asset) {
-  return {
-    from: path.resolve(__dirname, '../src/' + asset),
-    to: path.resolve(config.build.assetsRoot, asset),
-  };
-});
-
 exports.styleLoaders = function({extract, sourceMap}) {
   const includePath = path.join(__dirname, '..', 'src');
   return [
