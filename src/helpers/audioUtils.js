@@ -1,4 +1,4 @@
-import {capitalize} from 'lodash';
+import { capitalize } from 'lodash';
 import * as Noisefy from 'noisefy';
 
 const audioUtils = {
@@ -16,12 +16,12 @@ const audioUtils = {
   createAudioNode(audioContext, type) {
     console.log(`Creating ${capitalize(type)} audio node`);
 
-    let audioNode = new Noisefy[capitalize(type)](audioContext);
+    const audioNode = new Noisefy[capitalize(type)](audioContext);
     return audioNode;
   },
   createInput(audioContext) {
     const input = new Noisefy.Input(audioContext);
-    let stream = input.getUserMedia();
+    const stream = input.getUserMedia();
     console.log(stream);
     return input;
   },

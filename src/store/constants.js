@@ -175,17 +175,17 @@ export const PEDAL_PROPERTIES = {
     settingsList: [
       {
         name: 'delay',
-        value: 5, //0.005 0->0.1?,
+        value: 5, // 0.005 0->0.1?,
         color: 'lightslategray',
       },
       {
         name: 'depth',
-        value: 2, //0.002 0->0.1,
+        value: 2, // 0.002 0->0.1,
         color: 'lightseagreen',
       },
       {
         name: 'feedback',
-        value: 5, //0.5 0->1,
+        value: 5, // 0.5 0->1,
         color: 'lightskyblue',
       },
       {

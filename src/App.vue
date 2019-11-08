@@ -1,5 +1,5 @@
 <script>
-import {mapGetters, mapActions} from 'vuex';
+import { mapGetters, mapActions } from 'vuex';
 import modal from './components/common/modal.vue';
 import pedalZoomIn from './components/pedals/pedal/pedal-zoom-in';
 import infoModal from './components/common/info-modal';
@@ -8,6 +8,8 @@ import englTheme from './components/themes/engl-theme.vue';
 import pedalsBoard from './components/pedals/grid/pedals-board';
 import appFooter from './components/app-footer.vue';
 import closeable from './mixins/closeable';
+
+// file:./../noisefy
 
 export default {
   name: 'app',
@@ -49,19 +51,22 @@ export default {
 </script>
 <template>
   <div
-    id="app">
+    id="app"
+  >
     <modal
-      :show="zoomInPedal !== undefined">
-      <pedal-zoom-in/>
+      :show="zoomInPedal !== undefined"
+    >
+      <pedal-zoom-in />
     </modal>
     <modal
       :show="showInfoModal"
-      size="big">
-      <infoModal/>
+      size="big"
+    >
+      <infoModal />
     </modal>
-    <engl-theme/>
-    <pedals-board/>
-    <app-footer/>
+    <engl-theme />
+    <pedals-board />
+    <app-footer />
   </div>
 </template>
 <style lang="scss">

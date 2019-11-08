@@ -60,13 +60,13 @@ export default {
       return this.radius * 2 * Math.PI;
     },
     strokeDasharray() {
-      let value = (this.circumference / this.maxValue) * this.currentValue;
+      const value = (this.circumference / this.maxValue) * this.currentValue;
       return value + ' ' + (this.circumference - value);
     },
     labelStyle() {
-      //TO-DO: if decimal adjust transformY
+      // TO-DO: if decimal adjust transformY
       let transformY;
-      let currentValueDigits = this.numDigits(this.currentValue);
+      const currentValueDigits = this.numDigits(this.currentValue);
       if (currentValueDigits >= 3) {
         transformY = 0.75;
       } else if (currentValueDigits === 2) {
@@ -94,7 +94,7 @@ export default {
   },
   mounted() {
     const initialDegress = (this.currentValue / this.maxValue) * 360;
-    setTimeout(()=> this.selectorValue = initialDegress - (this.svgRotate - 90), 250);
+    setTimeout(()=> (this.selectorValue = initialDegress - (this.svgRotate - 90)), 250);
   },
   methods: {
     computeValue(e) {
@@ -104,23 +104,23 @@ export default {
       const centerY = rect.height / 2 + rect.top;
       const clickX = e.clientX;
       const clickY = e.clientY;
-      let result = Math.atan2(centerY - clickY, centerX - clickX);
+      const result = Math.atan2(centerY - clickY, centerX - clickX);
 
       // Calculation of current value
-      let percentage = ((result + Math.PI) / (Math.PI + Math.PI)) * this.maxValue;
+      const percentage = ((result + Math.PI) / (Math.PI + Math.PI)) * this.maxValue;
       // delta: the percentaje that represents the rotate: 90 degrees of rotate represents the 25% of the circumference
-      let deltaPercentaje = (this.svgRotate / 360) * this.maxValue;
+      const deltaPercentaje = (this.svgRotate / 360) * this.maxValue;
       let adjustPercentage = percentage + deltaPercentaje;
       // console.log(this.maxValue * Math.trunc(adjustPercentage/this.maxValue))
       adjustPercentage =
         adjustPercentage > this.maxValue
           ? adjustPercentage - this.maxValue
           : adjustPercentage;
-      //TO-DO if decimal: this.currentValue = adjustPercentage; and round to 1 digit
+      // TO-DO if decimal: this.currentValue = adjustPercentage; and round to 1 digit
       this.currentValue = Math.ceil(adjustPercentage);
       // Calculation of inner selector position
-      let deltaDegrees = (this.svgRotate / 360) * 360;
-      let degress = ((result + Math.PI) / (Math.PI + Math.PI)) * 360;
+      const deltaDegrees = (this.svgRotate / 360) * 360;
+      const degress = ((result + Math.PI) / (Math.PI + Math.PI)) * 360;
       let adjustDegrees = degress + deltaDegrees;
       adjustDegrees = adjustDegrees > 360 ? adjustDegrees - 360 : adjustDegrees;
       this.selectorValue = adjustDegrees - (this.svgRotate - 90);
@@ -142,18 +142,19 @@ export default {
       class="pointer-wrapper"
       @click="computeValue"
       @mouseover="setStroke(true)"
-      @mouseleave="setStroke(false)"/>
+      @mouseleave="setStroke(false)"
+    />
     <div
       ref="chicken"
       :style="svgAbove"
       class="chicken-head"
     >
-
       <svg
         width="100%"
         height="100%"
         xmlns="http://www.w3.org/2000/svg"
-        xmlns:svg="http://www.w3.org/2000/svg">
+        xmlns:svg="http://www.w3.org/2000/svg"
+      >
         <!-- Created with SVG-edit - https://github.com/SVG-Edit/svgedit-->
         <defs>
           <linearGradient
@@ -161,13 +162,16 @@ export default {
             y2="0"
             y1="0.31357"
             x2="1"
-            x1="0.6011">
+            x1="0.6011"
+          >
             <stop
               stop-color="#000000"
-              offset="0"/>
+              offset="0"
+            />
             <stop
               stop-color="#ffffff"
-              offset="1"/>
+              offset="1"
+            />
           </linearGradient>
           <linearGradient
             id="svg_5"
@@ -175,29 +179,35 @@ export default {
             y1="0"
             x2="0.61672"
             x1="0"
-            spreadMethod="pad">
+            spreadMethod="pad"
+          >
             <stop
               stop-color="#000000"
-              offset="0.06985"/>
+              offset="0.06985"
+            />
             <stop
               stop-opacity="0.99219"
               stop-color="#0f0f0f"
-              offset="0.54641"/>
+              offset="0.54641"
+            />
             <stop
               stop-opacity="0.99219"
               stop-color="#544f4f"
-              offset="0.80032"/>
+              offset="0.80032"
+            />
             <stop
               stop-opacity="0.99219"
               stop-color="#ffffff"
-              offset="0.98782"/>
+              offset="0.98782"
+            />
           </linearGradient>
         </defs>
         <g class="layer">
           <title>Layer 1</title>
           <g
             id="svg_8"
-            stroke="null">
+            stroke="null"
+          >
             <circle
               id="svg_2"
               :stroke="strokeColor"
@@ -208,7 +218,8 @@ export default {
               r="30%"
               fill="url(#svg_5)"
               cy="50%"
-              cx="51%"/>
+              cx="51%"
+            />
             <path
               id="svg_1"
               :stroke="strokeColor"
@@ -220,7 +231,8 @@ export default {
               fill="url(#svg_10)"
               stroke-width="2"
               fill-opacity="1"
-              stroke-opacity="1"/>
+              stroke-opacity="1"
+            />
             <path
               id="svg_4"
               xmlns="http://www.w3.org/2000/svg"
@@ -229,7 +241,8 @@ export default {
               stroke-width="0"
               stroke="black"
               fill-opacity="1"
-              stroke-opacity="1"/>
+              stroke-opacity="1"
+            />
           </g>
         </g>
       </svg>
@@ -244,7 +257,8 @@ export default {
         r="40%"
         cx="50%"
         cy="50%"
-        class="stroke-hole"/>
+        class="stroke-hole"
+      />
     </svg>
 
 
@@ -252,12 +266,14 @@ export default {
       <div
         v-show="isVisible"
         :key="currentValue"
-        class="value-label">
+        class="value-label"
+      >
         <div
           v-if="isVisible"
           :style="{ color: `hsl(0, 100%, ${100 - (currentValue/2)}%)`}"
           :class="'value-span--'+size"
-          class="value-span">
+          class="value-span"
+        >
           {{ currentValue }}
         </div>
       </div>

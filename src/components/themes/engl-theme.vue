@@ -14,8 +14,8 @@ export default {
 </script>
 <template>
   <section>
-    <app-header-engl/>
-    <amp-engl/>
-    <rack-engl/>
+    <app-header-engl />
+    <amp-engl />
+    <rack-engl />
   </section>
 </template>

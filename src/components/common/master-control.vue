@@ -1,7 +1,7 @@
 <script>
 import vueSliderNb from './vue-slider-nb.vue';
-import {mapActions} from 'vuex';
-import {PEDAL_TYPE} from '../../store/constants';
+import { mapActions } from 'vuex';
+import { PEDAL_TYPE } from '../../store/constants';
 
 export default {
   name: 'master-control',
@@ -25,7 +25,7 @@ export default {
       this.updateMainVolumeLevel(this.initialMainVolumeLevel);
     },
     updateMainVolumeLevel(value) {
-      this.setPedalEffectProperty({type: PEDAL_TYPE.VOLUME, property: 'level', value});
+      this.setPedalEffectProperty({ type: PEDAL_TYPE.VOLUME, property: 'level', value });
     },
   },
 };
@@ -37,7 +37,8 @@ export default {
     <div class="centered-child">
       <vue-slider-nb
         :value="initialMainVolumeLevel"
-        @change="updateMainVolumeLevel"/>
+        @change="updateMainVolumeLevel"
+      />
     </div>
   </div>
 </template>

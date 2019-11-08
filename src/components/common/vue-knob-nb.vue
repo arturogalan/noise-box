@@ -58,17 +58,17 @@ export default {
   },
   computed: {
     circumference() {
-      //94.2 = 2 * PI * RADIOUS (r="15")
+      // 94.2 = 2 * PI * RADIOUS (r="15")
       return this.radius * 2 * Math.PI;
     },
     strokeDasharray() {
-      let value = (this.circumference / this.maxValue) * this.currentValue;
+      const value = (this.circumference / this.maxValue) * this.currentValue;
       return value + ' ' + (this.circumference - value);
     },
     labelStyle() {
-      //TO-DO: if decimal adjust transformY
+      // TO-DO: if decimal adjust transformY
       let transformY;
-      let currentValueDigits = this.numDigits(this.currentValue);
+      const currentValueDigits = this.numDigits(this.currentValue);
       if (currentValueDigits >= 3) {
         transformY = 0.75;
       } else if (currentValueDigits === 2) {
@@ -101,7 +101,7 @@ export default {
   },
   mounted() {
     const initialDegress = (this.currentValue / this.maxValue) * 360;
-    setTimeout(()=> this.selectorValue = initialDegress, 250);
+    setTimeout(()=> (this.selectorValue = initialDegress), 250);
   },
   methods: {
     computeValue(e) {
@@ -111,24 +111,24 @@ export default {
       const centerY = rect.height / 2 + rect.top;
       const clickX = e.clientX;
       const clickY = e.clientY;
-      let result = Math.atan2(centerY - clickY, centerX - clickX);
+      const result = Math.atan2(centerY - clickY, centerX - clickX);
 
       // Calculation of current value
-      let percentage = ((result + Math.PI) / (Math.PI + Math.PI)) * this.maxValue;
+      const percentage = ((result + Math.PI) / (Math.PI + Math.PI)) * this.maxValue;
       // delta: the percentaje that represents the rotate: 90 degrees of rotate represents the 25% of the circumference
-      let deltaPercentaje = (this.svgRotate / 360) * this.maxValue;
+      const deltaPercentaje = (this.svgRotate / 360) * this.maxValue;
       let adjustPercentage = percentage + deltaPercentaje;
       // console.log(this.maxValue * Math.trunc(adjustPercentage/this.maxValue))
       adjustPercentage =
         adjustPercentage > this.maxValue
           ? adjustPercentage - this.maxValue
           : adjustPercentage;
-      //TO-DO if decimal: this.currentValue = adjustPercentage; and round to 1 digit
+      // TO-DO if decimal: this.currentValue = adjustPercentage; and round to 1 digit
       this.currentValue = Math.ceil(adjustPercentage);
 
       // Calculation of inner selector position
-      let deltaDegrees = (this.svgRotate / 360) * 360;
-      let degress = ((result + Math.PI) / (Math.PI + Math.PI)) * 360;
+      const deltaDegrees = (this.svgRotate / 360) * 360;
+      const degress = ((result + Math.PI) / (Math.PI + Math.PI)) * 360;
       let adjustDegrees = degress + deltaDegrees;
       adjustDegrees = adjustDegrees > 360 ? adjustDegrees - 360 : adjustDegrees;
       this.selectorValue = adjustDegrees;
@@ -146,7 +146,8 @@ export default {
   <section class="container">
     <div
       :class="'setting-name--'+size"
-      class="setting-name">
+      class="setting-name"
+    >
       <span>{{ name }}</span>
     </div>
     <svg
@@ -162,12 +163,14 @@ export default {
         :r="radius-5"
         class="stroke-hole"
         cx="16"
-        cy="16"/>
+        cy="16"
+      />
       <circle
         class="stroke-mark"
         cx="16"
         cy="16"
-        r="5"/>
+        r="5"
+      />
     </svg>
     <svg
       :style="svgStyle"
@@ -175,7 +178,8 @@ export default {
       height="100%"
       viewBox="0 0 32 32"
       preserveAspectRatio
-      @click="computeValue">
+      @click="computeValue"
+    >
       <circle
         ref="ring"
         :r="radius+30"
@@ -205,19 +209,20 @@ export default {
       <div
         v-show="isVisible"
         :key="currentValue"
-        class="value-label">
+        class="value-label"
+      >
         <div
           v-if="isVisible"
           :style="{color: barcolor}"
           :class="'value-span--'+size"
-          class="value-span">
+          class="value-span"
+        >
           {{ currentValue }}
         </div>
       </div>
     </transition>
     <!-- :style="{top: knobsNumber > 3 ? '-20%' : '-8%'}" -->
   </section>
-
 </template>
 <style lang="scss" scoped>
 .value-label{

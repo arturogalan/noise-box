@@ -1,9 +1,9 @@
 <script>
 import ChickenHeadKnob from '../common/chicken-head-knob.vue';
 import audioMaps from '../../helpers/audioMaps';
-import {mapActions, mapGetters} from 'vuex';
+import { mapActions, mapGetters } from 'vuex';
 import SwitchOn from './../common/switch-on.vue';
-import {AMP_COMPONENT_TYPE} from '../../store/constants';
+import { AMP_COMPONENT_TYPE } from '../../store/constants';
 
 
 export default {
@@ -58,9 +58,9 @@ export default {
     setKnobValue(component, knobSetting, value) {
       // when setting disto intensity also set the asymetric disto intensity to the same value in SIMPLE mode
       if (component.name === 'distortionStage2') {
-        this.setAmpComponentEffectProperty({name: 'distortionStage1', property: knobSetting.name, value: this.denormalize(value)});
+        this.setAmpComponentEffectProperty({ name: 'distortionStage1', property: knobSetting.name, value: this.denormalize(value) });
       }
-      this.setAmpComponentEffectProperty({name: component.name, property: knobSetting.name, value: this.denormalize(value)});
+      this.setAmpComponentEffectProperty({ name: component.name, property: knobSetting.name, value: this.denormalize(value) });
     },
   },
 };
@@ -74,8 +74,7 @@ export default {
         src="../../assets/img/cable-input.svg"
       >
     </div>
-    <div class="knob-grid" >
-
+    <div class="knob-grid">
       <div
         v-for="component in amp.multiEffectAmp.getKnobTypeComponents().filter((component)=> component.name !== 'distortionStage1')"
         :key="component.name"
@@ -94,8 +93,9 @@ export default {
       <switch-on
         name="Stand by"
         color="black"
-        @click="toogleMuteAudio()"/>
-      <switch-on @click="toogleSwitchOnAmp()"/>
+        @click="toogleMuteAudio()"
+      />
+      <switch-on @click="toogleSwitchOnAmp()" />
     </div>
   </div>
 </template>
