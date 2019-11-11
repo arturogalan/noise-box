@@ -1,16 +1,15 @@
 <script>
-import {mapActions} from 'vuex';
+import { mapActions } from 'vuex';
 
 export default {
   name: 'pedals-palette',
-  props: {palettePedal: {type: Object, required: true},
-  },
+  props: { palettePedal: { type: Object, required: true } },
   data() {
     return {};
   },
   methods: {
     getAsset: function(assetName) {
-      return require('../../../'+assetName);
+      return require('../../../' + assetName);
     },
     ...mapActions('pedal', [
       'addPedal',
@@ -21,14 +20,18 @@ export default {
 <template>
   <div
     class="palette-card"
-    @click="addPedal(palettePedal)">
-    <div class="overlay">{{ palettePedal.name }}</div>
+    @click="addPedal(palettePedal)"
+  >
+    <div class="overlay">
+      {{ palettePedal.name }}
+    </div>
     <img
       :src="getAsset(palettePedal.icon)"
-      class="icon-type">
+      class="icon-type"
+    >
   </div>
 </template>
-<style>
+<style lang="scss" scoped>
 .palette-card {
     display: flex;
     position: relative;
@@ -55,7 +58,7 @@ export default {
 }
 .icon-type{
     max-width: 5rem;
-       display:block;
+    display:block;
     margin:auto;
 }
 .overlay {

@@ -1,12 +1,10 @@
 <script>
-import {mapGetters, mapActions} from 'vuex';
-import pedalsPalette from '../../pedals/grid/pedals-palette.vue';
+import { mapGetters, mapActions } from 'vuex';
 import pedal from '../../pedals/pedal/pedal.vue';
 
 export default {
   name: 'pedals-board',
   components: {
-    pedalsPalette,
     pedal,
   },
   computed: {
@@ -16,16 +14,16 @@ export default {
     ]),
   },
   created() {
-    this.initPalettePedals();
+    this.initPedals();
   },
   methods: {
     ...mapActions('pedal', [
-      'initPalettePedals',
+      'initPedals',
       'removePedal',
       'setPedalProperty',
     ]),
     zoomPedal(pedal) {
-      this.setPedalProperty({name: pedal.name, property: 'zoomIn', value: true});
+      this.setPedalProperty({ name: pedal.name, property: 'zoomIn', value: true });
     },
   },
 };
@@ -33,41 +31,27 @@ export default {
 
 <template>
   <article>
-    <div class="pedal-palette">
-      <div class="palette-title">{{ this.$t('MAIN.STEP_1') }}</div>
-      <div class="grid-container">
-        <pedals-palette
-          v-tooltip="{text: $t('TOOLTIP.PEDAL.ADD', { effect: palettePedal.name })}"
-          v-for="palettePedal in palettePedalsList"
-          :key="palettePedal.name"
-          :palette-pedal="palettePedal"
-        />
-      </div>
-    </div>
+    <div class="pedal-palette" />
     <div class="pedal-board">
-      <div class="palette-title">{{ this.$t('MAIN.STEP_2') }}</div>
-
-
-      <div class="noise-board column">
-        <div>
-          <div
-            class="column left"/>
-          <div
-            class="column middle">
-            <div>
-              <pedal
-                v-for="pedal in pedalList"
-                :key="pedal.name"
-                :pedal="pedal"
-                class="column"
-                @delete="removePedal(pedal)"
-                @maximize="zoomPedal(pedal)"
-              />
-            </div>
-          </div>
-          <div
-            class="column right"/>
+      <div class="noise-board">
+        <div
+          class="column left"
+        />
+        <div
+          class="column middle "
+        >
+          <pedal
+            v-for="pedal in pedalList"
+            :key="pedal.name"
+            :pedal="pedal"
+            class="column"
+            @delete="removePedal(pedal)"
+            @maximize="zoomPedal(pedal)"
+          />
         </div>
+        <div
+          class="column right"
+        />
       </div>
     </div>
   </article>
@@ -76,34 +60,32 @@ export default {
 .pedal-palette {
   /* display: flex; */
   /* flex-wrap: wrap; */
-  width: 15%;
+  width: 15%;display: grid;
   height: 100%;
   float: left;
-  background-color:#aaa;
 }
 .pedal-board {
    height: 100%;
-     background-color:#ccc;
 }
 
 .noise-board{
-  width: 80%;
+  width: 100%;
+  background-color: rgb(70,70,70);
+  display: grid;
+  grid-template-columns: 10% 80% 10%;
 }
 /* Create three unequal columns that floats next to each other */
-.column {
-    float: left;
-    height: 100%;
-}
+// .column {
+//     float: left;
+//     height: 100%;
+// }
 .left {
-  width: 2%;
-  background-color:#bbb;
 }
 .middle {
-  width: 95%;
+  display: flex;
+  justify-content: space-around;
 }
 .right {
-  width: 5%;
-  background-color:#ddd;
 }
 
 /* Clear floats after the columns */

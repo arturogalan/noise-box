@@ -21,11 +21,11 @@
     },
     "AMP": {
       "COMPONENT": {
-        "MASTER":{
-          "LEVEL":"Master"
+        "OUTPUTGAIN":{
+          "LEVEL":"Volume"
           },
-        "VOLUME":{
-        "LEVEL":"Volume"
+        "MASTER":{
+        "LEVEL":"Master"
         },
         "EQUALIZER": {
           "TREBBLEGAIN":"Trebble",
@@ -37,6 +37,15 @@
         },
         "DISTORTION":{
           "INTENSITY":"Gain"
+        },
+        "DISTORTIONSTAGE1":{
+          "INTENSITY":"Gain1"
+        },
+        "DISTORTIONSTAGE2":{
+          "INTENSITY":"Gain"
+        },
+        "OUTPUT":{
+          "LEVEL":"Output"
         }
       },
       "RACK":{

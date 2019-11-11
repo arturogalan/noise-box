@@ -7,25 +7,25 @@ export default {
 <template>
   <div class="metal-grid-wrapper n-index-5">
     <div class="horizontal-metal-bar horizontal-metal-bar--big top n-index-3">
-      <div class="horizontal-white-reflect horizontal-white-reflect--middle-left"/>
-      <div class="horizontal-white-reflect horizontal-white-reflect--middle-right"/>
+      <div class="horizontal-white-reflect horizontal-white-reflect--middle-left" />
+      <div class="horizontal-white-reflect horizontal-white-reflect--middle-right" />
     </div>
     <div class="horizontal-metal-bar horizontal-metal-bar--small center left-small n-index-1">
-      <div class="horizontal-white-reflect"/>
-      <div class="horizontal-white-reflect horizontal-white-reflect--right"/>
+      <div class="horizontal-white-reflect" />
+      <div class="horizontal-white-reflect horizontal-white-reflect--right" />
     </div>
     <div class="horizontal-metal-bar horizontal-metal-bar--big bottom n-index-3">
-      <div class="horizontal-white-reflect horizontal-white-reflect--middle-left"/>
-      <div class="horizontal-white-reflect horizontal-white-reflect--middle-right"/>
+      <div class="horizontal-white-reflect horizontal-white-reflect--middle-left" />
+      <div class="horizontal-white-reflect horizontal-white-reflect--middle-right" />
     </div>
     <div class="vertical-metal-bar left n-index-4">
-      <div class="vertical-white-reflect vertical-white-reflect--top"/>
+      <div class="vertical-white-reflect vertical-white-reflect--top" />
     </div>
     <div class="vertical-metal-bar middle n-index-2">
-      <div class="vertical-white-reflect vertical-white-reflect--middle"/>
+      <div class="vertical-white-reflect vertical-white-reflect--middle" />
     </div>
     <div class="vertical-metal-bar right n-index-4">
-      <div class="vertical-white-reflect vertical-white-reflect--top"/>
+      <div class="vertical-white-reflect vertical-white-reflect--top" />
     </div>
   </div>
 </template>

@@ -10,16 +10,16 @@ const positionTooltip = function(event, element) {
     pageX = event.clientX + document.body.scrollLeft + document.documentElement.scrollLeft;
     pageY = event.clientY + document.body.scrollTop + document.documentElement.scrollTop;
   }
-  element.style.top = `${pageY+cursorSize}px`;
-  element.style.left = `${pageX+cursorSize}px`;
+  element.style.top = `${pageY + cursorSize}px`;
+  element.style.left = `${pageX + cursorSize}px`;
 };
 
 const createTooltip = function(event, element, text) {
-  let boxDiv = document.createElement('div');
+  const boxDiv = document.createElement('div');
   boxDiv.classList.add('tooltip-box');
   boxDiv.classList.remove('fade-out');
   boxDiv.classList.add('fade-in');
-  let textDiv = document.createElement('div');
+  const textDiv = document.createElement('div');
   textDiv.innerHTML = text;
   boxDiv.classList.add('tooltip-text');
   boxDiv.appendChild(textDiv);
@@ -58,7 +58,7 @@ const tooltip = {
     });
   },
   update: function(el, binding) {
-    //If tooltip exists, change the text
+    // If tooltip exists, change the text
     if (el.attributes['vue-tooltip'] && el.attributes['vue-tooltip'].value === 'true') {
       if (binding.value) {
         el.lastChild.lastChild.innerHTML = binding.value.text;

@@ -36,37 +36,41 @@ export default {
 <template>
   <div class="pedal-led--strip">
     <div
-      v-tooltip="buttonEnabled.close && {text: $t(buttonLiterals.close)}"
       v-if="buttonLiterals.close"
+      v-tooltip="buttonEnabled.close && {text: $t(buttonLiterals.close)}"
       :class="[buttonLiterals.close && 'pedal-led--close', !buttonEnabled.close && 'pedal-led--disabled']"
       class="pedal-led"
-      @click="$emit('close')">
-      <i :class="buttonLiterals.close && 'ico-close ico-led'"/>
+      @click="$emit('close')"
+    >
+      <i :class="buttonLiterals.close && 'ico-close ico-led'" />
     </div>
     <div
-      v-tooltip="buttonEnabled.minimize && ({text: $t(buttonLiterals.minimize)})"
       v-if="buttonLiterals.minimize"
+      v-tooltip="buttonEnabled.minimize && ({text: $t(buttonLiterals.minimize)})"
       :class="[buttonLiterals.minimize && 'pedal-led--minimize', !buttonEnabled.minimize && 'pedal-led--disabled']"
       class="pedal-led"
-      @click="$emit('minimize')">
-      <i :class="buttonLiterals.minimize && 'ico-minimize ico-led'"/>
+      @click="$emit('minimize')"
+    >
+      <i :class="buttonLiterals.minimize && 'ico-minimize ico-led'" />
     </div>
     <div
-      v-tooltip="buttonEnabled.maximize && ({text: $t(buttonLiterals.maximize)})"
       v-if="buttonLiterals.maximize"
+      v-tooltip="buttonEnabled.maximize && ({text: $t(buttonLiterals.maximize)})"
       :class="[buttonLiterals.maximize && 'pedal-led--maximize', !buttonEnabled.maximize && 'pedal-led--disabled']"
       class="pedal-led"
-      @click="$emit('maximize')">
-      <i :class="buttonLiterals.maximize && 'ico-maximize ico-led'"/>
+      @click="$emit('maximize')"
+    >
+      <i :class="buttonLiterals.maximize && 'ico-maximize ico-led'" />
     </div>
   </div>
 </template>
 <style lang="scss" scoped>
 .ico-led {
-  width: 10px;
-  line-height: 10px;
-  font-size: 8px;
-  margin-left: .5px;
+  width: 11px;
+  line-height: 11px;
+  font-size: 10px;
+  // margin-left: 1px;
+  margin-top: 1px;
   display: none;
 }
 .pedal-led--strip:hover {

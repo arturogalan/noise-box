@@ -1,6 +1,6 @@
 <script>
 import metalGrid from './../common/metal-grid.vue';
-import {mapGetters} from 'vuex';
+import { mapGetters, mapActions } from 'vuex';
 
 export default {
   components: {
@@ -9,16 +9,38 @@ export default {
   data() {
     return {
       isVisible: true,
+      isHover: false,
     };
   },
   computed: {
     ...mapGetters('pedal', [
       'amp',
     ]),
+    showOnIcon() {
+      return !this.isHover && this.amp.switchedOn && this.amp.standBy;
+    },
+    showStandByIcon() {
+      return !this.isHover && !this.amp.standBy && this.amp.switchedOn;
+    },
+    showOffIcon() {
+      return !this.isHover && !this.amp.switchedOn;
+    },
+    showHoverIcon() {
+      return this.isHover;
+    },
   },
   created() {
   },
   methods: {
+    ...mapActions('ui', [
+      'toggleModal',
+    ]),
+    setHover(status) {
+      console.log('eee');
+    },
+    openInfo() {
+      this.toggleModal({ modalName: 'infoModal', status: true });
+    },
   },
 
 };
@@ -26,23 +48,26 @@ export default {
 
 <template>
   <div>
-    <div class="header-background n-index-7"/>
+    <div class="header-background n-index-7" />
     <div class="valves-behind valve-left n-index-5">
       <div
         v-for="index in 2"
         :key="index"
       >
         <transition
-          name="fade-valve">
+          name="fade-valve"
+        >
           <div :key="amp.switchedOn">
             <img
               v-if="amp.switchedOn"
               :src="require('../../assets/img/valve-on.svg')"
-              class="valves">
+              class="valves"
+            >
             <img
               v-else
               :src="require('../../assets/img/valve-off.svg')"
-              class="valves">
+              class="valves"
+            >
           </div>
         </transition>
       </div>
@@ -53,43 +78,99 @@ export default {
         :key="index"
       >
         <transition
-          name="fade-valve">
+          name="fade-valve"
+        >
           <div :key="amp.switchedOn">
             <img
               v-if="amp.switchedOn"
               :src="require('../../assets/img/valve-on.svg')"
-              class="valves">
+              class="valves"
+            >
             <img
               v-else
               :src="require('../../assets/img/valve-off.svg')"
-              class="valves">
+              class="valves"
+            >
           </div>
         </transition>
       </div>
     </div>
-    <div class="grid-wrapper">
+    <div class="grid-wrapper n-index-1">
       <metal-grid
         v-for="i in 240"
-        :key="i"/>
+        :key="i"
+      />
     </div>
     <div
-      v-tooltip="{text: 'F*king awesome noise box!!!'}"
       class="title"
     >
+      <section
+        v-tooltip="{text: 'F*king awesome noise box!!!'}"
+        @mouseover="isHover = true"
+        @mouseleave="isHover = false"
+      >
+        <img
+          v-if="showHoverIcon"
+          :src="require('../../assets/img/header-icon-animated.gif')"
+          class="logo-icon"
+        >
+        <img
+          v-if="showOnIcon"
+          :src="require('../../assets/img/header-icon-animated.gif')"
+          class="logo-icon"
+          @mouseover="setHover(true)"
+          @mouseleave="isHover = false"
+        >
+        <img
+          v-if="showStandByIcon"
+          :src="require('../../assets/img/header-icon-on.gif')"
+          class="logo-icon"
+          @mouseover="setHover(true)"
+          @mouseleave="isHover = false"
+        >
+        <img
+          v-if="showOffIcon"
+          :src="require('../../assets/img/header-icon-off.gif')"
+          class="logo-icon"
+          @mouseover="isHover = true"
+          @mouseleave="isHover = false"
+        >
+      </section>
+      <h1>
+        <span
+          class="metal"
+        >NOISE BOX</span>
+      </h1>
+    </div>
+    <div
+      class="contact-section"
+      @click="openInfo"
+    >
       <img
-        v-if="amp.standBy"
-        :src="require('../../assets/img/header-icon-on.png')"
-        class="logo-icon">
+        class="footer-label icon-type-1"
+        src="../../assets/icons/marioquestion.png"
+        alt=""
+      >
+      <div class="contact-text">
+        <span class="develop">Developed by:</span>
+        <span
+          class="contact"
+        >
+          Arturo Galán&nbsp;&nbsp;</span>
+      </div>
+      <!-- <img
+        class="footer-label icon-type-1"
+        src="../../assets/icons/github.png"
+        alt="">
       <img
-        v-else
-        :src="require('../../assets/img/header-icon-off.png')"
-        class="logo-icon">
-      <h1><span class="metal">NOISE BOX</span></h1>
+        class="footer-label icon-type-2"
+        src="../../assets/icons/twitter.png"
+        alt=""> -->
     </div>
   </div>
 </template>
 
-<style lang="scss">
+<style lang="scss" scoped>
 
 $logo-height: 130;
 
@@ -171,7 +252,42 @@ h1 {
   width: $logo-height + px;
   float: left;
   margin-top: 4px;
+  position: absolute;
+  left: 0;
 }
 
-
+.contact-section {
+  float: right;
+  // margin-top: 4px;
+  position: absolute;
+  top: 0;
+  right: 0;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  cursor: pointer;
+  transform: translateY(-15%);
+}
+.contact-text {
+  vertical-align: bottom;
+}
+.icon-type-1{
+  max-width: .8rem;
+  margin-right: .5rem;
+  // margin-bottom: .2rem;
+}
+.icon-type-2{
+  max-width: 1.3rem;
+}
+.develop {
+  font-family: "pixel";
+  color: darkgrey;
+  font-size: .8rem;
+}
+.contact {
+  font-family: "pixel";
+  text-decoration: none;
+  color: lightseagreen;
+  font-size: .9rem;
+}
 </style>
