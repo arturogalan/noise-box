@@ -1,13 +1,19 @@
 {
   "name": "noise-box",
   "version": "0.1.0",
-  "private": true,
+  "description": "A Vue project to make a guitar amp in the browser",
+  "author": "Arturo Galan <arturo.galan@gmail.com>",
+  "license": "MIT",
   "scripts": {
     "dev": "vue-cli-service serve --open --noinstructions",
     "serve": "vue-cli-service serve --noinstructions",
     "build": "vue-cli-service build",
     "test:unit": "vue-cli-service test:unit",
     "lint": "vue-cli-service lint"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/arturogalan/noise-box.git"
   },
   "dependencies": {
     "core-js": "^3.3.2",
