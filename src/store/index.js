@@ -1,7 +1,7 @@
-import Vue from 'vue';
-import Vuex from 'vuex';
-import pedalModule from './modules/entities-pedal';
-import uiModule from './modules/entities-ui';
+import Vue from "vue";
+import Vuex from "vuex";
+import pedalModule from "./modules/entities-pedal";
+import uiModule from "./modules/entities-ui";
 
 // import {
 //   pedalModule,

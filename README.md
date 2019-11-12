@@ -2,18 +2,32 @@
 > A Vue project to test WebAudio capabilites and deal with Vue/Vuex/css/html/javascript.
 All the webaudio nodes creation and structures of different pedal effects and amp simulation relies on noisefy library.
 
+## Project setup
+```
 Bug or new funcionalities to add? [Issues section](https://github.com/arturogalan/noise-box/issues)
 
-## Build Setup
-``` bash
-# install dependencies
-npm install
+### Compiles and hot-reloads for development
+```
+npm run serve
+```
 
-# serve with hot reload at localhost:8080
-npm run dev
-
-# build for production with minification
+### Compiles and minifies for production
+```
 npm run build
+```
+
+### Run your unit tests
+```
+npm run test:unit
+```
+
+### Lints and fixes files
+```
+npm run lint
+```
+
+### Customize configuration
+See [Configuration Reference](https://cli.vuejs.org/config/).
 
 # generate icons
 npm run build:icons
