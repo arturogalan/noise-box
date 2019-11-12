@@ -3,7 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "serve": "vue-cli-service serve",
+    "dev": "vue-cli-service serve --open --noinstructions",
+    "serve": "vue-cli-service serve --noinstructions",
     "build": "vue-cli-service build",
     "test:unit": "vue-cli-service test:unit",
     "lint": "vue-cli-service lint"
@@ -29,9 +30,21 @@
     "eslint": "^5.16.0",
     "eslint-plugin-prettier": "^3.1.1",
     "eslint-plugin-vue": "^5.0.0",
+    "friendly-errors-webpack-plugin": "^1.7.0",
     "prettier": "^1.18.2",
     "sass": "^1.19.0",
     "sass-loader": "^8.0.0",
     "vue-template-compiler": "^2.6.10"
+  },
+  "rules": {
+    "prettier/prettier": [
+      "warn",
+      {
+        "#": "prettier config in here :)",
+        "singleQuote": true,
+        "semi": false,
+        "trailingComma": true
+      }
+    ]
   }
 }
