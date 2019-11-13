@@ -9,7 +9,8 @@
     "serve": "vue-cli-service serve --noinstructions",
     "build": "vue-cli-service build",
     "test:unit": "vue-cli-service test:unit",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "build:icons": "icon-font-generator src/assets/icons/icofonts/*.svg -o public/fonts -n noisefont normalize -p ico --center --csstp src/helpers/iconscss.hbs"
   },
   "repository": {
     "type": "git",
@@ -36,6 +37,7 @@
     "eslint": "^5.16.0",
     "eslint-plugin-vue": "^5.0.0",
     "friendly-errors-webpack-plugin": "^1.7.0",
+    "icon-font-generator": "^2.1.10",
     "sass": "^1.19.0",
     "sass-loader": "^8.0.0",
     "vue-template-compiler": "^2.6.10"

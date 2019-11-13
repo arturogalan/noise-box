@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>noisefont</title>
+
     <style>
 
         body {
@@ -51,59 +52,9 @@
             border-radius: 0 0 3px 3px;
             color: #666;
         }
-
-        @font-face {
-    font-family: "noisefont";
-    src: url("./noisefont.eot?d6f393f32f52ed32d6ac715d14b0be88?#iefix") format("embedded-opentype"),
-url("./noisefont.woff2?d6f393f32f52ed32d6ac715d14b0be88") format("woff2"),
-url("./noisefont.woff?d6f393f32f52ed32d6ac715d14b0be88") format("woff"),
-url("./noisefont.ttf?d6f393f32f52ed32d6ac715d14b0be88") format("truetype"),
-url("./noisefont.svg?d6f393f32f52ed32d6ac715d14b0be88#noisefont") format("svg");
-}
-
-i {
-    line-height: 1;
-}
-
-i:before {
-    font-family: noisefont !important;
-    font-style: normal;
-    font-weight: normal !important;
-}
-
-.ico-close:before {
-    content: "\f101";
-}
-.ico-maximize:before {
-    content: "\f102";
-}
-.ico-minimize:before {
-    content: "\f103";
-}
-
-i-after {
-  line-height: 1;
-}
-
-i-after:after {
-  font-family: noisefont !important;
-  font-style: normal;
-  font-weight: normal !important;
-  vertical-align: top;
-}
-
-.ico-close-after:after {
-  content: "\f101";
-}
-.ico-maximize-after:after {
-  content: "\f102";
-}
-.ico-minimize-after:after {
-  content: "\f103";
-}
-
-
     </style>
+
+    <link rel="stylesheet" type="text/css" href="noisefont.css" />
 </head>
 <body>
 
@@ -112,7 +63,7 @@ i-after:after {
 
         <div class="preview">
             <span class="inner">
-                <i class="ico-close"></i>
+                <i class=" ico-close"></i>
             </span>
             <br>
             <span class='label'>close</span>
@@ -121,7 +72,7 @@ i-after:after {
 
         <div class="preview">
             <span class="inner">
-                <i class="ico-maximize"></i>
+                <i class=" ico-maximize"></i>
             </span>
             <br>
             <span class='label'>maximize</span>
@@ -130,7 +81,7 @@ i-after:after {
 
         <div class="preview">
             <span class="inner">
-                <i class="ico-minimize"></i>
+                <i class=" ico-minimize"></i>
             </span>
             <br>
             <span class='label'>minimize</span>
