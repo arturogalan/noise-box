@@ -5,11 +5,11 @@ import store from "./store";
 import vueTooltipNb from "./directives/vue-tooltip-nb";
 import VueI18n from "vue-i18n";
 import messages from "./i18n/en.json";
+import analytics from "./helpers/analitycs";
 
+analytics.init(window);
 Vue.config.productionTip = false;
 Vue.use(VueI18n);
-
-
 
 vueTooltipNb.init();
 const i18n = new VueI18n({

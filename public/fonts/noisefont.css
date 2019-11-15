@@ -1,10 +1,6 @@
 @font-face {
     font-family: "noisefont";
-    src: url("./noisefont.eot?9440d2f90964154385d6797ca7928fbd?#iefix") format("embedded-opentype"),
-url("./noisefont.woff2?9440d2f90964154385d6797ca7928fbd") format("woff2"),
-url("./noisefont.woff?9440d2f90964154385d6797ca7928fbd") format("woff"),
-url("./noisefont.ttf?9440d2f90964154385d6797ca7928fbd") format("truetype"),
-url("./noisefont.svg?9440d2f90964154385d6797ca7928fbd#noisefont") format("svg");
+    src: url("./noisefont.ttf?1febff5742c2b0e6c1a37299ef48ff0b") format("truetype");
 }
 
 i {
