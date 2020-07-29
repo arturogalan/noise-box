@@ -22,7 +22,7 @@ export default {
   created() {
   },
   mounted() {
-    console.log(this.amp.multiEffectAmp.getInputGainComponent());
+    // console.log(this.amp.multiEffectAmp.getInputGainComponent());
   },
   methods: {
     ...mapActions('pedal', [
@@ -71,6 +71,7 @@ export default {
         </div>
         <div class="footer-label">
           <vue-slider-nb
+            size="big"
             :value="10"
             :value-color="'rgb(206, 71, 73)'"
             :value-fill-color="'hsl(359,37%,34%)'"

@@ -46,12 +46,24 @@
         },
         "OUTPUT":{
           "LEVEL":"Output"
+        },
+        "CABINET": {
+          "GAIN": "Dry / Wet"
         }
       },
       "RACK":{
         "DISTORTION_SELECTOR": {
           "TITLE": "Distortion"
         }
+      },
+      "PRESET":{
+        "HARD_ROCK": "Hard Rock"
+      },
+      "CABINET": {
+        "WARSHALL_1": "Warshall 1960",
+        "WARSHALL_2": "Wharsall Vintage",
+        "V0X": "V0x M930",
+        "BENDER": "Bender Champ"
       }
     }
   }

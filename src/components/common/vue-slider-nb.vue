@@ -18,6 +18,7 @@ export default {
     positionVertical: { type: Boolean, required: false, default: false },
     valueColor: { type: String, required: false, default: '' },
     valueFillColor: { type: String, required: false, default: '' },
+    size:  { type: String, required: false, default: 'big' },
   },
   data() {
     return {
@@ -28,7 +29,11 @@ export default {
   },
   computed: {
     valueLeftMargin() {
-      return (this.inputValue * 11) / 100;
+      return {
+        'medium': ()=> (this.inputValue * 5.8) / 100,
+        'big': ()=> (this.inputValue * 14) / 100,
+      }[this.size]()
+      // return (this.inputValue * 14) / 100;
     },
     fillColorLeftMargin() {
       return 102 - this.inputValue;
@@ -63,7 +68,7 @@ export default {
     <transition name="bounce-tiny">
       <div
         :key="valueKey"
-        :style="{left: `${valueLeftMargin}em`, color: valueColor}"
+        :style="{left: `${valueLeftMargin}rem`, color: valueColor}"
         :class="[inputValue < 10 ? 'range-value-one-digit' : 'range-value-two-digits']"
         class="range-value"
       >
@@ -78,6 +83,7 @@ export default {
       max="99"
       value="85"
       class="range"
+      :class="`range--${size}`"
       @click="trackValue"
     >
     <div class="sliderticks">
@@ -166,10 +172,15 @@ export default {
   appearance: none;
   -webkit-appearance: none;
   outline: none;
-  width: 20em;
   height: 0.8em;
   background-color: transparent;
   z-index: $z-index-3;
+  &--big {
+    width: 20em;
+  }
+  &--medium {
+    width: 10em;
+  }
 }
 .range-value {
   z-index: $z-index-4;

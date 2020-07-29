@@ -33,11 +33,17 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 npm run build:icons
 ```
 ## TO-DO
-Watchers in chickenKnob to bind the preset value when selected, more presets
-Remove unnecessary Vue.set when setting vars and separete entities pedal and entities amp
-Disto advanced settings to make own distos by users.
-LocalStorage saving of user presets
-Tuner
-Curves graphs
-Mixin for all the different knobs
-Midi
+Add clean presets somewhat
+add boost button
+when only standby pressed...maybe some help?
+click in the logo also opens the credits modal
+Watchers in chickenKnob to bind the preset value when selected, more presets  
+Remove unnecessary Vue.set when setting vars and separete entities pedal and entities amp  
+Disto advanced settings to make own distos by users.  
+LocalStorage saving of user presets  
+Tuner  
+Noise gate
+Curves graphs  
+Mixin for all the different knobs  
+Midi 
+ 

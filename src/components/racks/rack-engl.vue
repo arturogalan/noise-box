@@ -1,6 +1,7 @@
 <script>
 import dropdown from '../common/dropdown';
-import vueKnobNb from '../common/vue-knob-nb.vue';
+import vueSliderNb from '../common/vue-slider-nb.vue';
+
 import audioMaps from '../../helpers/audioMaps';
 import { mapGetters, mapActions } from 'vuex';
 // import {AMP_COMPONENT_NAME} from '../../store/constants';
@@ -9,7 +10,7 @@ export default {
   name: 'rack-engl',
   components: {
     dropdown,
-    vueKnobNb,
+    vueSliderNb,
   },
   computed: {
     ...mapGetters('pedal', [
@@ -19,6 +20,7 @@ export default {
       'ampCabinetSettings',
       'ampCabinetWet',
       'ampPresetList',
+      'getAmpComponentEffectProperty',
     ]),
   },
 
@@ -26,7 +28,6 @@ export default {
     ...mapActions('pedal', [
       'setComponentDistoType',
       'setAmpCabinetType',
-      'setAmpCabinetWet',
       'setAmpCabinetSettings',
       'setPreset',
     ]),
@@ -35,7 +36,7 @@ export default {
       this.setComponentDistoType({ name: 'distortionStage2', value: selectedPreset.distortionStage2 });
     },
     setCabinetType(selectedCabinet) {
-      this.setAmpCabinetType({ value: selectedCabinet.name });
+      this.setAmpCabinetType({ value: selectedCabinet.id });
     },
     normalize(value) {
       return audioMaps.getNormalizedSettingValue(value);
@@ -73,19 +74,21 @@ export default {
         />
         <div class="knob-grid-wrapper">
           <section class="knob-grid">
-            <vue-knob-nb
+            <section
               v-for="setting in ampCabinetSettings"
               :key="setting.name"
-              :init-value="normalize(setting.value)"
-              :name="setting.name"
-              :knobs-number="ampCabinetSettings.length"
-              barcolor="aliceblue"
-              size="rack"
-              class="one-knob"
-              fillcolor="none"
-              bgcolor="none"
-              @valueChanged="setAmpCabinetSettings({property: setting.name, value: denormalize($event)})"
+            >
+            <div class="setting-name">
+              {{ $t(`AMP.COMPONENT.CABINET.${setting.name.toUpperCase()}`) }}
+            </div>
+            <vue-slider-nb
+              size="medium"
+              :value="normalize(getAmpComponentEffectProperty({ name: 'cabinet', property: setting.name}))"
+              :value-color="'rgb(227, 213, 227)'"
+              :value-fill-color="'hsl(300,23%,55%)'"
+              @change="setAmpCabinetSettings({property: setting.name, value: denormalize($event)})"
             />
+            </section>
           </section>
         </div>
       </div>
@@ -148,14 +151,16 @@ export default {
 }
 .knob-grid-wrapper {
   position: relative;
-  width: 6rem;
+  width: 10rem;
   height: 2.4rem;
   min-height: 100%;
   margin-left: .4rem;
+  display: flex;
+  align-items: center;
 }
 .knob-grid {
   position: absolute;
-  transform: translateY(-15%);
+  transform: translateY(25%);
   z-index: $z-index-2;
 }
 .one-knob {
@@ -166,5 +171,16 @@ export default {
   width: 3rem;
   // display: flex;
   z-index: $z-index-2;
+}
+.setting-name {
+  text-transform: uppercase;
+  font-weight: bold;
+  color: aliceblue;
+  position: absolute;
+  width: 100%;
+  top: -180%;
+  z-index: -1;
+  font-size: .6rem;
+  font-family: "FontPbio";
 }
 </style>

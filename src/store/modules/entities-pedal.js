@@ -68,11 +68,11 @@ const pedalModule = {
     ampSelectedCabinet(state) {
       return state.amp.multiEffectAmp.getSelectedCabinet();
     },
-    ampCabinetList(state, getters) {
+    ampCabinetList(state, getters, rootState, rootGetters) {
       return state.amp.multiEffectAmp.getCabinetTypes().map((cabinet)=> {
         return {
           id: cabinet,
-          name: cabinet,
+          name: rootGetters['ui/i18n'].t(`AMP.CABINET.${cabinet}`),
           selected: cabinet === getters.ampSelectedCabinet,
         };
       });
@@ -83,14 +83,19 @@ const pedalModule = {
     ampCabinetSettings(state) {
       return state.amp.multiEffectAmp.getCabinetSettings();
     },
-    ampPresetList(state) {
+    ampPresetList(state, getters, rootState, rootGetters) {
       return audioUtils.getPresetList().map((preset)=> {
         return {
           id: preset,
-          name: preset,
+          name: rootGetters['ui/i18n'].t(`AMP.PRESET.${preset}`),
           selected: preset === state.selectedPreset,
         };
       });
+    },
+    getAmpComponentEffectProperty(state) {
+      return ({name, property})=> {
+        return state.amp.multiEffectAmp.getAmpComponentEffectProperty({componentName: name, componentProperty: property})
+      }
     },
     pedalList(state) {
       return Object.values(state.pedalBoard.pedals);
@@ -184,15 +189,6 @@ const pedalModule = {
         {
           name: audioUtils.AMP_COMPONENT_NAME.CABINET,
           property,
-          value,
-        },
-      );
-    },
-    setAmpCabinetWet({ commit }, { value }) {
-      commit('setAmpComponentEffectProperty',
-        {
-          name: audioUtils.AMP_COMPONENT_NAME.CABINET,
-          property: audioUtils.AMP_SETTING_NAME.CABINET_WET,
           value,
         },
       );

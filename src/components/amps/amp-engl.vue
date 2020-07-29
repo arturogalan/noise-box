@@ -24,6 +24,7 @@ export default {
   computed: {
     ...mapGetters('pedal', [
       'amp',
+      'getAmpComponentEffectProperty'
     ]),
   },
   created() {
@@ -54,6 +55,9 @@ export default {
     },
     denormalize(value) {
       return audioMaps.setNormalizedSettingValue(value);
+    },
+    getKnobValue(component, knobSetting) {
+      this.getAmpComponentEffectProperty({ name: component.name, property: knobSetting.name});
     },
     setKnobValue(component, knobSetting, value) {
       // when setting disto intensity also set the asymetric disto intensity to the same value in SIMPLE mode
