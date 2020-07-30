@@ -1,4 +1,3 @@
-
 export const AMP_COMPONENT_TYPE = {
   VOLUME: 'volume',
   EQUALIZER: 'equalizer',
@@ -127,12 +126,14 @@ export const AMP_COMPONENT_PROPERTIES = {
 
 
 export const PEDAL_TYPE = {
+  BOOST: 'boost',
   DELAY: 'delay',
   FLANGER: 'flanger',
   REVERB: 'reverb',
   TREMOLO: 'tremolo',
 };
 export const PEDAL_NAME = {
+  BOOST: 'boost',
   DELAY: 'delay',
   FLANGER: 'flanger',
   REVERB: 'reverb',
@@ -140,6 +141,26 @@ export const PEDAL_NAME = {
 };
 
 export const PEDAL_PROPERTIES = {
+  [PEDAL_NAME.BOOST]: {
+    name: PEDAL_NAME.BOOST,
+    type: PEDAL_TYPE.BOOST,
+    zoomIn: false,
+    icon: 'assets/icons/delay.svg',
+    bgcolor: '#AAAAAA',
+    fcolor: 'black',
+    settingsList: [
+      {
+        name: 'gain',
+        value: 1,
+        color: 'lightskyblue',
+      },
+      {
+        name: 'tone',
+        value: 5,
+        color: 'lightslategray',
+      },
+    ],
+  },
   [PEDAL_NAME.DELAY]: {
     name: PEDAL_NAME.DELAY,
     type: PEDAL_TYPE.DELAY,

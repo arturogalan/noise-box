@@ -103,8 +103,10 @@ export default {
     </div>
     <div
       class="title"
+
     >
       <section
+        @click="openInfo"
         v-tooltip="{text: 'F*king awesome noise box!!!'}"
         @mouseover="isHover = true"
         @mouseleave="isHover = false"
@@ -254,6 +256,7 @@ h1 {
   margin-top: 4px;
   position: absolute;
   left: 0;
+  cursor: pointer;
 }
 
 .contact-section {
