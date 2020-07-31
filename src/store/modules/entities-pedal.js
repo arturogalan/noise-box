@@ -48,6 +48,20 @@ const pedalModule = {
       });
       return lists;
     },
+    ampCleanPresets(state, getters) {
+      const presetSelected = (preset)=> {
+        return preset.distortionStage1 === getters.ampDistortionsLists.find((el)=> el.componentName === 'distortionStage1').distortionType &&
+        preset.distortionStage2 === getters.ampDistortionsLists.find((el)=> el.componentName === 'distortionStage2').distortionType;
+      };
+
+      return audioUtils.CLEAN_PRESETS.map((preset)=> {
+        return {
+          id: preset.name,
+          ...preset,
+          selected: presetSelected(preset),
+        };
+      });
+    },
     ampDistortionPresets(state, getters) {
       const presetSelected = (preset)=> {
         return preset.distortionStage1 === getters.ampDistortionsLists.find((el)=> el.componentName === 'distortionStage1').distortionType &&

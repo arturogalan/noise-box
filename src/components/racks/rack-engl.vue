@@ -14,6 +14,7 @@ export default {
   },
   computed: {
     ...mapGetters('pedal', [
+      'ampCleanPresets',
       'ampDistortionsLists',
       'ampDistortionPresets',
       'ampCabinetList',
@@ -52,6 +53,19 @@ export default {
     <div class="rack-section">
       <div class="rack-box">
         <div class="rack-label">
+          CLEAN
+        </div>
+        <dropdown
+          :list="ampCleanPresets"
+          name="cleanType"
+          @selected="setDistortionType"
+        />
+        <!-- :name="distoList.componentName" -->
+      </div>
+    </div>
+    <div class="rack-section">
+      <div class="rack-box">
+        <div class="rack-label">
           DISTORTION
         </div>
         <dropdown
@@ -62,7 +76,7 @@ export default {
         <!-- :name="distoList.componentName" -->
       </div>
     </div>
-    <div class="rack-section">
+    <div class="rack-section rack-section--right">
       <div class="rack-box">
         <div class="rack-label">
           CABINET
@@ -93,7 +107,7 @@ export default {
         </div>
       </div>
     </div>
-    <div class="rack-section rack-section--right">
+    <!-- <div class="rack-section rack-section--right">
       <div class="rack-box">
         <div class="rack-label">
           PRESET
@@ -105,7 +119,7 @@ export default {
           @selected="setPreset"
         />
       </div>
-    </div>
+    </div> -->
   </div>
 </template>
 <style lang="scss" scoped>
