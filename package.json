@@ -1,7 +1,7 @@
 {
   "name": "noise-box",
   "version": "0.1.0",
-  "description": "A Vue project to make a guitar amp in the browser",
+  "description": "file:./../noisefy A Vue project to make a guitar amp in the browser",
   "author": "Arturo Galan <arturo.galan@gmail.com>",
   "license": "MIT",
   "scripts": {
@@ -10,6 +10,7 @@
     "build": "npm run build:icons && vue-cli-service build",
     "test:unit": "vue-cli-service test:unit",
     "lint": "vue-cli-service lint",
+    "lintfix": "eslint --fix src/**/*.js",
     "build:icons": "icon-font-generator src/assets/icons/icofonts/*.svg -o public/fonts -n noisefont normalize -p ico --center --csstp src/helpers/iconscss.hbs --html false --types ttf"
   },
   "repository": {
