@@ -1,6 +1,8 @@
 <script>
 import { mapGetters, mapActions } from 'vuex';
 import vueSliderNb from './common/vue-slider-nb';
+import audioMaps from './../helpers/audioMaps';
+
 // const input = require('../assets/icons/input.svg');
 // const output = require('../assets/icons/output.svg');
 
@@ -17,6 +19,8 @@ export default {
       'amp',
       'defaultInputDevice',
       'defaultOutputDevice',
+      'getAmpInputGain',
+      'getAmpOutputGain',
     ]),
   },
   created() {
@@ -26,10 +30,15 @@ export default {
   },
   methods: {
     ...mapActions('pedal', [
-      'setAmpComponentEffectProperty',
       'setAmpInputGain',
       'setAmpOutputGain',
     ]),
+    normalize(value) {
+      return audioMaps.getNormalizedSettingValue(value);
+    },
+    denormalize(value) {
+      return audioMaps.setNormalizedSettingValue(value);
+    },
   },
 };
 </script>
@@ -38,7 +47,7 @@ export default {
 <template>
   <div>
     <div
-      v-if="defaultInputDevice || defaultInputDevice"
+      v-if="defaultInputDevice || defaultOutputDevice"
       class="footer"
     >
       <div class="footer-section">
@@ -52,11 +61,11 @@ export default {
         </div>
         <div class="footer-label">
           <vue-slider-nb
-            :value="10"
+            :value="normalize(getAmpInputGain)"
             :value-color="'rgb(146, 215, 146)'"
             :value-fill-color="'hsl(100,16%,30%)'"
             class="footer-slider"
-            @change="setAmpInputGain($event)"
+            @change="setAmpInputGain(denormalize($event))"
           />
         </div>
       </div>
@@ -72,11 +81,11 @@ export default {
         <div class="footer-label">
           <vue-slider-nb
             size="big"
-            :value="10"
+            :value="normalize(getAmpOutputGain)"
             :value-color="'rgb(206, 71, 73)'"
             :value-fill-color="'hsl(359,37%,34%)'"
             class="footer-slider"
-            @change="setAmpOutputGain($event)"
+            @change="setAmpOutputGain(denormalize($event))"
           />
         </div>
       </div>

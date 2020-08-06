@@ -3,6 +3,8 @@ import ChickenHeadKnob from '../common/chicken-head-knob.vue';
 import audioMaps from '../../helpers/audioMaps';
 import { mapActions, mapGetters } from 'vuex';
 import SwitchOn from './../common/switch-on.vue';
+import Led from './../common/led.vue';
+
 import { AMP_COMPONENT_TYPE } from '../../store/constants';
 
 
@@ -11,6 +13,7 @@ export default {
   components: {
     ChickenHeadKnob,
     SwitchOn,
+    Led
   },
   data() {
     return {
@@ -24,7 +27,10 @@ export default {
   computed: {
     ...mapGetters('pedal', [
       'amp',
-      'getAmpComponentEffectProperty'
+      'getAmpComponentEffectProperty',
+      'isCleanChannelActive',
+      'isDistoChannelActive',
+      'getChannelKnobTypeComponents',
     ]),
   },
   created() {
@@ -33,9 +39,10 @@ export default {
     ...mapActions('pedal', [
       'switchOnAudioContext',
       'initAudioInputAndOutput',
-      'setAmpComponentEffectProperty',
+      'setActiveChannelEffectProperty',
       'toggleAmp',
       'toggleStandByAmp',
+      'toggleAmpChannel',
     ]),
     initAudioInterface() {
       if (!this.isAudioInitializated) {
@@ -62,9 +69,9 @@ export default {
     setKnobValue(component, knobSetting, value) {
       // when setting disto intensity also set the asymetric disto intensity to the same value in SIMPLE mode
       if (component.name === 'distortionStage2') {
-        this.setAmpComponentEffectProperty({ name: 'distortionStage1', property: knobSetting.name, value: this.denormalize(value) });
+        this.setActiveChannelEffectProperty({ name: 'distortionStage1', property: knobSetting.name, value: this.denormalize(value) });
       }
-      this.setAmpComponentEffectProperty({ name: component.name, property: knobSetting.name, value: this.denormalize(value) });
+      this.setActiveChannelEffectProperty({ name: component.name, property: knobSetting.name, value: this.denormalize(value) });
     },
   },
 };
@@ -73,14 +80,35 @@ export default {
   <div class="amp-wrapper grid-container">
     <div class="input-cable-wrapper">
       <img
-        ref="chicken"
         class="input-cable"
         src="../../assets/img/cable-input.svg"
       >
     </div>
+    <div class="channel-wrapper">
+      <div class="row">
+      <div class="col">
+      <div class="channel-name">clean</div>
+      <led :on="isCleanChannelActive" color="green" size="big"/>
+      </div>
+      <div class="col">
+      <div class="channel-name">disto</div>
+      <led :on="isDistoChannelActive" color="red" size="big"/>
+      </div>
+      </div>
+
+      <button
+      class="channel-btn"
+      :class="`channel-btn--${isDistoChannelActive ? 'on' : 'off'}`"
+      @click="toggleAmpChannel">
+      CHANNEL
+      <!-- {{ ampActiveChannel }} -->
+      <!-- {{getChannelKnobTypeComponents}} -->
+      </button>
+    </div>
     <div class="knob-grid">
+        <!-- v-for="component in amp.multiEffectAmp.getKnobTypeComponents().filter((component)=> component.name !== 'distortionStage1')" -->
       <div
-        v-for="component in amp.multiEffectAmp.getKnobTypeComponents().filter((component)=> component.name !== 'distortionStage1')"
+        v-for="component in getChannelKnobTypeComponents"
         :key="component.name"
         class="component-grid"
       >
@@ -107,8 +135,8 @@ export default {
 .grid-container {
   display: grid;
   justify-content: center;
-  grid-template-columns: 10% 75% 15%;/*Make the grid smaller than the container*/
-  grid-gap: 5px;
+  grid-template-columns: 6% 8% 72% 14%;/*Make the grid smaller than the container*/
+  grid-gap: 10px;
 }
 .amp-wrapper {
   width: 100%;
@@ -138,6 +166,46 @@ export default {
   &-wrapper{
     align-self: center;
   }
+}
+.channel-wrapper {
+  width: 7rem;
+  align-self: center;
+  height: 50%;
+}
+.channel-btn {
+  &:focus {outline:0;}
+  font-family: "FontPbio";
+  font-size: .7rem;
+  color: black;
+  cursor: pointer;
+  border-radius: .3rem;
+  &--on {
+    box-shadow: 0px 2px 5px 3px rgb(0, 0, 0);
+  }
+  &--off {
+    box-shadow: 0px 1px 5px 0px rgb(0, 0, 0);
+  }
+}
+.row {
+  display: flex;
+  flex-flow: row;
+  justify-content: space-around;
+  height: 60%;
+}
+.col {
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  column-gap: 1rem;
+}
+.channel-name {
+  text-transform: uppercase;
+  font-weight: bold;
+  color: aliceblue;
+  width: 100%;
+  font-size: .5rem;
+  font-family: "FontPbio";
+  margin-bottom: .3rem;
 }
 .power-section {
    display: flex;

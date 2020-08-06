@@ -56,6 +56,9 @@ export default {
     };
   },
   computed: {
+    // currentValue(){
+    //   return this.initValue;
+    // },
     circumference() {
       return this.radius * 2 * Math.PI;
     },
@@ -96,6 +99,16 @@ export default {
     const initialDegress = (this.currentValue / this.maxValue) * 360;
     setTimeout(()=> (this.selectorValue = initialDegress - (this.svgRotate - 90)), 250);
   },
+  watch: {
+    initValue(newValue, oldValue) {
+      if (newValue !== oldValue) {
+      this.currentValue = newValue;
+      const initialDegress = (this.currentValue / this.maxValue) * 360;
+      setTimeout(()=> (this.selectorValue = initialDegress - (this.svgRotate - 90)), 250);
+      console.log(newValue)
+      }
+    }
+  },
   methods: {
     computeValue(e) {
       // The percentaje where user clicks
@@ -123,7 +136,7 @@ export default {
       const degress = ((result + Math.PI) / (Math.PI + Math.PI)) * 360;
       let adjustDegrees = degress + deltaDegrees;
       adjustDegrees = adjustDegrees > 360 ? adjustDegrees - 360 : adjustDegrees;
-      this.selectorValue = adjustDegrees - (this.svgRotate - 90);
+      // this.selectorValue = adjustDegrees - (this.svgRotate - 90);
       this.$emit('valueChanged', this.currentValue);
     },
     numDigits(x) {

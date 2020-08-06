@@ -21,6 +21,9 @@
     },
     "AMP": {
       "COMPONENT": {
+        "DISTORTION":{
+          "INTENSITY":"Gain"
+        },
         "OUTPUTGAIN":{
           "LEVEL":"Volume"
           },
@@ -34,9 +37,6 @@
         },
         "PRESENCE":{
           "GAIN": "Presence"
-        },
-        "DISTORTION":{
-          "INTENSITY":"Gain"
         },
         "DISTORTIONSTAGE1":{
           "INTENSITY":"Gain1"

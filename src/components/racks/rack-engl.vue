@@ -15,26 +15,32 @@ export default {
   computed: {
     ...mapGetters('pedal', [
       'ampCleanPresets',
-      'ampDistortionsLists',
       'ampDistortionPresets',
       'ampCabinetList',
       'ampCabinetSettings',
-      'ampCabinetWet',
       'ampPresetList',
       'getAmpComponentEffectProperty',
+      'getCabinetProperty',
+      'isCleanChannelActive',
+      'isDistoChannelActive',
     ]),
   },
 
   methods: {
     ...mapActions('pedal', [
       'setComponentDistoType',
+      'setChannelDistoType',
       'setAmpCabinetType',
       'setAmpCabinetSettings',
       'setPreset',
     ]),
+    setCleanType(selectedPreset) {
+      this.setChannelDistoType({ channel: 1, name: 'distortionStage1', value: selectedPreset.distortionStage1 });
+      this.setChannelDistoType({ channel: 1, name: 'distortionStage2', value: selectedPreset.distortionStage2 });
+    },
     setDistortionType(selectedPreset) {
-      this.setComponentDistoType({ name: 'distortionStage1', value: selectedPreset.distortionStage1 });
-      this.setComponentDistoType({ name: 'distortionStage2', value: selectedPreset.distortionStage2 });
+      this.setChannelDistoType({ channel: 2, name: 'distortionStage1', value: selectedPreset.distortionStage1 });
+      this.setChannelDistoType({ channel: 2, name: 'distortionStage2', value: selectedPreset.distortionStage2 });
     },
     setCabinetType(selectedCabinet) {
       this.setAmpCabinetType({ value: selectedCabinet.id });
@@ -50,22 +56,22 @@ export default {
 </script>
 <template>
   <div class="rack-wrapper">
-    <div class="rack-section">
+    <div class="rack-section rack-section--left">
       <div class="rack-box">
-        <div class="rack-label">
+        <div class="rack-label" :style="isCleanChannelActive && {textShadow: '-2px 0 black, 0 2px darkgreen, 2px 0 green, 0 3px green'}">
           CLEAN
         </div>
         <dropdown
           :list="ampCleanPresets"
           name="cleanType"
-          @selected="setDistortionType"
+          @selected="setCleanType"
         />
         <!-- :name="distoList.componentName" -->
       </div>
     </div>
     <div class="rack-section">
       <div class="rack-box">
-        <div class="rack-label">
+        <div class="rack-label" :style="isDistoChannelActive && {textShadow: '-2px 0 black, 0 2px red, 2px 0 red, 0 3px red'}">
           DISTORTION
         </div>
         <dropdown
@@ -95,12 +101,14 @@ export default {
             <div class="setting-name">
               {{ $t(`AMP.COMPONENT.CABINET.${setting.name.toUpperCase()}`) }}
             </div>
+              <!-- :value="normalize(getAmpComponentEffectProperty({ name: 'cabinet', property: setting.name}))" -->
+              
             <vue-slider-nb
               size="medium"
-              :value="normalize(getAmpComponentEffectProperty({ name: 'cabinet', property: setting.name}))"
+              @change="setAmpCabinetSettings({property: setting.name, value: denormalize($event)})"
+              :value="normalize(getCabinetProperty(setting.name))"
               :value-color="'rgb(227, 213, 227)'"
               :value-fill-color="'hsl(300,23%,55%)'"
-              @change="setAmpCabinetSettings({property: setting.name, value: denormalize($event)})"
             />
             </section>
           </section>
@@ -124,13 +132,14 @@ export default {
 </template>
 <style lang="scss" scoped>
 .rack-wrapper {
-  width: 100%;
+  padding-left: 3%;
+  width: 97%;
   height: 6rem;
   background-color: rgb(70,70,70);
   box-shadow: inset 0px 1px 10px 0px rgb(0, 0, 0);
   min-width: $app-min-width + 12px;
   display: grid;
-  grid-template-columns: 33% 33% 33%;
+  grid-template-columns: 30% 30% 40%;
   // grid-gap: 2px;
   // justify-content: center;
   // text-align: center;
@@ -151,8 +160,8 @@ export default {
   margin: 1rem 0rem 0rem 0rem;
   padding: 0rem .2rem;
   &--right {
-    right: 0;
-    justify-content: flex-end;
+    // right: 0;
+    justify-content: center;
   }
 }
 .rack-label {

@@ -26,12 +26,55 @@ const pedalModule = {
     amp(state) {
       return state.amp;
     },
-    ampSelectedDistos(state) {
-      return state.amp.multiEffectAmp.getSelectedDistortions();
+    getAmpInputGain(state) {
+      return state.amp.multiEffectAmp.getInputGain();
     },
-    ampDistortionsLists(state, getters) {
+    getAmpOutputGain(state) {
+      return state.amp.multiEffectAmp.getOutputGain();
+    },
+    ampActiveChannel(state){
+      return state.amp.multiEffectAmp.activeChannel;
+    },
+    isCleanChannelActive(state) {
+      return state.amp.multiEffectAmp.activeChannel === 1;
+    },
+    isDistoChannelActive(state) {
+      return state.amp.multiEffectAmp.activeChannel === 2;
+    },
+    getChannelKnobTypeComponents(state, getters){
+      console.log('returning channel active: ', getters.ampActiveChannel, ' knob components')
+      console.log(state.amp.multiEffectAmp);
+      return state.amp.multiEffectAmp.getChannelKnobTypeComponents({channel: getters.ampActiveChannel})
+      .filter((component)=> component.name !== 'distortionStage1');
+    },
+    getCleanChannelDistortions(state) {
+      return state.amp.multiEffectAmp.getChannelDistortions({channel: 1});
+    },
+    ampCleanChannelDistoList(state, getters) {
       const lists = [];
-      state.amp.multiEffectAmp.getSelectedDistortions().forEach((distortion)=> {
+      getters.getCleanChannelDistortions.forEach((distortion)=> {
+        lists.push(
+          {
+            componentName: distortion.componentName,
+            distortionType: distortion.distortionType,
+            list: state.amp.multiEffectAmp.getDistortionTypes().map((disto)=> {
+              return {
+                id: disto,
+                name: disto,
+                selected: disto === distortion.distortionType,
+              };
+            }),
+          },
+        );
+      });
+      return lists;
+    },    
+    getGainChannelDistortions(state) {
+      return state.amp.multiEffectAmp.getChannelDistortions({channel: 2});
+    },
+    ampGainChannelDistoList(state, getters) {
+      const lists = [];
+      getters.getGainChannelDistortions.forEach((distortion)=> {
         lists.push(
           {
             componentName: distortion.componentName,
@@ -48,10 +91,32 @@ const pedalModule = {
       });
       return lists;
     },
+    // ampSelectedDistos(state) {
+    //   return state.amp.multiEffectAmp.getSelectedDistortions();
+    // },
+    // ampDistortionsLists(state, getters) {
+    //   const lists = [];
+    //   state.amp.multiEffectAmp.getSelectedDistortions().forEach((distortion)=> {
+    //     lists.push(
+    //       {
+    //         componentName: distortion.componentName,
+    //         distortionType: distortion.distortionType,
+    //         list: state.amp.multiEffectAmp.getDistortionTypes().map((disto)=> {
+    //           return {
+    //             id: disto,
+    //             name: disto,
+    //             selected: disto === distortion.distortionType,
+    //           };
+    //         }),
+    //       },
+    //     );
+    //   });
+    //   return lists;
+    // },
     ampCleanPresets(state, getters) {
       const presetSelected = (preset)=> {
-        return preset.distortionStage1 === getters.ampDistortionsLists.find((el)=> el.componentName === 'distortionStage1').distortionType &&
-        preset.distortionStage2 === getters.ampDistortionsLists.find((el)=> el.componentName === 'distortionStage2').distortionType;
+        return preset.distortionStage1 === getters.ampCleanChannelDistoList.find((el)=> el.componentName === 'distortionStage1').distortionType &&
+        preset.distortionStage2 === getters.ampCleanChannelDistoList.find((el)=> el.componentName === 'distortionStage2').distortionType;
       };
 
       return audioUtils.CLEAN_PRESETS.map((preset)=> {
@@ -64,8 +129,8 @@ const pedalModule = {
     },
     ampDistortionPresets(state, getters) {
       const presetSelected = (preset)=> {
-        return preset.distortionStage1 === getters.ampDistortionsLists.find((el)=> el.componentName === 'distortionStage1').distortionType &&
-        preset.distortionStage2 === getters.ampDistortionsLists.find((el)=> el.componentName === 'distortionStage2').distortionType;
+        return preset.distortionStage1 === getters.ampGainChannelDistoList.find((el)=> el.componentName === 'distortionStage1').distortionType &&
+        preset.distortionStage2 === getters.ampGainChannelDistoList.find((el)=> el.componentName === 'distortionStage2').distortionType;
       };
 
       return audioUtils.DISTORTION_PRESETS.map((preset)=> {
@@ -76,9 +141,9 @@ const pedalModule = {
         };
       });
     },
-    ampMainSelectedDisto(state, getters) {
-      return getters.ampSelectedDistos.find((disto)=> disto.componentName === 'distortionStage2').distortionType;
-    },
+    // ampMainSelectedDisto(state, getters) {
+    //   return getters.ampSelectedDistos.find((disto)=> disto.componentName === 'distortionStage2').distortionType;
+    // },
     ampSelectedCabinet(state) {
       return state.amp.multiEffectAmp.getSelectedCabinet();
     },
@@ -91,9 +156,9 @@ const pedalModule = {
         };
       });
     },
-    ampCabinetWet(state) {
-      return state.amp.multiEffectAmp.getCabinetSettings().find((setting)=> setting.name === audioUtils.AMP_SETTING_NAME.CABINET_WET).value;
-    },
+    // ampCabinetWet(state) {
+    //   return state.amp.multiEffectAmp.getCabinetSettings().find((setting)=> setting.name === audioUtils.AMP_SETTING_NAME.CABINET_WET).value;
+    // },
     ampCabinetSettings(state) {
       return state.amp.multiEffectAmp.getCabinetSettings();
     },
@@ -105,6 +170,11 @@ const pedalModule = {
           selected: preset === state.selectedPreset,
         };
       });
+    },
+    getCabinetProperty(state){
+      return (property) =>{
+        return state.amp.multiEffectAmp.getCabinetProperty({property})
+      }
     },
     getAmpComponentEffectProperty(state) {
       return ({name, property})=> {
@@ -139,24 +209,26 @@ const pedalModule = {
       if (!inputDevice) return '';
       let formattedInput = inputDevice.label;
       [
+        'Default',
         'Predeterminado',
         ' - ',
       ].forEach((word)=> {
         formattedInput = formattedInput.replace(word, '');
       });
-      return formattedInput;
+      return formattedInput.replace(/ *\([^)]*\) */g, "");;
     },
     defaultOutputDevice(state, getters) {
       const outputDevice = getters.defaultAudioDevicesList.find((el)=> el.direction === 'output');
       if (!outputDevice) return '';
       let formattedOutput = outputDevice.label;
       [
+        'Default',
         'Predeterminado',
         ' - ',
       ].forEach((word)=> {
         formattedOutput = formattedOutput.replace(word, '');
       });
-      return formattedOutput;
+      return formattedOutput.replace(/ *\([^)]*\) */g, "");;
     },
   },
 
@@ -168,11 +240,12 @@ const pedalModule = {
         dispatch('initAudioInputAndOutput');
         commit('connectAllNodes', getters.pedalList);
       }
-      dispatch('setAmpComponentEffectProperty', { name: AMP_COMPONENT_NAME.VOLUME, property: 'mute', value: !state.amp.switchedOn || !state.amp.standBy });
     },
     toggleStandByAmp({ state, commit, dispatch }, data) {
       commit('toggleStandByAmp', data);
-      dispatch('setAmpComponentEffectProperty', { name: AMP_COMPONENT_NAME.VOLUME, property: 'mute', value: !state.amp.switchedOn || !state.amp.standBy });
+    },
+    toggleAmpChannel({commit}) {
+      commit('toggleAmpChannel');
     },
     createAmp({ commit }) {
       commit('createAmp');
@@ -180,28 +253,36 @@ const pedalModule = {
     setAmpComponentEffectProperty({ commit }, data) {
       commit('setAmpComponentEffectProperty', data);
     },
+    setActiveChannelEffectProperty({ commit, getters }, data) {
+      commit('setAmpChannelEffectProperty', {...data, channel: getters.ampActiveChannel});
+    },
+    setAllChannelEffectProperty({ commit, getters }, data) {
+      commit('setAmpChannelEffectProperty', {...data, channel: 1});
+      commit('setAmpChannelEffectProperty', {...data, channel: 2});
+    },    
     setAmpInputGain({ commit }, value) {
-      commit('setAmpComponentEffectProperty', { name: 'input', property: 'level', value });
+      commit('setAmpInputEffectProperty', { property: 'level', value });
     },
     setAmpOutputGain({ commit }, value) {
-      commit('setAmpComponentEffectProperty', { name: 'output', property: 'level', value });
+      commit('setAmpOutputEffectProperty', { property: 'level', value });
     },
     setComponentDistoType({ commit }, data) {
       commit('setComponentDistoType', data);
     },
+    setChannelDistoType({ commit }, data) {
+      commit('setChannelDistoType', data);
+    },
     setAmpCabinetType({ commit }, { value }) {
-      commit('setAmpComponentEffectProperty',
+      commit('setCabinetProperty',
         {
-          name: audioUtils.AMP_COMPONENT_NAME.CABINET,
           property: audioUtils.AMP_SETTING_NAME.CABINET_IMPULSE,
           value,
         },
       );
     },
     setAmpCabinetSettings({ commit }, { property, value }) {
-      commit('setAmpComponentEffectProperty',
+      commit('setCabinetProperty',
         {
-          name: audioUtils.AMP_COMPONENT_NAME.CABINET,
           property,
           value,
         },
@@ -269,15 +350,34 @@ const pedalModule = {
   mutations: {
     toggleAmp(state) {
       state.amp.switchedOn = !state.amp.switchedOn;
+      state.amp.multiEffectAmp.muted = !state.amp.standBy || !state.amp.switchedOn;
     },
     toggleStandByAmp(state) {
       state.amp.standBy = !state.amp.standBy;
+      if (state.amp.switchedOn) {
+        state.amp.multiEffectAmp.muted = !state.amp.standBy;
+      } else {
+        state.amp.multiEffectAmp.muted = true;
+      }
     },
     createAmp(state) {
       state.amp.multiEffectAmp = audioUtils.createMultiEffectAmp(state.audioContext);
     },
+    toggleAmpChannel(state) {
+      state.amp.multiEffectAmp.toggleChannel();
+    },
     setAmpComponentEffectProperty(state, { name, property, value }) {
       state.amp.multiEffectAmp.setAmpComponentEffectProperty({ componentName: name, componentProperty: property, value });
+    },
+    setAmpInputEffectProperty(state, { property, value }) {
+      state.amp.multiEffectAmp.setAmpInputEffectProperty({componentProperty: property, value})
+    },
+    setAmpOutputEffectProperty(state, { property, value }) {
+      state.amp.multiEffectAmp.setAmpOutputEffectProperty({componentProperty: property, value})
+    },
+    
+    setAmpChannelEffectProperty(state, { channel, name, property, value }) {
+      state.amp.multiEffectAmp.setAmpChannelEffectProperty({ channel, componentName: name, componentProperty: property, value });
     },
     setComponentDistoType(state, { name, value }) {
       state.amp.multiEffectAmp.setAmpComponentEffectProperty(
@@ -287,6 +387,19 @@ const pedalModule = {
           value,
         },
       );
+    },
+    setChannelDistoType(state, { channel, name, value }) {
+      state.amp.multiEffectAmp.setAmpChannelEffectProperty(
+        {
+          channel,
+          componentName: name,
+          componentProperty: audioUtils.AMP_SETTING_NAME.DISTORTION_TYPE,
+          value,
+        },
+      );
+    },
+    setCabinetProperty(state, data){
+      state.amp.multiEffectAmp.setCabinetProperty({...data});
     },
     setPreset(state, value) {
       state.selectedPreset = value;

@@ -3,6 +3,10 @@ module.exports = {
   env: {
     node: true,
   },
+  extends: [
+    'standard',
+    'plugin:vue/recommended',
+  ],  
   // extends: ["plugin:vue/essential"],
   rules: {
     "no-console": process.env.NODE_ENV === "production" ? "off" : "off",

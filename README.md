@@ -34,16 +34,26 @@ npm run build:icons
 ```
 ## TO-DO
 Add clean presets somewhat
-add boost button
 when only standby pressed...maybe some help?
-click in the logo also opens the credits modal
 Watchers in chickenKnob to bind the preset value when selected, more presets  
-Remove unnecessary Vue.set when setting vars and separete entities pedal and entities amp  
+Remove unnecessary Vue.set when setting vars
+separete entities pedal and entities amp  
 Disto advanced settings to make own distos by users.  
 LocalStorage saving of user presets  
 Tuner  
 Noise gate
 Curves graphs  
-Mixin for all the different knobs  
 Midi 
+Mixin for all the different knobs  
  
+
+
+
+input 0-10 first gain node in the chain
+volume 0-1 gain node just before equalizer
+master 0-10 last gain node after equalizer
+output 0-1 last gain node in the chain
+
+Los knobs normalizan y denormalizan para mostrar 1-100 pero setean los efectos 1-10....revisar el efecto volumen para ponerlo 1-10 y revisar los knobs de volumen
+Para los inputs outputs habra que hacer lo mismo y normalizar-denormalizar en la ui para que llegue 1-10
+La definicion de amp esta 1-10

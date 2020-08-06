@@ -1,5 +1,7 @@
 const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin');
+
 module.exports = {
+  lintOnSave: true,
   configureWebpack: {
     plugins: [
       new FriendlyErrorsPlugin({
