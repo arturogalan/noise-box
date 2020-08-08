@@ -1,6 +1,6 @@
 <script>
 export default {
-  name: 'mac-buttons',
+  name: 'MacButtons',
   props: {
     maximized: {
       type: Boolean,
@@ -8,7 +8,7 @@ export default {
     },
     buttonLiterals: {
       type: Object,
-      default: ()=> ({
+      default: () => ({
         close: 'TOOLTIP.PEDAL.CLOSE',
         minimize: 'TOOLTIP.PEDAL.MINIMIZE',
         maximize: 'TOOLTIP.PEDAL.MAXIMIZE',
@@ -16,7 +16,7 @@ export default {
     },
     buttonVisible: {
       type: Object,
-      default: ()=> ({
+      default: () => ({
         close: true,
         minimize: true,
         maximize: true,
@@ -24,14 +24,14 @@ export default {
     },
     buttonEnabled: {
       type: Object,
-      default: ()=> ({
+      default: () => ({
         close: true,
         minimize: true,
         maximize: true,
       }),
     },
   },
-};
+}
 </script>
 <template>
   <div class="pedal-led--strip">

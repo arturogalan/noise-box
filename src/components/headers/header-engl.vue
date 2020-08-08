@@ -1,49 +1,49 @@
 <script>
-import metalGrid from './../common/metal-grid.vue';
-import { mapGetters, mapActions } from 'vuex';
+import metalGrid from './../common/metal-grid.vue'
+import { mapGetters, mapActions } from 'vuex'
 
 export default {
   components: {
     metalGrid,
   },
-  data() {
+  data () {
     return {
       isVisible: true,
       isHover: false,
-    };
+    }
   },
   computed: {
     ...mapGetters('pedal', [
       'amp',
     ]),
-    showOnIcon() {
-      return !this.isHover && this.amp.switchedOn && this.amp.standBy;
+    showOnIcon () {
+      return !this.isHover && this.amp.switchedOn && this.amp.standBy
     },
-    showStandByIcon() {
-      return !this.isHover && !this.amp.standBy && this.amp.switchedOn;
+    showStandByIcon () {
+      return !this.isHover && !this.amp.standBy && this.amp.switchedOn
     },
-    showOffIcon() {
-      return !this.isHover && !this.amp.switchedOn;
+    showOffIcon () {
+      return !this.isHover && !this.amp.switchedOn
     },
-    showHoverIcon() {
-      return this.isHover;
+    showHoverIcon () {
+      return this.isHover
     },
   },
-  created() {
+  created () {
   },
   methods: {
     ...mapActions('ui', [
       'toggleModal',
     ]),
-    setHover(status) {
-      console.log('eee');
+    setHover (status) {
+      console.log('eee')
     },
-    openInfo() {
-      this.toggleModal({ modalName: 'infoModal', status: true });
+    openInfo () {
+      this.toggleModal({ modalName: 'infoModal', status: true })
     },
   },
 
-};
+}
 </script>
 
 <template>
@@ -103,11 +103,9 @@ export default {
     </div>
     <div
       class="title"
-
     >
       <section
         @click="openInfo"
-        v-tooltip="{text: 'F*king awesome noise box!!!'}"
         @mouseover="isHover = true"
         @mouseleave="isHover = false"
       >

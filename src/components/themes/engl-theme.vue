@@ -1,16 +1,16 @@
 <script>
-import appHeaderEngl from './../headers/header-engl.vue';
-import ampEngl from './../amps/amp-engl.vue';
-import rackEngl from './../racks/rack-engl.vue';
+import appHeaderEngl from './../headers/header-engl.vue'
+import ampEngl from './../amps/amp-engl.vue'
+import rackEngl from './../racks/rack-engl.vue'
 
 export default {
-  name: 'engl-theme',
+  name: 'EnglTheme',
   components: {
     appHeaderEngl,
     ampEngl,
     rackEngl,
   },
-};
+}
 </script>
 <template>
   <section>

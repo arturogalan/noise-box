@@ -1,17 +1,17 @@
 <script>
-import vueSliderNb from './vue-slider-nb.vue';
-import { mapActions } from 'vuex';
-import { PEDAL_TYPE } from '../../store/constants';
+import vueSliderNb from './vue-slider-nb.vue'
+import { mapActions } from 'vuex'
+import { PEDAL_TYPE } from '../../store/constants'
 
 export default {
-  name: 'master-control',
+  name: 'MasterControl',
   components: {
     vueSliderNb,
   },
-  data() {
+  data () {
     return {
       initialMainVolumeLevel: 0,
-    };
+    }
   },
   methods: {
     ...mapActions('pedal', [
@@ -19,16 +19,16 @@ export default {
       'initAudioInputAndOutput',
       'setPedalEffectProperty',
     ]),
-    initAudioInterface() {
-      this.switchOnAudioContext();
-      this.initAudioInputAndOutput();
-      this.updateMainVolumeLevel(this.initialMainVolumeLevel);
+    initAudioInterface () {
+      this.switchOnAudioContext()
+      this.initAudioInputAndOutput()
+      this.updateMainVolumeLevel(this.initialMainVolumeLevel)
     },
-    updateMainVolumeLevel(value) {
-      this.setPedalEffectProperty({ type: PEDAL_TYPE.VOLUME, property: 'level', value });
+    updateMainVolumeLevel (value) {
+      this.setPedalEffectProperty({ type: PEDAL_TYPE.VOLUME, property: 'level', value })
     },
   },
-};
+}
 </script>
 <template>
   <div class="centered-parent">

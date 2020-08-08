@@ -1,7 +1,7 @@
 <script>
-import vueKnobNb from '../../common/vue-knob-nb.vue';
-import { mapActions } from 'vuex';
-import audioMaps from '../../../helpers/audioMaps';
+import vueKnobNb from '../../common/vue-knob-nb.vue'
+import { mapActions } from 'vuex'
+import audioMaps from '../../../helpers/audioMaps'
 
 export default {
   components: {
@@ -9,25 +9,25 @@ export default {
   },
   props: {
     pedal: { type: Object, required: true },
-    size: { type: String, required: false, default: ()=> 'normal' },
+    size: { type: String, required: false, default: () => 'normal' },
   },
-  data() {
+  data () {
     return {
       myVal: 50,
-    };
+    }
   },
   methods: {
     ...mapActions('pedal', [
       'setPedalEffectProperty',
     ]),
-    normalize(value) {
-      return audioMaps.getNormalizedSettingValue(value);
+    normalize (value) {
+      return audioMaps.getNormalizedSettingValue(value)
     },
-    denormalize(value) {
-      return audioMaps.setNormalizedSettingValue(value);
+    denormalize (value) {
+      return audioMaps.setNormalizedSettingValue(value)
     },
   },
-};
+}
 </script>
 <template>
   <div class="knob-grid">

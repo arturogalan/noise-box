@@ -1,6 +1,6 @@
 <script>
 export default {
-  name: 'modal',
+  name: 'Modal',
   props: {
     show: {
       type: Boolean,
@@ -11,7 +11,7 @@ export default {
       default: 'normal',
     },
   },
-};
+}
 </script>
 <template>
   <transition
@@ -55,4 +55,3 @@ export default {
   }
 }
 </style>
-

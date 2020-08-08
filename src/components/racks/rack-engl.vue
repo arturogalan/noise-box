@@ -1,13 +1,13 @@
 <script>
-import dropdown from '../common/dropdown';
-import vueSliderNb from '../common/vue-slider-nb.vue';
+import dropdown from '../common/dropdown'
+import vueSliderNb from '../common/vue-slider-nb.vue'
 
-import audioMaps from '../../helpers/audioMaps';
-import { mapGetters, mapActions } from 'vuex';
+import audioMaps from '../../helpers/audioMaps'
+import { mapGetters, mapActions } from 'vuex'
 // import {AMP_COMPONENT_NAME} from '../../store/constants';
 
 export default {
-  name: 'rack-engl',
+  name: 'RackEngl',
   components: {
     dropdown,
     vueSliderNb,
@@ -34,31 +34,34 @@ export default {
       'setAmpCabinetSettings',
       'setPreset',
     ]),
-    setCleanType(selectedPreset) {
-      this.setChannelDistoType({ channel: 1, name: 'distortionStage1', value: selectedPreset.distortionStage1 });
-      this.setChannelDistoType({ channel: 1, name: 'distortionStage2', value: selectedPreset.distortionStage2 });
+    setCleanType (selectedPreset) {
+      this.setChannelDistoType({ channel: 1, name: 'distortionStage1', value: selectedPreset.distortionStage1 })
+      this.setChannelDistoType({ channel: 1, name: 'distortionStage2', value: selectedPreset.distortionStage2 })
     },
-    setDistortionType(selectedPreset) {
-      this.setChannelDistoType({ channel: 2, name: 'distortionStage1', value: selectedPreset.distortionStage1 });
-      this.setChannelDistoType({ channel: 2, name: 'distortionStage2', value: selectedPreset.distortionStage2 });
+    setDistortionType (selectedPreset) {
+      this.setChannelDistoType({ channel: 2, name: 'distortionStage1', value: selectedPreset.distortionStage1 })
+      this.setChannelDistoType({ channel: 2, name: 'distortionStage2', value: selectedPreset.distortionStage2 })
     },
-    setCabinetType(selectedCabinet) {
-      this.setAmpCabinetType({ value: selectedCabinet.id });
+    setCabinetType (selectedCabinet) {
+      this.setAmpCabinetType({ value: selectedCabinet.id })
     },
-    normalize(value) {
-      return audioMaps.getNormalizedSettingValue(value);
+    normalize (value) {
+      return audioMaps.getNormalizedSettingValue(value)
     },
-    denormalize(value) {
-      return audioMaps.setNormalizedSettingValue(value);
+    denormalize (value) {
+      return audioMaps.setNormalizedSettingValue(value)
     },
   },
-};
+}
 </script>
 <template>
   <div class="rack-wrapper">
     <div class="rack-section rack-section--left">
       <div class="rack-box">
-        <div class="rack-label" :style="isCleanChannelActive && {textShadow: '-2px 0 black, 0 2px darkgreen, 2px 0 green, 0 3px green'}">
+        <div
+          class="rack-label"
+          :style="isCleanChannelActive && {textShadow: '-2px 0 black, 0 2px darkgreen, 2px 0 green, 0 3px green'}"
+        >
           CLEAN
         </div>
         <dropdown
@@ -71,7 +74,10 @@ export default {
     </div>
     <div class="rack-section">
       <div class="rack-box">
-        <div class="rack-label" :style="isDistoChannelActive && {textShadow: '-2px 0 black, 0 2px red, 2px 0 red, 0 3px red'}">
+        <div
+          class="rack-label"
+          :style="isDistoChannelActive && {textShadow: '-2px 0 black, 0 2px red, 2px 0 red, 0 3px red'}"
+        >
           DISTORTION
         </div>
         <dropdown
@@ -98,18 +104,18 @@ export default {
               v-for="setting in ampCabinetSettings"
               :key="setting.name"
             >
-            <div class="setting-name">
-              {{ $t(`AMP.COMPONENT.CABINET.${setting.name.toUpperCase()}`) }}
-            </div>
+              <div class="setting-name">
+                {{ $t(`AMP.COMPONENT.CABINET.${setting.name.toUpperCase()}`) }}
+              </div>
               <!-- :value="normalize(getAmpComponentEffectProperty({ name: 'cabinet', property: setting.name}))" -->
-              
-            <vue-slider-nb
-              size="medium"
-              @change="setAmpCabinetSettings({property: setting.name, value: denormalize($event)})"
-              :value="normalize(getCabinetProperty(setting.name))"
-              :value-color="'rgb(227, 213, 227)'"
-              :value-fill-color="'hsl(300,23%,55%)'"
-            />
+
+              <vue-slider-nb
+                size="medium"
+                :value="normalize(getCabinetProperty(setting.name))"
+                :value-color="'rgb(227, 213, 227)'"
+                :value-fill-color="'hsl(300,23%,55%)'"
+                @change="setAmpCabinetSettings({property: setting.name, value: denormalize($event)})"
+              />
             </section>
           </section>
         </div>

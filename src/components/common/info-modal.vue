@@ -1,9 +1,9 @@
 <script>
-import { mapActions } from 'vuex';
-import macButtons from './mac-buttons.vue';
+import { mapActions } from 'vuex'
+import macButtons from './mac-buttons.vue'
 
 export default {
-  name: 'info-modal',
+  name: 'InfoModal',
   components: {
     macButtons,
   },
@@ -13,11 +13,11 @@ export default {
     ...mapActions('ui', [
       'toggleModal',
     ]),
-    closeModal() {
-      this.toggleModal({ modalName: 'infoModal', status: false });
+    closeModal () {
+      this.toggleModal({ modalName: 'infoModal', status: false })
     },
   },
-};
+}
 </script>
 <template>
   <div

@@ -5,6 +5,18 @@
       "STEP_2": "2: Configure effects!"
     },
     "TOOLTIP": {
+      "AMP": {
+        "CHANNEL": {
+          "CLEAN": "Change fron clean to disto",
+          "DISTO": "Change fron disto to clean",
+          "TEXT": "Channel"
+        },
+        "BUTTONS": {
+          "STANDBY_OFF": "Stand by on, first you have to power on the amp",
+          "STANDBY_ON": "Toggle amp stand by",
+          "POWER": "Power on the amp!"
+        }
+      },
       "PEDAL": {
         "SWITCH_ON": "Swith ON pedal",
         "SWITCH_OFF": "Swith OFF pedal",
@@ -20,7 +32,15 @@
       "VOLUME": "Volume"
     },
     "AMP": {
+      "BUTTONS": {
+        "STANDBY": "Stand by",
+        "POWER": "Power"
+      },      
       "COMPONENT": {
+        "CHANNEL":{
+          "CLEAN": "",
+          "DISTO": ""
+        },
         "DISTORTION":{
           "INTENSITY":"Gain"
         },

@@ -1,7 +1,7 @@
 <script>
-import { mapGetters, mapActions } from 'vuex';
-import vueSliderNb from './common/vue-slider-nb';
-import audioMaps from './../helpers/audioMaps';
+import { mapGetters, mapActions } from 'vuex'
+import vueSliderNb from './common/vue-slider-nb'
+import audioMaps from './../helpers/audioMaps'
 
 // const input = require('../assets/icons/input.svg');
 // const output = require('../assets/icons/output.svg');
@@ -10,9 +10,9 @@ export default {
   components: {
     vueSliderNb,
   },
-  data() {
+  data () {
     return {
-    };
+    }
   },
   computed: {
     ...mapGetters('pedal', [
@@ -23,9 +23,9 @@ export default {
       'getAmpOutputGain',
     ]),
   },
-  created() {
+  created () {
   },
-  mounted() {
+  mounted () {
     // console.log(this.amp.multiEffectAmp.getInputGainComponent());
   },
   methods: {
@@ -33,14 +33,14 @@ export default {
       'setAmpInputGain',
       'setAmpOutputGain',
     ]),
-    normalize(value) {
-      return audioMaps.getNormalizedSettingValue(value);
+    normalize (value) {
+      return audioMaps.getNormalizedSettingValue(value)
     },
-    denormalize(value) {
-      return audioMaps.setNormalizedSettingValue(value);
+    denormalize (value) {
+      return audioMaps.setNormalizedSettingValue(value)
     },
   },
-};
+}
 </script>
 
 <!-- amp.multiEffectAmp.getInputComponent().settingList[0].value -->
@@ -80,6 +80,7 @@ export default {
         </div>
         <div class="footer-label">
           <vue-slider-nb
+
             size="big"
             :value="normalize(getAmpOutputGain)"
             :value-color="'rgb(206, 71, 73)'"
