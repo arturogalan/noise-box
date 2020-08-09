@@ -7,14 +7,22 @@
     "TOOLTIP": {
       "AMP": {
         "CHANNEL": {
-          "CLEAN": "Change fron clean to disto",
-          "DISTO": "Change fron disto to clean",
-          "TEXT": "Channel"
+          "CLEAN": "Change fron clean to distortion channel",
+          "DISTO": "Change fron distortion to clean channel",
+          "TEXT": "Channel",
+          "CLEAN_PRESETS": "Select the clean channel flavor",
+          "DISTO_PRESETS": "Select the distortion channel flavor",
+          "CABINET_PRESETS": "Select the cabinet flavor"
         },
         "BUTTONS": {
           "STANDBY_OFF": "Stand by on, first you have to power on the amp",
           "STANDBY_ON": "Toggle amp stand by",
           "POWER": "Power on the amp!"
+        },
+        "CONTEXT": {
+          "INPUT": "Input",
+          "OUTPUT": "Output",
+          "LATENCY": "The latency of the sound with your current input and ouput presets" 
         }
       },
       "PEDAL": {
@@ -36,11 +44,12 @@
         "STANDBY": "Stand by",
         "POWER": "Power"
       },      
+      "CHANNEL":{
+        "CLEAN": "Clean",
+        "DISTO": "Disto",
+        "DISTORTION": "Distortion"
+      },
       "COMPONENT": {
-        "CHANNEL":{
-          "CLEAN": "",
-          "DISTO": ""
-        },
         "DISTORTION":{
           "INTENSITY":"Gain"
         },
@@ -84,6 +93,11 @@
         "WARSHALL_2": "Wharsall Vintage",
         "V0X": "V0x M930",
         "BENDER": "Bender Champ"
+      },
+      "CONTEXT": {
+        "INPUT": "Input",
+        "OUTPUT": "Output",
+        "LATENCY": "Latency" 
       }
     }
   }

@@ -14,8 +14,15 @@ const audioUtils = {
     }
     return null
   },
+  getAudioContextProps (audioContext) {
+    return {
+      baseLatency: audioContext.baseLatency,
+      sampleRate: audioContext.sampleRate,
+      state: audioContext.state,
+    }
+  },
   createAudioNode (audioContext, type) {
-    console.log(`Creating ${capitalize(type)} audio node`)
+    console.log(`Creating ${capitalize(type)} PEDAL audio node`)
 
     const audioNode = new Noisefy[capitalize(type)](audioContext)
     return audioNode
@@ -23,7 +30,7 @@ const audioUtils = {
   createInput (audioContext) {
     const input = new Noisefy.Input(audioContext)
     const stream = input.getUserMedia()
-    console.log(stream)
+    console.log('STREAM:', stream)
     return input
   },
   createOutput (audioContext) {

@@ -27,6 +27,9 @@ const pedalModule = {
     amp (state) {
       return state.amp
     },
+    audioContextProps (state) {
+      return audioUtils.getAudioContextProps(state.audioContext)
+    },
     getAmpInputGain (state) {
       return state.amp.multiEffectAmp.getInputGain()
     },

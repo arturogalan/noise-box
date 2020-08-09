@@ -62,11 +62,12 @@ export default {
           class="rack-label"
           :style="isCleanChannelActive && {textShadow: '-2px 0 black, 0 2px darkgreen, 2px 0 green, 0 3px green'}"
         >
-          CLEAN
+          {{ $t('AMP.CHANNEL.CLEAN') }}
         </div>
         <dropdown
           :list="ampCleanPresets"
           name="cleanType"
+          tooltip-key="TOOLTIP.AMP.CHANNEL.CLEAN_PRESETS"
           @selected="setCleanType"
         />
         <!-- :name="distoList.componentName" -->
@@ -78,11 +79,12 @@ export default {
           class="rack-label"
           :style="isDistoChannelActive && {textShadow: '-2px 0 black, 0 2px red, 2px 0 red, 0 3px red'}"
         >
-          DISTORTION
+          {{ $t('AMP.CHANNEL.DISTORTION') }}
         </div>
         <dropdown
           :list="ampDistortionPresets"
           name="distoType"
+          tooltip-key="TOOLTIP.AMP.CHANNEL.DISTO_PRESETS"
           @selected="setDistortionType"
         />
         <!-- :name="distoList.componentName" -->
@@ -96,6 +98,7 @@ export default {
         <dropdown
           :list="ampCabinetList"
           name="cabinetType"
+          tooltip-key="TOOLTIP.AMP.CHANNEL.CABINET_PRESETS"
           @selected="setCabinetType"
         />
         <div class="knob-grid-wrapper">
@@ -177,6 +180,7 @@ export default {
   font-size: 1.2rem;
   color: aliceblue;
   text-shadow: 2px 2px rgba(0, 0, 0, 0.8);
+  text-transform: uppercase;
 }
 .knob-grid-wrapper {
   position: relative;

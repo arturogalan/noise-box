@@ -87,7 +87,7 @@ export default {
       <div class="row">
         <div class="col">
           <div class="channel-name">
-            clean
+            {{ $t('AMP.CHANNEL.CLEAN') }}
           </div>
           <led
             :on="isCleanChannelActive"
@@ -97,7 +97,7 @@ export default {
         </div>
         <div class="col">
           <div class="channel-name">
-            disto
+            {{ $t('AMP.CHANNEL.DISTO') }}
           </div>
           <led
             :on="isDistoChannelActive"

@@ -18,6 +18,10 @@ export default {
       required: false,
       default: '',
     },
+    tooltipKey: {
+      type: String,
+      required: true,
+    },
   },
   data () {
     return {
@@ -30,6 +34,11 @@ export default {
     },
     strokeBoxShadow () {
       return this.strokeColor ? `0 0px 4px 0 ${this.strokeColor}` : '0 0px 4px 0 grey'
+    },
+    tooltipText () {
+      return {
+        text: this.$t(this.tooltipKey),
+      }
     },
   },
   methods: {
@@ -58,15 +67,17 @@ export default {
       type="checkbox"
     >
     <label
-      :for="`checkbox_toggle${name}`"
+      v-tooltip="tooltipText"
       :style="{ boxShadow: strokeBoxShadow}"
+      :for="`checkbox_toggle${name}`"
       :class="[!selectedItem.name && 'placeholder']"
     >
       {{ selectedItem.name || placeholder }}
       <img
         class="arrow"
         src="../../assets/icons/arrow.png"
-      ></label>
+      >
+    </label>
     <ul>
       <li
         v-for="item in list"
