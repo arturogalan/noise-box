@@ -3,30 +3,34 @@ import { mapActions } from 'vuex'
 import macButtons from './mac-buttons.vue'
 
 export default {
-  name: 'InfoModal',
+  name: 'FirstTimeModal',
   components: {
     macButtons,
   },
   computed: {
+    },
+  mounted () {
+    this.setSiteVisited();
   },
   methods: {
     ...mapActions('ui', [
       'toggleModal',
+      'setSiteVisited',
     ]),
     closeModal () {
-      this.toggleModal({ modalName: 'infoModal', status: false })
+      this.toggleModal({ modalName: 'firstTimeModal', status: false })
     },
   },
 }
 </script>
 <template>
   <div
+    @click.stop
     :style="{ borderColor: 'brown' }"
     class="info-container"
-    @click.stop
   >
     <div
-      :style="{ color: 'black', backgroundColor: 'brown'}"
+      :style="{ color: 'black', backgroundColor: 'darkred'}"
       class="info-name"
     >
       <mac-buttons
@@ -38,65 +42,42 @@ export default {
         @close="closeModal"
         @maximize="$emit('maximize')"
       />
-      <img
+      <div class="info-name--title">
+        <img
         class="icon-type-1"
-        src="../../assets/icons/marioquestion.png"
-        alt=""
-      >
-      Noise Box/Noisefy
+        src="../../assets/img/header-icon-animated.gif"
+        >
+      Noise Box
+      </div>
     </div>
     <div class="info-wrapper">
       <div
         class="contact-section"
       >
-        <div class="contact-text">
-          <span class="develop">Developed by</span>
-          <a
-              class="developers-color"
-              href="https://twitter.com/turugalan"
-              target="_blank"
-            >
-            <span
-              class="contact"
-            >
-                Arturo Galán&nbsp;&nbsp;
-            </span>
-          </a>
-        </div>
+          <p
+            class="contact"
+          >
+            Javascript Guitar Amp emulator&nbsp;&nbsp;</p>
       </div>
       <div class="info-text">
-        Developed in several months as a pet project to merge two passions: Play guitar and Javascript.
-        Webaudio ideas seeing talks and Github code accounts from great developers like...
+        Hi and welcome to NoiseBox, a 🎸guitar🎸 amp emulator to enjoy playing your guitar and getting real amp sounds!!!
+        <br/>
+        <br/>
+        <p class="warning-text">
+          ⚠️ Warning! ⚠️
+        </p>
+        <br>
+        This page uses <strong>WebAudio interface</strong> to produce sounds.
+        <br>
+          The input and output will be that ones that you have configured in your computer (can be the microphone, speakers or any other sound target) so...
         <ul>
           <li class="pt">
-            <a
-              class="developers-color"
-              href="https://twitter.com/sambego"
-              target="_blank"
-            >Sam Bellem</a>
-          </li>
+          Take care with the <span class="white-text"><u>volume if you are using headphones!</u></span>
+           </li>
           <li class="pt">
-            <a
-              class="developers-color"
-              href="https://twitter.com/micbuffa"
-              target="_blank"
-            >Michel Buffa</a>
-          </li>
+          Take care with the <span class="white-text"><u>sound coupling</u></span> if you use the same source for the input and the output!
+ </li>
         </ul>
-        Made with <a
-          class="vue-color"
-          href="https://vuejs.org/"
-          target="_blank"
-        >Vue.js</a>, in the cloud thanks to <a
-          class="netlify-color"
-          href="https://www.netlify.com/"
-          target="_blank"
-        >netlify</a>, code hosted in <a
-          class="netlify-color"
-          href="https://github.com/"
-          target="_blank"
-        >github</a>.
-        Any ideas, feedback, bugs or comments on Github or Twitter will be really appreciated.
       </div>
       <div class="contact-section--center">
         <section class="contact-section">
@@ -130,53 +111,7 @@ export default {
           </div>
         </section>
       </div>
-      <div class="info-text">
-        Project also possible thanks to:
-        <ul>
-          <li>
-        Free fonts resources provided by <a
-          class="netlify-color"
-          href="https://www.dafont.com"
-          target="_blank"
-        >dafont</a>:<br>
-        <div class="info-text--center pt">
-          <a
-            class="font-link-color"
-            href="https://www.dafont.com/pbio.font"
-            target="_blank"
-          >Pbio</a>
-          <a
-            class="font-link-color"
-            href="https://www.dafont.com/Conthrax.font"
-            target="_blank"
-          >Conthrax</a>
-          <a
-            class="font-link-color"
-            href="https://www.dafont.com/Fatsans.font"
-            target="_blank"
-          >Fatsans</a>
-          <a
-            class="font-link-color"
-            href="https://www.dafont.com/open-dyslexic.font"
-            target="_blank"
-          >Open Dyslexic</a>
-          <a
-            class="font-link-color"
-            href="https://www.dafont.com/pixel-square.font"
-            target="_blank"
-          >Pixel Square</a>
-        </div>
-        <br>
-        </li>
-        <li>
-        Free cabinet impulses sounds provided by <a
-          class="netlify-color"
-          href="https://soundwoofer.com/Library/Index"
-          target="_blank"
-        >Soundwoofer</a>
-        </li>
-        </ul>
-      </div>
+      
       <div class="license-text">
         <strong class="license-text--title">MIT license</strong><br>
         Copyright © 2019 Arturo Galán <br>
@@ -242,6 +177,10 @@ export default {
     text-transform: capitalize;
     opacity: .8;
     margin-bottom: .4rem;
+    &--title{
+      justify-content: center;
+      display: flex;
+    }
   }
   .buttons-absolute{
     position: absolute;
@@ -266,12 +205,17 @@ export default {
 }
 .contact-text {
   vertical-align: bottom;
+  text-align: center;
+  align-items: center;
 }
 .icon-clickable {
   cursor: pointer;
 }
 .icon-type-1{
-  max-width: 1.7rem;
+  width: 2.5rem;
+  height: 3rem;
+  padding-right: .5rem;
+  margin-top: .1rem;
 }
 .icon-type-2{
   max-width: 5rem;
@@ -297,6 +241,9 @@ export default {
     text-align: center;
   }
 }
+.white-text {
+  color: white;
+}
 .license-text {
   font-family: "pixel";
   line-height: .9rem;
@@ -316,6 +263,12 @@ export default {
   color: white;
   text-decoration: none;
 }
+.warning-text {
+  color: rgb(244, 237, 60);
+  font-weight: bold;
+  font-size: 1.5rem;
+  text-align: center;
+}
 .personal-links-color {
   color: rgb(71,183,132);
   font-weight: bold;
@@ -330,7 +283,6 @@ export default {
 }
 .font-link-color {
   color: lightslategray;
-  margin-right: 1rem;
 }
 .pt {
   padding-top: .5rem;

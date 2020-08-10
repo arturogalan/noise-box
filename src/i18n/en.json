@@ -89,10 +89,15 @@
         "HARD_ROCK": "Hard Rock"
       },
       "CABINET": {
-        "WARSHALL_1": "Warshall 1960",
-        "WARSHALL_2": "Wharsall Vintage",
-        "V0X": "V0x M930",
-        "BENDER": "Bender Champ"
+        "LINE_6_SPIDER_III": "Line 6 Spider",
+        "MARSHALL_1960": "Marshall 1960",
+        "MARSHALL_JCM800": "Marchall JCM800",
+        "MARSHALL_MF28": "Marshall MF28",
+        "MESA_BOOGIE": "Mesa Boogie",
+        "ORANGE": "Orange",
+        "BUGERA_V55": "Bugera V55",
+        "FENDER_TWIN": "Fender Twin",
+        "VOX": "VOX"
       },
       "CONTEXT": {
         "INPUT": "Input",

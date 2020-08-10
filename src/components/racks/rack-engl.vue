@@ -19,7 +19,6 @@ export default {
       'ampCabinetList',
       'ampCabinetSettings',
       'ampPresetList',
-      'getAmpComponentEffectProperty',
       'getCabinetProperty',
       'isCleanChannelActive',
       'isDistoChannelActive',
@@ -28,7 +27,6 @@ export default {
 
   methods: {
     ...mapActions('pedal', [
-      'setComponentDistoType',
       'setChannelDistoType',
       'setAmpCabinetType',
       'setAmpCabinetSettings',
@@ -110,13 +108,11 @@ export default {
               <div class="setting-name">
                 {{ $t(`AMP.COMPONENT.CABINET.${setting.name.toUpperCase()}`) }}
               </div>
-              <!-- :value="normalize(getAmpComponentEffectProperty({ name: 'cabinet', property: setting.name}))" -->
-
               <vue-slider-nb
                 size="medium"
                 :value="normalize(getCabinetProperty(setting.name))"
-                :value-color="'rgb(227, 213, 227)'"
-                :value-fill-color="'hsl(300,23%,55%)'"
+                :value-color="'hsl(20,53%,55%)'"
+                :value-fill-color="'hsl(20,23%,55%)'"
                 @change="setAmpCabinetSettings({property: setting.name, value: denormalize($event)})"
               />
             </section>

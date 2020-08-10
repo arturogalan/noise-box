@@ -1,4 +1,6 @@
 <script>
+import { mapActions } from 'vuex'
+
 export default {
   name: 'Modal',
   props: {
@@ -9,6 +11,24 @@ export default {
     size: {
       type: String,
       default: 'normal',
+    },
+    clickOutsideCloses: {
+      type: Boolean,
+      default: false,
+    },
+    modalName: {
+      type: String,
+      default: null,
+    }
+  },
+  methods: {
+    ...mapActions('ui', [
+      'toggleModal',
+    ]),
+    closeModal () {
+      if (this.modalName) {
+        this.toggleModal({ modalName: this.modalName, status: false })
+      }
     },
   },
 }
@@ -21,6 +41,7 @@ export default {
     <div
       v-if="show"
       class="modal"
+      @click="clickOutsideCloses && closeModal()"
     >
       <div
         :class="[size === 'big' && 'modal-content--big']"

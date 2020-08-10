@@ -101,7 +101,6 @@ export default {
         this.currentValue = newValue
         const initialDegress = (this.currentValue / this.maxValue) * 360
         setTimeout(() => (this.selectorValue = initialDegress - (this.svgRotate - 90)), 250)
-        console.log(newValue)
       }
     },
   },

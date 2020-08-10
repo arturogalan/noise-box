@@ -3,6 +3,7 @@ import { mapGetters, mapActions } from 'vuex'
 import modal from './components/common/modal.vue'
 import pedalZoomIn from './components/pedals/pedal/pedal-zoom-in'
 import infoModal from './components/common/info-modal'
+import firstTimeModal from './components/common/first-time-modal'
 
 import englTheme from './components/themes/engl-theme.vue'
 import pedalsBoard from './components/pedals/grid/pedals-board'
@@ -16,6 +17,7 @@ export default {
   components: {
     modal,
     infoModal,
+    firstTimeModal,
     pedalZoomIn,
     englTheme,
     pedalsBoard,
@@ -33,17 +35,27 @@ export default {
     ]),
     ...mapGetters('ui', [
       'showInfoModal',
+      'showFirstTimeModal',
+      'isFirstTime',
     ]),
   },
   created () {
     this.createAudioContext()
     this.createAmp()
   },
+  mounted () {
+    if (this.isFirstTime) {
+      this.toggleModal({ modalName: 'firstTimeModal', status: true })
+    }
+  },
   methods: {
     ...mapActions('pedal', [
       'createAudioContext',
       'createAmp',
       'setPedalProperty',
+    ]),
+    ...mapActions('ui', [
+      'toggleModal',
     ]),
   },
 
@@ -60,10 +72,20 @@ export default {
     </modal>
     <modal
       :show="showInfoModal"
+      :click-outside-closes="true"
+      modal-name="infoModal"
       size="big"
     >
       <infoModal />
     </modal>
+    <modal
+      :show="showFirstTimeModal"
+      :click-outside-closes="true"
+      modal-name="firstTimeModal"
+      size="big"
+    >
+      <firstTimeModal />
+    </modal>    
     <engl-theme />
     <pedals-board />
     <app-footer />

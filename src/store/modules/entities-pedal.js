@@ -181,11 +181,6 @@ const pedalModule = {
         return state.amp.multiEffectAmp.getCabinetProperty({property})
       }
     },
-    getAmpComponentEffectProperty (state) {
-      return ({name, property}) => {
-        return state.amp.multiEffectAmp.getAmpComponentEffectProperty({componentName: name, componentProperty: property})
-      }
-    },
     pedalList (state) {
       return Object.values(state.pedalBoard.pedals)
     },
@@ -255,9 +250,6 @@ const pedalModule = {
     createAmp ({ commit }) {
       commit('createAmp')
     },
-    setAmpComponentEffectProperty ({ commit }, data) {
-      commit('setAmpComponentEffectProperty', data)
-    },
     setActiveChannelEffectProperty ({ commit, getters }, data) {
       commit('setAmpChannelEffectProperty', {...data, channel: getters.ampActiveChannel})
     },
@@ -270,9 +262,6 @@ const pedalModule = {
     },
     setAmpOutputGain ({ commit }, value) {
       commit('setAmpOutputEffectProperty', { property: 'level', value })
-    },
-    setComponentDistoType ({ commit }, data) {
-      commit('setComponentDistoType', data)
     },
     setChannelDistoType ({ commit }, data) {
       commit('setChannelDistoType', data)
@@ -371,9 +360,6 @@ const pedalModule = {
     toggleAmpChannel (state) {
       state.amp.multiEffectAmp.toggleChannel()
     },
-    setAmpComponentEffectProperty (state, { name, property, value }) {
-      state.amp.multiEffectAmp.setAmpComponentEffectProperty({ componentName: name, componentProperty: property, value })
-    },
     setAmpInputEffectProperty (state, { property, value }) {
       state.amp.multiEffectAmp.setAmpInputEffectProperty({componentProperty: property, value})
     },
@@ -383,15 +369,6 @@ const pedalModule = {
 
     setAmpChannelEffectProperty (state, { channel, name, property, value }) {
       state.amp.multiEffectAmp.setAmpChannelEffectProperty({ channel, componentName: name, componentProperty: property, value })
-    },
-    setComponentDistoType (state, { name, value }) {
-      state.amp.multiEffectAmp.setAmpComponentEffectProperty(
-        {
-          componentName: name,
-          componentProperty: audioUtils.AMP_SETTING_NAME.DISTORTION_TYPE,
-          value,
-        },
-      )
     },
     setChannelDistoType (state, { channel, name, value }) {
       state.amp.multiEffectAmp.setAmpChannelEffectProperty(
