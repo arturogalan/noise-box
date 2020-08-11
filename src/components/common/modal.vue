@@ -19,7 +19,7 @@ export default {
     modalName: {
       type: String,
       default: null,
-    }
+    },
   },
   methods: {
     ...mapActions('ui', [

@@ -139,7 +139,6 @@ export default {
       return Math.max(Math.floor(Math.log10(Math.abs(x))), 0) + 1
     },
   },
-  template: '#vue-knob-nb',
 }
 </script>
 <template>

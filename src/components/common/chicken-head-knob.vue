@@ -45,10 +45,8 @@ export default {
   data () {
     return {
       radius: 10,
-      strokeWidth: 5,
       svgRotate: 270,
       currentValue: this.initValue,
-      isShowing: false,
       selectorValue: 0,
       isVisible: true,
       strokeColor: 'black',
@@ -56,9 +54,6 @@ export default {
     }
   },
   computed: {
-    // currentValue(){
-    //   return this.initValue;
-    // },
     circumference () {
       return this.radius * 2 * Math.PI
     },
@@ -81,11 +76,6 @@ export default {
         transform: `translateX(-${transformY}em) translateY(0.4em)`,
         'font-size': '0.9em',
         fill: 'white',
-      }
-    },
-    svgStyle () {
-      return {
-        transform: `rotate(-${this.svgRotate}deg)`,
       }
     },
     svgAbove () {

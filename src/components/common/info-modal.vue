@@ -52,14 +52,14 @@ export default {
         <div class="contact-text">
           <span class="develop">Developed by</span>
           <a
-              class="developers-color"
-              href="https://twitter.com/turugalan"
-              target="_blank"
-            >
+            class="developers-color"
+            href="https://twitter.com/turugalan"
+            target="_blank"
+          >
             <span
               class="contact"
             >
-                Arturo Galán&nbsp;&nbsp;
+              Arturo Galán&nbsp;&nbsp;
             </span>
           </a>
         </div>
@@ -134,47 +134,47 @@ export default {
         Project also possible thanks to:
         <ul>
           <li>
-        Free fonts resources provided by <a
-          class="netlify-color"
-          href="https://www.dafont.com"
-          target="_blank"
-        >dafont</a>:<br>
-        <div class="info-text--center pt">
-          <a
-            class="font-link-color"
-            href="https://www.dafont.com/pbio.font"
-            target="_blank"
-          >Pbio</a>
-          <a
-            class="font-link-color"
-            href="https://www.dafont.com/Conthrax.font"
-            target="_blank"
-          >Conthrax</a>
-          <a
-            class="font-link-color"
-            href="https://www.dafont.com/Fatsans.font"
-            target="_blank"
-          >Fatsans</a>
-          <a
-            class="font-link-color"
-            href="https://www.dafont.com/open-dyslexic.font"
-            target="_blank"
-          >Open Dyslexic</a>
-          <a
-            class="font-link-color"
-            href="https://www.dafont.com/pixel-square.font"
-            target="_blank"
-          >Pixel Square</a>
-        </div>
-        <br>
-        </li>
-        <li>
-        Free cabinet impulses sounds provided by <a
-          class="netlify-color"
-          href="https://soundwoofer.com/Library/Index"
-          target="_blank"
-        >Soundwoofer</a>
-        </li>
+            Free fonts resources provided by <a
+              class="netlify-color"
+              href="https://www.dafont.com"
+              target="_blank"
+            >dafont</a>:<br>
+            <div class="info-text--center pt">
+              <a
+                class="font-link-color"
+                href="https://www.dafont.com/pbio.font"
+                target="_blank"
+              >Pbio</a>
+              <a
+                class="font-link-color"
+                href="https://www.dafont.com/Conthrax.font"
+                target="_blank"
+              >Conthrax</a>
+              <a
+                class="font-link-color"
+                href="https://www.dafont.com/Fatsans.font"
+                target="_blank"
+              >Fatsans</a>
+              <a
+                class="font-link-color"
+                href="https://www.dafont.com/open-dyslexic.font"
+                target="_blank"
+              >Open Dyslexic</a>
+              <a
+                class="font-link-color"
+                href="https://www.dafont.com/pixel-square.font"
+                target="_blank"
+              >Pixel Square</a>
+            </div>
+            <br>
+          </li>
+          <li>
+            Free cabinet impulses sounds provided by <a
+              class="netlify-color"
+              href="https://soundwoofer.com/Library/Index"
+              target="_blank"
+            >Soundwoofer</a>
+          </li>
         </ul>
       </div>
       <div class="license-text">

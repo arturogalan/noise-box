@@ -28,7 +28,7 @@ const audioUtils = {
   },
   createInput (audioContext) {
     const input = new Noisefy.Input(audioContext)
-    const stream = input.getUserMedia()
+    input.getUserMedia()
     return input
   },
   createOutput (audioContext) {
