@@ -1,46 +1,51 @@
 {
   "name": "noise-box",
   "version": "0.1.0",
-  "description": "file:./../noisefy A Vue project to make a guitar amp in the browser",
+  "description": "A Vue project to make a guitar amp in the browser",
   "author": "Arturo Galan <arturo.galan@gmail.com>",
-  "license": "MIT",
   "scripts": {
-    "dev": "vue-cli-service serve --open --noinstructions",
     "serve": "vue-cli-service serve --noinstructions",
     "build": "npm run build:icons && vue-cli-service build",
     "test:unit": "vue-cli-service test:unit",
     "lint": "vue-cli-service lint",
-    "lintfix": "eslint --fix src/**/*.js",
-    "build:icons": "icon-font-generator src/assets/icons/icofonts/*.svg -o public/fonts -n noisefont normalize -p ico --center --csstp src/helpers/iconscss.hbs --html false --types ttf"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/arturogalan/noise-box.git"
+    "build:icons": "icon-font-generator src/assets/icons/icofonts/*.svg -o public/fonts -n noisefont normalize -p ico --center --csstp src/helpers/iconscss.hbs --html false --types ttf",
+    "dev": "vue-cli-service serve --open --noinstructions",
+    "lintfix": "eslint --fix --ext .js,.vue src"
   },
   "dependencies": {
     "core-js": "^3.3.2",
-    "noisefy": "^0.1.1",
+    "noisefy": "^0.1.2",
     "vue": "^2.6.10",
     "vue-i18n": "^8.15.0",
     "vue-router": "^3.1.3",
     "vuex": "^3.0.1"
   },
   "devDependencies": {
-    "@vue/cli-plugin-babel": "^4.0.0",
-    "@vue/cli-plugin-eslint": "^4.0.0",
-    "@vue/cli-plugin-router": "^4.0.0",
-    "@vue/cli-plugin-unit-jest": "^4.0.0",
-    "@vue/cli-plugin-vuex": "^4.0.0",
-    "@vue/cli-service": "^4.0.0",
-    "@vue/eslint-config-standard": "^4.0.0",
+    "@vue/cli-plugin-babel": "^4.4.6",
+    "@vue/cli-plugin-eslint": "^4.4.6",
+    "@vue/cli-plugin-router": "^4.4.6",
+    "@vue/cli-plugin-unit-jest": "^4.4.6",
+    "@vue/cli-plugin-vuex": "^4.4.6",
+    "@vue/cli-service": "^4.4.6",
+    "@vue/eslint-config-standard": "^5.1.2",
     "@vue/test-utils": "1.0.0-beta.29",
-    "babel-eslint": "^10.0.3",
-    "eslint": "^5.16.0",
-    "eslint-plugin-vue": "^5.0.0",
+    "babel-eslint": "^10.1.0",
+    "eslint": "^6.7.2",
+    "eslint-friendly-formatter": "^4.0.1",
+    "eslint-plugin-import": "^2.20.2",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^4.2.1",
+    "eslint-plugin-standard": "^4.0.0",
+    "eslint-plugin-vue": "^6.2.2",
     "friendly-errors-webpack-plugin": "^1.7.0",
     "icon-font-generator": "^2.1.10",
     "sass": "^1.19.0",
     "sass-loader": "^8.0.0",
     "vue-template-compiler": "^2.6.10"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/arturogalan/noise-box.git"
   }
 }

@@ -32,6 +32,9 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 # generate icons
 npm run build:icons
 ```
+
+To work with a Nisefy local version: file:./../noisefy in package.json
+
 ## TO-DO
 When changin input/output maybe we need a reset?
 Add clean presets somewhat
