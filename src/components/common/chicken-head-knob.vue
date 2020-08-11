@@ -1,12 +1,12 @@
 <script>
 export default {
-  name: 'chicken-head-knob',
+  name: 'ChickenHeadKnob',
   props: {
     initValue: {
       type: Number,
       required: true,
-      validator: (initValue)=> {
-        return initValue > 0 && initValue <= 100;
+      validator: (initValue) => {
+        return initValue > 0 && initValue <= 100
       },
     },
     maxValue: {
@@ -39,10 +39,10 @@ export default {
     size: {
       type: String,
       required: false,
-      default: ()=> 'normal',
+      default: () => 'normal',
     },
   },
-  data() {
+  data () {
     return {
       radius: 10,
       strokeWidth: 5,
@@ -53,101 +53,100 @@ export default {
       isVisible: true,
       strokeColor: 'black',
       valueColor: 'grey',
-    };
+    }
   },
   computed: {
     // currentValue(){
     //   return this.initValue;
     // },
-    circumference() {
-      return this.radius * 2 * Math.PI;
+    circumference () {
+      return this.radius * 2 * Math.PI
     },
-    strokeDasharray() {
-      const value = (this.circumference / this.maxValue) * this.currentValue;
-      return value + ' ' + (this.circumference - value);
+    strokeDasharray () {
+      const value = (this.circumference / this.maxValue) * this.currentValue
+      return value + ' ' + (this.circumference - value)
     },
-    labelStyle() {
+    labelStyle () {
       // TO-DO: if decimal adjust transformY
-      let transformY;
-      const currentValueDigits = this.numDigits(this.currentValue);
+      let transformY
+      const currentValueDigits = this.numDigits(this.currentValue)
       if (currentValueDigits >= 3) {
-        transformY = 0.75;
+        transformY = 0.75
       } else if (currentValueDigits === 2) {
-        transformY = 0.5;
+        transformY = 0.5
       } else {
-        transformY = 0.25;
+        transformY = 0.25
       }
       return {
-        'transform': `translateX(-${transformY}em) translateY(0.4em)`,
+        transform: `translateX(-${transformY}em) translateY(0.4em)`,
         'font-size': '0.9em',
-        'fill': 'white',
-      };
+        fill: 'white',
+      }
     },
-    svgStyle() {
+    svgStyle () {
       return {
         transform: `rotate(-${this.svgRotate}deg)`,
-      };
+      }
     },
-    svgAbove() {
+    svgAbove () {
       return {
         transition: 'all 1s ease',
         transform: `rotate(${this.selectorValue}deg)`,
-      };
+      }
     },
   },
-  mounted() {
-    const initialDegress = (this.currentValue / this.maxValue) * 360;
-    setTimeout(()=> (this.selectorValue = initialDegress - (this.svgRotate - 90)), 250);
-  },
   watch: {
-    initValue(newValue, oldValue) {
+    initValue (newValue, oldValue) {
       if (newValue !== oldValue) {
-      this.currentValue = newValue;
-      const initialDegress = (this.currentValue / this.maxValue) * 360;
-      setTimeout(()=> (this.selectorValue = initialDegress - (this.svgRotate - 90)), 250);
-      console.log(newValue)
+        this.currentValue = newValue
+        const initialDegress = (this.currentValue / this.maxValue) * 360
+        setTimeout(() => (this.selectorValue = initialDegress - (this.svgRotate - 90)), 250)
       }
-    }
+    },
+  },
+  mounted () {
+    const initialDegress = (this.currentValue / this.maxValue) * 360
+    setTimeout(() => (this.selectorValue = initialDegress - (this.svgRotate - 90)), 250)
   },
   methods: {
-    computeValue(e) {
+    computeValue (e) {
       // The percentaje where user clicks
-      const rect = this.$refs.chicken.getBoundingClientRect();
-      const centerX = rect.width / 2 + rect.left;
-      const centerY = rect.height / 2 + rect.top;
-      const clickX = e.clientX;
-      const clickY = e.clientY;
-      const result = Math.atan2(centerY - clickY, centerX - clickX);
+      const rect = this.$refs.chicken.getBoundingClientRect()
+      const centerX = rect.width / 2 + rect.left
+      const centerY = rect.height / 2 + rect.top
+      const clickX = e.clientX
+      const clickY = e.clientY
+      const result = Math.atan2(centerY - clickY, centerX - clickX)
 
       // Calculation of current value
-      const percentage = ((result + Math.PI) / (Math.PI + Math.PI)) * this.maxValue;
+      const percentage = ((result + Math.PI) / (Math.PI + Math.PI)) * this.maxValue
       // delta: the percentaje that represents the rotate: 90 degrees of rotate represents the 25% of the circumference
-      const deltaPercentaje = (this.svgRotate / 360) * this.maxValue;
-      let adjustPercentage = percentage + deltaPercentaje;
+      const deltaPercentaje = (this.svgRotate / 360) * this.maxValue
+      let adjustPercentage = percentage + deltaPercentaje
       // console.log(this.maxValue * Math.trunc(adjustPercentage/this.maxValue))
       adjustPercentage =
         adjustPercentage > this.maxValue
           ? adjustPercentage - this.maxValue
-          : adjustPercentage;
+          : adjustPercentage
       // TO-DO if decimal: this.currentValue = adjustPercentage; and round to 1 digit
-      this.currentValue = Math.ceil(adjustPercentage);
+      this.currentValue = Math.ceil(adjustPercentage)
       // Calculation of inner selector position
-      const deltaDegrees = (this.svgRotate / 360) * 360;
-      const degress = ((result + Math.PI) / (Math.PI + Math.PI)) * 360;
-      let adjustDegrees = degress + deltaDegrees;
-      adjustDegrees = adjustDegrees > 360 ? adjustDegrees - 360 : adjustDegrees;
+      // const deltaDegrees = (this.svgRotate / 360) * 360
+      // const degress = ((result + Math.PI) / (Math.PI + Math.PI)) * 360
+      // let adjustDegrees = degress + deltaDegrees
+      // adjustDegrees = adjustDegrees > 360 ? adjustDegrees - 360 : adjustDegrees
       // this.selectorValue = adjustDegrees - (this.svgRotate - 90);
-      this.$emit('valueChanged', this.currentValue);
+      this.$emit('valueChanged', this.currentValue)
     },
-    numDigits(x) {
-      return Math.max(Math.floor(Math.log10(Math.abs(x))), 0) + 1;
+    numDigits (x) {
+      return Math.max(Math.floor(Math.log10(Math.abs(x))), 0) + 1
     },
-    setStroke(isHover) {
-      this.strokeColor = isHover ? '#3f7f00' : 'black';
-      this.valueColor = isHover ? '#3f7f00' : 'grey';
+    setStroke (isHover) {
+      this.strokeColor = isHover ? '#3f7f00' : 'black'
+      this.valueColor = isHover ? '#3f7f00' : 'grey'
     },
   },
-};
+}
 </script>
 <template>
   <div class="container">
@@ -261,7 +260,6 @@ export default {
       </svg>
     </div>
 
-
     <svg
       class="ring-mesaure"
       preserveAspectRatio
@@ -273,7 +271,6 @@ export default {
         class="stroke-hole"
       />
     </svg>
-
 
     <transition name="bounce-tiny">
       <div

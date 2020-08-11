@@ -4,8 +4,8 @@ export default {
     initValue: {
       type: Number,
       required: true,
-      validator: (initValue)=> {
-        return initValue > 0 && initValue <= 100;
+      validator: (initValue) => {
+        return initValue > 0 && initValue <= 100
       },
     },
     maxValue: {
@@ -38,14 +38,14 @@ export default {
     size: {
       type: String,
       required: false,
-      default: ()=> 'normal',
+      default: () => 'normal',
     },
     knobsNumber: {
       type: Number,
       required: true,
     },
   },
-  data() {
+  data () {
     return {
       radius: 13,
       strokeWidth: 3,
@@ -54,40 +54,40 @@ export default {
       isShowing: false,
       selectorValue: 0,
       isVisible: true,
-    };
+    }
   },
   computed: {
-    circumference() {
+    circumference () {
       // 94.2 = 2 * PI * RADIOUS (r="15")
-      return this.radius * 2 * Math.PI;
+      return this.radius * 2 * Math.PI
     },
-    strokeDasharray() {
-      const value = (this.circumference / this.maxValue) * this.currentValue;
-      return value + ' ' + (this.circumference - value);
+    strokeDasharray () {
+      const value = (this.circumference / this.maxValue) * this.currentValue
+      return value + ' ' + (this.circumference - value)
     },
-    labelStyle() {
+    labelStyle () {
       // TO-DO: if decimal adjust transformY
-      let transformY;
-      const currentValueDigits = this.numDigits(this.currentValue);
+      let transformY
+      const currentValueDigits = this.numDigits(this.currentValue)
       if (currentValueDigits >= 3) {
-        transformY = 0.75;
+        transformY = 0.75
       } else if (currentValueDigits === 2) {
-        transformY = 0.5;
+        transformY = 0.5
       } else {
-        transformY = 0.25;
+        transformY = 0.25
       }
       return {
-        'transform': `translateX(-${transformY}em) translateY(0.4em)`,
+        transform: `translateX(-${transformY}em) translateY(0.4em)`,
         'font-size': '0.9em',
-        'fill': 'white',
-      };
+        fill: 'white',
+      }
     },
-    svgStyle() {
+    svgStyle () {
       return {
         transform: `rotate(-${this.svgRotate}deg)`,
-      };
+      }
     },
-    svgAbove() {
+    svgAbove () {
       return {
         position: 'absolute',
         top: 0,
@@ -96,51 +96,51 @@ export default {
         height: '100%',
         transition: 'all 1s ease',
         transform: `rotate(${this.selectorValue - this.svgRotate - 2}deg)`,
-      };
+      }
     },
   },
-  mounted() {
-    const initialDegress = (this.currentValue / this.maxValue) * 360;
-    setTimeout(()=> (this.selectorValue = initialDegress), 250);
+  mounted () {
+    const initialDegress = (this.currentValue / this.maxValue) * 360
+    setTimeout(() => (this.selectorValue = initialDegress), 250)
   },
   methods: {
-    computeValue(e) {
+    computeValue (e) {
       // The percentaje where user clicks
-      const rect = this.$refs.ring.getBoundingClientRect();
-      const centerX = rect.width / 2 + rect.left;
-      const centerY = rect.height / 2 + rect.top;
-      const clickX = e.clientX;
-      const clickY = e.clientY;
-      const result = Math.atan2(centerY - clickY, centerX - clickX);
+      const rect = this.$refs.ring.getBoundingClientRect()
+      const centerX = rect.width / 2 + rect.left
+      const centerY = rect.height / 2 + rect.top
+      const clickX = e.clientX
+      const clickY = e.clientY
+      const result = Math.atan2(centerY - clickY, centerX - clickX)
 
       // Calculation of current value
-      const percentage = ((result + Math.PI) / (Math.PI + Math.PI)) * this.maxValue;
+      const percentage = ((result + Math.PI) / (Math.PI + Math.PI)) * this.maxValue
       // delta: the percentaje that represents the rotate: 90 degrees of rotate represents the 25% of the circumference
-      const deltaPercentaje = (this.svgRotate / 360) * this.maxValue;
-      let adjustPercentage = percentage + deltaPercentaje;
+      const deltaPercentaje = (this.svgRotate / 360) * this.maxValue
+      let adjustPercentage = percentage + deltaPercentaje
       // console.log(this.maxValue * Math.trunc(adjustPercentage/this.maxValue))
       adjustPercentage =
         adjustPercentage > this.maxValue
           ? adjustPercentage - this.maxValue
-          : adjustPercentage;
+          : adjustPercentage
       // TO-DO if decimal: this.currentValue = adjustPercentage; and round to 1 digit
-      this.currentValue = Math.ceil(adjustPercentage);
+      this.currentValue = Math.ceil(adjustPercentage)
 
       // Calculation of inner selector position
-      const deltaDegrees = (this.svgRotate / 360) * 360;
-      const degress = ((result + Math.PI) / (Math.PI + Math.PI)) * 360;
-      let adjustDegrees = degress + deltaDegrees;
-      adjustDegrees = adjustDegrees > 360 ? adjustDegrees - 360 : adjustDegrees;
-      this.selectorValue = adjustDegrees;
-      this.$emit('valueChanged', this.currentValue);
+      const deltaDegrees = (this.svgRotate / 360) * 360
+      const degress = ((result + Math.PI) / (Math.PI + Math.PI)) * 360
+      let adjustDegrees = degress + deltaDegrees
+      adjustDegrees = adjustDegrees > 360 ? adjustDegrees - 360 : adjustDegrees
+      this.selectorValue = adjustDegrees
+      this.$emit('valueChanged', this.currentValue)
       // console.log(this.maxValue * Math.trunc(adjustPercentage/this.maxValue))
     },
-    numDigits(x) {
-      return Math.max(Math.floor(Math.log10(Math.abs(x))), 0) + 1;
+    numDigits (x) {
+      return Math.max(Math.floor(Math.log10(Math.abs(x))), 0) + 1
     },
   },
   template: '#vue-knob-nb',
-};
+}
 </script>
 <template>
   <section class="container">

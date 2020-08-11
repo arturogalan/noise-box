@@ -1,53 +1,57 @@
 <script>
+
 export default {
-  name: 'switch-on',
+  name: 'SwitchOn',
   props: {
     name: {
       type: String,
-      required: false,
-      default: 'Power',
+      required: true,
     },
     color: {
       type: String,
       required: false,
       default: 'red',
     },
+    tooltipKey: {
+      type: String,
+      required: true,
+    },
   },
-  data() {
+  data () {
     return {
       switchedOn: false,
       strokeColor: '',
-    };
+    }
   },
   computed: {
-    strokeStyle() {
+    tooltipText () {
       return {
-        border: this.strokeColor ? `1px solid ${this.strokeColor}` : '1px solid transparent',
-      };
+        text: this.$t(this.tooltipKey),
+      }
     },
   },
   methods: {
-    toogleSwitch() {
-      this.switchedOn = !this.switchedOn;
-      this.$emit('click');
-    },
-    setStroke(isHover) {
-      this.strokeColor = isHover ? '#3f7f00' : '';
+    toogleSwitch () {
+      this.switchedOn = !this.switchedOn
+      this.$emit('click')
     },
   },
-};
+}
 </script>
 <template>
+  <!-- @mouseover="setStroke(true)" -->
   <div
     class="container"
-    @mouseover="setStroke(true)"
-    @mouseleave="setStroke(false)"
   >
+    <!-- key to force tooltip update when text changes -->
     <section
-      :style="strokeStyle"
+      :key="tooltipText.text"
+      v-focus-stroke="{size: '1'}"
+      v-tooltip="tooltipText"
     >
       <div
         class="frame"
+        @click="toogleSwitch()"
       >
         <div
           :class="`switch-border--${color}`"
@@ -66,7 +70,6 @@ export default {
             <label
               :class="[switchedOn && `switch-right switch-right--${color}`]"
               class="letter"
-              @click="toogleSwitch()"
             >
               <span :class="switchedOn && 'switch-letter-right'">
                 0
@@ -75,7 +78,6 @@ export default {
             <label
               :class="[!switchedOn && `switch-left switch-left--${color}`]"
               class="letter"
-              @click="toogleSwitch()"
             >
               <span :class="!switchedOn && 'switch-letter-left'">
                 I
@@ -104,6 +106,7 @@ export default {
   border: 5px solid #282727;
   border-radius: 2px;
   background: black;
+  cursor: pointer;
 }
 .switch-border {
   border: 3px solid;

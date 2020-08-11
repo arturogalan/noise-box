@@ -1,31 +1,33 @@
 <script>
-import { mapGetters, mapActions } from 'vuex';
-import modal from './components/common/modal.vue';
-import pedalZoomIn from './components/pedals/pedal/pedal-zoom-in';
-import infoModal from './components/common/info-modal';
+import { mapGetters, mapActions } from 'vuex'
+import modal from './components/common/modal.vue'
+import pedalZoomIn from './components/pedals/pedal/pedal-zoom-in'
+import infoModal from './components/common/info-modal'
+import firstTimeModal from './components/common/first-time-modal'
 
-import englTheme from './components/themes/engl-theme.vue';
-import pedalsBoard from './components/pedals/grid/pedals-board';
-import appFooter from './components/app-footer.vue';
-import closeable from './mixins/closeable';
+import englTheme from './components/themes/engl-theme.vue'
+import pedalsBoard from './components/pedals/grid/pedals-board'
+import appFooter from './components/app-footer.vue'
+import closeable from './mixins/closeable'
 
 // file:./../noisefy
 
 export default {
-  name: 'app',
+  name: 'App',
   components: {
     modal,
     infoModal,
+    firstTimeModal,
     pedalZoomIn,
     englTheme,
     pedalsBoard,
     appFooter,
   },
   mixins: [closeable],
-  data() {
+  data () {
     return {
       audioContext: null,
-    };
+    }
   },
   computed: {
     ...mapGetters('pedal', [
@@ -33,11 +35,18 @@ export default {
     ]),
     ...mapGetters('ui', [
       'showInfoModal',
+      'showFirstTimeModal',
+      'isFirstTime',
     ]),
   },
-  created() {
-    this.createAudioContext();
-    this.createAmp();
+  created () {
+    this.createAudioContext()
+    this.createAmp()
+  },
+  mounted () {
+    if (this.isFirstTime) {
+      this.toggleModal({ modalName: 'firstTimeModal', status: true })
+    }
   },
   methods: {
     ...mapActions('pedal', [
@@ -45,9 +54,12 @@ export default {
       'createAmp',
       'setPedalProperty',
     ]),
+    ...mapActions('ui', [
+      'toggleModal',
+    ]),
   },
 
-};
+}
 </script>
 <template>
   <div
@@ -60,10 +72,20 @@ export default {
     </modal>
     <modal
       :show="showInfoModal"
+      :click-outside-closes="true"
+      modal-name="infoModal"
       size="big"
     >
       <infoModal />
     </modal>
+    <modal
+      :show="showFirstTimeModal"
+      :click-outside-closes="true"
+      modal-name="firstTimeModal"
+      size="big"
+    >
+      <firstTimeModal />
+    </modal>    
     <engl-theme />
     <pedals-board />
     <app-footer />

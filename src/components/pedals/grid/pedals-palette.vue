@@ -1,21 +1,21 @@
 <script>
-import { mapActions } from 'vuex';
+import { mapActions } from 'vuex'
 
 export default {
-  name: 'pedals-palette',
+  name: 'PedalsPalette',
   props: { palettePedal: { type: Object, required: true } },
-  data() {
-    return {};
+  data () {
+    return {}
   },
   methods: {
-    getAsset: function(assetName) {
-      return require('../../../' + assetName);
+    getAsset: function (assetName) {
+      return require('../../../' + assetName)
     },
     ...mapActions('pedal', [
       'addPedal',
     ]),
   },
-};
+}
 </script>
 <template>
   <div

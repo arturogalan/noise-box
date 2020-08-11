@@ -1,10 +1,10 @@
 <script>
-import { mapGetters, mapActions } from 'vuex';
-import pedalKnobGrid from './pedal-knob-grid.vue';
-import macButtons from '../../common/mac-buttons.vue';
+import { mapGetters, mapActions } from 'vuex'
+import pedalKnobGrid from './pedal-knob-grid.vue'
+import macButtons from '../../common/mac-buttons.vue'
 
 export default {
-  name: 'pedal-zoom-in',
+  name: 'PedalZoomIn',
   components: {
     pedalKnobGrid,
     macButtons,
@@ -18,11 +18,11 @@ export default {
     ...mapActions('pedal', [
       'setPedalProperty',
     ]),
-    zoomPedalOut(pedal) {
-      this.setPedalProperty({ name: this.zoomInPedal.name, property: 'zoomIn', value: false });
+    zoomPedalOut (pedal) {
+      this.setPedalProperty({ name: this.zoomInPedal.name, property: 'zoomIn', value: false })
     },
   },
-};
+}
 </script>
 <template>
   <div

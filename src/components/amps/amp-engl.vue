@@ -1,39 +1,37 @@
 <script>
-import ChickenHeadKnob from '../common/chicken-head-knob.vue';
-import audioMaps from '../../helpers/audioMaps';
-import { mapActions, mapGetters } from 'vuex';
-import SwitchOn from './../common/switch-on.vue';
-import Led from './../common/led.vue';
+import ChickenHeadKnob from '../common/chicken-head-knob.vue'
+import audioMaps from '../../helpers/audioMaps'
+import { mapActions, mapGetters } from 'vuex'
+import SwitchOn from './../common/switch-on.vue'
+import Led from './../common/led.vue'
 
-import { AMP_COMPONENT_TYPE } from '../../store/constants';
-
+import { AMP_COMPONENT_TYPE } from '../../store/constants'
 
 export default {
-  name: 'amp-engl',
+  name: 'AmpEngl',
   components: {
     ChickenHeadKnob,
     SwitchOn,
-    Led
+    Led,
   },
-  data() {
+  data () {
     return {
       mainVolumeLevel: 30,
       isAudioInitializated: false,
       isMuted: true,
       isSwitchedOn: false,
       AMP_COMPONENT_TYPE,
-    };
+    }
   },
   computed: {
     ...mapGetters('pedal', [
       'amp',
-      'getAmpComponentEffectProperty',
       'isCleanChannelActive',
       'isDistoChannelActive',
       'getChannelKnobTypeComponents',
     ]),
   },
-  created() {
+  created () {
   },
   methods: {
     ...mapActions('pedal', [
@@ -44,37 +42,34 @@ export default {
       'toggleStandByAmp',
       'toggleAmpChannel',
     ]),
-    initAudioInterface() {
+    initAudioInterface () {
       if (!this.isAudioInitializated) {
-        this.switchOnAudioContext();
-        this.initAudioInputAndOutput();
-        this.isAudioInitializated = true;
+        this.switchOnAudioContext()
+        this.initAudioInputAndOutput()
+        this.isAudioInitializated = true
       }
     },
-    toogleMuteAudio() {
-      this.toggleStandByAmp();
+    toogleMuteAudio () {
+      this.toggleStandByAmp()
     },
-    toogleSwitchOnAmp() {
-      this.toggleAmp();
+    toogleSwitchOnAmp () {
+      this.toggleAmp()
     },
-    normalize(value) {
-      return audioMaps.getNormalizedSettingValue(value);
+    normalize (value) {
+      return audioMaps.getNormalizedSettingValue(value)
     },
-    denormalize(value) {
-      return audioMaps.setNormalizedSettingValue(value);
+    denormalize (value) {
+      return audioMaps.setNormalizedSettingValue(value)
     },
-    getKnobValue(component, knobSetting) {
-      this.getAmpComponentEffectProperty({ name: component.name, property: knobSetting.name});
-    },
-    setKnobValue(component, knobSetting, value) {
+    setKnobValue (component, knobSetting, value) {
       // when setting disto intensity also set the asymetric disto intensity to the same value in SIMPLE mode
       if (component.name === 'distortionStage2') {
-        this.setActiveChannelEffectProperty({ name: 'distortionStage1', property: knobSetting.name, value: this.denormalize(value) });
+        this.setActiveChannelEffectProperty({ name: 'distortionStage1', property: knobSetting.name, value: this.denormalize(value) })
       }
-      this.setActiveChannelEffectProperty({ name: component.name, property: knobSetting.name, value: this.denormalize(value) });
+      this.setActiveChannelEffectProperty({ name: component.name, property: knobSetting.name, value: this.denormalize(value) })
     },
   },
-};
+}
 </script>
 <template>
   <div class="amp-wrapper grid-container">
@@ -86,27 +81,40 @@ export default {
     </div>
     <div class="channel-wrapper">
       <div class="row">
-      <div class="col">
-      <div class="channel-name">clean</div>
-      <led :on="isCleanChannelActive" color="green" size="big"/>
-      </div>
-      <div class="col">
-      <div class="channel-name">disto</div>
-      <led :on="isDistoChannelActive" color="red" size="big"/>
-      </div>
+        <div class="col">
+          <div class="channel-name">
+            {{ $t('AMP.CHANNEL.CLEAN') }}
+          </div>
+          <led
+            :on="isCleanChannelActive"
+            color="green"
+            size="big"
+          />
+        </div>
+        <div class="col">
+          <div class="channel-name">
+            {{ $t('AMP.CHANNEL.DISTO') }}
+          </div>
+          <led
+            :on="isDistoChannelActive"
+            color="red"
+            size="big"
+          />
+        </div>
       </div>
 
       <button
-      class="channel-btn"
-      :class="`channel-btn--${isDistoChannelActive ? 'on' : 'off'}`"
-      @click="toggleAmpChannel">
-      CHANNEL
+        v-tooltip="{text: $t(`TOOLTIP.AMP.CHANNEL.${isCleanChannelActive ? 'CLEAN' : 'DISTO'}`)}"
+        v-focus-stroke="{size: '2'}"
+        class="channel-btn"
+        :class="`channel-btn--${isDistoChannelActive ? 'on' : 'off'}`"
+        @click="toggleAmpChannel"
+      >
+        {{ $t('TOOLTIP.AMP.CHANNEL.TEXT') }}
       <!-- {{ ampActiveChannel }} -->
-      <!-- {{getChannelKnobTypeComponents}} -->
       </button>
     </div>
     <div class="knob-grid">
-        <!-- v-for="component in amp.multiEffectAmp.getKnobTypeComponents().filter((component)=> component.name !== 'distortionStage1')" -->
       <div
         v-for="component in getChannelKnobTypeComponents"
         :key="component.name"
@@ -123,11 +131,16 @@ export default {
     </div>
     <div class="power-section">
       <switch-on
-        name="Stand by"
+        :name="$t('AMP.BUTTONS.STANDBY')"
+        :tooltip-key="`TOOLTIP.AMP.BUTTONS.STANDBY_${amp.switchedOn ? 'ON' : 'OFF'}`"
         color="black"
         @click="toogleMuteAudio()"
       />
-      <switch-on @click="toogleSwitchOnAmp()" />
+      <switch-on
+        :name="$t('AMP.BUTTONS.POWER')"
+        tooltip-key="TOOLTIP.AMP.BUTTONS.POWER"
+        @click="toogleSwitchOnAmp()"
+      />
     </div>
   </div>
 </template>

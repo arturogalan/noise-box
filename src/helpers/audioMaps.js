@@ -14,12 +14,12 @@ const audioMaps = {
   //   const setting = settingList.find((setting)=> setting.name === setName);
   //   return value / 10;
   // },
-  getNormalizedSettingValue(value) {
-    return value * 10;
+  getNormalizedSettingValue (value) {
+    return value * 10
   },
-  setNormalizedSettingValue(value) {
-    return value / 10;
+  setNormalizedSettingValue (value) {
+    return value / 10
   },
-};
+}
 
-export default audioMaps;
+export default audioMaps

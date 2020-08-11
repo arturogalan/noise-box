@@ -1,29 +1,29 @@
 <template>
-    <div
-      class="led"
-      :class="`led--${on ? 'on' : 'off'} led--${size}`"
-      :style="{backgroundColor: color}"
-    />
+  <div
+    class="led"
+    :class="`led--${on ? 'on' : 'off'} led--${size}`"
+    :style="{backgroundColor: color}"
+  />
 </template>
 
 <script>
-  export default {
-    name: "led",
-    props: {
-      color: {
-        type: String,
-        required: true,
-      },
-      on: {
-        type: Boolean,
-        default: false,
-      },
-      size: {
-        type: String,
-        default: 'small',
-      }
+export default {
+  name: 'Led',
+  props: {
+    color: {
+      type: String,
+      required: true,
     },
-  }
+    on: {
+      type: Boolean,
+      default: false,
+    },
+    size: {
+      type: String,
+      default: 'small',
+    },
+  },
+}
 </script>
 
 <style lang="scss" scoped>

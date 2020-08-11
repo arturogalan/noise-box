@@ -1,60 +1,60 @@
 <script>
-const debounce = (func, delay)=> {
-  let debounceTimer;
-  return function() {
-    const context = this;
+const debounce = (func, delay) => {
+  let debounceTimer
+  return function () {
+    const context = this
     // eslint-disable-next-line prefer-rest-params
-    const args = arguments;
-    clearTimeout(debounceTimer);
-    debounceTimer = setTimeout(()=> func.apply(context, args), delay);
-  };
-};
+    const args = arguments
+    clearTimeout(debounceTimer)
+    debounceTimer = setTimeout(() => func.apply(context, args), delay)
+  }
+}
 
 export default {
-  name: 'vue-slider-nb',
+  name: 'VueSliderNb',
   components: {},
   props: {
-    value: { type: Number, required: true, default: ()=> 0 },
+    value: { type: Number, required: true, default: () => 0 },
     positionVertical: { type: Boolean, required: false, default: false },
     valueColor: { type: String, required: false, default: '' },
     valueFillColor: { type: String, required: false, default: '' },
-    size:  { type: String, required: false, default: 'big' },
+    size: { type: String, required: false, default: 'big' },
   },
-  data() {
+  data () {
     return {
       isVisible: true,
       inputValue: this.value,
       valueKey: '',
-    };
+    }
   },
   computed: {
-    valueLeftMargin() {
+    valueLeftMargin () {
       return {
-        'medium': ()=> (this.inputValue * 5.8) / 100,
-        'big': ()=> (this.inputValue * 14) / 100,
+        medium: () => (this.inputValue * 5.8) / 100,
+        big: () => (this.inputValue * 14) / 100,
       }[this.size]()
       // return (this.inputValue * 14) / 100;
     },
-    fillColorLeftMargin() {
-      return 102 - this.inputValue;
+    fillColorLeftMargin () {
+      return 102 - this.inputValue
     },
   },
   watch: {
-    inputValue(newValue) {
-      this.emitChangeDebounced(newValue);
+    inputValue (newValue) {
+      this.emitChangeDebounced(newValue)
     },
   },
   methods: {
-    trackValue() {
+    trackValue () {
       // Change the value key to trigger animation
-      this.valueKey = 'bounce-tiny';
-      this.$nextTick(()=> (this.valueKey = ''));
+      this.valueKey = 'bounce-tiny'
+      this.$nextTick(() => (this.valueKey = ''))
     },
-    emitChangeDebounced: debounce(function(newValue) {
-      this.$emit('change', newValue);
+    emitChangeDebounced: debounce(function (newValue) {
+      this.$emit('change', newValue)
     }, 250),
   },
-};
+}
 </script>
 <template>
   <div class="slider-container">
@@ -228,7 +228,6 @@ background: linear-gradient(to right, rgba(61,58,61,1) 0%, rgba(0,0,0,1) 12%, rg
   rgba(43,43,43,1) 84%, rgba(0,0,0,1) 89%, rgba(71,71,71,1) 92%, rgba(0,0,0,1) 95%, rgba(19,19,19,1) 100%);
 filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#3d3a3d', endColorstr='#131313', GradientType=1 );
 
-
   // border: 0.2em groove #ffffff;
   border: 1px solid #474747;
   border-radius: .8em;
@@ -242,6 +241,5 @@ input[type="range"]::-webkit-slider-thumb {
 .range::-ms-thumb {
 @include thumb;
 }
-
 
 </style>

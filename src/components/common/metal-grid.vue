@@ -1,8 +1,8 @@
 <script>
 export default {
-  name: 'metal-grid',
+  name: 'MetalGrid',
 
-};
+}
 </script>
 <template>
   <div class="metal-grid-wrapper n-index-5">

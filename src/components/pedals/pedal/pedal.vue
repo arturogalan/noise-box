@@ -1,10 +1,10 @@
 <script>
-import { mapActions } from 'vuex';
-import pedalKnobGrid from './pedal-knob-grid.vue';
-import macButtons from '../../common/mac-buttons.vue';
+import { mapActions } from 'vuex'
+import pedalKnobGrid from './pedal-knob-grid.vue'
+import macButtons from '../../common/mac-buttons.vue'
 
 export default {
-  name: 'pedal',
+  name: 'Pedal',
   components: {
     pedalKnobGrid,
     macButtons,
@@ -15,7 +15,7 @@ export default {
       required: true,
     },
   },
-  data() {
+  data () {
     return {
       myVal: 50,
       ledStatus: {
@@ -24,36 +24,36 @@ export default {
         maximize: false,
       },
       strokeColor: '',
-    };
+    }
   },
   computed: {
-    helper() {
-      return this.pedal.switchedOn ? 'Switch off pedal' : 'Switch on pedal';
+    helper () {
+      return this.pedal.switchedOn ? 'Switch off pedal' : 'Switch on pedal'
     },
-    strokeBorder() {
-      return this.strokeColor ? `2px solid ${this.strokeColor}` : '';
+    strokeBorder () {
+      return this.strokeColor ? `2px solid ${this.strokeColor}` : ''
     },
   },
-  mounted() {
+  mounted () {
   },
   methods: {
     ...mapActions('pedal', [
       'togglePedal',
       'connectAll',
     ]),
-    deleteClick() {
+    deleteClick () {
       if (!this.pedal.dying) {
-        this.$emit('delete');
+        this.$emit('delete')
       }
     },
-    switchPedal() {
-      this.togglePedal(this.pedal.type);
+    switchPedal () {
+      this.togglePedal(this.pedal.type)
     },
-    setStroke(isHover) {
-      this.strokeColor = isHover ? '#3f7f00' : '';
+    setStroke (isHover) {
+      this.strokeColor = isHover ? '#3f7f00' : ''
     },
   },
-};
+}
 </script>
 <template>
   <div
@@ -198,7 +198,6 @@ export default {
   cursor: pointer;
 }
 
-
 .pedal-name {
   font-family: "Conthrax";
   font-size: 1.2rem;;
@@ -207,7 +206,6 @@ export default {
   transform: translateX(-50%);
   text-transform: capitalize;
 }
-
 
 .pedal-svg {
   height: 16rem;

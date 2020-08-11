@@ -1,9 +1,9 @@
 <script>
-import { mapGetters, mapActions } from 'vuex';
-import pedal from '../../pedals/pedal/pedal.vue';
+import { mapGetters, mapActions } from 'vuex'
+import pedal from '../../pedals/pedal/pedal.vue'
 
 export default {
-  name: 'pedals-board',
+  name: 'PedalsBoard',
   components: {
     pedal,
   },
@@ -12,8 +12,8 @@ export default {
       'pedalList',
     ]),
   },
-  created() {
-    this.initPedals();
+  created () {
+    this.initPedals()
   },
   methods: {
     ...mapActions('pedal', [
@@ -21,11 +21,11 @@ export default {
       'removePedal',
       'setPedalProperty',
     ]),
-    zoomPedal(pedal) {
-      this.setPedalProperty({ name: pedal.name, property: 'zoomIn', value: true });
+    zoomPedal (pedal) {
+      this.setPedalProperty({ name: pedal.name, property: 'zoomIn', value: true })
     },
   },
-};
+}
 </script>
 
 <template>
@@ -100,7 +100,6 @@ export default {
   grid-template-columns: 45% 45%;/*Make the grid smaller than the container*/
   grid-gap: 5px;
 
-
   padding-top: .3rem;
 }
 .palette-title {
@@ -109,4 +108,3 @@ export default {
   font-weight: 900;
 }
 </style>
-

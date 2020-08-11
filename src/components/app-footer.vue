@@ -1,7 +1,7 @@
 <script>
-import { mapGetters, mapActions } from 'vuex';
-import vueSliderNb from './common/vue-slider-nb';
-import audioMaps from './../helpers/audioMaps';
+import { mapGetters, mapActions } from 'vuex'
+import vueSliderNb from './common/vue-slider-nb'
+import audioMaps from './../helpers/audioMaps'
 
 // const input = require('../assets/icons/input.svg');
 // const output = require('../assets/icons/output.svg');
@@ -10,9 +10,9 @@ export default {
   components: {
     vueSliderNb,
   },
-  data() {
+  data () {
     return {
-    };
+    }
   },
   computed: {
     ...mapGetters('pedal', [
@@ -21,11 +21,12 @@ export default {
       'defaultOutputDevice',
       'getAmpInputGain',
       'getAmpOutputGain',
+      'audioContextProps',
     ]),
   },
-  created() {
+  created () {
   },
-  mounted() {
+  mounted () {
     // console.log(this.amp.multiEffectAmp.getInputGainComponent());
   },
   methods: {
@@ -33,14 +34,14 @@ export default {
       'setAmpInputGain',
       'setAmpOutputGain',
     ]),
-    normalize(value) {
-      return audioMaps.getNormalizedSettingValue(value);
+    normalize (value) {
+      return audioMaps.getNormalizedSettingValue(value)
     },
-    denormalize(value) {
-      return audioMaps.setNormalizedSettingValue(value);
+    denormalize (value) {
+      return audioMaps.setNormalizedSettingValue(value)
     },
   },
-};
+}
 </script>
 
 <!-- amp.multiEffectAmp.getInputComponent().settingList[0].value -->
@@ -50,15 +51,17 @@ export default {
       v-if="defaultInputDevice || defaultOutputDevice"
       class="footer"
     >
-      <div class="footer-section">
+      <div class="footer-section footer-section--left">
+        <div class="footer-label footer-title--input">
+          <span class="footer-title">
+            {{ $t('AMP.CONTEXT.INPUT') }}
+          </span>
+          {{ defaultInputDevice }}
+        </div>
         <img
           class="footer-label icon-type"
           src="../assets/icons/input.svg"
         >
-        <div class="footer-label footer-title--input">
-          <span class="footer-title">Input: </span>
-          {{ defaultInputDevice }}
-        </div>
         <div class="footer-label">
           <vue-slider-nb
             :value="normalize(getAmpInputGain)"
@@ -69,15 +72,27 @@ export default {
           />
         </div>
       </div>
+      <div class="footer-section footer-section--middle">
+        <div
+          v-tooltip="{text: $t('TOOLTIP.AMP.CONTEXT.LATENCY')}"
+          class="footer-label footer-latency"
+        >
+          ☻
+          {{ $t('AMP.CONTEXT.LATENCY') }}:
+          {{ $n(audioContextProps.baseLatency, 'decimal') }}
+        </div>
+      </div>
       <div class="footer-section footer-section--right">
+        <div class="footer-label footer-title--output">
+          <span class="footer-title">
+            {{ $t('AMP.CONTEXT.OUTPUT') }}
+          </span>
+          {{ defaultOutputDevice }}
+        </div>
         <img
           class="footer-label icon-type"
           src="../assets/icons/output.svg"
         >
-        <div class="footer-label footer-title--output">
-          <span class="footer-title">Output: </span>
-          {{ defaultOutputDevice }}
-        </div>
         <div class="footer-label">
           <vue-slider-nb
             size="big"
@@ -107,7 +122,7 @@ export default {
   text-align: center;
   display: grid;
   justify-content: center;
-  grid-template-columns: 50% 50%;/*Make the grid smaller than the container*/
+  grid-template-columns: 40% 20% 40%;/*Make the grid smaller than the container*/
   grid-gap: 5px;
   border: 3px solid rgb(21,18,17);
 }
@@ -116,6 +131,11 @@ export default {
   margin-left: .2rem;
   font-family: "Conthrax";
   font-size: .9rem;
+  display: flex;
+  flex-flow: column;
+}
+.footer-latency {
+  cursor: pointer;
 }
 .footer-title {
   font-weight: bold;
@@ -132,6 +152,12 @@ export default {
   display: flex;
   justify-content: flex-start;
   align-items: center;
+  &--left {
+    justify-content: flex-start;
+  }
+  &--middle {
+    justify-content: center;
+  }
   &--right {
     right: 0;
     justify-content: flex-end;

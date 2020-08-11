@@ -1,8 +1,8 @@
 <script>
-import closeable from '../../mixins/closeable';
+import closeable from '../../mixins/closeable'
 
 export default {
-  name: 'dropdown',
+  name: 'Dropdown',
   mixins: [closeable],
   props: {
     list: {
@@ -18,33 +18,42 @@ export default {
       required: false,
       default: '',
     },
+    tooltipKey: {
+      type: String,
+      required: true,
+    },
   },
-  data() {
+  data () {
     return {
       strokeColor: '',
-    };
+    }
   },
   computed: {
-    selectedItem() {
-      return this.list.find((el)=> el.selected) || {};
+    selectedItem () {
+      return this.list.find((el) => el.selected) || {}
     },
-    strokeBoxShadow() {
-      return this.strokeColor ? `0 0px 4px 0 ${this.strokeColor}` : '0 0px 4px 0 grey';
+    strokeBoxShadow () {
+      return this.strokeColor ? `0 0px 4px 0 ${this.strokeColor}` : '0 0px 4px 0 grey'
+    },
+    tooltipText () {
+      return {
+        text: this.$t(this.tooltipKey),
+      }
     },
   },
   methods: {
-    emitSelected(item) {
-      this.$emit('selected', item);
-      this.close();
+    emitSelected (item) {
+      this.$emit('selected', item)
+      this.close()
     },
-    close() {
-      this.$refs[`checkbox_toggle${this.name}`].checked = false;
+    close () {
+      this.$refs[`checkbox_toggle${this.name}`].checked = false
     },
-    setStroke(isHover) {
-      this.strokeColor = isHover ? '#3f7f00' : '';
+    setStroke (isHover) {
+      this.strokeColor = isHover ? '#3f7f00' : ''
     },
   },
-};
+}
 </script>
 <template>
   <div
@@ -58,15 +67,17 @@ export default {
       type="checkbox"
     >
     <label
-      :for="`checkbox_toggle${name}`"
+      v-tooltip="tooltipText"
       :style="{ boxShadow: strokeBoxShadow}"
+      :for="`checkbox_toggle${name}`"
       :class="[!selectedItem.name && 'placeholder']"
     >
       {{ selectedItem.name || placeholder }}
       <img
         class="arrow"
         src="../../assets/icons/arrow.png"
-      ></label>
+      >
+    </label>
     <ul>
       <li
         v-for="item in list"
@@ -159,4 +170,3 @@ export default {
       @extend .fade-in;
   }
 </style>
-

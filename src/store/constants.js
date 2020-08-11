@@ -3,7 +3,7 @@ export const AMP_COMPONENT_TYPE = {
   EQUALIZER: 'equalizer',
   PRESENCE: 'presence',
   DISTORTION: 'distortion',
-};
+}
 // This order is the order the components appear in the amp header
 export const AMP_COMPONENT_NAME = {
   DISTORTION: 'distortionStage2',
@@ -11,7 +11,7 @@ export const AMP_COMPONENT_NAME = {
   PRESENCE: 'presence',
   VOLUME: 'outputGain',
   MASTER: 'master',
-};
+}
 export const AMP_SETTING_TYPE = {
   INPUT: 'input',
   OUTPUT: 'output',
@@ -20,7 +20,7 @@ export const AMP_SETTING_TYPE = {
   BOOLEAN: 'boolean',
   SELECT: 'select',
   CABINET: 'cabinet',
-};
+}
 // Properties for each of the components added to the amp mapped by name
 export const AMP_COMPONENT_PROPERTIES = {
   [AMP_COMPONENT_NAME.VOLUME]: {
@@ -122,8 +122,7 @@ export const AMP_COMPONENT_PROPERTIES = {
       },
     ],
   },
-};
-
+}
 
 export const PEDAL_TYPE = {
   BOOST: 'boost',
@@ -131,14 +130,14 @@ export const PEDAL_TYPE = {
   FLANGER: 'flanger',
   REVERB: 'reverb',
   TREMOLO: 'tremolo',
-};
+}
 export const PEDAL_NAME = {
   BOOST: 'boost',
   DELAY: 'delay',
   FLANGER: 'flanger',
   REVERB: 'reverb',
   TREMOLO: 'tremolo',
-};
+}
 
 export const PEDAL_PROPERTIES = {
   [PEDAL_NAME.BOOST]: {
@@ -251,4 +250,4 @@ export const PEDAL_PROPERTIES = {
       },
     ],
   },
-};
+}
