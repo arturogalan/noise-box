@@ -11,7 +11,7 @@ const debounce = (func, delay) => {
 }
 
 export default {
-  name: 'VueSliderNb',
+  name: 'Slider',
   components: {},
   props: {
     value: { type: Number, required: true, default: () => 0 },

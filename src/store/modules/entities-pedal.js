@@ -244,6 +244,13 @@ const pedalModule = {
     toggleStandByAmp ({ state, commit, dispatch }, data) {
       commit('toggleStandByAmp', data)
     },
+    resetAmp ({dispatch, commit, getters}) {
+      // NOT WORKING, firs disconnect all the things
+      // dispatch('switchOnAudioContext')
+      // dispatch('reinitAudioInputAndOutput')
+      // commit('createAmp')
+      // commit('connectAllNodes', getters.pedalList)
+    },
     toggleAmpChannel ({commit}) {
       commit('toggleAmpChannel')
     },
@@ -295,6 +302,10 @@ const pedalModule = {
       commit('setUserOutput')
       dispatch('setDevicesList')
       dispatch('setDevicesListHandler')
+    },
+    reinitAudioInputAndOutput ({ commit, dispatch, getters }) {
+      commit('resetUserInput')
+      commit('resetUserOutput')
     },
     addPedal ({ state, commit, getters }, type) {
       if (type && !state.pedalBoard.pedals[type]) { // add only if not exists
@@ -388,6 +399,7 @@ const pedalModule = {
       state.amp.multiEffectAmp.preset = state.selectedPreset
     },
     addPedal (state, pedal) {
+      trace(`Creating ${pedal.type} PEDAL audio node`)
       pedal.effect = audioUtils.createAudioNode(state.audioContext, pedal.type)
       for (const setting of pedal.settingsList) {
         pedal.effect[setting.name] = setting.value
@@ -456,6 +468,13 @@ const pedalModule = {
       if (isEmpty(state.audioOutput)) {
         Vue.set(state, 'audioOutput', audioUtils.createOutput(state.audioContext))
       }
+    },
+    resetUserInput (state) {
+      Vue.set(state, 'audioInput', audioUtils.createInput(state.audioContext))
+      trace(state.audioInput)
+    },
+    resetUserOutput (state) {
+      Vue.set(state, 'audioOutput', audioUtils.createOutput(state.audioContext))
     },
     setDevicesList (state, deviceList) {
       Vue.set(state, 'deviceList', deviceList)

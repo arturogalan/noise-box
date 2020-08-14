@@ -1,6 +1,6 @@
 <script>
 import dropdown from '../common/dropdown'
-import vueSliderNb from '../common/vue-slider-nb.vue'
+import slider from '../common/slider.vue'
 
 import audioMaps from '../../helpers/audioMaps'
 import { mapGetters, mapActions } from 'vuex'
@@ -10,7 +10,7 @@ export default {
   name: 'RackEngl',
   components: {
     dropdown,
-    vueSliderNb,
+    slider,
   },
   computed: {
     ...mapGetters('pedal', [
@@ -108,7 +108,7 @@ export default {
               <div class="setting-name">
                 {{ $t(`AMP.COMPONENT.CABINET.${setting.name.toUpperCase()}`) }}
               </div>
-              <vue-slider-nb
+              <slider
                 size="medium"
                 :value="normalize(getCabinetProperty(setting.name))"
                 :value-color="'hsl(20,53%,55%)'"

@@ -32,8 +32,8 @@ const pedalModule = {
       return state.isFocusEnabled
     },
     isFirstTime () {
-      const localConfig = localStorage.getItem('NoiseBox');
-      return !localConfig || !JSON.parse(localConfig).visited;
+      const localConfig = localStorage.getItem('NoiseBox')
+      return !localConfig || !JSON.parse(localConfig).visited
     },
   },
   actions: {
@@ -44,8 +44,8 @@ const pedalModule = {
       commit('setI18n', i18Instance)
     },
     setSiteVisited ({commit}) {
-      commit('setSiteVisited');
-    }
+      commit('setSiteVisited')
+    },
   },
   mutations: {
     toggleModal (state, { modalName, status }) {
@@ -55,7 +55,7 @@ const pedalModule = {
       state.i18n = i18Instance
     },
     setSiteVisited () {
-      localStorage.setItem('NoiseBox', JSON.stringify({visited: true}));
+      localStorage.setItem('NoiseBox', JSON.stringify({visited: true}))
     },
   },
 }

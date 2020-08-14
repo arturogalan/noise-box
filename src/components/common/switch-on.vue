@@ -227,6 +227,7 @@ export default {
   font-family: "FontPbio";
   white-space: nowrap;
   align-self: center;
+  letter-spacing: .03rem;
 }
 
 </style>

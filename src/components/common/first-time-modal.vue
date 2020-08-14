@@ -8,9 +8,9 @@ export default {
     macButtons,
   },
   computed: {
-    },
+  },
   mounted () {
-    this.setSiteVisited();
+    this.setSiteVisited()
   },
   methods: {
     ...mapActions('ui', [
@@ -25,9 +25,9 @@ export default {
 </script>
 <template>
   <div
-    @click.stop
     :style="{ borderColor: 'brown' }"
     class="info-container"
+    @click.stop
   >
     <div
       :style="{ color: 'black', backgroundColor: 'darkred'}"
@@ -44,39 +44,40 @@ export default {
       />
       <div class="info-name--title">
         <img
-        class="icon-type-1"
-        src="../../assets/img/header-icon-animated.gif"
+          class="icon-type-1"
+          src="../../assets/img/header-icon-animated.gif"
         >
-      Noise Box
+        Noise Box
       </div>
     </div>
     <div class="info-wrapper">
       <div
         class="contact-section"
       >
-          <p
-            class="contact"
-          >
-            Javascript Guitar Amp emulator&nbsp;&nbsp;</p>
+        <p
+          class="contact"
+        >
+          Javascript Guitar Amp emulator&nbsp;&nbsp;
+        </p>
       </div>
       <div class="info-text">
         Hi and welcome to NoiseBox, a 🎸guitar🎸 amp emulator to enjoy playing your guitar and getting real amp sounds!!!
-        <br/>
-        <br/>
+        <br>
+        <br>
         <p class="warning-text">
           ⚠️ Warning! ⚠️
         </p>
         <br>
         This page uses <strong>WebAudio interface</strong> to produce sounds.
         <br>
-          The input and output will be that ones that you have configured in your computer (can be the microphone, speakers or any other sound target) so...
+        The input and output will be that ones that you have configured in your computer (can be the microphone, speakers or any other sound target) so...
         <ul>
           <li class="pt">
-          Take care with the <span class="white-text"><u>volume if you are using headphones!</u></span>
-           </li>
+            Take care with the <span class="white-text"><u>volume if you are using headphones!</u></span>
+          </li>
           <li class="pt">
-          Take care with the <span class="white-text"><u>sound coupling</u></span> if you use the same source for the input and the output!
- </li>
+            Take care with the <span class="white-text"><u>sound coupling</u></span> if you use the same source for the input and the output!
+          </li>
         </ul>
       </div>
       <div class="contact-section--center">
@@ -111,7 +112,7 @@ export default {
           </div>
         </section>
       </div>
-      
+
       <div class="license-text">
         <strong class="license-text--title">MIT license</strong><br>
         Copyright © 2019 Arturo Galán <br>
@@ -272,17 +273,6 @@ export default {
 .personal-links-color {
   color: rgb(71,183,132);
   font-weight: bold;
-}
-.vue-color {
-  color: rgb(71,183,132);
-  text-decoration: none;
-}
-.netlify-color {
-  color: white;
-  text-decoration: none;
-}
-.font-link-color {
-  color: lightslategray;
 }
 .pt {
   padding-top: .5rem;

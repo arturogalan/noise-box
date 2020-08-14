@@ -85,7 +85,7 @@ export default {
       size="big"
     >
       <firstTimeModal />
-    </modal>    
+    </modal>
     <engl-theme />
     <pedals-board />
     <app-footer />

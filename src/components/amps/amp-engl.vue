@@ -219,6 +219,7 @@ export default {
   font-size: .5rem;
   font-family: "FontPbio";
   margin-bottom: .3rem;
+  letter-spacing: .03rem;
 }
 .power-section {
    display: flex;

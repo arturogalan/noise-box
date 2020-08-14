@@ -22,13 +22,12 @@ const audioUtils = {
     }
   },
   createAudioNode (audioContext, type) {
-    console.log(`Creating ${capitalize(type)} PEDAL audio node`)
     const audioNode = new Noisefy[capitalize(type)](audioContext)
     return audioNode
   },
   createInput (audioContext) {
     const input = new Noisefy.Input(audioContext)
-    const stream = input.getUserMedia()
+    input.getUserMedia()
     return input
   },
   createOutput (audioContext) {

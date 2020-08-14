@@ -1,12 +1,12 @@
 <script>
-import vueSliderNb from './vue-slider-nb.vue'
+import slider from './slider.vue'
 import { mapActions } from 'vuex'
 import { PEDAL_TYPE } from '../../store/constants'
 
 export default {
   name: 'MasterControl',
   components: {
-    vueSliderNb,
+    slider,
   },
   data () {
     return {
@@ -35,7 +35,7 @@ export default {
     <span class="slider-title slider-title--small">{{ $t('MAIN_CONTROL.POWER') }}</span>
     <!-- <span class="slider-title slider-title--big">{{ $t('MAIN_CONTROL.VOLUME') }}</span> -->
     <div class="centered-child">
-      <vue-slider-nb
+      <slider
         :value="initialMainVolumeLevel"
         @change="updateMainVolumeLevel"
       />

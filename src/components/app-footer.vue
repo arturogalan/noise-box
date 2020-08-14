@@ -1,6 +1,6 @@
 <script>
 import { mapGetters, mapActions } from 'vuex'
-import vueSliderNb from './common/vue-slider-nb'
+import slider from './common/slider'
 import audioMaps from './../helpers/audioMaps'
 
 // const input = require('../assets/icons/input.svg');
@@ -8,7 +8,7 @@ import audioMaps from './../helpers/audioMaps'
 
 export default {
   components: {
-    vueSliderNb,
+    slider,
   },
   data () {
     return {
@@ -24,6 +24,22 @@ export default {
       'audioContextProps',
     ]),
   },
+  watch: {
+    defaultInputDevice (newValue, oldValue) {
+      // If is not the first time and the input is different we must resetAmp
+      if (oldValue && newValue !== oldValue) {
+        this.$trace('input changed reset amp')
+        this.resetAmp()
+      }
+    },
+    defaultOutputDevice (newValue, oldValue) {
+      // If is not the first time and the input is different we must resetAmp
+      if (oldValue && newValue !== oldValue) {
+        this.$trace('output changed reset amp')
+        this.resetAmp()
+      }
+    },
+  },
   created () {
   },
   mounted () {
@@ -33,6 +49,7 @@ export default {
     ...mapActions('pedal', [
       'setAmpInputGain',
       'setAmpOutputGain',
+      'resetAmp',
     ]),
     normalize (value) {
       return audioMaps.getNormalizedSettingValue(value)
@@ -63,7 +80,7 @@ export default {
           src="../assets/icons/input.svg"
         >
         <div class="footer-label">
-          <vue-slider-nb
+          <slider
             :value="normalize(getAmpInputGain)"
             :value-color="'rgb(146, 215, 146)'"
             :value-fill-color="'hsl(100,16%,30%)'"
@@ -94,7 +111,7 @@ export default {
           src="../assets/icons/output.svg"
         >
         <div class="footer-label">
-          <vue-slider-nb
+          <slider
             size="big"
             :value="normalize(getAmpOutputGain)"
             :value-color="'rgb(206, 71, 73)'"
