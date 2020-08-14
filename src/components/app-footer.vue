@@ -24,6 +24,22 @@ export default {
       'audioContextProps',
     ]),
   },
+  watch: {
+    defaultInputDevice (newValue, oldValue) {
+      // If is not the first time and the input is different we must resetAmp
+      if (oldValue && newValue !== oldValue) {
+        this.$trace('input changed reset amp')
+        this.resetAmp()
+      }
+    },
+    defaultOutputDevice (newValue, oldValue) {
+      // If is not the first time and the input is different we must resetAmp
+      if (oldValue && newValue !== oldValue) {
+        this.$trace('output changed reset amp')
+        this.resetAmp()
+      }
+    },
+  },
   created () {
   },
   mounted () {
@@ -33,6 +49,7 @@ export default {
     ...mapActions('pedal', [
       'setAmpInputGain',
       'setAmpOutputGain',
+      'resetAmp',
     ]),
     normalize (value) {
       return audioMaps.getNormalizedSettingValue(value)

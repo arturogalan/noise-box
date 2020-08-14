@@ -306,6 +306,7 @@ export default {
   z-index: -1;
   font-size: .6rem;
   font-family: "FontPbio";
+  letter-spacing: .03rem;
 }
 .value-label{
   z-index: $z-index-2;

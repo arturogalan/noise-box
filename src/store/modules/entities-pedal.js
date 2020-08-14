@@ -244,6 +244,10 @@ const pedalModule = {
     toggleStandByAmp ({ state, commit, dispatch }, data) {
       commit('toggleStandByAmp', data)
     },
+    resetAmp ({state, commit, getters}) {
+      // if (state.amp.switchedOn)
+      commit('connectAllNodes', getters.pedalList)
+    },
     toggleAmpChannel ({commit}) {
       commit('toggleAmpChannel')
     },
@@ -388,6 +392,7 @@ const pedalModule = {
       state.amp.multiEffectAmp.preset = state.selectedPreset
     },
     addPedal (state, pedal) {
+      trace(`Creating ${pedal.type} PEDAL audio node`)
       pedal.effect = audioUtils.createAudioNode(state.audioContext, pedal.type)
       for (const setting of pedal.settingsList) {
         pedal.effect[setting.name] = setting.value
