@@ -82,11 +82,6 @@ export default {
         fill: 'white',
       }
     },
-    svgStyle () {
-      return {
-        transform: `rotate(-${this.svgRotate}deg)`,
-      }
-    },
     svgAbove () {
       return {
         position: 'absolute',
@@ -95,13 +90,29 @@ export default {
         width: '100%',
         height: '100%',
         transition: 'all 1s ease',
-        transform: `rotate(${this.selectorValue - this.svgRotate - 2}deg)`,
+        transform: `rotate(${this.selectorValue}deg)`,
+      }
+    },
+    svgStyle () {
+      return {
+        transform: `rotate(-${this.svgRotate}deg)`,
+      }
+    },
+  },
+  watch: {
+    initValue (newValue, oldValue) {
+      if (newValue !== oldValue) {
+        this.currentValue = newValue
+        const initialDegress = (this.currentValue / this.maxValue) * 360
+        // setTimeout(() => (this.selectorValue = initialDegress), 250)
+        setTimeout(() => (this.selectorValue = initialDegress - (this.svgRotate)), 250)
       }
     },
   },
   mounted () {
     const initialDegress = (this.currentValue / this.maxValue) * 360
-    setTimeout(() => (this.selectorValue = initialDegress), 250)
+    // setTimeout(() => (this.selectorValue = initialDegress), 250)
+    setTimeout(() => (this.selectorValue = initialDegress - (this.svgRotate)), 250)
   },
   methods: {
     computeValue (e) {
@@ -127,11 +138,11 @@ export default {
       this.currentValue = Math.ceil(adjustPercentage)
 
       // Calculation of inner selector position
-      const deltaDegrees = (this.svgRotate / 360) * 360
-      const degress = ((result + Math.PI) / (Math.PI + Math.PI)) * 360
-      let adjustDegrees = degress + deltaDegrees
-      adjustDegrees = adjustDegrees > 360 ? adjustDegrees - 360 : adjustDegrees
-      this.selectorValue = adjustDegrees
+      // const deltaDegrees = (this.svgRotate / 360) * 360
+      // const degress = ((result + Math.PI) / (Math.PI + Math.PI)) * 360
+      // let adjustDegrees = degress + deltaDegrees
+      // adjustDegrees = adjustDegrees > 360 ? adjustDegrees - 360 : adjustDegrees
+      // this.selectorValue = adjustDegrees
       this.$emit('valueChanged', this.currentValue)
       // console.log(this.maxValue * Math.trunc(adjustPercentage/this.maxValue))
     },

@@ -43,7 +43,7 @@ export default {
         src="../../assets/icons/marioquestion.png"
         alt=""
       >
-      Noise Box/Noisefy
+      Noise-Box
     </div>
     <div class="info-wrapper">
       <div
@@ -65,7 +65,7 @@ export default {
         </div>
       </div>
       <div class="info-text">
-        Developed in several months as a pet project to merge two passions: Play guitar and Javascript.
+        Developed in several months as a pet project to merge two passions: Playing guitar and coding Javascript.
         Webaudio ideas seeing talks and Github code accounts from great developers like...
         <ul>
           <li class="pt">
@@ -96,7 +96,7 @@ export default {
           href="https://github.com/"
           target="_blank"
         >github</a>.
-        Any ideas, feedback, bugs or comments on Github or Twitter will be really appreciated.
+        Any ideas, feedback, bugs or comments on Github or Twitter will be really appreciated: <a href="mailto:noiseboxamp@gmail.com">noiseboxamp@gmail.com</a>
       </div>
       <div class="contact-section--center">
         <section class="contact-section">

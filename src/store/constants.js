@@ -170,17 +170,17 @@ export const PEDAL_PROPERTIES = {
     settingsList: [
       {
         name: 'wet',
-        value: 1,
+        value: 3,
         color: 'lightskyblue',
       },
       {
         name: 'speed',
-        value: 5,
+        value: 2,
         color: 'lightslategray',
       },
       {
         name: 'duration',
-        value: 4,
+        value: 5,
         color: 'lightseagreen',
       },
     ],
