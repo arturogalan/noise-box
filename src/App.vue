@@ -47,12 +47,19 @@ export default {
     if (this.isFirstTime) {
       this.toggleModal({ modalName: 'firstTimeModal', status: true })
     }
+    document.body.onkeyup = (e) => {
+      // Spacebar
+      if (e.keyCode === 32) {
+        this.toggleAmpChannel()
+      }
+    }
   },
   methods: {
     ...mapActions('pedal', [
       'createAudioContext',
       'createAmp',
       'setPedalProperty',
+      'toggleAmpChannel',
     ]),
     ...mapActions('ui', [
       'toggleModal',
@@ -86,7 +93,7 @@ export default {
     >
       <firstTimeModal />
     </modal>
-    <engl-theme />
+    <engl-theme @keyup.space="toggleKeyAction" />
     <pedals-board />
     <app-footer />
   </div>

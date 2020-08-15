@@ -36,7 +36,7 @@ export default {
       :key="index"
       :name="setting.name"
       :barcolor="setting.color"
-      :init-value="normalize(setting.value)"
+      :init-value="normalize(pedal.effect[setting.name])"
       :class="'one-knob--'+size"
       :size="size"
       :knobs-number="pedal.settingsList.length"

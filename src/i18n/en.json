@@ -7,8 +7,8 @@
     "TOOLTIP": {
       "AMP": {
         "CHANNEL": {
-          "CLEAN": "Change fron clean to distortion channel",
-          "DISTO": "Change fron distortion to clean channel",
+          "CLEAN": "Change fron clean to distortion channel </br> (keyboard: space bar key)",
+          "DISTO": "Change fron distortion to clean channel </br> (keyboard: space bar key)",
           "TEXT": "Channel",
           "CLEAN_PRESETS": "Select the clean channel flavor",
           "DISTO_PRESETS": "Select the distortion channel flavor",
