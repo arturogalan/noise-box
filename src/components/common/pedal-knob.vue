@@ -57,6 +57,10 @@ export default {
     }
   },
   computed: {
+    isSafari () {
+      var ua = navigator.userAgent.toLowerCase()
+      return ua.indexOf('chrome') === -1 && ua.indexOf('safari') !== -1
+    },
     circumference () {
       // 94.2 = 2 * PI * RADIOUS (r="15")
       return this.radius * 2 * Math.PI
@@ -85,10 +89,6 @@ export default {
     svgAbove () {
       return {
         position: 'absolute',
-        top: 0,
-        left: 0,
-        width: '100%',
-        height: '100%',
         transition: 'all 1s ease',
         transform: `rotate(${this.selectorValue}deg)`,
       }
@@ -155,66 +155,63 @@ export default {
 <template>
   <section class="container">
     <div
-      :class="'setting-name--'+size"
-      class="setting-name"
+      :class="`pedal-setting-name--${size}${isSafari ? '-safari' : ''}`"
+      class="pedal-setting-name"
     >
       <span>{{ name }}</span>
     </div>
-    <svg
-      id="rotationSVG"
-      :style="svgAbove"
-      width="100%"
-      height="100%"
-      viewBox="0 0 32 32"
-      preserveAspectRatio
-      @click="computeValue"
-    >
-      <circle
-        :r="radius-5"
-        class="stroke-hole"
-        cx="16"
-        cy="16"
-      />
-      <circle
-        class="stroke-mark"
-        cx="16"
-        cy="16"
-        r="5"
-      />
-    </svg>
-    <svg
-      :style="svgStyle"
-      width="100%"
-      height="100%"
-      viewBox="0 0 32 32"
-      preserveAspectRatio
-      @click="computeValue"
-    >
-      <circle
-        ref="ring"
-        :r="radius+30"
-        :stroke="bgcolor"
-        :stroke-width="strokeWidth"
-        class="ring"
-        cx="16"
-        cy="16"
-        fill="transparent"
+    <div class="svg-container">
+      <svg
+        id="rotationSVG"
+        :style="svgAbove"
+        viewBox="0 0 32 32"
+        preserveAspectRatio
+      >
+        <circle
+          :r="radius-5"
+          class="stroke-hole"
+          cx="16"
+          cy="16"
+        />
+        <circle
+          class="stroke-mark"
+          cx="16"
+          cy="16"
+          r="5"
+        />
+      </svg>
+      <svg
+        :style="svgStyle"
+        viewBox="0 0 32 32"
+        preserveAspectRatio
         @click="computeValue"
-      />
-      <circle
-        ref="segment"
-        :r="radius"
-        :stroke="barcolor"
-        :stroke-width="strokeWidth"
-        :stroke-dasharray="strokeDasharray"
-        class="segment"
-        cx="16"
-        cy="16"
-        fill="transparent"
-        stroke-dashoffset="0"
-        @click="computeValue"
-      />
-    </svg>
+      >
+        <circle
+          ref="ring"
+          :r="radius+30"
+          :stroke="bgcolor"
+          :stroke-width="strokeWidth"
+          cx="16"
+          cy="16"
+          fill="transparent"
+          @click="computeValue"
+        />
+        <circle
+          ref="segment"
+          :r="radius"
+          :stroke="barcolor"
+          :stroke-width="strokeWidth"
+          :stroke-dasharray="strokeDasharray"
+          class="segment"
+          cx="16"
+          cy="16"
+          fill="transparent"
+          stroke-dashoffset="0"
+          @click="computeValue"
+        />
+      </svg>
+    </div>
+
     <transition name="bounce-tiny">
       <div
         v-show="isVisible"
@@ -271,45 +268,31 @@ export default {
   stroke-dasharray: 1, 90;
 }
 
-.setting-name {
+.pedal-setting-name {
   text-transform: uppercase;
   font-weight: bold;
   color: aliceblue;
   position: absolute;
   top: 0;
   width: 100%;
-  // top: -15%;
   z-index: -1;
   transform: translateY(-50%);
   &--normal {
     font-size: .46rem;
   }
-  &--rack {
-    font-size: .5rem;
+  &--normal-safari {
+    font-size: 6px;
   }
+
   &--zoom-in {
     font-size: 1.2rem;
   }
 }
-/* .svg-above{
-  position: absolute;
-  top: 0;
-  left:0;
-  width: 100%;
+
+.svg-container {
   height: 100%;
-  animation: spin 1s linear 0s 1 normal both;
-} */
-/* .spin-animation{
-  animation: spin 1s linear 0s 1 normal both;
-  -webkit-animation-fill-mode: both;
-  animation-fill-mode: both;
-  display: inline-block;
-} */
-/* @keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% {
-    transform: rotate(90deg);
-    display: inline-block;
-  }
-} */
+  width: 100%;
+  position: relative;
+  margin-top: .2rem;
+}
 </style>

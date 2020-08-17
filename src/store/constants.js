@@ -225,12 +225,12 @@ export const PEDAL_PROPERTIES = {
     settingsList: [
       {
         name: 'wet',
-        value: 1,
+        value: 5,
         color: 'lightslategray',
       },
       {
         name: 'level',
-        value: 1,
+        value: 7.5,
         color: 'lightseagreen',
       },
     ],

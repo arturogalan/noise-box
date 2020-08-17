@@ -1,4 +1,16 @@
 <script>
+
+// const debounce = (func, delay) => {
+//   let debounceTimer
+//   return function () {
+//     const context = this
+//     // eslint-disable-next-line prefer-rest-params
+//     const args = arguments
+//     clearTimeout(debounceTimer)
+//     debounceTimer = setTimeout(() => func.apply(context, args), delay)
+//   }
+// }
+
 export default {
   name: 'ChickenHeadKnob',
   props: {
@@ -13,6 +25,10 @@ export default {
       type: Number,
       required: false,
       default: 100,
+    },
+    id: {
+      type: String,
+      required: true,
     },
     // fillcolor: {
     //   type: String,
@@ -99,6 +115,15 @@ export default {
     setTimeout(() => (this.selectorValue = initialDegress - (this.svgRotate - 90)), 250)
   },
   methods: {
+    handleWheel (event) {
+      const quantToAdd = Math.round(this.currentValue + (event.wheelDelta / 20))
+      if (quantToAdd > 0 && quantToAdd < 100) {
+        this.currentValue = quantToAdd
+        const initialDegress = (this.currentValue / this.maxValue) * 360
+        this.selectorValue = initialDegress - (this.svgRotate - 90)
+        this.$emit('valueChanged', this.currentValue)
+      }
+    },
     computeValue (e) {
       // The percentaje where user clicks
       const rect = this.$refs.chicken.getBoundingClientRect()
@@ -141,7 +166,9 @@ export default {
 <template>
   <div class="container">
     <div
+      :id="id"
       class="pointer-wrapper"
+      @wheel.prevent="handleWheel"
       @click="computeValue"
       @mouseover="setStroke(true)"
       @mouseleave="setStroke(false)"

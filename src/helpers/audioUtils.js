@@ -9,10 +9,7 @@ const audioUtils = {
   AMP_COMPONENT_NAME: Noisefy.AMP_COMPONENT_NAME,
   AMP_SETTING_NAME: Noisefy.AMP_SETTING_NAME,
   createAudioContext () {
-    if (Noisefy.hasAudioContext) {
-      return new AudioContext()
-    }
-    return null
+    return Noisefy.createAudioContext()
   },
   getAudioContextProps (audioContext) {
     return {
@@ -26,9 +23,7 @@ const audioUtils = {
     return audioNode
   },
   createInput (audioContext) {
-    const input = new Noisefy.Input(audioContext)
-    input.getUserMedia()
-    return input
+    return new Noisefy.Input(audioContext)
   },
   createOutput (audioContext) {
     return new Noisefy.Output(audioContext)

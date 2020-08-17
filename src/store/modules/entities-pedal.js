@@ -96,28 +96,6 @@ const pedalModule = {
       })
       return lists
     },
-    // ampSelectedDistos(state) {
-    //   return state.amp.multiEffectAmp.getSelectedDistortions();
-    // },
-    // ampDistortionsLists(state, getters) {
-    //   const lists = [];
-    //   state.amp.multiEffectAmp.getSelectedDistortions().forEach((distortion)=> {
-    //     lists.push(
-    //       {
-    //         componentName: distortion.componentName,
-    //         distortionType: distortion.distortionType,
-    //         list: state.amp.multiEffectAmp.getDistortionTypes().map((disto)=> {
-    //           return {
-    //             id: disto,
-    //             name: disto,
-    //             selected: disto === distortion.distortionType,
-    //           };
-    //         }),
-    //       },
-    //     );
-    //   });
-    //   return lists;
-    // },
     ampCleanPresets (state, getters) {
       const presetSelected = (preset) => {
         return preset.distortionStage1 === getters.ampCleanChannelDistoList.find((el) => el.componentName === 'distortionStage1').distortionType &&
@@ -146,9 +124,6 @@ const pedalModule = {
         }
       })
     },
-    // ampMainSelectedDisto(state, getters) {
-    //   return getters.ampSelectedDistos.find((disto)=> disto.componentName === 'distortionStage2').distortionType;
-    // },
     ampSelectedCabinet (state) {
       return state.amp.multiEffectAmp.getSelectedCabinet()
     },
@@ -161,9 +136,6 @@ const pedalModule = {
         }
       })
     },
-    // ampCabinetWet(state) {
-    //   return state.amp.multiEffectAmp.getCabinetSettings().find((setting)=> setting.name === audioUtils.AMP_SETTING_NAME.CABINET_WET).value;
-    // },
     ampCabinetSettings (state) {
       return state.amp.multiEffectAmp.getCabinetSettings()
     },
@@ -202,7 +174,7 @@ const pedalModule = {
       return state.audioOut
     },
     defaultAudioDevicesList (state) {
-      return state.deviceList.filter((el) => el.deviceId === 'default')
+      return state.deviceList.lenght > 1 ? state.deviceList.filter((el) => el.deviceId === 'default') : state.deviceList
     },
     defaultInputDevice (state, getters) {
       const inputDevice = getters.defaultAudioDevicesList.find((el) => el.direction === 'input')
@@ -236,17 +208,15 @@ const pedalModule = {
     toggleAmp ({ state, commit, dispatch, getters }, data) {
       commit('toggleAmp', data)
       if (!state.nodesConnected) {
-        dispatch('switchOnAudioContext')
         dispatch('initAudioInputAndOutput')
-        commit('connectAllNodes', getters.pedalList)
       }
     },
-    toggleStandByAmp ({ state, commit, dispatch }, data) {
+    toggleStandByAmp ({ state, commit, dispatch, getters }, data) {
+      commit('connectAllNodes', getters.pedalList)
       commit('toggleStandByAmp', data)
     },
     resetAmp ({dispatch, commit, getters}) {
       // NOT WORKING, firs disconnect all the things
-      // dispatch('switchOnAudioContext')
       // dispatch('reinitAudioInputAndOutput')
       // commit('createAmp')
       // commit('connectAllNodes', getters.pedalList)
@@ -299,9 +269,14 @@ const pedalModule = {
     },
     initAudioInputAndOutput ({ commit, dispatch, getters }) {
       commit('setUserInput')
-      commit('setUserOutput')
-      dispatch('setDevicesList')
-      dispatch('setDevicesListHandler')
+      return dispatch('activateUserInput').then(() => {
+        commit('setUserOutput')
+        dispatch('setDevicesList')
+        dispatch('setDevicesListHandler')
+      })
+    },
+    activateUserInput ({state}) {
+      return state.audioInput.activateInput()
     },
     reinitAudioInputAndOutput ({ commit, dispatch, getters }) {
       commit('resetUserInput')
@@ -331,14 +306,8 @@ const pedalModule = {
       commit('togglePedal', type)
       if (state.amp.switchedOn) commit('connectAllNodes', getters.pedalList)
     },
-    connectAll ({ state, commit, getters }) {
-      if (state.amp.switchedOn) commit('connectAllNodes', getters.pedalList)
-    },
     createAudioContext ({ commit }) {
       commit('setAudioContext', audioUtils.createAudioContext())
-    },
-    switchOnAudioContext ({ commit }) {
-      commit('resumeAudioContext')
     },
     setDevicesList ({ commit }) {
       audioUtils.deviceList().then((deviceList) => {
@@ -399,15 +368,16 @@ const pedalModule = {
       state.amp.multiEffectAmp.preset = state.selectedPreset
     },
     addPedal (state, pedal) {
-      trace(`Creating ${pedal.type} PEDAL audio node`)
-      pedal.effect = audioUtils.createAudioNode(state.audioContext, pedal.type)
+      pedal.effect = {}
+      pedal.isInitialized = false
       for (const setting of pedal.settingsList) {
         pedal.effect[setting.name] = setting.value
       }
       Vue.set(state.pedalBoard.pedals, pedal.name, pedal)
     },
     togglePedal (state, name) {
-      state.pedalBoard.pedals[name].switchedOn = !state.pedalBoard.pedals[name].switchedOn
+      const pedal = state.pedalBoard.pedals[name]
+      pedal.switchedOn = !pedal.switchedOn
     },
     setPedalProperty (state, { name, property, value }) {
       const pedal = state.pedalBoard.pedals[name]
@@ -423,16 +393,23 @@ const pedalModule = {
     },
 
     connectAllNodes (state, pedalList) {
-      state.nodesConnected = true
-      state.audioInput.connect(state.amp.multiEffectAmp.input)
+      const userInput = state.audioInput
       const ampOutput = state.amp.multiEffectAmp.output
+      state.nodesConnected = true
+      userInput.connect(state.amp.multiEffectAmp.input)
+      ampOutput.disconnect()
       const switchedOnPedalList = pedalList.filter((pedal) => pedal.switchedOn)
       const switchedOffPedalList = pedalList.filter((pedal) => !pedal.switchedOn)
-      ampOutput.disconnect()
-      switchedOffPedalList.forEach((pedal) => pedal.effect.disconnect())
-
+      switchedOffPedalList.forEach((pedal) => { if (pedal.isInitialized) pedal.effect.disconnect() })
       if (switchedOnPedalList && switchedOnPedalList.length) {
         switchedOnPedalList.forEach((pedal, index) => {
+          if (!pedal.isInitialized) {
+            const effectsPrepopulated = {...pedal.effect}
+            pedal.effect = audioUtils.createAudioNode(state.audioContext, pedal.type)
+            for (const effect in effectsPrepopulated) {
+              pedal.effect[effect] = effectsPrepopulated[effect]
+            }
+          }
           if (index === 0) {
             ampOutput.connect(pedal.effect)
           } else if (index < (switchedOnPedalList.length - 1)) {
@@ -451,12 +428,6 @@ const pedalModule = {
     // Audio mutations
     setAudioContext (state, audioContext) {
       Vue.set(state, 'audioContext', audioContext)
-    },
-    resumeAudioContext (state) {
-      state.audioContext.resume().then(() => {
-        trace('Playback resumed successfully')
-        trace(state.audioContext)
-      })
     },
     setUserInput (state) {
       if (isEmpty(state.audioInput)) {

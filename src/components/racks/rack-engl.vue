@@ -99,23 +99,21 @@ export default {
           tooltip-key="TOOLTIP.AMP.CHANNEL.CABINET_PRESETS"
           @selected="setCabinetType"
         />
-        <div class="knob-grid-wrapper">
-          <section class="knob-grid">
-            <section
-              v-for="setting in ampCabinetSettings"
-              :key="setting.name"
-            >
-              <div class="setting-name">
-                {{ $t(`AMP.COMPONENT.CABINET.${setting.name.toUpperCase()}`) }}
-              </div>
-              <slider
-                size="medium"
-                :value="normalize(getCabinetProperty(setting.name))"
-                :value-color="'hsl(20,53%,55%)'"
-                :value-fill-color="'hsl(20,23%,55%)'"
-                @change="setAmpCabinetSettings({property: setting.name, value: denormalize($event)})"
-              />
-            </section>
+        <div class="slider-wrapper">
+          <section
+            v-for="setting in ampCabinetSettings"
+            :key="setting.name"
+          >
+            <div class="setting-name">
+              {{ $t(`AMP.COMPONENT.CABINET.${setting.name.toUpperCase()}`) }}
+            </div>
+            <slider
+              size="medium"
+              :value="normalize(getCabinetProperty(setting.name))"
+              :value-color="'hsl(20,53%,55%)'"
+              :value-fill-color="'hsl(20,23%,55%)'"
+              @change="setAmpCabinetSettings({property: setting.name, value: denormalize($event)})"
+            />
           </section>
         </div>
       </div>
@@ -178,14 +176,9 @@ export default {
   text-shadow: 2px 2px rgba(0, 0, 0, 0.8);
   text-transform: uppercase;
 }
-.knob-grid-wrapper {
+.slider-wrapper {
+  margin-left: .5rem;
   position: relative;
-  width: 10rem;
-  height: 2.4rem;
-  min-height: 100%;
-  margin-left: .4rem;
-  display: flex;
-  align-items: center;
 }
 .knob-grid {
   position: absolute;
@@ -207,8 +200,7 @@ export default {
   color: aliceblue;
   position: absolute;
   width: 100%;
-  top: -180%;
-  z-index: -1;
+  top: -1.5rem;
   font-size: .6rem;
   font-family: "FontPbio";
 }

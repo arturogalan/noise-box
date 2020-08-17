@@ -61,7 +61,6 @@ export default {
 }
 </script>
 
-<!-- amp.multiEffectAmp.getInputComponent().settingList[0].value -->
 <template>
   <div>
     <div
@@ -84,7 +83,6 @@ export default {
             :value="normalize(getAmpInputGain)"
             :value-color="'rgb(146, 215, 146)'"
             :value-fill-color="'hsl(100,16%,30%)'"
-            class="footer-slider"
             @change="setAmpInputGain(denormalize($event))"
           />
         </div>
@@ -179,9 +177,6 @@ export default {
     right: 0;
     justify-content: flex-end;
   }
-}
-.footer-slider {
-  margin-left: 1rem;
 }
 .icon-type{
     max-width: 2.5rem;

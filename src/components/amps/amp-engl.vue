@@ -35,20 +35,11 @@ export default {
   },
   methods: {
     ...mapActions('pedal', [
-      'switchOnAudioContext',
-      'initAudioInputAndOutput',
       'setActiveChannelEffectProperty',
       'toggleAmp',
       'toggleStandByAmp',
       'toggleAmpChannel',
     ]),
-    initAudioInterface () {
-      if (!this.isAudioInitializated) {
-        this.switchOnAudioContext()
-        this.initAudioInputAndOutput()
-        this.isAudioInitializated = true
-      }
-    },
     toogleMuteAudio () {
       this.toggleStandByAmp()
     },
@@ -122,6 +113,7 @@ export default {
       >
         <chicken-head-knob
           v-for="knobSetting in component.settingList"
+          :id="knobSetting.name"
           :key="knobSetting.name"
           :name="$t(`AMP.COMPONENT.${component.name.toUpperCase()}.${knobSetting.name.toUpperCase()}`)"
           :init-value="normalize(knobSetting.value)"
@@ -159,9 +151,13 @@ export default {
   min-width: $app-min-width + 12px;
 }
 .knob-grid {
-    position: relative;
     z-index: $z-index-3;
+    display: flex;
+    justify-content: space-around;
     width: 100%;
+    position: relative;
+    // z-index: $z-index-3;
+    // width: 100%;
 }
 .component-grid{
   display: flex;

@@ -30,17 +30,17 @@ export default {
 }
 </script>
 <template>
-  <div class="knob-grid">
+  <div class="pedal-knob-grid">
     <pedal-knob
       v-for="(setting, index) in pedal.settingsList"
       :key="index"
       :name="setting.name"
       :barcolor="setting.color"
       :init-value="normalize(pedal.effect[setting.name])"
-      :class="'one-knob--'+size"
+      :class="'pedal-one-knob--'+size"
       :size="size"
       :knobs-number="pedal.settingsList.length"
-      class="one-knob"
+      class="pedal-one-knob"
       fillcolor="none"
       bgcolor="none"
       @valueChanged="setPedalEffectProperty({name: pedal.name, property: setting.name, value: denormalize($event)})"
@@ -48,14 +48,14 @@ export default {
   </div>
 </template>
 <style lang="scss">
-.knob-grid {
+.pedal-knob-grid {
     position: absolute;
     z-index: $z-index-2;
     display: flex;
     justify-content: space-around;
     width: 100%;
 }
-.one-knob {
+.pedal-one-knob {
   /* font-family: "Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -70,5 +70,9 @@ export default {
   &--zoom-in {
     width: 10rem;
   }
+  margin-left: .3rem;
+  width: 3rem;
+  // display: flex;
+  z-index: $z-index-2;
 }
 </style>

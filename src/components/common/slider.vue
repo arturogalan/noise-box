@@ -30,8 +30,8 @@ export default {
   computed: {
     valueLeftMargin () {
       return {
-        medium: () => (this.inputValue * 5.8) / 100,
-        big: () => (this.inputValue * 14) / 100,
+        medium: () => this.scale(this.inputValue, 0, 100, 1, 6),
+        big: () => this.scale(this.inputValue, 0, 100, 1, 18),
       }[this.size]()
       // return (this.inputValue * 14) / 100;
     },
@@ -45,6 +45,9 @@ export default {
     },
   },
   methods: {
+    scale (num, inMin, inMax, outMin, outMax) {
+      return (num - inMin) * (outMax - outMin) / (inMax - inMin) + outMin
+    },
     trackValue () {
       // Change the value key to trigger animation
       this.valueKey = 'bounce-tiny'
@@ -69,7 +72,6 @@ export default {
       <div
         :key="valueKey"
         :style="{left: `${valueLeftMargin}rem`, color: valueColor}"
-        :class="[inputValue < 10 ? 'range-value-one-digit' : 'range-value-two-digits']"
         class="range-value"
       >
         {{ inputValue }}
@@ -120,6 +122,7 @@ export default {
   position: relative;
   display: flex;
   float: left;
+  width: 100%;
 }
 .sliderticks {
   z-index: $z-index-0;
@@ -161,10 +164,7 @@ export default {
   z-index: $z-index-2;
   position: absolute;
   pointer-events: none;
-  left: .2rem;
-  right: 0;
   top: calc(50% - .1rem);
-  height: .4rem;
   border-radius: .1rem;
 }
 .range {
@@ -176,10 +176,10 @@ export default {
   background-color: transparent;
   z-index: $z-index-3;
   &--big {
-    width: 20em;
+    width: 20rem;
   }
   &--medium {
-    width: 10em;
+    width: 8rem;
   }
 }
 .range-value {
@@ -190,12 +190,6 @@ export default {
   pointer-events: none;
   font-family: "FontPbio";
   font-size: 1rem;;
-}
-.range-value-one-digit {
-  margin-left: 1.5rem;
-}
-.range-value-two-digits {
-  margin-left: .6em;
 }
 @mixin thumb {
   -webkit-appearance: none;
