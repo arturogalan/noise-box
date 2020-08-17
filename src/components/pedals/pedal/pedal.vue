@@ -39,7 +39,6 @@ export default {
   methods: {
     ...mapActions('pedal', [
       'togglePedal',
-      'connectAll',
     ]),
     deleteClick () {
       if (!this.pedal.dying) {
@@ -208,7 +207,6 @@ export default {
 }
 
 .pedal-svg {
-  height: 16rem;
   width: 11rem;
   left: 0;
   top: 0;

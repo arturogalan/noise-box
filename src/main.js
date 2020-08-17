@@ -4,6 +4,7 @@ import router from './router'
 import store from './store'
 import vueTooltipNb from './directives/vue-tooltip-nb'
 import focusStoke from './directives/focus-stroke'
+
 import VueI18n from 'vue-i18n'
 import messages from './i18n/en.json'
 import analytics from './helpers/analitycs'
