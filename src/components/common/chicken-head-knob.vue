@@ -10,6 +10,7 @@ const debounce = (func, delay) => {
     debounceTimer = setTimeout(() => func.apply(context, args), delay)
   }
 }
+
 export default {
   name: 'ChickenHeadKnob',
   props: {
@@ -120,7 +121,6 @@ export default {
       }
     },
     handleWheel (event) {
-      debugger
       if (this.currentValue > 0 && this.currentValue <= 100) {
         this.hasEaseEffect = false
         if (event.deltaY < 0 && this.currentValue > 1) {
@@ -130,7 +130,8 @@ export default {
         }
         const initialDegress = (this.currentValue / this.maxValue) * 360
         this.selectorValue = initialDegress - (this.svgRotate - 90)
-        this.computeKnobSvgStyleDebounced()
+        // this.computeKnobSvgStyleDebounced()
+        this.computeKnobSvgStyle()
         this.$emit('valueChanged', this.currentValue)
         this.hasEaseEffect = true
       }
