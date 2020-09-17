@@ -102,7 +102,8 @@
       "CONTEXT": {
         "INPUT": "Input",
         "OUTPUT": "Output",
-        "LATENCY": "Latency" 
+        "LATENCY": "Latency",
+        "INIT_HELPER": "Click on POWER, and then on STAND BY to start making noise! 🎸"
       }
     }
   }

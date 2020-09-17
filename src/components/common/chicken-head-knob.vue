@@ -1,15 +1,15 @@
 <script>
 
-// const debounce = (func, delay) => {
-//   let debounceTimer
-//   return function () {
-//     const context = this
-//     // eslint-disable-next-line prefer-rest-params
-//     const args = arguments
-//     clearTimeout(debounceTimer)
-//     debounceTimer = setTimeout(() => func.apply(context, args), delay)
-//   }
-// }
+const debounce = (func, delay) => {
+  let debounceTimer
+  return function () {
+    const context = this
+    // eslint-disable-next-line prefer-rest-params
+    const args = arguments
+    clearTimeout(debounceTimer)
+    debounceTimer = setTimeout(() => func.apply(context, args), delay)
+  }
+}
 
 export default {
   name: 'ChickenHeadKnob',
@@ -30,23 +30,6 @@ export default {
       type: String,
       required: true,
     },
-    // fillcolor: {
-    //   type: String,
-    //   required: false,
-    //   default: 'red',
-    //   // '#17d'
-    // },
-    // barcolor: {
-    //   type: String,
-    //   required: false,
-    //   default: 'grey',
-    //   // '#17d'
-    // },
-    // bgcolor: {
-    //   type: String,
-    //   required: false,
-    //   default: '#d2d3d4',
-    // },
     name: {
       type: String,
       required: false,
@@ -67,6 +50,11 @@ export default {
       isVisible: true,
       strokeColor: 'black',
       valueColor: 'grey',
+      hasEaseEffect: true,
+      knobSvgStyle: {
+        transition: '',
+        transform: '',
+      },
     }
   },
   computed: {
@@ -94,34 +82,58 @@ export default {
         fill: 'white',
       }
     },
-    svgAbove () {
-      return {
-        transition: 'all 1s ease',
-        transform: `rotate(${this.selectorValue}deg)`,
-      }
-    },
   },
   watch: {
     initValue (newValue, oldValue) {
       if (newValue !== oldValue) {
         this.currentValue = newValue
         const initialDegress = (this.currentValue / this.maxValue) * 360
-        setTimeout(() => (this.selectorValue = initialDegress - (this.svgRotate - 90)), 250)
+        setTimeout(() => {
+          this.selectorValue = initialDegress - (this.svgRotate - 90)
+          this.computeKnobSvgStyle()
+        }, 100)
       }
     },
   },
   mounted () {
     const initialDegress = (this.currentValue / this.maxValue) * 360
-    setTimeout(() => (this.selectorValue = initialDegress - (this.svgRotate - 90)), 250)
+    setTimeout(() => {
+      this.selectorValue = initialDegress - (this.svgRotate - 90)
+      this.computeKnobSvgStyle()
+    }, 100)
   },
   methods: {
+    computeKnobSvgStyleDebounced: debounce(function () {
+      if (this.hasEaseEffect) {
+        this.knobSvgStyle.transition = 'all 1s ease'
+        this.knobSvgStyle.transform = `rotate(${this.selectorValue}deg)`
+      } else {
+        this.knobSvgStyle.transform = `rotate(${this.selectorValue}deg)`
+      }
+    }
+    , 100),
+    computeKnobSvgStyle () {
+      if (this.hasEaseEffect) {
+        this.knobSvgStyle.transition = 'all 1s ease'
+        this.knobSvgStyle.transform = `rotate(${this.selectorValue}deg)`
+      } else {
+        this.knobSvgStyle.transform = `rotate(${this.selectorValue}deg)`
+      }
+    },
     handleWheel (event) {
-      const quantToAdd = Math.round(this.currentValue + (event.wheelDelta / 20))
-      if (quantToAdd > 0 && quantToAdd < 100) {
-        this.currentValue = quantToAdd
+      if (this.currentValue > 0 && this.currentValue <= 100) {
+        this.hasEaseEffect = false
+        if (event.deltaY < 0 && this.currentValue > 1) {
+          this.currentValue = this.currentValue - 1
+        } else if (event.deltaY > 0 && this.currentValue < 100) {
+          this.currentValue = this.currentValue + 1
+        }
         const initialDegress = (this.currentValue / this.maxValue) * 360
         this.selectorValue = initialDegress - (this.svgRotate - 90)
+        // this.computeKnobSvgStyleDebounced()
+        this.computeKnobSvgStyle()
         this.$emit('valueChanged', this.currentValue)
+        this.hasEaseEffect = true
       }
     },
     computeValue (e) {
@@ -151,6 +163,7 @@ export default {
       // let adjustDegrees = degress + deltaDegrees
       // adjustDegrees = adjustDegrees > 360 ? adjustDegrees - 360 : adjustDegrees
       // this.selectorValue = adjustDegrees - (this.svgRotate - 90);
+      this.computeKnobSvgStyle()
       this.$emit('valueChanged', this.currentValue)
     },
     numDigits (x) {
@@ -175,7 +188,7 @@ export default {
     />
     <div
       ref="chicken"
-      :style="svgAbove"
+      :style="knobSvgStyle"
       class="chicken-head"
     >
       <svg

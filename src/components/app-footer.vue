@@ -64,7 +64,20 @@ export default {
 <template>
   <div>
     <div
-      v-if="defaultInputDevice || defaultOutputDevice"
+      v-if="!defaultInputDevice && !defaultOutputDevice"
+      class="footer"
+    >
+      <div />
+      <div class="footer-section footer-section--middle">
+        <div class="footer-label">
+          <span class="footer-title bounce-animated">
+            {{ $t('AMP.CONTEXT.INIT_HELPER') }}
+          </span>
+        </div>
+      </div>
+    </div>
+    <div
+      v-else
       class="footer"
     >
       <div class="footer-section footer-section--left">
@@ -124,6 +137,9 @@ export default {
 </template>
 
 <style lang="scss" scoped>
+.bounce-animated {
+  animation: pulse_animation_very_tiny 2s infinite;
+}
 .footer {
   z-index: $z-index-10; /* Sit on top */
   padding: 0 2rem 0 2rem;
