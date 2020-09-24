@@ -96,7 +96,7 @@ export default {
           href="https://github.com/"
           target="_blank"
         >github</a>.
-        Any ideas, feedback, bugs or comments on Github or Twitter will be really appreciated: <a href="mailto:noiseboxamp@gmail.com">noiseboxamp@gmail.com</a>
+        Any ideas, feedback, bugs or comments on Github or Twitter will be really appreciated: <a href="mailto:arturo.galan@gmail.com">arturo.galan@gmail.com</a>
       </div>
       <div class="contact-section--center">
         <section class="contact-section">

@@ -122,7 +122,7 @@ export default {
   position: relative;
   display: flex;
   float: left;
-  width: 100%;
+  // width: 100%;
 }
 .sliderticks {
   z-index: $z-index-0;
@@ -164,7 +164,10 @@ export default {
   z-index: $z-index-2;
   position: absolute;
   pointer-events: none;
+  left: .2rem;
+  right: 0;
   top: calc(50% - .1rem);
+  height: .4rem;
   border-radius: .1rem;
 }
 .range {
