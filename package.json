@@ -2,7 +2,7 @@
   "name": "noise-box",
   "version": "0.1.0",
   "productName": "Noise-box: Web Guitar Amp Simulator!",
-  "description": "✨Noise-box✨ a web-audio 🎸 guitar amp simulator! made with Javascript and Vue.js. noiseboxamp@gmail.com",
+  "description": "✨Noise-box✨ a web-audio 🎸 guitar amp simulator! made with Javascript and Vue.js. arturo.galan@gmail.com",
   "pageKeywords": "Webaudio Guitar Sound Javascript Vue.js Amplificator",
   "comments": "file:./../noisefy",
   "author": "Arturo Galan <arturo.galan@gmail.com>",
@@ -17,7 +17,7 @@
   },
   "dependencies": {
     "core-js": "^3.3.2",
-    "noisefy": "^0.1.6",
+    "noisefy": "^0.1.7",
     "vue": "^2.6.10",
     "vue-i18n": "^8.15.0",
     "vue-router": "^3.1.3",
