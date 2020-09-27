@@ -44,7 +44,6 @@ export default {
     this.createAmp()
   },
   mounted () {
-    debugger
     if (this.isFirstTime) {
       this.toggleModal({ modalName: 'firstTimeModal', status: true })
     }

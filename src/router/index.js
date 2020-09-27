@@ -8,7 +8,7 @@ Vue.use(VueRouter)
 const routes = [
   {
     path: '/',
-    name: 'App',
+    name: 'main',
     redirect: {name: 'mainMenu'},
     component: App,
     children: [
@@ -41,6 +41,7 @@ const routes = [
 ]
 
 const router = new VueRouter({
+  mode: 'history',
   routes,
 })
 
