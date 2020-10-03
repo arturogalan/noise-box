@@ -136,11 +136,13 @@ export default {
           @mouseleave="isHover = false"
         >
       </section>
-      <h1>
-        <span
-          class="metal"
-        >NOISE BOX</span>
-      </h1>
+      <router-link :to="{name: 'main'}">
+        <h1 class="no-link">
+          <span
+            class="metal"
+          >NOISE BOX</span>
+        </h1>
+      </router-link>
     </div>
     <div
       class="contact-section"
@@ -246,8 +248,11 @@ h1 {
   color:transparent;
   -webkit-filter: drop-shadow(2px 1px lightgrey);
   filter: drop-shadow(2px 1px lightgrey);
+  cursor: pointer;
 }
-
+.router-link-active {
+  text-decoration: none !important;
+}
 .logo-icon {
   width: $logo-height + px;
   float: left;

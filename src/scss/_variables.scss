@@ -102,6 +102,14 @@ $knob-grid-background: rgb(39,39,39);
   }
 }
 
+@keyframes zoom_animation {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(1.1);
+  }
+}
 // .pulse {
 //   animation-name: pulse_animation;
 //   animation-duration: 5000ms;
