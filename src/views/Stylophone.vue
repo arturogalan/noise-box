@@ -1,15 +1,173 @@
 <script>
+import * as Noisefy from 'noisefy'
+import dropdown from '../components/common/dropdown'
+import slider from '../components/common/slider'
+
+const keyboardToNoteMapper = {
+  81: {key: 'A', octave: 1}, // Q - A
+  50: {key: 'A#', octave: 1}, // 2 - A#
+  87: {key: 'B', octave: 1}, // W - b
+  69: {key: 'C', octave: 2}, // E - C
+  52: {key: 'C#', octave: 2}, // 4 - C#
+  82: {key: 'D', octave: 2}, // R - D
+  53: {key: 'D#', octave: 2}, // 5 - D#
+  84: {key: 'E', octave: 2}, // T - E
+  89: {key: 'F', octave: 2}, // Y - F
+  55: {key: 'F#', octave: 2}, // 7 - F#
+  85: {key: 'G', octave: 2}, // U - G
+  56: {key: 'G#', octave: 2}, // 8 - G#
+  73: {key: 'A', octave: 2}, // I - A
+  57: {key: 'A#', octave: 2}, // 9 - A#
+  79: {key: 'B', octave: 2}, // O - B
+  80: {key: 'C', octave: 3}, // P - C
+  // we mapped the last four by code cause in spanish 2 keys has the same code
+  // 189: 'C#', // - - C#
+  // 219: 'D', // [ - D
+  // 187: 'D#', //= - D#
+  // 221: 'E', // ] - E
+}
+const keyboardCodeToNoteMapper = {
+  Minus: {key: 'C#', octave: 3},
+  BracketLeft: {key: 'D', octave: 3},
+  Equal: {key: 'D#', octave: 3},
+  BracketRight: {key: 'E', octave: 3},
+}
+const notesMapper = {
+  1: { key: 'A', octave: 1},
+  1.5: { key: 'A#', octave: 1},
+  2: { key: 'B', octave: 1},
+  3: { key: 'C', octave: 2},
+  3.5: { key: 'C#', octave: 2},
+  4: { key: 'D', octave: 2},
+  4.5: { key: 'D#', octave: 2},
+  5: { key: 'E', octave: 2},
+  6: { key: 'F', octave: 2},
+  6.5: { key: 'F#', octave: 2},
+  7: { key: 'G', octave: 2},
+  7.5: { key: 'G#', octave: 2},
+  8: { key: 'A', octave: 2},
+  8.5: { key: 'A#', octave: 2},
+  9: { key: 'B', octave: 2},
+  10: { key: 'C', octave: 3},
+  10.5: { key: 'C#', octave: 3},
+  11: { key: 'D', octave: 3},
+  11.5: { key: 'D#', octave: 3},
+  12: { key: 'E', octave: 3},
+}
+
 export default {
   name: 'Stylophone',
+  components: {
+    dropdown,
+    slider,
+  },
   data () {
     return {
+      upKeys: [1.5, 3.5, 4.5, 6.5, 7.5, 8.5, 10.5, 11.5],
       playingNote: undefined,
+      playingOctave: 2,
+      playingWaveForm: 'sawtooth',
+      isClicking: false,
+      synth: {},
     }
   },
+  computed: {
+    octaveList () {
+      return [1, 2, 3, 4].map(el => {
+        return {
+          id: el,
+          selected: this.playingOctave === el,
+          name: el,
+        }
+      })
+    },
+    waveFormList () {
+      return ['sine',
+        'square',
+        'sawtooth',
+        'triangle'].map(el => {
+        return {
+          id: el,
+          selected: this.playingWaveForm === el,
+          name: el,
+        }
+      })
+    },
+  },
+  watch: {
+    playingNote (newValue, oldValue) {
+      if (newValue && newValue !== oldValue && this.isClicking) {
+        const {key, octave} = notesMapper[newValue]
+        if (key) this.synth.playSingleNote({key, octave: octave + this.playingOctave })
+      }
+    },
+  },
+  mounted () {
+    const audioContext = Noisefy.createAudioContext()
+    this.synth = new Noisefy.Synth(audioContext)
+    window.addEventListener('keydown', this.playKeyPress, false)
+    window.addEventListener('keyup', this.stopKeyPress, false)
+    window.addEventListener('mousedown', this.clickTrue, false)
+    window.addEventListener('mouseup', this.clickFalse, false)
+  },
+  destroyed () {
+    window.removeEventListener('keydown', this.playKeyPress, false)
+    window.removeEventListener('keyup', this.stopKeyPress, false)
+    window.removeEventListener('mousedown', this.clickTrue, false)
+    window.removeEventListener('mouseup', this.clickFalse, false)
+  },
   methods: {
+    playKeyPress (evt) {
+      if (!evt.ctrlKey && !evt.metaKey) {
+        const {key, octave} = (keyboardToNoteMapper[evt.keyCode] || keyboardCodeToNoteMapper[evt.code] || {})
+        if (key) this.synth.playNote({key, octave: octave + this.playingOctave })
+      }
+    },
+    stopKeyPress (evt) {
+      const {key, octave} = (keyboardToNoteMapper[evt.keyCode] || keyboardCodeToNoteMapper[evt.code] || {})
+      if (key) this.synth.stopNote({key, octave: octave + this.playingOctave })
+    },
+    test (event) {
+      var touch = event.touches[0]
+      const element = document.elementFromPoint(touch.pageX, touch.pageY)
+      if (element.id) {
+        console.log('touched inside: ' + element.id)
+      }
+    },
     playNote (note) {
-      debugger
-      console.log('playing' + note)
+      if (this.isClicking) {
+        this.playingNote = note
+      }
+    },
+    stopNote () {
+      this.playingNote = undefined
+      this.synth.stopSingleNote()
+    },
+    clickOn (note) {
+      this.clickTrue()
+      this.playNote(note)
+    },
+    clickOff () {
+      this.clickFalse()
+      this.stopNote()
+    },
+    clickTrue () {
+      this.isClicking = true
+    },
+    clickFalse () {
+      this.isClicking = false
+    },
+    setOctave (oct) {
+      this.synth.stopAllNotes()
+      this.playingOctave = oct.id
+    },
+    setVolume (val) {
+      this.synth.volume = val
+    },
+    setWaveForm (wave) {
+      this.synth.stopAllNotes()
+      this.synth.waveForm = wave.id
+      this.playingWaveForm = wave.id
     },
   },
 }
@@ -17,7 +175,10 @@ export default {
 <template>
   <section>
     <router-link :to="{name: 'main'}">
-      <div class="title-container">
+      <div
+        class="title-container"
+        @keypress="playKeyPress($event)"
+      >
         <img
           :src="require('../assets/img/header-icon-on.gif')"
           class="logo-icon"
@@ -36,7 +197,9 @@ export default {
             <span>Stylophone</span><span class="subtext">TM</span>
           </div>
         </div>
-        <div class="pen-wrapper">
+        <div
+          class="pen-wrapper"
+        >
           <div class="square" />
           <div class="pen--square">
             <div class="pen--holder-circle" />
@@ -44,10 +207,7 @@ export default {
               <div class="pen--tip-wrapper">
                 <div class="pen--tip" />
               </div>
-              <div class="pen--body">
-                <div class="pen--body--triangle-up" />
-                <div class="pen--body--triangle-down" />
-              </div>
+              <div class="pen--body" />
             </div>
           </div>
         </div>
@@ -57,15 +217,25 @@ export default {
               <div class="switch--buttons">
                 <div class="button-gap button-gap--left">
                   <div class="button button--on" />
-                </div>
-                <div class="rotate-text">
-                  &nbsp;POWER
+                  <div class="button--name button--name--box">
+                    <div>P</div>
+                    <div>O</div>
+                    <div>W</div>
+                    <div>E</div>
+                    <div>R</div>
+                  </div>
                 </div>
               </div>
               <div class="button-gap button-gap--right">
                 <div class="button button--off" />
-                <div class="button--name rotate-text">
-                  VIBRATO
+                <div class="button--name button--name--box button--name--vibrato">
+                  <div>V</div>
+                  <div>I</div>
+                  <div>B</div>
+                  <div>R</div>
+                  <div>A</div>
+                  <div>T</div>
+                  <div>O</div>
                 </div>
               </div>
             </div>
@@ -73,115 +243,40 @@ export default {
           <div class="pad-wrapper">
             <div class="pad-box">
               <div class="pad-corner" />
-              <div class="pad-down-keys">
+              <div
+                class="pad-bottom-keys"
+                @mouseleave="stopNote"
+              >
                 <div
-                  class="key"
-                  @click="playNote('1')"
+                  v-for="downKeyNumber in 12"
+                  :id="`key-down-${downKeyNumber}`"
+                  :key="downKeyNumber"
+                  class="key-bottom"
+                  @mousedown="clickOn(downKeyNumber)"
+                  @mouseup="clickOff"
+                  @mousemove="playNote(downKeyNumber)"
+                  @mouseenter="playNote(downKeyNumber)"
+                  @touchmove="test($event)"
                 >
                   <div
                     class="key-bottom--name"
                   >
-                    1
+                    {{ downKeyNumber }}
                   </div>
                 </div>
-                <div class="key">
-                  <div class="key-bottom--name">
-                    2
-                  </div>
-                </div>
-                <div class="key">
-                  <div class="key-bottom--name">
-                    3
-                  </div>
-                </div>
-                <div class="key">
-                  <div class="key-bottom--name">
-                    4
-                  </div>
-                </div>
-                <div class="key">
-                  <div class="key-bottom--name">
-                    5
-                  </div>
-                </div>
-                <div class="key">
-                  <div class="key-bottom--name">
-                    6
-                  </div>
-                </div>
-                <div class="key">
-                  <div class="key-bottom--name">
-                    7
-                  </div>
-                </div>
-                <div class="key">
-                  <div class="key-bottom--name">
-                    8
-                  </div>
-                </div>
-                <div class="key">
-                  <div class="key-bottom--name">
-                    9
-                  </div>
-                </div>
-                <div class="key">
-                  <div class="key-bottom--name">
-                    10
-                  </div>
-                </div>
-                <div class="key">
-                  <div class="key-bottom--name">
-                    11
-                  </div>
-                </div>
-                <div class="key">
-                  <div class="key-bottom--name">
-                    12
-                  </div>
-                </div>
-              </div>
-              <div class="pad-up-keys">
-                <div class="key-up">
+                <div
+                  v-for="(upKeyNumber, index) in upKeys"
+                  :id="`key-up-${index + 1}`"
+                  :key="upKeyNumber"
+                  class="key-up"
+                  :class="`key-up--${index + 1}`"
+                  @mousedown="clickOn(upKeyNumber)"
+                  @mouseup="clickOff(upKeyNumber)"
+                  @mousemove="playNote(upKeyNumber)"
+                  @touchmove="test($event)"
+                >
                   <div class="key-up--name">
-                    1.5
-                  </div><div class="key-up--footer" />
-                </div>
-                <div class="space-key" />
-                <div class="key-up">
-                  <div class="key-up--name">
-                    3.5
-                  </div><div class="key-up--footer" />
-                </div>
-                <div class="key-up no-left">
-                  <div class="key-up--name">
-                    4.5
-                  </div><div class="key-up--footer" />
-                </div>
-                <div class="space-key" />
-                <div class="key-up">
-                  <div class="key-up--name">
-                    6.5
-                  </div><div class="key-up--footer" />
-                </div>
-                <div class="key-up no-left">
-                  <div class="key-up--name">
-                    7.5
-                  </div><div class="key-up--footer" />
-                </div>
-                <div class="key-up no-left">
-                  <div class="key-up--name">
-                    8.5
-                  </div><div class="key-up--footer" />
-                </div>
-                <div class="space-key" />
-                <div class="key-up">
-                  <div class="key-up--name">
-                    10.5
-                  </div><div class="key-up--footer" />
-                </div>
-                <div class="key-up no-left">
-                  <div class="key-up--name">
-                    11.5
+                    {{ upKeyNumber }}
                   </div><div class="key-up--footer" />
                 </div>
               </div>
@@ -190,12 +285,68 @@ export default {
         </div>
       </div>
     </div>
+    <div class="footer">
+      <div class="footer-section">
+        <div
+          class="dropdown-label"
+        >
+          {{ $t('TOOLTIP.STYLO.OCTAVE.NAME') }}
+        </div>
+        <dropdown
+          :list="octaveList"
+          direction="up"
+          name="octaveType"
+          tooltip-key="TOOLTIP.STYLO.OCTAVE.DESC"
+          @selected="setOctave"
+        />
+      </div>
+      <div class="footer-section">
+        <div
+          class="dropdown-label"
+        >
+          {{ $t('TOOLTIP.STYLO.WAVEFORM.NAME') }}
+        </div>
+        <dropdown
+          :list="waveFormList"
+          direction="up"
+          name="waveFormType"
+          tooltip-key="TOOLTIP.STYLO.WAVEFORM.DESC"
+          @selected="setWaveForm"
+        />
+      </div>
+      <div class="footer-section">
+        <div class="footer-label footer-title--output">
+          <span class="footer-title">
+            {{ $t('MAIN_CONTROL.VOLUME').toUpperCase() }}
+          </span>
+        </div>
+        <slider
+          size="big"
+          :value="synth.volume"
+          :value-color="'rgb(206, 71, 73)'"
+          :value-fill-color="'hsl(359,37%,34%)'"
+          class="footer-slider"
+          @change="setVolume"
+        />
+      </div>
+    </div>
   </section>
 </template>
 
 <style lang="scss" scoped>
 @import url('https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap');
+@font-face {
+  font-family: "Dyslexic";
+  src: url("../assets/fonts/OpenDyslexic-Bold.otf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+}@font-face {
+  font-family: "FontPbio";
+  src: url("../assets/fonts/pbio-bold.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+}
 
 .title-container {
   position: absolute;
@@ -231,13 +382,13 @@ export default {
 }
 
 .box {
-  // --box-width: 1000px;
-  // --box-height: 500px;
-  --box-width: 80vw;
+  --box-width: 70vw;
   --box-height: calc(var(--box-width) / 2);
   position: absolute;
   width: var(--box-width);
   height: var(--box-height);
+  min-width: 720px;
+  min-height: 360px;
   background-color: #191f24;
   border-radius: 1rem;
   display: flex;
@@ -262,16 +413,16 @@ export default {
   position: absolute;
   right: 2%;
   top: 10%;
-  width: 20rem;
-  height: 3.5rem;
+  width: 25vw;
+  height: 25%;
   border-radius: .5rem;
   box-shadow: 2px 1px 1px 1px #343536;
   background-color: #0c0d13;
   color: white;
   text-align: center;
   font-family: 'Great vibes', cursive;
-  font-size: 3rem;
-  letter-spacing: .15rem;
+  font-size: 3.8vw;
+  letter-spacing: .3vw;
   text-shadow: 2px 0 #343536, 0 1px darkgrey, 3px 0 black, 0 -1px grey;
 }
 .subtext {
@@ -311,10 +462,11 @@ export default {
 }
 .pen--holder-circle {
   background-color: black;
-  border-radius: 100%;
+  border-bottom-left-radius: 100%;
+  border-top-left-radius: 100%;
   width: 6%;
   height: 100%;
-  margin-right: -1.2rem;
+  margin-right: -2rem;
 }
 .pen--holder {
   background-color: black;
@@ -333,11 +485,11 @@ export default {
 .pen--tip {
   position: absolute;
   top: 50%;
-  width: calc(var(--box-width) / 59);
-  height: 5px;
-  border-top: .5rem solid transparent;
-  border-bottom: .5rem solid transparent;
-  border-right: 3rem solid white;
+  right: 0;
+  height: calc(.1vw);
+  border-top: .6vw solid transparent;
+  border-bottom: .6vw solid transparent;
+  border-right: 3vw solid white;
 }
 .pen--body {
   position: relative;
@@ -372,20 +524,6 @@ export default {
   border-bottom: 40px solid transparent;
 }
 
-// .pen--body::before {
-//   // --box-width
-//   content: '';
-//   position: absolute;
-//   width: 0;
-//   height: .5rem;
-//   left: -3rem;
-//   border-top: calc(var(--box-width) / 59) solid black;
-//   border-bottom: calc(var(--box-width) / 59) solid black;
-//   border-right: calc(var(--box-width) / 5) solid transparent;
-//   // border-top: .9rem solid black;
-//   // border-bottom: .9rem solid black;
-//   // border-right: 10rem solid transparent;
-// }
 .touch-pad {
   height: 35%;
   width: 98%;
@@ -404,28 +542,26 @@ export default {
 .switch--sticker {
   position: relative;
   height: 50%;
-  width: 40%;
+  width: 35%;
   background-color: white;
-  border-width: 1.5rem .3rem;
+  border-width: 2.5vw .3rem;
   border-style: solid;
 }
 .switch--sticker::before {
   content: 'OFF';
   position: absolute;
   color: white;
-  top: 0;
-  left: 50%;
-  transform: translateY(calc(-150%)) translateX(calc(-50%));
-  font-size: 10px;
+  top: -25%;
+  left: 40%;
+  font-size: .7vw;
 }
 .switch--sticker::after {
   content: 'ON';
   position: absolute;
   color: white;
-  bottom: 0;
-  left: 50%;
-  transform: translateY(calc(150%)) translateX(calc(-50%));
-  font-size: 10px;
+  bottom: -25%;
+  left: 40%;
+  font-size: .7vw;
 }
 .button-gap {
   position: absolute;
@@ -465,15 +601,28 @@ export default {
   font-size: 9px;
   font-weight: bold;
   writing-mode: vertical-rl;
-  height: 10%;
+  height: 50%;
   text-orientation: upright;
 }
 .button--name {
   position: absolute;
   top: 0;
   right: 0;
-  transform: translateX(calc(100% + .4rem)) translateY(-1rem);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  &--box {
+  transform: translateX(calc(200%));
+  div {
+  font-size: .5vw;
+  font-weight: bold;
+  }
+  }
+  &--vibrato {
+  transform: translateX(calc(200%)) translateY(-15%);
+  }
 }
+button--name
 .switch--buttons {
   color: black;
   display: flex;
@@ -536,38 +685,33 @@ export default {
   -webkit-box-shadow: 0px 20px 24px -10px rgba(0,0,0,0.75);
   box-shadow: 0px 20px 24px -10px rgba(0,0,0,0.75);
 }
-.pad-down-keys {
-  display: flex;
-  width: 100;
-  height: 100%;
-  flex-direction: row;
-}
-.key{
-  border-right: solid 1px black;
-  height: 100%;
-  width: 20%;
-  position: relative;
-}
 .key-bottom--name {
   position: absolute;
   left: 25%;
   width: 50%;
   bottom: calc(-11%);
-  font-size: 11px;
+  font-size: .7vw;
   font-weight: bold;
   letter-spacing: .05rem;
+  user-select: none;
+  pointer-events: none;
 }
-.pad-up-keys {
+
+.pad-bottom-keys {
   display: flex;
-  width: 100%;
+  width: 100;
   height: 100%;
   flex-direction: row;
-  position: absolute;
-  top: 0;
-  padding: 0 4.16%;
+}
+.key-bottom{
+  border-right: solid 1px black;
+  height: 100%;
+  width: 20%;
+  position: relative;
 }
 .key-up {
-  position: relative;
+  --key-width: 4.16%;
+  position: absolute;
   border-right: solid 1px black;
   border-left: solid 1px black;
   height: 45%;
@@ -576,57 +720,157 @@ export default {
   -moz-box-shadow: inset 0 10px 10px -10px #000000;
   -webkit-box-shadow: inset 0 10px 10px -10px #000000;
   box-shadow: inset 0 10px 10px -10px #000000;
+  &--1 {
+    left: calc(var(--key-width));
+  }
+  &--2 {
+    left:  calc(var(--key-width) * 5);
+  }
+  &--3 {
+    left:  calc(var(--key-width) * 7);
+  }
+  &--4 {
+    left:  calc(var(--key-width) * 11);
+  }
+  &--5 {
+    left:  calc(var(--key-width) * 13);
+  }
+  &--6 {
+    left:  calc(var(--key-width) * 15);
+  }
+  &--7 {
+    left:  calc(var(--key-width) * 19);
+  }
+  &--8 {
+    left:  calc(var(--key-width) * 21);
+  }
 }
+
+.no-left {
+  // border-left: 0;
+}
+
+.space-key {
+  position: absolute;
+  height: 50%;
+  width: 0%;
+  margin-left: 4%;
+  margin-right: 4%;
+}
+
 .key-up--name {
   position: absolute;
   left: 25%;
   width: 50%;
   top: calc(-25%);
-  font-size: 11px;
+  font-size: .7vw;
   font-weight: bold;
   letter-spacing: .05rem;
+  user-select: none;
+  pointer-events: none;
 }
 .key-up--footer {
   position: absolute;
-  left: calc(50% + .5px);
-  bottom: 0;
   border-bottom: solid 1px black;
-  width: calc(66% + 3px);
+  width: 77%;
   height: .5rem;
-  transform: translateX(calc(-50%)) translateY(calc(100% - 1px));
+  left: 11%;
+  bottom: -9%;
+  // left: calc(50%);
+  // bottom: 0;
+  // transform: translateX(calc(-50%)) translateY(calc(100% - 1px));
   background-color: #bfb9bf;
 }
 .key-up--footer::before {
   content: '';
   position: absolute;
-  left: 0;
-  bottom: 0;
+  left: -11%;
+  bottom: 19%;
   border-left: solid 1px black;
   width: .5rem;
   height: .6rem;
-  transform: rotate(-45deg) translateY(calc(-50%)) translateX(-25%);
+  // left: 0;
+  // bottom: 0;
+  // transform: rotate(-45deg) translateY(calc(-50%)) translateX(-25%);
+  transform: rotate(-45deg);
   background-color: #bfb9bf;
 }
 .key-up--footer::after {
   content: '';
   position: absolute;
-  right: 0;
-  bottom: 0;
+  right: -10%;
+  bottom: 19%;
   border-right: solid 1px black;
   width: .5rem;
   height: .6rem;
-  transform: rotate(45deg) translateY(calc(-50%)) translateX(calc(25%));
+  // right: 0;
+  // bottom: 0;
+  // transform: rotate(45deg) translateY(calc(-50%)) translateX(calc(25%));
+  transform: rotate(45deg);
   background-color: #bfb9bf;
 }
 
-.no-left {
-  border-left: 0;
+.footer {
+  z-index: $z-index-10; /* Sit on top */
+  padding: 0 2rem 0 2rem;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: calc(100% - 70px);
+  height: 5em;
+  background-color: black;
+  color: white;
+  text-align: center;
+  display: grid;
+  justify-content: center;
+  grid-template-columns: 30% 30% 30%;/*Make the grid smaller than the container*/
+  grid-gap: 5px;
+  border: 3px solid rgb(21,18,17);
 }
-
-.space-key {
-  height: 50%;
-  width: 0%;
-  margin-left: 4%;
-  margin-right: 4%;
+.footer-section {
+  max-width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  &--left {
+    justify-content: flex-start;
+  }
+  &--middle {
+    justify-content: center;
+  }
+  &--right {
+    right: 0;
+    justify-content: flex-end;
+  }
+}
+.dropdown-label {
+  white-space: nowrap;
+  margin-right: 1rem;
+  font-family: "Dyslexic";
+  font-size: 1.2rem;
+  color: aliceblue;
+  text-shadow: 2px 2px rgba(0, 0, 0, 0.8);
+  text-transform: uppercase;
+}
+.footer-label {
+  white-space: nowrap;
+  margin: 0 1rem;
+  font-family: "Dyslexic";
+  font-size: 1.2rem;
+  display: flex;
+  flex-flow: column;
+}
+.footer-latency {
+  cursor: pointer;
+}
+.footer-title {
+  font-weight: bold;
+  // font-size: 1.1rem;
+  &--input {
+    color: rgb(146, 215, 146);
+  }
+  &--output {
+    color: rgb(206, 71, 73);
+  }
 }
 </style>

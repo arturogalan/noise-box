@@ -1,5 +1,4 @@
 <script>
-import { mapGetters, mapActions } from 'vuex'
 
 export default {
   name: 'Amp',
@@ -8,33 +7,15 @@ export default {
   mixins: [],
   data () {
     return {
-      audioContext: null,
     }
   },
   computed: {
-    ...mapGetters('pedal', [
-      'zoomInPedal',
-    ]),
-    ...mapGetters('ui', [
-      'showInfoModal',
-      'showFirstTimeModal',
-      'isFirstTime',
-    ]),
   },
   created () {
-    this.createAudioContext()
-    this.createAmp()
   },
   mounted () {
   },
   methods: {
-    ...mapActions('pedal', [
-      'createAudioContext',
-      'createAmp',
-    ]),
-    ...mapActions('ui', [
-      'toggleModal',
-    ]),
   },
 
 }

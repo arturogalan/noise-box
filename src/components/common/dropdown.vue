@@ -22,6 +22,10 @@ export default {
       type: String,
       required: true,
     },
+    direction: {
+      type: String,
+      default: 'down',
+    },
   },
   data () {
     return {
@@ -78,7 +82,7 @@ export default {
         src="../../assets/icons/arrow.png"
       >
     </label>
-    <ul>
+    <ul :class="`direction--${direction}`">
       <li
         v-for="item in list"
         :key="item.name"
@@ -111,8 +115,9 @@ export default {
   }
   label{
       box-sizing: border-box;
-      display: block;
+      display: inline-table;
       width: 100%;
+      height: 2rem;
       background-color: rgba(88, 49, 49, .5);
       padding: .5rem 0rem;
       color: #FFF;
@@ -141,6 +146,12 @@ export default {
       overflow-y: auto;
       max-height: 20rem;
       border-radius: .2rem;
+  }
+  .direction--up {
+    bottom: 2rem;
+  }
+  .direction--down {
+
   }
   ul li{
       padding: 8px;

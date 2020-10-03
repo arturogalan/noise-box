@@ -5,6 +5,18 @@
       "STEP_2": "2: Configure effects!"
     },
     "TOOLTIP": {
+      "STYLO": {
+        "OCTAVE": 
+        {
+          "NAME": "Octave",
+          "DESC": "Select the octave"
+        },
+        "WAVEFORM": 
+        {
+          "NAME": "Wave form",
+          "DESC": "Select the wave form"
+        }        
+      },
       "AMP": {
         "CHANNEL": {
           "CLEAN": "Change fron clean to distortion channel </br> (keyboard: space bar key)",

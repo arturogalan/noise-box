@@ -48,6 +48,7 @@ Noise gate
 Curves graphs  
 Midi 
 Mixin for all the different knobs  
+unify FONTS
 
 input 0-10 first gain node in the chain
 volume 0-1 gain node just before equalizer
