@@ -26,6 +26,10 @@ export default {
       type: String,
       default: 'down',
     },
+    size: {
+      type: String,
+      default: 'normal',
+    },
   },
   data () {
     return {
@@ -62,6 +66,7 @@ export default {
 <template>
   <div
     class="dropdown"
+    :class="`dropdown--${size}`"
     @mouseover="setStroke(true)"
     @mouseleave="setStroke(false)"
   >
@@ -107,7 +112,12 @@ export default {
     font-family: "Dyslexic";
     font-size: .8rem;
     color: #FFF;
+    &--normal {
     min-width: 200px;
+    }
+    &--small {
+    min-width: 110px;
+    }
   }
   .placeholder{
     font-style: italic;

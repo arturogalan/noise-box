@@ -64,6 +64,7 @@ export default {
   data () {
     return {
       upKeys: [1.5, 3.5, 4.5, 6.5, 7.5, 8.5, 10.5, 11.5],
+      downKeys: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
       playingNote: undefined,
       playingOctave: 2,
       playingWaveForm: 'sawtooth',
@@ -117,6 +118,9 @@ export default {
     window.removeEventListener('mouseup', this.clickFalse, false)
   },
   methods: {
+    logMouse () {
+      console.log('enter')
+    },
     playKeyPress (evt) {
       if (!evt.ctrlKey && !evt.metaKey) {
         const {key, octave} = (keyboardToNoteMapper[evt.keyCode] || keyboardCodeToNoteMapper[evt.code] || {})
@@ -127,12 +131,10 @@ export default {
       const {key, octave} = (keyboardToNoteMapper[evt.keyCode] || keyboardCodeToNoteMapper[evt.code] || {})
       if (key) this.synth.stopNote({key, octave: octave + this.playingOctave })
     },
-    test (event) {
+    manageTouchNote (event) {
       var touch = event.touches[0]
       const element = document.elementFromPoint(touch.pageX, touch.pageY)
-      if (element.id) {
-        console.log('touched inside: ' + element.id)
-      }
+      this.playNote(element.id)
     },
     playNote (note) {
       if (this.isClicking) {
@@ -249,14 +251,16 @@ export default {
               >
                 <div
                   v-for="downKeyNumber in 12"
-                  :id="`key-down-${downKeyNumber}`"
+                  :id="`${downKeyNumber}`"
                   :key="downKeyNumber"
                   class="key-bottom"
                   @mousedown="clickOn(downKeyNumber)"
                   @mouseup="clickOff"
                   @mousemove="playNote(downKeyNumber)"
                   @mouseenter="playNote(downKeyNumber)"
-                  @touchmove="test($event)"
+                  @touchstart="clickOn(downKeyNumber)"
+                  @touchend="clickOff(downKeyNumber)"
+                  @touchmove="manageTouchNote($event)"
                 >
                   <div
                     class="key-bottom--name"
@@ -266,18 +270,22 @@ export default {
                 </div>
                 <div
                   v-for="(upKeyNumber, index) in upKeys"
-                  :id="`key-up-${index + 1}`"
+                  :id="`${upKeyNumber}`"
                   :key="upKeyNumber"
                   class="key-up"
                   :class="`key-up--${index + 1}`"
                   @mousedown="clickOn(upKeyNumber)"
                   @mouseup="clickOff(upKeyNumber)"
                   @mousemove="playNote(upKeyNumber)"
-                  @touchmove="test($event)"
+                  @touchstart="clickOn(upKeyNumber)"
+                  @touchend="clickOff(upKeyNumber)"
+                  @touchmove="manageTouchNote($event)"
                 >
                   <div class="key-up--name">
                     {{ upKeyNumber }}
-                  </div><div class="key-up--footer" />
+                  </div>
+                  <div class="key-up--footer-polygon--bg" />
+                  <div class="key-up--footer-polygon--black" />
                 </div>
               </div>
             </div>
@@ -294,6 +302,7 @@ export default {
         </div>
         <dropdown
           :list="octaveList"
+          size="small"
           direction="up"
           name="octaveType"
           tooltip-key="TOOLTIP.STYLO.OCTAVE.DESC"
@@ -308,20 +317,21 @@ export default {
         </div>
         <dropdown
           :list="waveFormList"
+          size="small"
           direction="up"
           name="waveFormType"
           tooltip-key="TOOLTIP.STYLO.WAVEFORM.DESC"
           @selected="setWaveForm"
         />
       </div>
-      <div class="footer-section">
+      <div class="footer-section footer-section--right">
         <div class="footer-label footer-title--output">
           <span class="footer-title">
             {{ $t('MAIN_CONTROL.VOLUME').toUpperCase() }}
           </span>
         </div>
         <slider
-          size="big"
+          size="medium"
           :value="synth.volume"
           :value-color="'rgb(206, 71, 73)'"
           :value-fill-color="'hsl(359,37%,34%)'"
@@ -714,6 +724,7 @@ button--name
   position: absolute;
   border-right: solid 1px black;
   border-left: solid 1px black;
+  border-bottom: solid 1px #bfb9bf;
   height: 45%;
   width: 8.2%;
   background-color: #bfb9bf;
@@ -769,45 +780,32 @@ button--name
   user-select: none;
   pointer-events: none;
 }
-.key-up--footer {
+.key-up--footer-polygon--black {
   position: absolute;
-  border-bottom: solid 1px black;
-  width: 77%;
-  height: .5rem;
-  left: 11%;
-  bottom: -9%;
-  // left: calc(50%);
-  // bottom: 0;
-  // transform: translateX(calc(-50%)) translateY(calc(100% - 1px));
-  background-color: #bfb9bf;
+  width: 104%;
+  height: .8rem;
+  left: -1px;
+  bottom: 0;
+  overflow: hidden;
+  background: black;
+  // border: solid 3px #bfb9bf;
+  clip-path: polygon(0 0, 100% 0, 89% 100%, 10% 100%);
+  transform: translateY(90%);
+  border-right: solid black -1px;
 }
-.key-up--footer::before {
-  content: '';
+.key-up--footer-polygon--bg {
   position: absolute;
-  left: -11%;
-  bottom: 19%;
-  border-left: solid 1px black;
-  width: .5rem;
-  height: .6rem;
-  // left: 0;
-  // bottom: 0;
-  // transform: rotate(-45deg) translateY(calc(-50%)) translateX(-25%);
-  transform: rotate(-45deg);
-  background-color: #bfb9bf;
-}
-.key-up--footer::after {
-  content: '';
+  width: 101%;
+  height: .8rem;
+  left: .3px;
+  bottom: 1px;
+  overflow: hidden;
+  transform: translateY(90%);
+  -webkit-clip-path: polygon(0 0, 100% 0, 90% 100%, 10% 100%);
+  clip-path: polygon(0 0, 100% 0, 90% 100%, 10% 100%);
+  background: #bfb9bf;
   position: absolute;
-  right: -10%;
-  bottom: 19%;
-  border-right: solid 1px black;
-  width: .5rem;
-  height: .6rem;
-  // right: 0;
-  // bottom: 0;
-  // transform: rotate(45deg) translateY(calc(-50%)) translateX(calc(25%));
-  transform: rotate(45deg);
-  background-color: #bfb9bf;
+  z-index: 4;
 }
 
 .footer {
@@ -823,14 +821,14 @@ button--name
   text-align: center;
   display: grid;
   justify-content: center;
-  grid-template-columns: 30% 30% 30%;/*Make the grid smaller than the container*/
-  grid-gap: 5px;
+  grid-template-columns: 35% 35% 30%;/*Make the grid smaller than the container*/
+  // grid-gap: 3vw;
   border: 3px solid rgb(21,18,17);
 }
 .footer-section {
-  max-width: 100%;
+  // max-width: 50%;
   display: flex;
-  justify-content: flex-start;
+  justify-content: center;
   align-items: center;
   &--left {
     justify-content: flex-start;
