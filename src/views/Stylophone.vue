@@ -73,6 +73,9 @@ export default {
     }
   },
   computed: {
+    isMobile () {
+      return navigator.userAgent.match(/iPad/i) != null
+    },
     octaveList () {
       return [1, 2, 3, 4].map(el => {
         return {
@@ -191,7 +194,7 @@ export default {
       </div>
     </router-link>
     <div class="parent">
-      <div class="box">
+      <div :class="isMobile ? 'box--mobile' : 'box'">
         <div class="grid">
           <div
             class="name"
@@ -209,7 +212,10 @@ export default {
               <div class="pen--tip-wrapper">
                 <div class="pen--tip" />
               </div>
-              <div class="pen--body" />
+              <div class="pen--body">
+                <div class="pen--body--triangle-up" />
+                <div class="pen--body--triangle-down" />
+              </div>
             </div>
           </div>
         </div>
@@ -392,7 +398,22 @@ export default {
 }
 
 .box {
-  --box-width: 70vw;
+  --box-width: calc(60vw + 40vh);
+  --box-height: calc(var(--box-width) / 2);
+  position: absolute;
+  width: var(--box-width);
+  height: var(--box-height);
+  min-width: 720px;
+  min-height: 360px;
+  background-color: #191f24;
+  border-radius: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: 3px 8px 4px 4px #343536;
+}
+.box--mobile {
+  --box-width: 98vw;
   --box-height: calc(var(--box-width) / 2);
   position: absolute;
   width: var(--box-width);
@@ -525,7 +546,7 @@ export default {
   bottom: 0;
   width: 0;
   height: 0;
-  border-bottom: calc(var(--box-width) / 70) solid black;
+  border-bottom: calc(var(--box-width) / 60) solid black;
   border-right: calc(var(--box-width) / 5) solid transparent;
   z-index: 2;
 }
@@ -845,7 +866,7 @@ button--name
   white-space: nowrap;
   margin-right: 1rem;
   font-family: "Dyslexic";
-  font-size: 1.2rem;
+  font-size: calc(1vw + 1vh);
   color: aliceblue;
   text-shadow: 2px 2px rgba(0, 0, 0, 0.8);
   text-transform: uppercase;
@@ -854,7 +875,7 @@ button--name
   white-space: nowrap;
   margin: 0 1rem;
   font-family: "Dyslexic";
-  font-size: 1.2rem;
+  font-size: calc(1vw + .5vh);
   display: flex;
   flex-flow: column;
 }

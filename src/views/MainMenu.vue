@@ -114,12 +114,13 @@ export default {
   align-items: top;
 }
 .title-name {
-  font-size: 9vw;
+  font-size: calc(4vw + 4vh);
   font-family: 'Fredoka One', cursive;
   text-align: center;
   white-space: nowrap;
   color: white;
   top: 0;
+  z-index: 2;
 }
 
 .title-desc {
@@ -176,7 +177,8 @@ export default {
   background: #003;
 }
 .logo-icon {
-  width: 12vw;
+  width: 10vw;
+  height: 12vw;
   z-index: 2;
 }
 
