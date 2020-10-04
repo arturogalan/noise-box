@@ -476,6 +476,7 @@ export default {
   align-items: center;
   grid-template-columns: 18% 81%;
   grid-gap: 0;
+  z-index: 3;
 }
 .square {
   background-color: #343536;
@@ -490,6 +491,8 @@ export default {
   border-radius: .3rem;
   display: flex;
   justify-content: flex-end;
+  z-index: 2;
+
 }
 .pen--holder-circle {
   background-color: black;
@@ -515,7 +518,7 @@ export default {
 }
 .pen--tip {
   position: absolute;
-  top: 50%;
+  top: 55%;
   right: 0;
   height: calc(.1vw);
   border-top: .6vw solid transparent;
@@ -733,12 +736,14 @@ button--name
   width: 100;
   height: 100%;
   flex-direction: row;
+  user-select: none;
 }
 .key-bottom{
   border-right: solid 1px black;
   height: 100%;
   width: 20%;
   position: relative;
+  user-select: none;
 }
 .key-up {
   --key-width: 4.16%;
@@ -752,6 +757,7 @@ button--name
   -moz-box-shadow: inset 0 10px 10px -10px #000000;
   -webkit-box-shadow: inset 0 10px 10px -10px #000000;
   box-shadow: inset 0 10px 10px -10px #000000;
+  user-select: none;
   &--1 {
     left: calc(var(--key-width));
   }
@@ -778,18 +784,6 @@ button--name
   }
 }
 
-.no-left {
-  // border-left: 0;
-}
-
-.space-key {
-  position: absolute;
-  height: 50%;
-  width: 0%;
-  margin-left: 4%;
-  margin-right: 4%;
-}
-
 .key-up--name {
   position: absolute;
   left: 25%;
@@ -813,6 +807,7 @@ button--name
   clip-path: polygon(0 0, 100% 0, 89% 100%, 10% 100%);
   transform: translateY(90%);
   border-right: solid black -1px;
+  user-select: none;
 }
 .key-up--footer-polygon--bg {
   position: absolute;
@@ -827,6 +822,7 @@ button--name
   background: #bfb9bf;
   position: absolute;
   z-index: 4;
+  user-select: none;
 }
 
 .footer {
