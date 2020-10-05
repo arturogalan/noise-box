@@ -672,6 +672,7 @@ button--name
 }
 .pad-box {
   position: relative;
+  overflow: hidden;
   background-color: #bfb9bf;
   width: 90%;
   height: 80%;
@@ -692,11 +693,9 @@ button--name
   border-bottom: solid 1px white;
   width: 3.7rem;
   height: 1.8rem;
-  transform: rotate(-45deg) translateY(calc(5%)) translateX(-54%);
+  transform: rotate(-45deg) translateY(15%) translateX(-53%);
   background-color: white;
   z-index: 2;
-  border-top-left-radius: 3rem;
-  border-top-right-radius: 3rem;
   -moz-box-shadow: inset 0 10px 10px -10px #000000;
   -webkit-box-shadow: inset 0 10px 10px -10px #000000;
   box-shadow: 0 20px 20px -12px #000000;
@@ -709,12 +708,9 @@ button--name
   border-bottom: solid 1px white;
   width: 3.3rem;
   height: 1.8rem;
-  // transform: rotate(45deg) translateY(calc(200%)) translateX(-60%);
   transform: rotate(45deg) translateX(17%) translateY(-60%);
   background-color: white;
   z-index: 2;
-  border-top-left-radius: 3rem;
-  border-top-right-radius: 3rem;
   -moz-box-shadow: 0px 20px 24px -10px rgba(0,0,0,0.75);
   -webkit-box-shadow: 0px 20px 24px -10px rgba(0,0,0,0.75);
   box-shadow: 0px 20px 24px -10px rgba(0,0,0,0.75);
