@@ -145,8 +145,8 @@ export default {
       this.playingNote = undefined
       this.synth.stopSingleNote()
     },
-    clickOn (event, note) {
-      if (event.which === 1) {
+    clickOn ({which}, note) {
+      if (which === 1) {
         this.clickTrue()
         this.playNote(note)
       }
@@ -263,9 +263,9 @@ export default {
                   @mouseup="clickOff"
                   @mousemove="playNote(downKeyNumber)"
                   @mouseenter="playNote(downKeyNumber)"
-                  @touchstart="clickOn($event, downKeyNumber)"
-                  @touchend="clickOff(downKeyNumber)"
-                  @touchmove="manageTouchNote($event)"
+                  @touchstart.stop="clickOn({which: 1}, downKeyNumber)"
+                  @touchend.stop="clickOff(downKeyNumber)"
+                  @touchmove.stop="manageTouchNote($event)"
                 >
                   <div
                     class="key-bottom--name"
@@ -282,9 +282,9 @@ export default {
                   @mousedown="clickOn($event, upKeyNumber)"
                   @mouseup="clickOff(upKeyNumber)"
                   @mousemove="playNote(upKeyNumber)"
-                  @touchstart="clickOn($event, upKeyNumber)"
-                  @touchend="clickOff(upKeyNumber)"
-                  @touchmove="manageTouchNote($event)"
+                  @touchstart.stop="clickOn({which: 1}, upKeyNumber)"
+                  @touchend.stop="clickOff(upKeyNumber)"
+                  @touchmove.stop="manageTouchNote($event)"
                 >
                   <div class="key-up--name">
                     {{ upKeyNumber }}
@@ -573,6 +573,7 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
+  pointer-events: none;
 }
 .switch--sticker {
   position: relative;
@@ -685,6 +686,7 @@ button--name
 .pad-corner {
   position: relative;
   width: 100%;
+  pointer-events: none;
 }
 .pad-corner:before {
   content: '';
