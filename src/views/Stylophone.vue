@@ -121,9 +121,6 @@ export default {
     window.removeEventListener('mouseup', this.clickFalse, false)
   },
   methods: {
-    logMouse () {
-      console.log('enter')
-    },
     playKeyPress (evt) {
       if (!evt.ctrlKey && !evt.metaKey) {
         const {key, octave} = (keyboardToNoteMapper[evt.keyCode] || keyboardCodeToNoteMapper[evt.code] || {})
@@ -576,7 +573,6 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
-  pointer-events: none;
 }
 .switch--sticker {
   position: relative;
@@ -689,7 +685,6 @@ button--name
 .pad-corner {
   position: relative;
   width: 100%;
-  pointer-events: none;
 }
 .pad-corner:before {
   content: '';
