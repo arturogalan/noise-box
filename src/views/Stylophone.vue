@@ -148,9 +148,11 @@ export default {
       this.playingNote = undefined
       this.synth.stopSingleNote()
     },
-    clickOn (note) {
-      this.clickTrue()
-      this.playNote(note)
+    clickOn (event, note) {
+      if (event.which === 1) {
+        this.clickTrue()
+        this.playNote(note)
+      }
     },
     clickOff () {
       this.clickFalse()
@@ -260,13 +262,13 @@ export default {
                   :id="`${downKeyNumber}`"
                   :key="downKeyNumber"
                   class="key-bottom"
-                  @mousedown="clickOn(downKeyNumber)"
+                  @mousedown="clickOn($event, downKeyNumber)"
                   @mouseup="clickOff"
                   @mousemove="playNote(downKeyNumber)"
                   @mouseenter="playNote(downKeyNumber)"
-                  @touchstart="clickOn(downKeyNumber)"
-                  @touchend="clickOff(downKeyNumber)"
-                  @touchmove="manageTouchNote($event)"
+                  @touchstart.prevent="clickOn($event, downKeyNumber)"
+                  @touchend.prevent="clickOff(downKeyNumber)"
+                  @touchmove.prevent="manageTouchNote($event)"
                 >
                   <div
                     class="key-bottom--name"
@@ -280,12 +282,12 @@ export default {
                   :key="upKeyNumber"
                   class="key-up"
                   :class="`key-up--${index + 1}`"
-                  @mousedown="clickOn(upKeyNumber)"
+                  @mousedown="clickOn($event, upKeyNumber)"
                   @mouseup="clickOff(upKeyNumber)"
                   @mousemove="playNote(upKeyNumber)"
-                  @touchstart="clickOn(upKeyNumber)"
-                  @touchend="clickOff(upKeyNumber)"
-                  @touchmove="manageTouchNote($event)"
+                  @touchstart.prevent="clickOn($event, upKeyNumber)"
+                  @touchend.prevent="clickOff(upKeyNumber)"
+                  @touchmove.prevent="manageTouchNote($event)"
                 >
                   <div class="key-up--name">
                     {{ upKeyNumber }}
@@ -439,6 +441,7 @@ export default {
   background-position: 11px 3px;
   background-size: 30px 11px;
   box-shadow: inset 0 0 10px #000000;
+  pointer-events: none;
 }
 .name {
   position: absolute;
@@ -477,6 +480,7 @@ export default {
   grid-template-columns: 18% 81%;
   grid-gap: 0;
   z-index: 3;
+  pointer-events: none;
 }
 .square {
   background-color: #343536;
@@ -572,6 +576,7 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
+  pointer-events: none;
 }
 .switch--sticker {
   position: relative;
@@ -684,6 +689,7 @@ button--name
 .pad-corner {
   position: relative;
   width: 100%;
+  pointer-events: none;
 }
 .pad-corner:before {
   content: '';
