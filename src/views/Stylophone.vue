@@ -266,9 +266,9 @@ export default {
                   @mouseup="clickOff"
                   @mousemove="playNote(downKeyNumber)"
                   @mouseenter="playNote(downKeyNumber)"
-                  @touchstart.stop="clickOn($event, downKeyNumber)"
-                  @touchend.stop="clickOff(downKeyNumber)"
-                  @touchmove.stop="manageTouchNote($event)"
+                  @touchstart="clickOn($event, downKeyNumber)"
+                  @touchend="clickOff(downKeyNumber)"
+                  @touchmove="manageTouchNote($event)"
                 >
                   <div
                     class="key-bottom--name"
@@ -285,9 +285,9 @@ export default {
                   @mousedown="clickOn($event, upKeyNumber)"
                   @mouseup="clickOff(upKeyNumber)"
                   @mousemove="playNote(upKeyNumber)"
-                  @touchstart.stop="clickOn($event, upKeyNumber)"
-                  @touchend.stop="clickOff(upKeyNumber)"
-                  @touchmove.stop="manageTouchNote($event)"
+                  @touchstart="clickOn($event, upKeyNumber)"
+                  @touchend="clickOff(upKeyNumber)"
+                  @touchmove="manageTouchNote($event)"
                 >
                   <div class="key-up--name">
                     {{ upKeyNumber }}
