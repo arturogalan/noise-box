@@ -384,6 +384,7 @@ export default {
   white-space: nowrap;
   color: white;
   top: 0;
+  user-select: none;
 }
 
 .parent {
@@ -464,6 +465,7 @@ export default {
   margin-left: .4rem;
   position: absolute;
   letter-spacing: normal;
+  user-select: none;
 }
 .pen-wrapper {
   height: 10%;
@@ -590,6 +592,7 @@ export default {
   top: -25%;
   left: 40%;
   font-size: .7vw;
+  user-select: none;
 }
 .switch--sticker::after {
   content: 'ON';
@@ -598,6 +601,7 @@ export default {
   bottom: -25%;
   left: 40%;
   font-size: .7vw;
+  user-select: none;
 }
 .button-gap {
   position: absolute;
@@ -639,6 +643,7 @@ export default {
   writing-mode: vertical-rl;
   height: 50%;
   text-orientation: upright;
+  user-select: none;
 }
 .button--name {
   position: absolute;
@@ -865,6 +870,7 @@ button--name
   color: aliceblue;
   text-shadow: 2px 2px rgba(0, 0, 0, 0.8);
   text-transform: uppercase;
+  user-select: none;
 }
 .footer-label {
   white-space: nowrap;
@@ -873,6 +879,7 @@ button--name
   font-size: calc(1vw + .5vh);
   display: flex;
   flex-flow: column;
+  user-select: none;
 }
 .footer-latency {
   cursor: pointer;
